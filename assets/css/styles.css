@@ -1,0 +1,358 @@
+/* Custom CSS for Gravity Ion Thermoelectric Website */
+
+/* CSS Reset and Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  from {
+    text-shadow:
+      0 0 20px #00bfff,
+      0 0 30px #00bfff,
+      0 0 40px #00bfff;
+  }
+  to {
+    text-shadow:
+      0 0 10px #00bfff,
+      0 0 20px #00bfff,
+      0 0 30px #00bfff,
+      0 0 40px #00bfff,
+      0 0 50px #00bfff;
+  }
+}
+
+@keyframes particle-float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  25% {
+    transform: translateY(-15px) translateX(5px);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-5px) translateX(-10px);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-20px) translateX(8px);
+    opacity: 0.5;
+  }
+}
+
+/* Particle system styles */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: particle-float 8s ease-in-out infinite;
+}
+
+.particle.ion-positive {
+  background: radial-gradient(circle, #ffd700, #ffa500);
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.particle.ion-negative {
+  background: radial-gradient(circle, #00bfff, #0080ff);
+  box-shadow: 0 0 10px #00bfff;
+}
+
+.particle.plasma {
+  background: radial-gradient(circle, #8a2be2, #ff1493);
+  box-shadow: 0 0 15px #8a2be2;
+}
+
+/* Energy field effect */
+.energy-field {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(0, 191, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 215, 0, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(138, 43, 226, 0.1) 0%,
+      transparent 50%
+    );
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
+/* Scroll-triggered animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.fade-in-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(11, 11, 47, 0.8);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #00bfff, #8a2be2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #ffd700, #00bfff);
+}
+
+/* Loading spinner */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #00bfff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Accessibility improvements */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-gray-300,
+  .text-gray-400 {
+    color: #ffffff;
+  }
+
+  .bg-white\/10,
+  .bg-white\/20 {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .particle {
+    animation: none;
+  }
+}
+
+/* Dark mode support (already dark by default, but prepared for light mode toggle) */
+@media (prefers-color-scheme: light) {
+  /* Light mode overrides can be added here if needed */
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .particle,
+  #particle-container,
+  .energy-field {
+    display: none !important;
+  }
+
+  nav,
+  footer {
+    page-break-inside: avoid;
+  }
+
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  .particle {
+    display: none; /* Reduce animations on mobile for performance */
+  }
+
+  html {
+    font-size: 16px; /* Ensure readable font size on mobile */
+  }
+}
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-opacity {
+  will-change: opacity;
+}
+
+/* Image optimization */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+img[loading='lazy'] {
+  transition: opacity 0.3s;
+}
+
+/* Focus indicators for better accessibility */
+button:focus,
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #00bfff;
+  outline-offset: 2px;
+}
+
+/* Skip to content link styling */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: 6px;
+}
+
+/* Error states */
+.error-message {
+  color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* Success states */
+.success-message {
+  color: #51cf66;
+  background: rgba(81, 207, 102, 0.1);
+  border: 1px solid rgba(81, 207, 102, 0.3);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+/* Utility classes */
+.text-shadow-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.backdrop-blur-strong {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Ensure smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove smooth scrolling for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

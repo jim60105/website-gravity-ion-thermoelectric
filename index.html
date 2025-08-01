@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>重力離子熱電技術 | Gravity Ion Thermoelectric Technology</title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="革命性的重力離子熱電技術，實現熱能到電能的高效轉換。探索突破性的物理發現，顛覆傳統熱力學定律。"
+    />
+    <meta
+      name="keywords"
+      content="重力離子, 熱電轉換, 離子電漿, 重力場, 熱力學, 能源轉換, Gravity Ion, Thermoelectric, Ion Plasma"
+    />
+    <meta name="author" content="Gravity Ion Thermoelectric Research" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gravity-ion-thermoelectric.com/" />
+    <meta property="og:title" content="重力離子熱電技術 | Gravity Ion Thermoelectric Technology" />
+    <meta
+      property="og:description"
+      content="革命性的重力離子熱電技術，實現熱能到電能的高效轉換。探索突破性的物理發現，顛覆傳統熱力學定律。"
+    />
+    <meta property="og:image" content="/assets/images/001-energy-flows-from-hot-to-cold-region.webp" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://gravity-ion-thermoelectric.com/" />
+    <meta property="twitter:title" content="重力離子熱電技術 | Gravity Ion Thermoelectric Technology" />
+    <meta
+      property="twitter:description"
+      content="革命性的重力離子熱電技術，實現熱能到電能的高效轉換。探索突破性的物理發現，顛覆傳統熱力學定律。"
+    />
+    <meta property="twitter:image" content="/assets/images/001-energy-flows-from-hot-to-cold-region.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'electric-blue': '#00BFFF',
+              'plasma-purple': '#8A2BE2',
+              'energy-gold': '#FFD700',
+              'deep-space': '#0B0B2F'
+            },
+            animation: {
+              float: 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              glow: 'glow 2s ease-in-out infinite alternate'
+            }
+          }
+        }
+      };
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body class="font-sans antialiased bg-gradient-to-br from-deep-space via-blue-900 to-purple-900 text-white">
+    <!-- Skip Navigation Link for Accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white text-black px-4 py-2 rounded"
+    >
+      跳至主要內容 (Skip to main content)
+    </a>
+
+    <!-- Header Navigation -->
+    <header role="banner" class="relative z-50">
+      <nav class="container mx-auto px-6 py-4" role="navigation" aria-label="主要導航">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <h1 class="text-2xl font-bold text-energy-gold">重力離子熱電技術</h1>
+          </div>
+
+          <div class="hidden md:flex space-x-8">
+            <a href="#technology" class="hover:text-electric-blue transition-colors duration-300" aria-label="技術原理">
+              技術原理
+            </a>
+            <a href="#research" class="hover:text-electric-blue transition-colors duration-300" aria-label="研究成果">
+              研究成果
+            </a>
+            <a
+              href="#applications"
+              class="hover:text-electric-blue transition-colors duration-300"
+              aria-label="應用領域"
+            >
+              應用領域
+            </a>
+            <a href="#contact" class="hover:text-electric-blue transition-colors duration-300" aria-label="聯絡我們">
+              聯絡我們
+            </a>
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <button id="mobile-menu-button" class="md:hidden p-2" aria-label="開啟選單" aria-expanded="false">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4" role="menu">
+          <div class="flex flex-col space-y-4">
+            <a href="#technology" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+              >技術原理</a
+            >
+            <a href="#research" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+              >研究成果</a
+            >
+            <a href="#applications" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+              >應用領域</a
+            >
+            <a href="#contact" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+              >聯絡我們</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+      <!-- Hero Section -->
+      <section class="relative min-h-screen flex items-center justify-center overflow-hidden" role="banner">
+        <!-- Particle Animation Container -->
+        <div id="particle-container" class="absolute inset-0 z-0" aria-hidden="true"></div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+          <h1
+            class="text-5xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-electric-blue to-energy-gold animate-pulse-slow"
+          >
+            重力離子熱電技術
+          </h1>
+          <p class="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed">
+            突破傳統熱力學定律限制<br />
+            實現革命性的熱能轉電能技術
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button
+              class="bg-gradient-to-r from-electric-blue to-plasma-purple hover:from-plasma-purple hover:to-electric-blue text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              探索技術原理
+            </button>
+            <button
+              class="border-2 border-energy-gold text-energy-gold hover:bg-energy-gold hover:text-deep-space font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105"
+            >
+              觀看演示影片
+            </button>
+          </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce" aria-hidden="true">
+          <svg class="w-6 h-6 text-energy-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
+      </section>
+
+      <!-- Technology Section -->
+      <section id="technology" class="py-20 px-6" role="region" aria-labelledby="technology-heading">
+        <div class="container mx-auto max-w-6xl">
+          <h2 id="technology-heading" class="text-4xl md:text-5xl font-bold text-center mb-16 text-energy-gold">
+            技術原理
+          </h2>
+
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+              <h3 class="text-2xl font-semibold text-electric-blue">重力場中的離子分離</h3>
+              <p class="text-gray-300 leading-relaxed">
+                在重力場作用下，不同質量的離子會產生分離效應，形成電場梯度。
+                這種現象打破了傳統熱力學第二定律的限制，實現了熱能的直接轉換。
+              </p>
+              <p class="text-gray-300 leading-relaxed">
+                通過精密控制離子濃度和重力場強度，我們能夠持續產生穩定的電流輸出， 效率遠超傳統熱電轉換技術。
+              </p>
+            </div>
+            <div class="relative">
+              <img
+                src="/assets/images/003-lithium-and-potassium-ion-fields-connected-in-parallel-generate-current-under-gravity.webp"
+                alt="鋰離子和鉀離子在重力場中並聯產生電流的示意圖"
+                class="w-full rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Research Results Section -->
+      <section id="research" class="py-20 px-6 bg-black/20" role="region" aria-labelledby="research-heading">
+        <div class="container mx-auto max-w-6xl">
+          <h2 id="research-heading" class="text-4xl md:text-5xl font-bold text-center mb-16 text-energy-gold">
+            研究成果
+          </h2>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
+              <h3 class="text-xl font-semibold text-electric-blue mb-4">突破卡諾定理限制</h3>
+              <p class="text-gray-300 mb-4">
+                實驗證明我們的技術效率超越了卡諾定理的理論上限， 開創了能源轉換的新紀元。
+              </p>
+              <a
+                href="/assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.md"
+                class="text-energy-gold hover:underline"
+              >
+                詳細研究報告 →
+              </a>
+            </article>
+
+            <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
+              <h3 class="text-xl font-semibold text-electric-blue mb-4">持續電流產生</h3>
+              <p class="text-gray-300 mb-4">
+                在嚴格控制的實驗環境中，成功實現了連續穩定的電流輸出， 驗證了技術的可靠性。
+              </p>
+              <a
+                href="/assets/docs/2-heat-to-electricity-conversion-under-gravity-simplified.md"
+                class="text-energy-gold hover:underline"
+              >
+                技術詳解 →
+              </a>
+            </article>
+
+            <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
+              <h3 class="text-xl font-semibold text-electric-blue mb-4">實驗數據驗證</h3>
+              <p class="text-gray-300 mb-4">
+                通過托爾曼實驗的改進版本，獲得了可重複的實驗數據， 證實了理論預測的正確性。
+              </p>
+              <a
+                href="/assets/docs/4-the-question-over-five-thousand-professors-could-not-answer.md"
+                class="text-energy-gold hover:underline"
+              >
+                實驗數據 →
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Applications Section -->
+      <section id="applications" class="py-20 px-6" role="region" aria-labelledby="applications-heading">
+        <div class="container mx-auto max-w-6xl">
+          <h2 id="applications-heading" class="text-4xl md:text-5xl font-bold text-center mb-16 text-energy-gold">
+            應用領域
+          </h2>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div
+              class="text-center p-6 bg-gradient-to-b from-electric-blue/20 to-transparent rounded-lg hover:from-electric-blue/30 transition-all duration-300"
+            >
+              <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">工業廢熱回收</h3>
+              <p class="text-gray-300 text-sm">將工業廢熱轉換為電能，提高能源利用效率</p>
+            </div>
+
+            <div
+              class="text-center p-6 bg-gradient-to-b from-plasma-purple/20 to-transparent rounded-lg hover:from-plasma-purple/30 transition-all duration-300"
+            >
+              <div class="w-16 h-16 mx-auto mb-4 bg-plasma-purple rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">太空探測器</h3>
+              <p class="text-gray-300 text-sm">在太空環境中利用溫差產生持續電力</p>
+            </div>
+
+            <div
+              class="text-center p-6 bg-gradient-to-b from-energy-gold/20 to-transparent rounded-lg hover:from-energy-gold/30 transition-all duration-300"
+            >
+              <div class="w-16 h-16 mx-auto mb-4 bg-energy-gold rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-deep-space" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">可攜式發電</h3>
+              <p class="text-gray-300 text-sm">為偏遠地區提供清潔、持續的電力供應</p>
+            </div>
+
+            <div
+              class="text-center p-6 bg-gradient-to-b from-electric-blue/20 to-transparent rounded-lg hover:from-electric-blue/30 transition-all duration-300"
+            >
+              <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">醫療設備</h3>
+              <p class="text-gray-300 text-sm">為植入式醫療設備提供長期穩定的電力</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="py-20 px-6 bg-black/40" role="region" aria-labelledby="contact-heading">
+        <div class="container mx-auto max-w-4xl text-center">
+          <h2 id="contact-heading" class="text-4xl md:text-5xl font-bold mb-8 text-energy-gold">聯絡我們</h2>
+          <p class="text-xl text-gray-300 mb-12">對我們的技術感興趣？歡迎與我們的研究團隊聯繫</p>
+
+          <div class="grid md:grid-cols-2 gap-12">
+            <div class="space-y-6">
+              <h3 class="text-2xl font-semibold text-electric-blue">研究合作</h3>
+              <p class="text-gray-300">我們誠摯邀請全球的研究機構和學者， 共同探索這項突破性技術的無限可能。</p>
+              <button
+                class="bg-electric-blue hover:bg-electric-blue/80 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                申請合作
+              </button>
+            </div>
+
+            <div class="space-y-6">
+              <h3 class="text-2xl font-semibold text-plasma-purple">商業應用</h3>
+              <p class="text-gray-300">如果您對技術的商業化應用感興趣， 我們的團隊將為您提供專業的諮詢服務。</p>
+              <button
+                class="bg-plasma-purple hover:bg-plasma-purple/80 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                商業諮詢
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black/60 py-12 px-6" role="contentinfo">
+      <div class="container mx-auto max-w-6xl">
+        <div class="grid md:grid-cols-3 gap-8">
+          <div>
+            <h3 class="text-xl font-bold text-energy-gold mb-4">重力離子熱電技術</h3>
+            <p class="text-gray-400">致力於推動能源轉換技術的革命性發展， 為人類的可持續發展貢獻力量。</p>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-white mb-4">研究文獻</h4>
+            <nav aria-label="研究文獻連結">
+              <ul class="space-y-2">
+                <li>
+                  <a
+                    href="/assets/docs/1-an-exception-to-the-second-law-of-thermodynamics-might-change-global-energy-rules.md"
+                    class="text-gray-400 hover:text-electric-blue transition-colors"
+                    >熱力學第二定律的例外</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/assets/docs/3-how-heat-converts-to-electricity-under-gravitational-effect-on-plasma.md"
+                    class="text-gray-400 hover:text-electric-blue transition-colors"
+                    >重力對電漿的影響</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="/assets/docs/4-the-question-over-five-thousand-professors-could-not-answer.md"
+                    class="text-gray-400 hover:text-electric-blue transition-colors"
+                    >五千位教授無法回答的問題</a
+                  >
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-semibold text-white mb-4">聯絡方式</h4>
+            <address class="text-gray-400 not-italic">
+              <p>Email: research@gravity-ion-tech.com</p>
+              <p>Tel: +886-X-XXXX-XXXX</p>
+              <p>研究中心: 台灣</p>
+            </address>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">&copy; 2024 重力離子熱電技術研究中心. 保留所有權利。</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/assets/js/utils.js"></script>
+    <script src="/assets/js/animations.js"></script>
+    <script src="/assets/js/main.js"></script>
+  </body>
+</html>
