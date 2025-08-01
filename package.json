@@ -1,0 +1,29 @@
+{
+  "name": "gravity-ion-thermoelectric-website",
+  "version": "1.0.0",
+  "description": "Gravity Ion Thermoelectric promotional website showcasing revolutionary heat-to-electricity conversion technology",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "live-server --port=3000 --open=/",
+    "start": "live-server --port=3000",
+    "lint": "eslint assets/js/*.js",
+    "format": "prettier --write assets/js/*.js assets/css/*.css *.html"
+  },
+  "keywords": [
+    "gravity",
+    "ion",
+    "thermoelectric",
+    "heat",
+    "electricity",
+    "physics",
+    "website"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^9.32.0",
+    "live-server": "^1.2.2",
+    "prettier": "^3.6.2"
+  }
+}
