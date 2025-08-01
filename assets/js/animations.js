@@ -6,114 +6,163 @@
  */
 
 /**
- * Particle System for Ion Visualization
+ * Enhanced Canvas-based Particle System for Ion Visualization
  */
-class ParticleSystem {
-    constructor(container, options = {}) {
-        this.container = typeof container === 'string' ? Utils.DOM.select(container) : container;
+class CanvasParticleSystem {
+    constructor(canvas, options = {}) {
+        this.canvas = typeof canvas === 'string' ? Utils.DOM.select(canvas) : canvas;
+        if (!this.canvas) {
+            console.warn('Canvas element not found for particle system');
+            return;
+        }
 
+        this.ctx = this.canvas.getContext('2d');
         this.options = {
-            particleCount: Utils.Device.isMobile() ? 50 : 100,
-            ionTypes: ['positive', 'negative', 'plasma'],
+            particleCount: Utils.Device.isMobile() ? 100 : 200,
+            lightIonColor: '#FFD700', // Yellow for light ions
+            heavyIonColor: '#00BFFF', // Blue for heavy ions
+            plasmaColor: '#8A2BE2', // Purple for plasma
             animationSpeed: 1,
+            gravityStrength: 0.02,
+            mouseInteraction: true,
             enabled: !Utils.Device.prefersReducedMotion(),
             ...options
         };
 
         this.particles = [];
+        this.mouse = { x: 0, y: 0, radius: 100 };
         this.animationId = null;
         this.isRunning = false;
 
-        if (this.container && this.options.enabled) {
+        if (this.options.enabled) {
             this.init();
         }
     }
 
     /**
-     * Initialize particle system
+     * Initialize canvas particle system
      */
     init() {
-        this.setupContainer();
+        this.setupCanvas();
         this.createParticles();
+        this.setupEventListeners();
         this.start();
     }
 
     /**
-     * Setup container for particles
+     * Setup canvas dimensions and properties
      */
-    setupContainer() {
-        this.container.style.position = 'relative';
-        this.container.style.overflow = 'hidden';
+    setupCanvas() {
+        this.resizeCanvas();
+        window.addEventListener('resize', Utils.Performance.debounce(() => {
+            this.resizeCanvas();
+        }, 250));
     }
 
     /**
-     * Create individual particles
+     * Resize canvas to fill container
+     */
+    resizeCanvas() {
+        const rect = this.canvas.parentElement.getBoundingClientRect();
+        this.canvas.width = rect.width;
+        this.canvas.height = rect.height;
+        this.canvas.style.width = rect.width + 'px';
+        this.canvas.style.height = rect.height + 'px';
+    }
+
+    /**
+     * Create particles with physics properties
      */
     createParticles() {
-        const containerRect = this.container.getBoundingClientRect();
+        this.particles = [];
 
         for (let i = 0; i < this.options.particleCount; i++) {
-            const particle = this.createParticle(containerRect);
+            const particle = this.createParticle();
             this.particles.push(particle);
-            this.container.appendChild(particle.element);
         }
     }
 
     /**
-     * Create a single particle
-     * @param {DOMRect} containerRect - Container dimensions
-     * @returns {Object} Particle object
+     * Create individual particle with random properties
      */
-    createParticle(containerRect) {
-        const ionType =
-            this.options.ionTypes[Utils.MathUtils.randomInt(0, this.options.ionTypes.length - 1)];
+    createParticle() {
+        const types = ['light', 'heavy', 'plasma'];
+        const type = types[Utils.MathUtils.randomInt(0, types.length - 1)];
 
-        const size = Utils.MathUtils.random(2, 8);
-        const x = Utils.MathUtils.random(0, containerRect.width);
-        const y = Utils.MathUtils.random(0, containerRect.height);
-        const vx = Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed;
-        const vy = Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed;
-        const opacity = Utils.MathUtils.random(0.3, 0.8);
-
-        const element = Utils.DOM.createElement('div', {
-            className: `particle ion-${ionType}`,
-            style: `
-                width: ${size}px;
-                height: ${size}px;
-                left: ${x}px;
-                top: ${y}px;
-                opacity: ${opacity};
-                animation-delay: ${Utils.MathUtils.random(0, 8)}s;
-            `
-        });
+        let color, size, mass;
+        switch (type) {
+            case 'light':
+                color = this.options.lightIonColor;
+                size = Utils.MathUtils.random(2, 4);
+                mass = 1;
+                break;
+            case 'heavy':
+                color = this.options.heavyIonColor;
+                size = Utils.MathUtils.random(4, 7);
+                mass = 2;
+                break;
+            case 'plasma':
+                color = this.options.plasmaColor;
+                size = Utils.MathUtils.random(3, 6);
+                mass = 1.5;
+                break;
+        }
 
         return {
-            element,
-            x,
-            y,
-            vx,
-            vy,
+            x: Utils.MathUtils.random(0, this.canvas.width),
+            y: Utils.MathUtils.random(0, this.canvas.height),
+            vx: Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed,
+            vy: Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed,
             size,
-            opacity,
-            ionType,
-            life: Utils.MathUtils.random(5, 15)
+            mass,
+            color,
+            type,
+            opacity: Utils.MathUtils.random(0.3, 0.8),
+            life: Utils.MathUtils.random(5, 15),
+            maxLife: Utils.MathUtils.random(5, 15)
         };
     }
 
     /**
-     * Start particle animation
+     * Setup mouse interaction listeners
+     */
+    setupEventListeners() {
+        if (!this.options.mouseInteraction) {return;}
+
+        const updateMouse = (e) => {
+            const rect = this.canvas.getBoundingClientRect();
+            this.mouse.x = e.clientX - rect.left;
+            this.mouse.y = e.clientY - rect.top;
+        };
+
+        this.canvas.addEventListener('mousemove', updateMouse);
+        this.canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                const rect = this.canvas.getBoundingClientRect();
+                this.mouse.x = touch.clientX - rect.left;
+                this.mouse.y = touch.clientY - rect.top;
+            }
+        });
+
+        this.canvas.addEventListener('mouseleave', () => {
+            this.mouse.x = -1000;
+            this.mouse.y = -1000;
+        });
+    }
+
+    /**
+     * Start animation loop
      */
     start() {
-        if (this.isRunning) {
-            return;
-        }
-
+        if (this.isRunning) {return;}
         this.isRunning = true;
         this.animate();
     }
 
     /**
-     * Stop particle animation
+     * Stop animation
      */
     stop() {
         this.isRunning = false;
@@ -124,63 +173,146 @@ class ParticleSystem {
     }
 
     /**
-     * Animation loop
+     * Main animation loop
      */
     animate() {
-        if (!this.isRunning) {
-            return;
-        }
+        if (!this.isRunning) {return;}
 
         this.updateParticles();
+        this.drawParticles();
+
         this.animationId = requestAnimationFrame(() => this.animate());
     }
 
     /**
-     * Update particle positions and properties
+     * Update particle physics
      */
     updateParticles() {
-        const containerRect = this.container.getBoundingClientRect();
-
         this.particles.forEach((particle, _index) => {
+            // Apply gravity (heavier particles fall faster)
+            particle.vy += this.options.gravityStrength * particle.mass;
+
+            // Mouse interaction (attraction/repulsion)
+            if (this.options.mouseInteraction) {
+                const dx = this.mouse.x - particle.x;
+                const dy = this.mouse.y - particle.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < this.mouse.radius) {
+                    const force = (this.mouse.radius - distance) / this.mouse.radius;
+                    const angle = Math.atan2(dy, dx);
+
+                    // Light particles are attracted, heavy particles repelled
+                    const direction = particle.type === 'light' ? 1 : -1;
+                    particle.vx += Math.cos(angle) * force * 0.1 * direction;
+                    particle.vy += Math.sin(angle) * force * 0.1 * direction;
+                }
+            }
+
             // Update position
             particle.x += particle.vx;
             particle.y += particle.vy;
 
-            // Boundary collision
-            if (particle.x <= 0 || particle.x >= containerRect.width) {
-                particle.vx *= -1;
-            }
-            if (particle.y <= 0 || particle.y >= containerRect.height) {
-                particle.vy *= -1;
+            // Boundary conditions with energy conservation
+            if (particle.x <= particle.size || particle.x >= this.canvas.width - particle.size) {
+                particle.vx *= -0.8; // Energy loss on collision
+                particle.x = Utils.MathUtils.clamp(particle.x, particle.size, this.canvas.width - particle.size);
             }
 
-            // Keep particles in bounds
-            particle.x = Utils.MathUtils.clamp(particle.x, 0, containerRect.width);
-            particle.y = Utils.MathUtils.clamp(particle.y, 0, containerRect.height);
+            if (particle.y <= particle.size || particle.y >= this.canvas.height - particle.size) {
+                particle.vy *= -0.8; // Energy loss on collision
+                particle.y = Utils.MathUtils.clamp(particle.y, particle.size, this.canvas.height - particle.size);
+            }
 
-            // Update DOM element
-            particle.element.style.left = `${particle.x}px`;
-            particle.element.style.top = `${particle.y}px`;
+            // Apply friction
+            particle.vx *= 0.999;
+            particle.vy *= 0.999;
 
-            // Update life
+            // Update life and opacity
             particle.life -= 0.01;
+            particle.opacity = Math.max(0.1, particle.life / particle.maxLife * 0.8);
+
+            // Reset particle if life expired
             if (particle.life <= 0) {
-                this.resetParticle(particle, containerRect);
+                this.resetParticle(particle);
             }
         });
     }
 
     /**
      * Reset particle to initial state
-     * @param {Object} particle - Particle to reset
-     * @param {DOMRect} containerRect - Container dimensions
      */
-    resetParticle(particle, containerRect) {
-        particle.x = Utils.MathUtils.random(0, containerRect.width);
-        particle.y = Utils.MathUtils.random(0, containerRect.height);
-        particle.life = Utils.MathUtils.random(5, 15);
+    resetParticle(particle) {
+        particle.x = Utils.MathUtils.random(0, this.canvas.width);
+        particle.y = Utils.MathUtils.random(0, this.canvas.height);
+        particle.vx = Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed;
+        particle.vy = Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed;
+        particle.life = particle.maxLife;
         particle.opacity = Utils.MathUtils.random(0.3, 0.8);
-        particle.element.style.opacity = particle.opacity;
+    }
+
+    /**
+     * Draw particles on canvas
+     */
+    drawParticles() {
+        // Clear canvas with fade effect
+        this.ctx.fillStyle = 'rgba(15, 23, 42, 0.1)';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.particles.forEach(particle => {
+            this.ctx.save();
+
+            // Set particle style
+            this.ctx.globalAlpha = particle.opacity;
+            this.ctx.fillStyle = particle.color;
+            this.ctx.shadowColor = particle.color;
+            this.ctx.shadowBlur = particle.size * 2;
+
+            // Draw particle
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            // Add glow effect
+            this.ctx.globalAlpha = particle.opacity * 0.3;
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            this.ctx.restore();
+        });
+
+        // Draw connections between nearby particles
+        this.drawConnections();
+    }
+
+    /**
+     * Draw connections between nearby particles
+     */
+    drawConnections() {
+        this.ctx.save();
+        this.ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)';
+        this.ctx.lineWidth = 0.5;
+
+        for (let i = 0; i < this.particles.length; i++) {
+            for (let j = i + 1; j < this.particles.length; j++) {
+                const p1 = this.particles[i];
+                const p2 = this.particles[j];
+
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 80) {
+                    this.ctx.globalAlpha = (80 - distance) / 80 * 0.2;
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(p1.x, p1.y);
+                    this.ctx.lineTo(p2.x, p2.y);
+                    this.ctx.stroke();
+                }
+            }
+        }
+        this.ctx.restore();
     }
 
     /**
@@ -188,12 +320,10 @@ class ParticleSystem {
      */
     destroy() {
         this.stop();
-        this.particles.forEach(particle => {
-            if (particle.element.parentNode) {
-                particle.element.parentNode.removeChild(particle.element);
-            }
-        });
         this.particles = [];
+        if (this.canvas) {
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        }
     }
 }
 
@@ -690,7 +820,7 @@ class LoadingAnimations {
 
 // Initialize animation systems when DOM is ready
 const AnimationManager = {
-    particleSystem: null,
+    canvasParticleSystem: null,
     scrollAnimations: null,
     interactiveAnimations: null,
     loadingAnimations: null,
@@ -699,10 +829,14 @@ const AnimationManager = {
      * Initialize all animation systems
      */
     init() {
-        // Initialize particle system for hero section
-        const particleContainer = Utils.DOM.select('#particle-container');
-        if (particleContainer) {
-            this.particleSystem = new ParticleSystem(particleContainer);
+        // Initialize canvas particle system for hero section
+        const particlesCanvas = Utils.DOM.select('#particles-canvas');
+        if (particlesCanvas) {
+            this.canvasParticleSystem = new CanvasParticleSystem(particlesCanvas, {
+                particleCount: Utils.Device.isMobile() ? 100 : 200,
+                mouseInteraction: true,
+                gravityStrength: 0.02
+            });
         }
 
         // Initialize scroll animations
@@ -721,8 +855,8 @@ const AnimationManager = {
      * Destroy all animation systems
      */
     destroy() {
-        if (this.particleSystem) {
-            this.particleSystem.destroy();
+        if (this.canvasParticleSystem) {
+            this.canvasParticleSystem.destroy();
         }
         if (this.scrollAnimations) {
             this.scrollAnimations.destroy();
@@ -733,7 +867,7 @@ const AnimationManager = {
 // Export for module usage
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
-        ParticleSystem,
+        CanvasParticleSystem,
         ScrollAnimations,
         InteractiveAnimations,
         LoadingAnimations,
@@ -743,7 +877,7 @@ if (typeof module !== 'undefined' && module.exports) {
 
 // Make available globally
 window.Animations = {
-    ParticleSystem,
+    CanvasParticleSystem,
     ScrollAnimations,
     InteractiveAnimations,
     LoadingAnimations,
