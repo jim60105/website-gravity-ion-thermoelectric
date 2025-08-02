@@ -4,8 +4,6 @@
  * @author Gravity Ion Thermoelectric Research Team
  */
 
-/* global Chart */
-
 class EfficiencyCalculator {
     constructor(containerId) {
         this.container = document.getElementById(containerId);

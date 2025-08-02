@@ -3,8 +3,6 @@
  * Handles interactive charts and data displays
  */
 
-/* global Chart */
-
 class DataVisualization {
   constructor() {
     this.chart = null;

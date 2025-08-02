@@ -27,7 +27,8 @@ export default [
                 URL: 'readonly',
                 Element: 'readonly',
                 module: 'readonly',
-                CustomEvent: 'readonly'
+                CustomEvent: 'readonly',
+                Chart: 'readonly'
             }
         },
         rules: {
