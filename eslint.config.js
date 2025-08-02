@@ -28,7 +28,10 @@ export default [
                 Element: 'readonly',
                 module: 'readonly',
                 CustomEvent: 'readonly',
-                Chart: 'readonly'
+                Chart: 'readonly',
+                FormData: 'readonly',
+                Blob: 'readonly',
+                sessionStorage: 'readonly'
             }
         },
         rules: {
