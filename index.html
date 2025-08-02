@@ -116,6 +116,29 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/assets/css/styles.css" />
 
+    <!-- Strategic Resource Loading -->
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    
+    <!-- Preconnect to critical external resources -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/css/styles.css" as="style">
+    <link rel="preload" href="/assets/js/utils.js" as="script">
+    <link rel="preload" href="/assets/js/main.js" as="script">
+    
+    <!-- Preload critical above-the-fold images -->
+    <link rel="preload" href="/assets/images/001-energy-flows-from-hot-to-cold-region.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="/assets/images/002-energy-flows-from-cold-to-hot-region-under-gravity-abstract-diagram.webp" as="image" fetchpriority="high">
+    
+    <!-- Prefetch non-critical resources -->
+    <link rel="prefetch" href="/assets/js/animations.js">
+    <link rel="prefetch" href="/assets/js/scientific-animations.js">
+    <link rel="prefetch" href="/assets/js/particle-simulator.js">
+
     <!-- JavaScript Libraries and Scripts -->
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -159,6 +182,10 @@
 
     <!-- Chart.js for Data Visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Critical JavaScript (loaded with defer) -->
+    <script defer src="/assets/js/utils.js"></script>
+    <script defer src="/assets/js/main.js"></script>
   </head>
   <body class="font-sans antialiased bg-gradient-to-br from-deep-space via-blue-900 to-purple-900 text-white">
     <!-- Skip Navigation Link for Accessibility -->
@@ -363,7 +390,7 @@
                 src="/assets/images/003-lithium-and-potassium-ion-fields-connected-in-parallel-generate-current-under-gravity.webp"
                 alt="鋰離子和鉀離子在重力場中並聯產生電流的示意圖"
                 class="w-full rounded-lg shadow-2xl transform hover:scale-105 transition-transform duration-300"
-                loading="lazy"
+                fetchpriority="high"
               />
               <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-lg"></div>
             </div>
@@ -483,7 +510,7 @@
                   src="/assets/images/004-tolmans-discovery-voltage-difference-of-lithium-and-potassium-iodide-solutions-under-acceleration-or-gravity.webp"
                   alt="托爾曼發現：鋰離子和鉀離子碘化物溶液在加速度或重力下的電位差"
                   class="w-full rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
-                  loading="lazy"
+                  fetchpriority="high"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
               </div>
@@ -622,7 +649,7 @@
                     src="/assets/images/001-energy-flows-from-hot-to-cold-region.webp"
                     alt="能量從高溫區域流向低溫區域"
                     class="w-full rounded-lg"
-                    loading="lazy"
+                    
                   />
                 </div>
                 
@@ -633,7 +660,7 @@
                     src="/assets/images/002-energy-flows-from-cold-to-hot-region-under-gravity-abstract-diagram.webp"
                     alt="重力場下能量從低溫區域流向高溫區域的抽象示意圖"
                     class="w-full rounded-lg"
-                    loading="lazy"
+                    
                   />
                 </div>
               </div>
@@ -652,7 +679,7 @@
                     src="/assets/images/008-illustration-of-carnots-theorem.webp"
                     alt="卡諾定理說明圖"
                     class="w-full rounded-lg"
-                    loading="lazy"
+                    
                   />
                 </div>
                 
@@ -663,7 +690,7 @@
                     src="/assets/images/009-measured-sample-surpasses-carnots-theorem-limit.webp"
                     alt="測量樣本超越卡諾定理限制"
                     class="w-full rounded-lg"
-                    loading="lazy"
+                    
                   />
                 </div>
               </div>
@@ -682,7 +709,7 @@
                     src="/assets/images/010-illustration-of-the-second-law-of-thermodynamics.webp"
                     alt="熱力學第二定律說明圖"
                     class="w-full rounded-lg"
-                    loading="lazy"
+                    
                   />
                 </div>
                 
@@ -693,7 +720,7 @@
                     src="/assets/images/011-measured-sample-surpasses-second-law-limit-illustration.webp"
                     alt="測量樣本超越熱力學第二定律限制示意圖"
                     class="w-full rounded-lg"
-                    loading="lazy"
+                    
                   />
                 </div>
               </div>
@@ -852,7 +879,7 @@
                     src="/assets/images/006-measured-continuous-and-stable-current-in-kuo-tso-chens-sample.webp"
                     alt="郭祚真樣品中測量到的連續穩定電流"
                     class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-                    loading="lazy"
+                    
                   />
                   <p class="text-sm text-gray-600 mt-2 text-center">實驗樣品中測量到的連續穩定電流</p>
                 </div>
@@ -863,7 +890,7 @@
                     src="/assets/images/036-table2-output-voltage-vs-time-of-battery-standing-upright.webp"
                     alt="電池正立時輸出電壓與時間關係表"
                     class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-                    loading="lazy"
+                    
                   />
                   <p class="text-sm text-gray-600 mt-2 text-center">電池正立狀態下的電壓時間數據表</p>
                 </div>
@@ -968,7 +995,7 @@
                     src="/assets/images/007-reversed-voltage-when-sample-is-upside-down-kuo-tso-chen.webp"
                     alt="樣品倒立時電壓反轉現象"
                     class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-                    loading="lazy"
+                    
                   />
                   <p class="text-sm text-gray-600 mt-2 text-center">樣品倒立時觀測到的電壓反轉現象</p>
                 </div>
@@ -979,7 +1006,7 @@
                     src="/assets/images/037-table3-output-voltage-vs-time-of-battery-upside-down.webp"
                     alt="電池倒立時輸出電壓與時間關係表"
                     class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
-                    loading="lazy"
+                    
                   />
                   <p class="text-sm text-gray-600 mt-2 text-center">電池倒立狀態下的電壓時間數據表</p>
                 </div>
@@ -1036,7 +1063,7 @@
                     src="/assets/images/032-fig8-structure-of-centrifugal-battery-used-in-experiment.webp"
                     alt="實驗用離心電池結構圖"
                     class="w-full rounded-lg mb-4"
-                    loading="lazy"
+                    
                   />
                   <h5 class="text-lg font-semibold text-gray-800 mb-2">電池結構設計</h5>
                   <p class="text-gray-700 text-sm">離心式電池結構，最大化重力場效應</p>
@@ -1047,7 +1074,7 @@
                     src="/assets/images/033-fig9-components-of-centrifugal-battery-manufacturing.webp"
                     alt="離心電池製造組件"
                     class="w-full rounded-lg mb-4"
-                    loading="lazy"
+                    
                   />
                   <h5 class="text-lg font-semibold text-gray-800 mb-2">製造組件</h5>
                   <p class="text-gray-700 text-sm">精密加工的電池組件，確保實驗精度</p>
@@ -1058,7 +1085,7 @@
                     src="/assets/images/034-fig10-photos-of-battery-setup-and-output-connections.webp"
                     alt="電池裝置與輸出連接實際照片"
                     class="w-full rounded-lg mb-4"
-                    loading="lazy"
+                    
                   />
                   <h5 class="text-lg font-semibold text-gray-800 mb-2">實際裝置</h5>
                   <p class="text-gray-700 text-sm">實驗室中的實際電池裝置與測量系統</p>
@@ -1075,7 +1102,7 @@
                     src="/assets/images/012-lab-environment-with-strict-control-of-temperature-and-airflow.webp"
                     alt="嚴格控制溫度和氣流的實驗室環境"
                     class="w-full rounded-xl shadow-lg"
-                    loading="lazy"
+                    
                   />
                   <p class="text-sm text-gray-600 mt-2 text-center">嚴格控制溫度和氣流的實驗室環境</p>
                 </div>
@@ -1152,7 +1179,7 @@
                     src="/assets/images/035-fig11-output-voltage-of-battery-under-10G-centrifuge.webp"
                     alt="10G離心機下電池的輸出電壓"
                     class="w-full rounded-xl shadow-lg"
-                    loading="lazy"
+                    
                   />
                   <p class="text-sm text-gray-600 mt-2 text-center">10G離心機測試下的電池電壓輸出結果</p>
                 </div>
@@ -1715,7 +1742,7 @@
                   src="/assets/images/014-centrifugal-structure-for-efficiency-enhancement.webp"
                   alt="離心結構效率增強示意圖"
                   class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                  loading="lazy"
+                  
                 />
                 <p class="text-sm text-gray-300 mt-2 text-center">離心結構設計原理</p>
               </div>
@@ -1724,7 +1751,7 @@
                   src="/assets/images/026-fig3-centrifugal-structure-for-efficiency-enhancement.webp"
                   alt="離心結構效率增強技術圖解"
                   class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                  loading="lazy"
+                  
                 />
                 <p class="text-sm text-gray-300 mt-2 text-center">技術實現方案</p>
               </div>
@@ -1733,7 +1760,7 @@
                   src="/assets/images/027-table1-efficiency-parameters-of-centrifugal-structure.webp"
                   alt="離心結構效率參數表"
                   class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                  loading="lazy"
+                  
                 />
                 <p class="text-sm text-gray-300 mt-2 text-center">效率參數數據</p>
               </div>
@@ -2788,8 +2815,6 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="/assets/js/utils.js"></script>
-    <script src="/assets/js/optimization.js"></script>
     <script src="/assets/js/accessibility.js"></script>
     <script src="/assets/js/navigation.js"></script>
     <script src="/assets/js/animations.js"></script>
@@ -2810,6 +2835,5 @@
     <script src="/assets/js/countdown-timer.js"></script>
     <script src="/assets/js/social-sharing.js"></script>
     <script src="/assets/js/newsletter-signup.js"></script>
-    <script src="/assets/js/main.js"></script>
   </body>
 </html>
