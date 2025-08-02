@@ -879,6 +879,317 @@ textarea:focus {
   -webkit-backdrop-filter: blur(10px);
 }
 
+/* Experimental Evidence Section Styles */
+#experimental-evidence {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+  position: relative;
+}
+
+/* Chart Container Styles */
+.chart-container {
+  background: rgba(248, 250, 252, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  background: rgba(248, 250, 252, 0.95);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.chart-control-btn {
+  background: #e2e8f0;
+  color: #475569;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.chart-control-btn:hover {
+  background: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.chart-control-btn.active {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+/* Equipment Cards */
+.equipment-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.equipment-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.equipment-card:hover::before {
+  left: 100%;
+}
+
+.equipment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Flip Simulation Styles */
+.battery-simulation {
+  perspective: 1000px;
+}
+
+.battery-3d {
+  transform-style: preserve-3d;
+}
+
+.battery-3d.flipped {
+  transform: rotateX(180deg);
+}
+
+.battery-visual {
+  transform-style: preserve-3d;
+}
+
+.voltage-indicator {
+  transition: all 0.5s ease;
+}
+
+.battery-3d.flipped .voltage-indicator.top {
+  transform: translateX(-50%) rotateX(180deg);
+}
+
+.battery-3d.flipped .voltage-indicator.bottom {
+  transform: translateX(-50%) rotateX(180deg);
+}
+
+/* Ion Animation Styles */
+.ion {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  animation: ionFlow 3s infinite linear;
+}
+
+.ion.positive {
+  background: #fbbf24;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.ion.negative {
+  background: #3b82f6;
+  right: 20%;
+  animation-delay: 1.5s;
+  animation-direction: reverse;
+}
+
+@keyframes ionFlow {
+  0% {
+    top: 10%;
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    top: 90%;
+    opacity: 1;
+  }
+}
+
+.battery-3d.flipped .ion.positive {
+  animation-direction: reverse;
+  animation-delay: 1.5s;
+}
+
+.battery-3d.flipped .ion.negative {
+  animation-direction: normal;
+  animation-delay: 0s;
+}
+
+/* Control Button Styles */
+.control-btn {
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+}
+
+/* Data Cards */
+.data-card {
+  transition: all 0.3s ease;
+}
+
+.data-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.data-card .value {
+  transition: all 0.3s ease;
+}
+
+/* Control Items */
+.control-item {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.control-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.control-item:hover::before {
+  left: 100%;
+}
+
+.control-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Parameters Grid */
+.parameters-grid .parameter {
+  text-align: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.parameters-grid .parameter:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.05);
+}
+
+/* Key Findings */
+.key-findings {
+  position: relative;
+  overflow: hidden;
+}
+
+.key-findings::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0.15) 100%);
+  pointer-events: none;
+}
+
+/* Comparison Analysis */
+.comparison-analysis {
+  position: relative;
+  overflow: hidden;
+}
+
+.comparison-analysis::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(138, 43, 226, 0.05) 0%, rgba(138, 43, 226, 0.15) 100%);
+  pointer-events: none;
+}
+
+.comparison-table table {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chart-container {
+    padding: 16px;
+  }
+  
+  .chart-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .chart-control-btn {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  
+  .simulation-controls {
+    position: static;
+    transform: none;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  
+  .real-time-data {
+    grid-template-columns: 1fr;
+  }
+  
+  .parameters-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .equipment-card {
+    padding: 16px;
+  }
+  
+  .battery-visual .battery-body {
+    width: 24px;
+    height: 36px;
+  }
+  
+  .voltage-indicator {
+    font-size: 14px;
+  }
+  
+  .parameters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* Ensure smooth scrolling */
 html {
   scroll-behavior: smooth;
