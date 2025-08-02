@@ -4,8 +4,6 @@
  * @author Gravity Ion Thermoelectric Research Team
  */
 
-/* global Chart */
-
 class ImpactCharts {
     constructor() {
         this.charts = new Map();
