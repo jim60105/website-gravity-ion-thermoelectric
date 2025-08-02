@@ -68,15 +68,15 @@ class RoadmapTimeline {
                 
                 <!-- Interactive Controls -->
                 <div class="timeline-controls mt-12 flex justify-center space-x-4">
-                    <button id="timeline-prev" class="control-btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors">
+                    <button id="timeline-prev" class="control-btn bg-gray-600 hover:bg-gray-700 text-gray-800 px-4 py-2 rounded-lg transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    <button id="timeline-play" class="control-btn bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg transition-colors">
+                    <button id="timeline-play" class="control-btn bg-green-600 hover:bg-green-700 text-gray-800 px-6 py-2 rounded-lg transition-colors">
                         自動播放
                     </button>
-                    <button id="timeline-next" class="control-btn bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors">
+                    <button id="timeline-next" class="control-btn bg-gray-600 hover:bg-gray-700 text-gray-800 px-4 py-2 rounded-lg transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
@@ -92,7 +92,7 @@ class RoadmapTimeline {
         return `
             <div class="milestone-item relative flex items-start space-x-6 opacity-60 transition-opacity duration-500" data-milestone="${index}">
                 <!-- Milestone Marker -->
-                <div class="milestone-marker relative z-10 w-16 h-16 rounded-full border-4 border-white shadow-lg flex items-center justify-center text-white font-bold text-lg transition-all duration-300"
+                <div class="milestone-marker relative z-10 w-16 h-16 rounded-full border-4 border-white shadow-lg flex items-center justify-center text-gray-600 font-bold text-lg transition-all duration-300"
                      style="background: linear-gradient(135deg, ${milestone.color}, ${this.adjustBrightness(milestone.color, -20)})">
                     ${milestone.year.slice(-2)}
                 </div>
@@ -102,12 +102,12 @@ class RoadmapTimeline {
                     <!-- Header -->
                     <div class="milestone-header mb-4">
                         <div class="flex items-center justify-between mb-2">
-                            <h3 class="text-2xl font-bold text-white">${milestone.year} - ${milestone.title}</h3>
-                            <div class="progress-indicator text-sm text-gray-300">
+                            <h3 class="text-2xl font-bold text-gray-800">${milestone.year} - ${milestone.title}</h3>
+                            <div class="progress-indicator text-sm text-gray-600">
                                 進度: ${milestone.progress}%
                             </div>
                         </div>
-                        <p class="text-gray-200 text-lg">${milestone.description}</p>
+                        <p class="text-gray-800 text-lg">${milestone.description}</p>
                     </div>
                     
                     <!-- Progress Bar -->
@@ -121,10 +121,10 @@ class RoadmapTimeline {
                     
                     <!-- Achievements -->
                     <div class="achievements">
-                        <h4 class="text-lg font-semibold text-white mb-3">關鍵成果</h4>
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">關鍵成果</h4>
                         <ul class="space-y-2">
                             ${milestone.achievements.map(achievement => `
-                                <li class="flex items-center space-x-3 text-gray-200">
+                                <li class="flex items-center space-x-3 text-gray-800">
                                     <div class="achievement-icon w-2 h-2 rounded-full" style="background-color: ${milestone.color}"></div>
                                     <span>${achievement}</span>
                                 </li>
