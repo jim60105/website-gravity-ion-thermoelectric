@@ -1,0 +1,54 @@
+# Robots.txt for 重力離子熱電技術 (Gravity Ion Thermoelectric Technology)
+# 
+# This website presents groundbreaking research on gravity ion thermoelectric conversion
+# technology that challenges traditional thermodynamic laws.
+
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the entire site
+Allow: /assets/
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/images/
+Allow: /assets/docs/
+
+# Disallow temporary and development files
+Disallow: /tmp/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /package-lock.json
+
+# Special instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# Sitemap location
+Sitemap: https://gravity-ion-thermoelectric.com/sitemap.xml
+
+# Contact information for crawlers
+# Webmaster: research@gravity-ion-tech.com
+# Last updated: 2024-08-02
