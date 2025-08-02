@@ -75,14 +75,20 @@ class CanvasParticleSystem {
     }
 
     /**
-     * Resize canvas to fill container
+     * Resize canvas to fill viewport height minus header
      */
     resizeCanvas() {
-        const rect = this.canvas.parentElement.getBoundingClientRect();
-        this.canvas.width = rect.width;
-        this.canvas.height = rect.height;
-        this.canvas.style.width = rect.width + 'px';
-        this.canvas.style.height = rect.height + 'px';
+        const header = Utils.DOM.select('header');
+        const headerHeight = header ? header.offsetHeight : 0;
+        
+        // Calculate canvas dimensions: full viewport width, viewport height minus header
+        const canvasWidth = window.innerWidth;
+        const canvasHeight = window.innerHeight - headerHeight;
+        
+        this.canvas.width = canvasWidth;
+        this.canvas.height = canvasHeight;
+        this.canvas.style.width = canvasWidth + 'px';
+        this.canvas.style.height = canvasHeight + 'px';
     }
 
     /**

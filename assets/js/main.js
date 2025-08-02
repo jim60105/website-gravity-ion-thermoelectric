@@ -59,6 +59,7 @@ class GravityIonApp {
             // Initialize core components
             this.setupErrorHandling();
             this.setupEventListeners();
+            this.setupHeaderHeight(); // Add header height calculation
             this.initializeComponents();
             this.setupAccessibility();
             this.setupPerformanceOptimizations();
@@ -78,6 +79,28 @@ class GravityIonApp {
             console.error('Failed to initialize application:', error);
             this.handleError(error);
         }
+    }
+
+    /**
+     * Setup header height calculation and CSS variable
+     */
+    setupHeaderHeight() {
+        const updateHeaderHeight = () => {
+            const header = Utils.DOM.select('header');
+            if (header) {
+                const headerHeight = header.offsetHeight;
+                document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+            }
+        };
+
+        // Set initial header height
+        updateHeaderHeight();
+
+        // Update on resize
+        const debouncedUpdate = Utils.Performance.debounce(updateHeaderHeight, 250);
+        window.addEventListener('resize', debouncedUpdate);
+
+        this.components.set('headerHeight', { update: updateHeaderHeight });
     }
 
     /**
@@ -583,6 +606,12 @@ class GravityIonApp {
             document.body.setAttribute('data-device', 'tablet');
         } else {
             document.body.setAttribute('data-device', 'desktop');
+        }
+
+        // Update header height
+        const headerHeightComponent = this.components.get('headerHeight');
+        if (headerHeightComponent) {
+            headerHeightComponent.update();
         }
 
         // Notify components of resize
