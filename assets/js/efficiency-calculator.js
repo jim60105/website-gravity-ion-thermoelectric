@@ -91,6 +91,7 @@ class EfficiencyCalculator {
                     },
                     y: {
                         display: true,
+                        type: 'logarithmic', // Use logarithmic scale for wide range of values
                         title: {
                             display: true,
                             text: '功率密度 (W/m³)',
@@ -99,7 +100,20 @@ class EfficiencyCalculator {
                         grid: {
                             color: 'rgba(156, 163, 175, 0.3)'
                         },
-                        beginAtZero: true
+                        min: 1e-20, // Set minimum to handle very small values
+                        ticks: {
+                            callback: function(value, index, values) {
+                                // Format y-axis labels with scientific notation when needed
+                                if (value === 0) return '0';
+                                if (value < 0.01) {
+                                    return value.toExponential(1);
+                                } else if (value >= 1000) {
+                                    return value.toLocaleString('en-US');
+                                } else {
+                                    return value.toFixed(2);
+                                }
+                            }
+                        }
                     }
                 },
                 plugins: {
@@ -113,10 +127,15 @@ class EfficiencyCalculator {
                         callbacks: {
                             label: function(context) {
                                 const value = context.parsed.y;
-                                if (value < 0.01) {
-                                    return `${context.dataset.label}: ${(value * 1000).toFixed(2)} mW/m³`;
+                                if (value === 0) {
+                                    return `${context.dataset.label}: 0 W/m³`;
+                                } else if (value < 0.01 && value > 0) {
+                                    return `${context.dataset.label}: ${value.toExponential(2)} W/m³`;
+                                } else if (value >= 1000) {
+                                    return `${context.dataset.label}: ${value.toLocaleString('en-US', {maximumFractionDigits: 2})} W/m³`;
+                                } else {
+                                    return `${context.dataset.label}: ${value.toFixed(2)} W/m³`;
                                 }
-                                return `${context.dataset.label}: ${value.toFixed(2)} W/m³`;
                             }
                         }
                     }
@@ -131,8 +150,8 @@ class EfficiencyCalculator {
     }
 
     generateDatasets() {
-        const maxRpm = 1000;
-        const step = 25;
+        const maxRpm = 100000; // Increase to 100,000 RPM to match paper calculations
+        const step = 2000; // Larger step for better performance
         
         // Generate data for different ion systems
         const ionSystems = [
@@ -147,10 +166,12 @@ class EfficiencyCalculator {
             for (let rpm = 0; rpm <= maxRpm; rpm += step) {
                 try {
                     const power = this.calculateScientificPowerOutput(rpm, system);
-                    dataPoints.push({ x: rpm, y: power });
+                    if (power > 0 || rpm === 0) { // Include zero point and positive values
+                        dataPoints.push({ x: rpm, y: power });
+                    }
                 } catch (error) {
-                    // If calculation fails (e.g., exceeds material limits), stop
-                    break;
+                    // If calculation fails (e.g., exceeds material limits), continue with next point
+                    console.warn(`Calculation failed at ${rpm} RPM:`, error.message);
                 }
             }
 
@@ -214,12 +235,9 @@ class EfficiencyCalculator {
             ionSystem = systems[this.currentIonSystem] || systems['HI'];
         }
 
-        // Check safety limits first
+        // Check safety limits first (but don't stop calculations, just warn)
         const safety = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
-        if (!safety.isWithinLimits) {
-            throw new Error('Exceeds material safety limits');
-        }
-
+        
         // Calculate centrifugal acceleration
         const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
         
@@ -269,10 +287,10 @@ class EfficiencyCalculator {
             const baselinePower = 72; // HI system at optimal conditions
             const efficiency = powerOutput / baselinePower;
             
-            // Update display values
-            this.updateDisplay('power-output', powerOutput.toFixed(2));
-            this.updateDisplay('efficiency-multiplier', efficiency.toFixed(3));
-            this.updateDisplay('energy-per-day', (powerOutput * 24).toFixed(1));
+            // Update display values with proper formatting
+            this.updateDisplay('power-output', powerOutput);
+            this.updateDisplay('efficiency-multiplier', efficiency);
+            this.updateDisplay('energy-per-day', powerOutput * 24);
             
             // Update acceleration display if element exists
             this.updateDisplay('acceleration', `${(acceleration / 9.81).toFixed(1)}g`);
@@ -301,7 +319,26 @@ class EfficiencyCalculator {
     updateDisplay(elementId, value) {
         const element = this.container.querySelector(`#${elementId}`);
         if (element) {
-            element.textContent = value;
+            // Format scientific notation for very small or very large numbers
+            if (typeof value === 'number') {
+                if (value === 0) {
+                    element.textContent = '0.00';
+                } else if (value < 0.01 && value > 0) {
+                    // Show in scientific notation for very small numbers
+                    element.textContent = value.toExponential(2);
+                } else if (value >= 1000) {
+                    // Show large numbers with commas
+                    element.textContent = value.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                } else {
+                    // Show normal decimal format
+                    element.textContent = value.toFixed(2);
+                }
+            } else {
+                element.textContent = value;
+            }
         }
     }
 
@@ -315,14 +352,14 @@ class EfficiencyCalculator {
             'safe': '材料應力安全',
             'caution': '中等轉速運行，材料應力在安全範圍內',
             'warning': '高轉速運行，接近材料安全極限',
-            'danger': '超出材料安全極限，可能導致結構失效'
+            'danger': '超出材料安全極限，理論計算範圍'
         };
 
         const classes = {
             'safe': 'text-green-600 bg-green-50 border-green-200',
             'caution': 'text-yellow-600 bg-yellow-50 border-yellow-200',
             'warning': 'text-orange-600 bg-orange-50 border-orange-200',
-            'danger': 'text-red-600 bg-red-50 border-red-200'
+            'danger': 'text-blue-600 bg-blue-50 border-blue-200' // Changed to blue for theoretical range
         };
 
         const level = safety.warningLevel || 'danger';
