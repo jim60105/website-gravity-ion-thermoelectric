@@ -1,6 +1,6 @@
 /**
- * Development Roadmap Timeline Interactive Component
- * Handles the interactive timeline for technology development milestones
+ * Development Roadmap Timeline Static Component
+ * Displays the static timeline for technology development milestones
  * @author Gravity Ion Thermoelectric Research Team
  */
 
@@ -42,8 +42,6 @@ class RoadmapTimeline {
             }
         ];
 
-        this.currentMilestone = 0;
-
         this.init();
     }
 
@@ -51,8 +49,6 @@ class RoadmapTimeline {
         if (!this.container) {return;}
 
         this.renderTimeline();
-        this.setupInteractivity();
-        this.setupProgressAnimation();
     }
 
     renderTimeline() {
@@ -65,23 +61,6 @@ class RoadmapTimeline {
                 <div class="milestones-container space-y-12">
                     ${this.milestones.map((milestone, index) => this.renderMilestone(milestone, index)).join('')}
                 </div>
-                
-                <!-- Interactive Controls -->
-                <div class="timeline-controls mt-12 flex justify-center space-x-4">
-                    <button id="timeline-prev" class="control-btn bg-gray-600 hover:bg-gray-700 text-gray-800 px-4 py-2 rounded-lg transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                    </button>
-                    <button id="timeline-play" class="control-btn bg-green-600 hover:bg-green-700 text-gray-800 px-6 py-2 rounded-lg transition-colors">
-                        自動播放
-                    </button>
-                    <button id="timeline-next" class="control-btn bg-gray-600 hover:bg-gray-700 text-gray-800 px-4 py-2 rounded-lg transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
-                </div>
             </div>
         `;
 
@@ -90,15 +69,15 @@ class RoadmapTimeline {
 
     renderMilestone(milestone, index) {
         return `
-            <div class="milestone-item relative flex items-start space-x-6 opacity-60 transition-opacity duration-500" data-milestone="${index}">
+            <div class="milestone-item relative flex items-start space-x-6" data-milestone="${index}">
                 <!-- Milestone Marker -->
-                <div class="milestone-marker relative z-10 w-16 h-16 rounded-full border-4 border-white shadow-lg flex items-center justify-center text-gray-600 font-bold text-lg transition-all duration-300"
+                <div class="milestone-marker relative z-10 w-16 h-16 rounded-full border-4 border-white shadow-lg flex items-center justify-center text-gray-100 font-bold text-lg"
                      style="background: linear-gradient(135deg, ${milestone.color}, ${this.adjustBrightness(milestone.color, -20)})">
                     ${milestone.year.slice(-2)}
                 </div>
                 
                 <!-- Milestone Content -->
-                <div class="milestone-content flex-1 bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300">
+                <div class="milestone-content flex-1 bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
                     <!-- Header -->
                     <div class="milestone-header mb-4">
                         <div class="flex items-center justify-between mb-2">
@@ -114,7 +93,7 @@ class RoadmapTimeline {
                     <div class="progress-bar-container mb-4">
                         <div class="progress-bar bg-gray-700 rounded-full h-2 overflow-hidden">
                             <div class="progress-fill h-full rounded-full transition-all duration-1000 ease-out"
-                                 style="width: 0%; background: linear-gradient(90deg, ${milestone.color}, ${this.adjustBrightness(milestone.color, 20)})">
+                                 style="width: ${milestone.progress}%; background: linear-gradient(90deg, ${milestone.color}, ${this.adjustBrightness(milestone.color, 20)})">
                             </div>
                         </div>
                     </div>
@@ -136,162 +115,6 @@ class RoadmapTimeline {
         `;
     }
 
-    setupInteractivity() {
-        // Previous/Next buttons
-        const prevBtn = this.container.querySelector('#timeline-prev');
-        const nextBtn = this.container.querySelector('#timeline-next');
-        const playBtn = this.container.querySelector('#timeline-play');
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => this.previousMilestone());
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => this.nextMilestone());
-        }
-
-        if (playBtn) {
-            playBtn.addEventListener('click', () => this.toggleAutoPlay());
-        }
-
-        // Milestone click events
-        this.container.querySelectorAll('.milestone-item').forEach((item, index) => {
-            item.addEventListener('click', () => this.goToMilestone(index));
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (!this.isTimelineVisible()) {return;}
-
-            switch(e.key) {
-                case 'ArrowLeft':
-                    e.preventDefault();
-                    this.previousMilestone();
-                    break;
-                case 'ArrowRight':
-                    e.preventDefault();
-                    this.nextMilestone();
-                    break;
-                case ' ':
-                    e.preventDefault();
-                    this.toggleAutoPlay();
-                    break;
-            }
-        });
-    }
-
-    setupProgressAnimation() {
-        // Intersection Observer for scroll-triggered animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    this.animateProgressBars();
-                    this.highlightCurrentMilestone();
-                }
-            });
-        }, {
-            threshold: 0.3
-        });
-
-        observer.observe(this.container);
-    }
-
-    animateProgressBars() {
-        this.container.querySelectorAll('.milestone-item').forEach((item, index) => {
-            const progressFill = item.querySelector('.progress-fill');
-            const milestone = this.milestones[index];
-
-            setTimeout(() => {
-                if (progressFill) {
-                    progressFill.style.width = `${milestone.progress}%`;
-                }
-            }, index * 200);
-        });
-    }
-
-    goToMilestone(index) {
-        if (index < 0 || index >= this.milestones.length) {return;}
-
-        this.currentMilestone = index;
-        this.highlightCurrentMilestone();
-        this.updateControls();
-    }
-
-    highlightCurrentMilestone() {
-        this.container.querySelectorAll('.milestone-item').forEach((item, index) => {
-            if (index === this.currentMilestone) {
-                item.classList.remove('opacity-60');
-                item.classList.add('opacity-100');
-                item.querySelector('.milestone-marker').style.transform = 'scale(1.1)';
-                item.querySelector('.milestone-marker').style.boxShadow = `0 0 20px ${this.milestones[index].color}`;
-            } else {
-                item.classList.remove('opacity-100');
-                item.classList.add('opacity-60');
-                item.querySelector('.milestone-marker').style.transform = 'scale(1)';
-                item.querySelector('.milestone-marker').style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-            }
-        });
-
-        // Scroll to current milestone
-        const currentItem = this.container.querySelector(`[data-milestone="${this.currentMilestone}"]`);
-        if (currentItem) {
-            currentItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-    }
-
-    previousMilestone() {
-        if (this.currentMilestone > 0) {
-            this.goToMilestone(this.currentMilestone - 1);
-        }
-    }
-
-    nextMilestone() {
-        if (this.currentMilestone < this.milestones.length - 1) {
-            this.goToMilestone(this.currentMilestone + 1);
-        }
-    }
-
-    toggleAutoPlay() {
-        const playBtn = this.container.querySelector('#timeline-play');
-
-        if (this.autoPlayInterval) {
-            // Stop auto play
-            clearInterval(this.autoPlayInterval);
-            this.autoPlayInterval = null;
-            if (playBtn) {playBtn.textContent = '自動播放';}
-        } else {
-            // Start auto play
-            this.autoPlayInterval = setInterval(() => {
-                if (this.currentMilestone < this.milestones.length - 1) {
-                    this.nextMilestone();
-                } else {
-                    this.goToMilestone(0); // Loop back to start
-                }
-            }, 3000);
-            if (playBtn) {playBtn.textContent = '停止播放';}
-        }
-    }
-
-    updateControls() {
-        const prevBtn = this.container.querySelector('#timeline-prev');
-        const nextBtn = this.container.querySelector('#timeline-next');
-
-        if (prevBtn) {
-            prevBtn.disabled = this.currentMilestone === 0;
-            prevBtn.classList.toggle('opacity-50', this.currentMilestone === 0);
-        }
-
-        if (nextBtn) {
-            nextBtn.disabled = this.currentMilestone === this.milestones.length - 1;
-            nextBtn.classList.toggle('opacity-50', this.currentMilestone === this.milestones.length - 1);
-        }
-    }
-
-    isTimelineVisible() {
-        const rect = this.container.getBoundingClientRect();
-        return rect.top < window.innerHeight && rect.bottom > 0;
-    }
-
     adjustBrightness(color, percent) {
         // Simple color brightness adjustment
         const num = parseInt(color.replace("#", ""), 16);
@@ -304,16 +127,10 @@ class RoadmapTimeline {
             (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
     }
 
-    // Public method to get current milestone data
-    getCurrentMilestone() {
-        return this.milestones[this.currentMilestone];
-    }
-
     // Public method to add new milestone
     addMilestone(milestone) {
         this.milestones.push(milestone);
         this.renderTimeline();
-        this.setupInteractivity();
     }
 }
 

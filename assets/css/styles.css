@@ -286,26 +286,12 @@
   background: linear-gradient(to bottom, #059669 0%, #0EA5E9 30%, #8B5CF6 70%, #F59E0B 100%);
 }
 
-.milestone-item:hover .timeline-line {
-  opacity: 0.6;
-}
-
 .milestone-marker {
   transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.milestone-marker:hover {
-  transform: scale(1.05);
 }
 
 .milestone-content {
   transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.milestone-content:hover {
-  background: rgba(255, 255, 255, 0.25) !important;
 }
 
 .progress-bar {
@@ -316,23 +302,6 @@
 .progress-fill {
   transition: width 1s ease-out;
   background: linear-gradient(90deg, #059669, #0EA5E9);
-}
-
-.timeline-controls .control-btn {
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
-}
-
-.timeline-controls .control-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.timeline-controls .control-btn:disabled {
-  transform: none;
-  cursor: not-allowed;
-  box-shadow: none;
 }
 
 /* Animations */
