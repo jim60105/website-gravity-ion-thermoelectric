@@ -1,0 +1,23 @@
+# Wrangler configuration for Gravity Ion Thermoelectric Website
+# https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name = "website-gravity-ion-thermoelectric"
+compatibility_date = "2025-08-02"
+
+# Node.js compatibility for enhanced runtime features
+compatibility_flags = ["nodejs_compat"]
+
+# Enable preview URLs for development
+preview_urls = true
+
+# Workers.dev subdomain (set to false for custom domains only)
+workers_dev = true
+
+# Static Assets Configuration
+[assets]
+directory = "./"
+not_found_handling = "single-page-application"
+
+# Smart Placement for optimal performance
+[placement]
+mode = "smart"

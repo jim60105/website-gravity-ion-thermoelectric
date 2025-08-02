@@ -1,0 +1,62 @@
+# Ignore development and build files
+node_modules/
+.git/
+.gitignore
+.DS_Store
+.vscode/
+.env*
+
+# Build and development files
+node_modules/
+.git/
+.vscode/
+.idea/
+
+# Python virtual environments and cache files
+**/.venv/
+**/venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Configuration files
+*.config.js
+*.config.mjs
+*.config.ts
+package*.json
+wrangler.toml
+.assetsignore
+.gitignore
+LICENSE
+
+# Documentation
+README.md
+assets/docs/*.md
+assets/docs/*.docx
+
+# Large binary files and data
+**/*.bin
+**/*.model
+**/*.weights
+**/*.data
+**/*.dll
+**/*.so
+**/*.dylib
+
+# Ignore documentation and development files
+README.md
+LICENSE
+*.md
+
+# Ignore development scripts and configs
+.editorconfig
+.prettierrc*
+.eslintrc*

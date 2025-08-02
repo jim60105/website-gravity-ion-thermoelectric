@@ -5,8 +5,11 @@
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "http-server -p 3000 -o",
+    "dev": "wrangler dev",
+    "dev:http-server": "http-server -p 3000 -o",
     "start": "http-server -p 3000",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler deploy --dry-run",
     "lint": "eslint assets/js/*.js",
     "format": "prettier --write assets/js/*.js assets/css/*.css *.html"
   },
@@ -28,6 +31,7 @@
   "devDependencies": {
     "eslint": "^9.32.0",
     "http-server": "^14.1.1",
-    "prettier": "^3.6.2"
+    "prettier": "^3.6.2",
+    "wrangler": "^4.27.0"
   }
 }
