@@ -1,3 +1,5 @@
+![Gravity Ion Thermoelectric Favicon](favicon.svg)
+
 # 重力離子熱電技術宣傳網站 | Gravity Ion Thermoelectric Technology Website
 
 一個展示突破性重力離子熱電轉換技術的現代化宣傳網站，採用響應式設計與無障礙網頁標準。
@@ -146,7 +148,16 @@ This website aims to showcase the breakthrough discoveries in gravity ion thermo
 4. **傳統主機**
    直接上傳所有檔案到網頁伺服器根目錄
 
+
 ## 🎨 設計系統 | Design System
+
+### Favicon 標誌設計
+
+<p align="center">
+   <img src="favicon.svg" width="32" height="32" alt="Gravity Ion Thermoelectric Favicon" style="border-radius: 8px; box-shadow: 0 2px 8px #0002; background: #181830;" />
+</p>
+
+> 這個 favicon 結合了離子軌道、正負離子、閃電與重力場線，象徵本專案的核心技術與科學精神。主要用於瀏覽器分頁、書籤列等小尺寸識別，設計理念詳見專案說明。
 
 ### 色彩調色盤 | Color Palette
 
