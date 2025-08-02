@@ -3,68 +3,17 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Main page with sections -->
   <url>
     <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/cn/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/en/" />
     <image:image>
       <image:loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/images/og-image.webp</image:loc>
       <image:title>重力離子熱電技術</image:title>
       <image:caption>革命性的重力離子熱電技術展示</image:caption>
     </image:image>
-  </url>
-
-  <!-- Hero section -->
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#hero</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Scientific breakthrough section -->
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#scientific-breakthrough</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Experimental evidence section -->
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#experimental-evidence</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Applications and impact section -->
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#applications-impact</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Academic recognition section -->
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#academic-recognition</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Call to action section -->
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#call-to-action</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Research documents -->
@@ -101,25 +50,6 @@
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- Future language versions -->
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/en/</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/en/" />
-  </url>
-
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/cn/</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/cn/" />
   </url>
 
 </urlset>
