@@ -5,6 +5,419 @@
   box-sizing: border-box;
 }
 
+/* Applications Impact Section Styles */
+#applications-impact {
+  background: linear-gradient(135deg, rgb(240 253 244) 0%, rgb(239 246 255) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+#applications-impact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(14, 165, 233, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+#applications-impact > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Efficiency Calculator Styles */
+.efficiency-calculator {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-slider {
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, #d1d5db, #059669);
+  outline: none;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.calculator-slider:hover {
+  opacity: 1;
+}
+
+.calculator-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #059669;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(5, 150, 105, 0.3);
+  transition: all 0.3s ease;
+}
+
+.calculator-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(5, 150, 105, 0.4);
+}
+
+.calculator-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #059669;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 4px 8px rgba(5, 150, 105, 0.3);
+}
+
+/* Tech Specifications Cards */
+.tech-spec-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.tech-spec-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.spec-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #059669, #0EA5E9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.spec-unit {
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Application Scenario Cards */
+.application-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.application-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #059669, #0EA5E9);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.application-card:hover::before {
+  transform: scaleX(1);
+}
+
+.application-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.application-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #059669, #0EA5E9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.3);
+  transition: all 0.3s ease;
+}
+
+.application-card:hover .application-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 32px rgba(5, 150, 105, 0.4);
+}
+
+/* Energy Comparison Table */
+.energy-comparison-table {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.energy-comparison-table th {
+  background: linear-gradient(135deg, #059669, #0EA5E9);
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+}
+
+.energy-comparison-table td {
+  padding: 1rem;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+  transition: background-color 0.2s ease;
+}
+
+.energy-comparison-table tr:hover td {
+  background-color: rgba(5, 150, 105, 0.05);
+}
+
+.comparison-advantage {
+  color: #059669;
+  font-weight: 600;
+}
+
+.comparison-disadvantage {
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.comparison-neutral {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Impact Metrics Cards */
+.impact-metric-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.impact-metric-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(5, 150, 105, 0.1), transparent);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+.impact-metric-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.metric-value {
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #059669, #0EA5E9, #8B5CF6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 2;
+}
+
+.metric-label {
+  color: #374151;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+.metric-description {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Economic Analysis Chart Container */
+.economic-chart-container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.chart-container {
+  position: relative;
+  height: 400px;
+  margin: 1rem 0;
+}
+
+/* Development Roadmap Timeline */
+.roadmap-timeline-container {
+  padding: 2rem 0;
+}
+
+.timeline-line {
+  background: linear-gradient(to bottom, #059669 0%, #0EA5E9 30%, #8B5CF6 70%, #F59E0B 100%);
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+}
+
+.milestone-item:hover .timeline-line {
+  opacity: 0.6;
+}
+
+.milestone-marker {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.milestone-marker:hover {
+  transform: scale(1.05);
+}
+
+.milestone-content {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.milestone-content:hover {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+.progress-bar {
+  background: rgba(107, 114, 128, 0.3);
+  transition: all 0.3s ease;
+}
+
+.progress-fill {
+  transition: width 1s ease-out;
+  background: linear-gradient(90deg, #059669, #0EA5E9);
+}
+
+.timeline-controls .control-btn {
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.timeline-controls .control-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-controls .control-btn:disabled {
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(5, 150, 105, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(5, 150, 105, 0.6);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse-glow-animation {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Responsive Design for Applications Impact */
+@media (max-width: 768px) {
+  .efficiency-calculator {
+    padding: 1.5rem;
+  }
+  
+  .spec-value {
+    font-size: 2rem;
+  }
+  
+  .metric-value {
+    font-size: 2.5rem;
+  }
+  
+  .chart-container {
+    height: 300px;
+  }
+  
+  .milestone-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .milestone-marker {
+    margin: 0 auto 1rem;
+  }
+  
+  .timeline-line {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .application-card {
+    margin-bottom: 1rem;
+  }
+  
+  .energy-comparison-table {
+    font-size: 0.875rem;
+  }
+  
+  .energy-comparison-table th,
+  .energy-comparison-table td {
+    padding: 0.75rem;
+  }
+}
+
 /* Scientific Breakthrough Section Styles */
 #scientific-breakthrough {
   background: linear-gradient(135deg, #111827 0%, #1e3a8a 25%, #312e81 50%, #1e293b 75%, #0f172a 100%);
