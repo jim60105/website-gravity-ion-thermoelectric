@@ -34,15 +34,16 @@ Additionally, theoretically, under specific conditions derived from our theoreti
 
 Consider a rotating system: if the rotation speed is doubled, the centrifugal force increases fourfold, meaning that only a quarter of the original distance is required to generate the same voltage difference. By connecting four such systems in series, the total voltage difference could reach four times the original value. Given that the resistance of the conductor is proportional to its thickness under the same cross-sectional area, the resistance at a quarter of the original distance would be one-fourth of the original value. Thus, the energy output from each system would be four times greater. If four systems are placed in the same space, it can be inferred that such a design could significantly increase the energy output efficiency by up to 16 times, whereas the air resistance energy consumption would only increase by approximately four times. Therefore, increasing the rotational speed could lead to the generation of practically usable electrical energy. In addition, there are many other ways to increase the output power, some of which are mentioned in the text.
 
-In conclusion, thermal vibrational energy drives charged particles to overcome both electric fields and gravitational or centrifugal forces. Through motion induced by the counter-electromotive force, these particles acquire electrical energy, replenishing regions where energy has been depleted due to voltage differences or conductive interface-driven energy output. Since the system can sustain energy exchange under accelerating conditions, even in the absence of a temperature gradient and without rotational inertia losses, this process could surpass the limitations of Carnot's theorem, offering a mechanism for continuously converting ambient thermal energy into usable electrical energy.
+In conclusion, thermal vibrational energy drives charged particles to overcome both electric fields and gravitational or centrifugal forces. Through motion induced by the counter-electromotive force, these particles acquire electrical energy, replenishing regions where energy has been depleted due to voltage differences or conductive interface-driven energy output. Since the system can sustain energy exchange under accelerating conditions, even in the absence of a temperature gradient and without rotational inertia losses, this process could surpass the limitations of Carnot's theorem, offering a mechanism for continuously converting ambient thermal energy into usable electrical energy. 
 
 **2. Qualitative Explanation of the Causes of Spontaneous Electric Fields within Plasma in a Gravitational Field**
 
 The higher concentration of gases at the Earth\'s surface than at high altitudes is due to gravitational effects. Under the same height difference, the concentration gradient for lighter gas molecules is relatively small, whereas for heavy gas molecules, the concentration gradient is more significant---an observation widely acknowledged. Consider Figures 1(a) and 1(b). In Figure 1(a), yellow circles represent lighter gas molecules, whereas in Figure 1(b), blue circles represent heavier gas molecules. When both gases have equal molecular quantities and each region maintains the same temperature and average pressures, heavier molecules will be more concentrated in the lower region along the direction of gravity, whereas lighter molecules will be more concentrated in the upper region, opposite to the gravitational direction. When these gases are mixed under isothermal and isobaric conditions, as illustrated in Figure 1(c), gas kinetic theory dictates that, in the absence of any chemical reactions and with only physical collisions occurring, the height-dependent distribution of molecules does not change significantly. Now, replacing lighter gas molecules with negatively charged ions of equal mass and heavier gas molecules with positively charged ions of equal mass, as shown in Figure 1(d), the overall system remains electrically neutral because of the equal number of ions. However, since heavier ions are more concentrated in the lower region and lighter ions are more concentrated in the upper region, the lower region acquires a net positive charge in the absence of ion movement, whereas the upper region acquires a net negative charge. This results in the formation of an electric field directed from bottom to top. This electric field drives ion migration, causing heavier positive ions to move upward, whereas lighter negative ions move downward. As ions move, the net charge in both the upper and lower regions decreases, weakening the electric field. Ion movement continues until the combined force of the electric field and gravitational pull acting on each ion type reaches equilibrium. At this point, the ions maintain a stable concentration gradient---intermediate between those depicted in Figure 1(d). Additionally, the central region remains nearly electrically neutral, leading to a cessation of net ion movement. At equilibrium, a small residual electric field remains to sustain the concentration gradient of lighter ions above what would be expected in a noncharged system, whereas the concentration gradient of heavier ions remains lower than that in an uncharged state. Consequently, the uppermost region retains a small net negative charge, whereas the lower region retains a small net positive charge, as illustrated in Figure 1(e).
 
-![](./assets/docs/media/media/image1.emf){width="6.5in" height="3.74661854768154in"}
+![](../images/023-fig1-abc-mixture-of-neutral-light-and-heavy-particles.webp)
 
-![](./assets/docs/media/media/image2.emf){width="6.5in" height="3.8850721784776905in"}\
+![](../images/024-fig1-de-charge-redistribution-to-stable-electric-field-after-ion-substitution.webp)
+
 **Fig. 1.** (a) Schematic diagram of the variation in the concentration of light neutral gas molecules with height. (b) Schematic diagram of the variation in the concentration of heavy neutral gas molecules with height. (c) Schematic diagram of the concentration distributions of both light and heavy neutral gas molecules with height when mixed. (d) Schematic diagram of the distribution of light negatively charged ions and heavy positively charged ions in a plasma with height, assuming no electric field or chemical interactions. (e) Schematic diagram of the redistribution of ions in a plasma due to the internally generated electric field, showing the height-dependent variation in light negatively charged ions and heavy positively charged ions, assuming no electrochemical interactions.
 
 **3. Calculation of Electric Field Strength Generated Within an Ion-Containing Fluid Under an Accelerating Force Field**
@@ -57,7 +58,7 @@ Notably, Equation (1) contains a mass variable 𝑚, meaning that heavier partic
 
 $\frac{C_{{Li}^{+}(h + \mathrm{\Delta}h)}}{C_{{Li}^{+}(h)}} = e^{- \ \frac{\left( m_{{Li}^{+}}G + qE \right)\Delta h}{kT}} = \frac{C_{{Cl}^{-}(h + \mathrm{\Delta}h)}}{C_{{Cl}^{-}(h)}} = e^{- \ \frac{\left( m_{{Cl}^{-}}G - qE \right)\Delta h}{kT}}\ \ \ \ \ \ \ldots\ldots\ldots$ $(2)$
 
-$$m_{{Li}^{+}}G + qE = m_{{Cl}^{-}}G - qE$$
+$m_{{Li}^{+}}G + qE = m_{{Cl}^{-}}G - qE$
 
 $E = \frac{\left( m_{{Cl}^{-}} - m_{{Li}^{+}} \right)G}{2q}\ \ldots\ldots\ldots$ $(3)$
 
@@ -83,7 +84,7 @@ It is worth noting that at this stage, in a potassium-ion plasma, the net electr
 
 Therefore, in such a structure, as long as thermal vibrations and gravity coexist, a net electron flow is generated. This electron flow can be utilized to convert thermal energy into electrical energy without a temperature gradient.
 
-![](./assets/docs/media/media/image3.emf){width="6.5in" height="3.6014490376202977in"}
+![](../images/025-fig2-parallel-lithium-and-potassium-ion-plasmas-self-generate-current-heat-drives-electrons-opposite-to-field.webp)
 
 **Fig. 2.** Illustrates the concept via an approach similar to Maxwell\'s reasoning. (a) Two adjacent plasma bodies are shown, one being a potassium ion plasma and the other being a lithium ion plasma. Each plasma is treated as independent, with the potassium ion plasma exhibiting a more pronounced potential difference, showing negative bias at the upper region and positive bias at the lower region. In contrast, lithium-ion plasma has minimal and less noticeable potential deviation. (b) Small openings are introduced at both the upper and lower regions of the two plasma bodies. At the upper opening, the negatively biased potassium ion plasma repels electrons from the lithium ion plasma, causing these electrons to be more likely to move back toward the lithium ion plasma owing to the repulsive force. At lower openings, the positively biased potassium ion plasma has the opposite effect, attracting electrons from the lithium ion plasma.
 
@@ -95,11 +96,11 @@ $E_{in.K^{+}.plasma} \cong - \frac{m_{K^{+}}G}{2q}\ \ldots\ldots\ldots$ $(6)$
 
 By comparing Equations (5) and (6), when the height difference between the upper and lower apertures is h, the subtracted value of the voltage difference between the two regions can be obtained as described in Equation (7).
 
-$$\mathrm{\Delta}(\mathrm{\Delta}V) = E_{{Li}^{+}plasma} \times h - E_{K^{+}plasma} \times h = \frac{\left( m_{K^{+}} - m_{{Li}^{+}} \right)Gh}{2q} > 0\ \ldots\ldots\ldots(7)$$
+$\mathrm{\Delta}(\mathrm{\Delta}V) = E_{{Li}^{+}plasma} \times h - E_{K^{+}plasma} \times h = \frac{\left( m_{K^{+}} - m_{{Li}^{+}} \right)Gh}{2q} > 0\ \ldots\ldots\ldots(7)$
 
 From Equation (7), the total energy released can be determined by summing the average electrical energy released when one additional electron flows from the potassium-ion plasma to the lithium-ion plasma through the upper aperture and the average electrical energy released when one additional electron flows from the lithium-ion plasma to the potassium-ion plasma through the lower aperture, as described in Equation (8).
 
-$$q\mathrm{\Delta}(\mathrm{\Delta}V) \cong \frac{1}{2}\left( m_{K^{+}} - m_{{Li}^{+}} \right)Gh > 0\ \ldots\ldots\ldots(8)$$
+$q\mathrm{\Delta}(\mathrm{\Delta}V) \cong \frac{1}{2}\left( m_{K^{+}} - m_{{Li}^{+}} \right)Gh > 0\ \ldots\ldots\ldots(8)$
 
 Equation (8) shows that, in a potassium-ion plasma, pushing an electron from a lower position to a higher position requires overcoming the gravitational attraction of potassium ions, consuming thermal vibrational energy approximately equal to half the product of the potassium ion mass, gravitational acceleration, and height difference. Conversely, in a lithium-ion plasma, when an electron moves downward from a higher position, it gains kinetic energy due to the gravitational attraction of lithium ions, and this energy is subsequently converted into thermal energy, with an average value approximately equal to half the product of the lithium-ion mass, gravitational acceleration, and height difference. Since potassium ions are heavier than lithium ions are, the net thermal-to-electrical conversion energy in a circulating electron flow can be positive, meaning that the system releases a net positive thermal energy, thereby reducing entropy by an amount equal to half the product of the mass difference between potassium and lithium ions, gravitational acceleration, and height difference divided by the absolute temperature. This phenomenon surpasses the limitations of Carnot\'s theorem and represents an exception to the second law of thermodynamics.
 
@@ -117,25 +118,25 @@ In cases where the pH value deviates significantly from 7, the primary ions in a
 
 To estimate the potential energy output, we consider an aqueous solution of hydrogen iodide. In Figure 3, the gray region represents a high-strength aluminum alloy, which is assumed to have a yield strength of Y=670 MPa. The blue region represents the electrolyte solution, which consists of hydrogen iodide in water. The distance from the center of the large circular disk to the center of the cross-section of the annular electrolyte is denoted as $r_{3}$. The cross-sectional radius of the electrolyte solution is $r_{1}$, whereas the outer radius of the cross-sectional hollow annular structure containing the electrolyte is $r_{2}$. The aluminum alloy disk has a thickness d of approximately $r_{3} - r_{2}$​ from the disk center.
 
-![](./assets/docs/media/media/image4.emf){width="4.484251968503937in" height="3.3149606299212597in"}
+![](../images/026-fig3-centrifugal-structure-for-efficiency-enhancement.webp)
 
 **Fig. 3.** Illustrates the structural configuration and dimensional notations used for simulating the maximum electrical power output
 
 At a rotational speed ω, the centrifugal force per unit volume of the electrolyte is approximately $\rho_{liquid} \times r_{3} \times \omega^{2}$, where $\rho_{liquid}$ is the density of the electrolyte solution. Consequently, the centrifugal force on the electrolyte per unit length along the radius $r_{3}$​ is $\pi \times r_{1}^{2} \times \rho_{liquid} \times r_{3} \times \omega^{2}$. The hollow annular aluminum alloy structure along the radius $r_{3}$ experiences a centrifugal force per unit length of $\pi \times \left( r_{2}^{2} - r_{1}^{2} \right) \times \rho_{solid} \times r_{3} \times \omega^{2}$, where $\rho_{solid}$​ is the density of the high-strength aluminum alloy. Assuming that the centrifugal force is fully supported by the tensile strength of the annular structure along $r_{3}$, the maximum tolerable rotational speed $\omega_{1}$ can be derived, resulting in Equation (9).
 
-$$\pi\left( r_{2}^{2} - r_{1}^{2} \right)Y = \ \left( \pi\rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right)r_{3}\omega_{1}^{2} + \pi\rho_{liquid}r_{1}^{2}r_{3}\omega_{1}^{2} \right)r_{3}$$
+$\pi\left( r_{2}^{2} - r_{1}^{2} \right)Y = \ \left( \pi\rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right)r_{3}\omega_{1}^{2} + \pi\rho_{liquid}r_{1}^{2}r_{3}\omega_{1}^{2} \right)r_{3}$
 
-$$\Rightarrow \omega_{1}^{2} = \frac{\left( r_{2}^{2} - r_{1}^{2} \right)Y}{r_{3}^{2}\left( \rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right) + \rho_{liquid}r_{1}^{2} \right)}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ldots\ldots\ldots(9)$$
+$\Rightarrow \omega_{1}^{2} = \frac{\left( r_{2}^{2} - r_{1}^{2} \right)Y}{r_{3}^{2}\left( \rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right) + \rho_{liquid}r_{1}^{2} \right)}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ldots\ldots\ldots(9)$
 
 Alternatively, assuming that the centrifugal force is entirely supported by the inward tensile force of the disk, the maximum tolerable rotational speed $\omega_{2}$ directed toward the center can be derived, resulting in Equation (10).
 
-$$Yd\frac{r_{3} - r_{1}}{r_{3}} = \pi\rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right)r_{3}\omega_{2}^{2} + \pi\rho_{liquid}r_{1}^{2}r_{3}\omega_{2}^{2}$$
+$Yd\frac{r_{3} - r_{1}}{r_{3}} = \pi\rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right)r_{3}\omega_{2}^{2} + \pi\rho_{liquid}r_{1}^{2}r_{3}\omega_{2}^{2}$
 
-$$\Rightarrow \ \omega_{2}^{2} = \frac{Y\left( r_{3} - r_{1} \right)d}{\pi r_{3}^{2}\left( \rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right) + \rho_{liquid}r_{1}^{2} \right)}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ldots\ldots\ldots(10)$$
+$\Rightarrow \ \omega_{2}^{2} = \frac{Y\left( r_{3} - r_{1} \right)d}{\pi r_{3}^{2}\left( \rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right) + \rho_{liquid}r_{1}^{2} \right)}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ldots\ldots\ldots(10)$
 
 When both the tensile force in the annular structure and the inward tensile force act simultaneously, the maximum tolerable rotational speed $\omega_{3}$ can be derived by combining Equations (9) and (10), resulting in Equation (11).
 
-$$\omega_{3}^{2} = \omega_{1}^{2} + \omega_{2}^{2} = \frac{\left\lbrack \left( r_{2}^{2} - r_{1}^{2} \right) + \left( r_{3} - r_{1} \right)d \right\rbrack Y}{r_{3}^{2}\left( \rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right) + \rho_{liquid}r_{1}^{2} \right)}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ldots\ldots\ldots(11)$$
+$\omega_{3}^{2} = \omega_{1}^{2} + \omega_{2}^{2} = \frac{\left\lbrack \left( r_{2}^{2} - r_{1}^{2} \right) + \left( r_{3} - r_{1} \right)d \right\rbrack Y}{r_{3}^{2}\left( \rho_{solid}\left( r_{2}^{2} - r_{1}^{2} \right) + \rho_{liquid}r_{1}^{2} \right)}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ldots\ldots\ldots(11)$
 
 By selecting parameters $r_{1}$ =0.0025 m, $r_{2}$=0.00355 m, $r_{3}$=0.005 m, d=0.0021 m, $\rho_{solid}$ =2700 kg/m^3^, and $\rho_{liquid}$ =1000 kg/m^3^, substitution into Equation (12) yields $\omega_{3}^{2} = 9.1888 \times 10^{9}\sec^{- 2}$. The maximum acceleration experienced by the electrolyte solution can then be calculated as $\omega_{3}^{2}r_{3} \cong 4.5944 \times 10^{7}\frac{m}{\sec^{2}}$. In solution, both the iodide anions and hydrogen cations are subjected to the same acceleration. Owing to the large mass of iodide ions, the buoyant force in water is negligible. Similarly, the buoyant force on hydrogen ions, with their small volume, can also be neglected. Using the approximate calculation method from Equation (4), the resulting electric field is estimated to be 29.97 V/m. Here, the mass of the iodide ion is approximately $2.1073 \times 10^{- 25}kg$ ^7^, the mass of the hydrogen ion is $1.1526 \times 10^{- 26}kg$ ^7^, and the elementary charge is $- 1.602 \times 10^{- 19}C$. The conductivity of the hydrogen iodide solution can be adjusted to 0.85 S/m ^14^, resulting in a resistance of approximately 1.1765 Ω for a ^1^ m3 cube. Assuming that the maximum output voltage drop is half the maximum voltage, the energy output of the cube can be estimated as $\frac{\left( \frac{29.97}{2} \right)^{2}}{1.1765}\ W$. In addition to the effects of the annular structure, the energy output per unit volume of 1 m^3^ is approximately 72 W. This energy density falls within an acceptable range for power generation applications. Some other conditions are listed in Table 1.
 
@@ -190,19 +191,19 @@ $\mathrm{\Delta}V = - \frac{RT}{nF}\ln\left( \frac{\lbrack C\rbrack}{\lbrack C\r
 
 Figure 7 also reveals that when the electrode exchanges electrons primarily with hydrogen ions or hydroxide ions, the voltage variation with height is nonlinear. This nonlinear behavior can explain the phenomena observed in our experiments.
 
-![](./assets/docs/media/media/image5.emf){width="5.980314960629921in" height="4.389763779527559in"}
+![](../images/028-fig4-concentration-vs-height-of-chloride-and-potassium-ions-in-kcl-solution.webp)
 
 **Fig. 4.** The concentrations of chloride ions and potassium ions at zero height are both 2 N, and the changes in the chloride ion concentration and potassium ion concentration with height are under the steady state without convection. The vertical axis is the concentration value in N, and the horizontal axis is the height value in m.
 
-![](./assets/docs/media/media/image6.emf){width="6.169291338582677in" height="4.405511811023622in"}
+![](../images/029-fig5-pH-vs-height-in-kcl-solution.webp)
 
 **Fig. 5.** The calculated pH value of the KCl aqueous solution at equilibrium. The vertical axis represents the pH value, and the horizontal axis represents the height in m.
 
-![](./assets/docs/media/media/image7.emf){width="5.984251968503937in" height="4.393700787401575in"}
+![](../images/030-fig6-chemical-potential-of-chloride-and-potassium-ions-vs-height-in-kcl-solution.webp)
 
 **Fig. 6.** The potential changes with height when the electrode exchanges electrons with chloride ions and exchanges electrons with potassium ions.
 
-![](./assets/docs/media/media/image8.emf){width="5.984251968503937in" height="4.393700787401575in"}
+![](../images/031-fig7-chemical-potential-of-hydrogen-and-hydroxide-ions-vs-height-in-kcl-solution.webp)
 
 **Fig. 7.** The change in potential with height when the electrode exchanges electrons with hydrogen ions or hydroxide ions.
 
@@ -236,15 +237,15 @@ To verify our hypothesis, we designed a structure resembling a battery in which 
 >
 > 9\. *Inverted Position Test:* The gravity battery was then inverted (placed upside down) and subjected to a similar long-term test over 86 days, with voltage readings taken via the same Keysight multimeter setup. Voltage measurements were taken 24 times between the 33rd and 86th days. This was done to confirm that the voltage was indeed caused by gravitational acceleration, with the hypothesis that reversing the direction of gravity would result in an opposite voltage. Therefore, the sample was inverted for measurement.
 
-![](./assets/docs/media/media/image9.emf){width="5.768055555555556in" height="3.753530183727034in"}
+![](../images/032-fig8-structure-of-centrifugal-battery-used-in-experiment.webp)
 
 **Fig. 8.** Internal structure diagram of the gravity battery, including six small units with electrode spacings of 32 mm, 24 mm, 16 mm, 8 mm, 4 mm, and 2 mm that are electrically connected in series.
 
-![](./assets/docs/media/media/image10.emf){width="5.759722222222222in" height="1.7520833333333334in"}
+![](../images/033-fig9-components-of-centrifugal-battery-manufacturing.webp)
 
 **Fig. 9.** Selected images of the gravity battery production process.
 
-![](./assets/docs/media/media/image11.emf){width="5.768055555555556in" height="2.1041666666666665in"}
+![](../images/034-fig10-photos-of-battery-setup-and-output-connections.webp)
 
 **Fig. 10.** Selected images of the gravity battery during the static measurement process.
 
@@ -252,7 +253,7 @@ To verify our hypothesis, we designed a structure resembling a battery in which 
 
 The left panel of Figure 11 shows the experimental setup, whereas the right panel illustrates the relationship between the output voltage and time under a 10 G centrifugal force field. As the 10G field was applied, the voltage difference between the two gravity batteries gradually increased, confirming that the centrifugal force induced potential changes in the solution along the direction of the field. This suggests that the device can continuously convert ambient thermal energy into electrical energy when exposed to a sufficiently large gravitational or centrifugal force. Small differences in pH between the two gravity batteries led to variations in the timing and magnitude of the generated potentials. Once the centrifuge stopped and no centrifugal force was applied, the potential quickly returned to its initial state.
 
-![](./assets/docs/media/media/image12.emf){width="5.768055555555556in" height="2.45625in"}
+![](../images/035-fig11-output-voltage-of-battery-under-10G-centrifuge.webp)
 
 **Fig. 11.** The gravity battery unit was subjected to a centrifugal force field of 10 G (10 times the gravity of the Earth\'s surface), and the output voltage was continuously recorded for two hours. The resulting relationship between the measured potential and time is shown.
 
