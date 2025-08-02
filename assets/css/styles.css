@@ -17,19 +17,49 @@
 }
 
 @keyframes glow {
-  from {
+  0% {
     text-shadow:
-      0 0 20px #00bfff,
-      0 0 30px #00bfff,
-      0 0 40px #00bfff;
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+    filter: brightness(1);
   }
-  to {
+  50% {
     text-shadow:
-      0 0 10px #00bfff,
-      0 0 20px #00bfff,
-      0 0 30px #00bfff,
-      0 0 40px #00bfff,
-      0 0 50px #00bfff;
+      0 0 10px currentColor,
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor,
+      0 0 50px currentColor;
+    filter: brightness(1.2);
+  }
+  100% {
+    text-shadow:
+      0 0 20px currentColor,
+      0 0 30px currentColor,
+      0 0 40px currentColor;
+    filter: brightness(1);
+  }
+}
+
+@keyframes pulse-breathing {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
   }
 }
 
@@ -51,6 +81,97 @@
     transform: translateY(-20px) translateX(8px);
     opacity: 0.5;
   }
+}
+
+/* Enhanced Hero Section Styles */
+#hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #0f172a 50%, #000000 100%);
+  position: relative;
+  height: calc(100vh - var(--header-height, 80px));
+  min-height: 500px; /* Ensure minimum height for content readability */
+}
+
+#hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+#particles-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Enhanced Text Effects */
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Button Enhancements */
+#hero-explore-btn,
+#hero-video-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+#hero-explore-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+#hero-explore-btn:hover::before {
+  left: 100%;
+}
+
+#hero-video-btn {
+  background: linear-gradient(45deg, transparent 30%, rgba(245, 158, 11, 0.1) 50%, transparent 70%);
+  background-size: 200% 200%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Value Proposition Cards Enhanced */
+.group:hover .text-electric-blue {
+  text-shadow: 0 0 20px #3b82f6;
+}
+
+.group:hover .text-energy-gold {
+  text-shadow: 0 0 20px #f59e0b;
+}
+
+.group:hover .text-plasma-purple {
+  text-shadow: 0 0 20px #8a2be2;
+}
+
+/* Enhanced Scroll Indicator */
+#scroll-indicator {
+  animation: pulse-breathing 2s ease-in-out infinite;
+}
+
+#scroll-indicator:hover svg {
+  filter: drop-shadow(0 0 10px currentColor);
 }
 
 /* Particle system styles */
@@ -266,6 +387,50 @@
 
   html {
     font-size: 16px; /* Ensure readable font size on mobile */
+  }
+
+  /* Optimize hero section for mobile */
+  #hero .grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  #hero h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+
+  /* Reduce particle count for mobile performance */
+  #particles-canvas {
+    opacity: 0.7;
+  }
+
+  /* Simplify value proposition cards on mobile */
+  #hero .space-y-6 .grid {
+    gap: 1rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  #hero h1 {
+    font-size: 3.5rem;
+  }
+
+  #hero .grid {
+    gap: 3rem;
+  }
+}
+
+/* Desktop enhancements */
+@media (min-width: 1025px) {
+  #hero h1 {
+    font-size: 4.5rem;
+  }
+
+  /* Enhanced particle effects for desktop */
+  #particles-canvas {
+    opacity: 1;
   }
 }
 

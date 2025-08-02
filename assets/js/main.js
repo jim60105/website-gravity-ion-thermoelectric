@@ -59,6 +59,7 @@ class GravityIonApp {
             // Initialize core components
             this.setupErrorHandling();
             this.setupEventListeners();
+            this.setupHeaderHeight(); // Add header height calculation
             this.initializeComponents();
             this.setupAccessibility();
             this.setupPerformanceOptimizations();
@@ -78,6 +79,28 @@ class GravityIonApp {
             console.error('Failed to initialize application:', error);
             this.handleError(error);
         }
+    }
+
+    /**
+     * Setup header height calculation and CSS variable
+     */
+    setupHeaderHeight() {
+        const updateHeaderHeight = () => {
+            const header = Utils.DOM.select('header');
+            if (header) {
+                const headerHeight = header.offsetHeight;
+                document.documentElement.style.setProperty('--header-height', `${headerHeight}px`);
+            }
+        };
+
+        // Set initial header height
+        updateHeaderHeight();
+
+        // Update on resize
+        const debouncedUpdate = Utils.Performance.debounce(updateHeaderHeight, 250);
+        window.addEventListener('resize', debouncedUpdate);
+
+        this.components.set('headerHeight', { update: updateHeaderHeight });
     }
 
     /**
@@ -156,6 +179,9 @@ class GravityIonApp {
         // Initialize mobile menu
         this.initMobileMenu();
 
+        // Initialize hero section interactions
+        this.initHeroSection();
+
         // Initialize contact forms (if any)
         this.initContactForms();
 
@@ -204,8 +230,65 @@ class GravityIonApp {
     }
 
     /**
-     * Initialize mobile menu
+     * Initialize hero section interactions
      */
+    initHeroSection() {
+        // Explore button functionality
+        const exploreBtn = Utils.DOM.select('#hero-explore-btn');
+        if (exploreBtn) {
+            Utils.DOM.on(exploreBtn, 'click', (e) => {
+                e.preventDefault();
+                const target = exploreBtn.dataset.scrollTarget;
+                const targetElement = Utils.DOM.select(target);
+                if (targetElement) {
+                    Utils.Scroll.to(targetElement, {
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        }
+
+        // Video button functionality
+        const videoBtn = Utils.DOM.select('#hero-video-btn');
+        if (videoBtn) {
+            Utils.DOM.on(videoBtn, 'click', (e) => {
+                e.preventDefault();
+                // const videoUrl = videoBtn.dataset.videoUrl;
+
+                // For now, show a notification. In real implementation,
+                // this would open a modal or redirect to YouTube
+                this.showNotification('影片功能即將推出！', 'info');
+
+                // Example of how to open YouTube video in new tab:
+                // if (videoUrl) {
+                //     window.open(videoUrl, '_blank', 'noopener,noreferrer');
+                // }
+            });
+        }
+
+        // Scroll indicator functionality
+        const scrollIndicator = Utils.DOM.select('#scroll-indicator');
+        if (scrollIndicator) {
+            Utils.DOM.on(scrollIndicator, 'click', (e) => {
+                e.preventDefault();
+                const target = scrollIndicator.dataset.scrollTarget;
+                const targetElement = Utils.DOM.select(target);
+                if (targetElement) {
+                    Utils.Scroll.to(targetElement, {
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        }
+
+        this.components.set('heroSection', {
+            exploreBtn,
+            videoBtn,
+            scrollIndicator
+        });
+    }
     initMobileMenu() {
         const menuButton = Utils.DOM.select('#mobile-menu-button');
         const mobileMenu = Utils.DOM.select('#mobile-menu');
@@ -525,6 +608,12 @@ class GravityIonApp {
             document.body.setAttribute('data-device', 'desktop');
         }
 
+        // Update header height
+        const headerHeightComponent = this.components.get('headerHeight');
+        if (headerHeightComponent) {
+            headerHeightComponent.update();
+        }
+
         // Notify components of resize
         this.components.forEach((component, _name) => {
             if (component.handleResize && typeof component.handleResize === 'function') {
@@ -582,8 +671,8 @@ class GravityIonApp {
     onPageHidden() {
         // Pause animations and timers when page is hidden
         const animationManager = this.components.get('animations');
-        if (animationManager && animationManager.particleSystem) {
-            animationManager.particleSystem.stop();
+        if (animationManager && animationManager.canvasParticleSystem) {
+            animationManager.canvasParticleSystem.stop();
         }
     }
 
@@ -593,8 +682,8 @@ class GravityIonApp {
     onPageVisible() {
         // Resume animations and timers when page becomes visible
         const animationManager = this.components.get('animations');
-        if (animationManager && animationManager.particleSystem) {
-            animationManager.particleSystem.start();
+        if (animationManager && animationManager.canvasParticleSystem) {
+            animationManager.canvasParticleSystem.start();
         }
     }
 

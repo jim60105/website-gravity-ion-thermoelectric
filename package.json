@@ -1,12 +1,12 @@
 {
   "name": "gravity-ion-thermoelectric-website",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Gravity Ion Thermoelectric promotional website showcasing revolutionary heat-to-electricity conversion technology",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "live-server --port=3000 --open=/",
-    "start": "live-server --port=3000",
+    "dev": "http-server -p 3000 -o",
+    "start": "http-server -p 3000",
     "lint": "eslint assets/js/*.js",
     "format": "prettier --write assets/js/*.js assets/css/*.css *.html"
   },
@@ -19,11 +19,15 @@
     "physics",
     "website"
   ],
-  "author": "",
-  "license": "MIT",
+  "author": "Jim Chen <Jim@ChenJ.im>",
+  "contributors": [
+    "Kuo Tso Chen <gtchen0@gmail.com>",
+    "Jim Chen <Jim@ChenJ.im>"
+  ],
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
     "eslint": "^9.32.0",
-    "live-server": "^1.2.2",
+    "http-server": "^14.1.1",
     "prettier": "^3.6.2"
   }
 }
