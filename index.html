@@ -65,7 +65,7 @@
     </script>
 
     <!-- MathJax for Mathematical Equations -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- MathJax CDN -->
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
       window.MathJax = {
@@ -1483,14 +1483,14 @@
             </div>
             
             <div class="grid lg:grid-cols-2 gap-12">
-              <div class="environmental-chart-container" id="environmental-chart-container">
+              <div class="environmental-chart-container max-h-96 h-80" id="environmental-chart-container">
                 <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">清潔能源評比</h4>
-                <canvas id="environmental-impact-chart" class="w-full h-64"></canvas>
+                <canvas id="environmental-impact-chart" class="w-full h-64 max-h-80"></canvas>
               </div>
               
-              <div class="co2-chart-container" id="co2-chart-container">
+              <div class="co2-chart-container max-h-96 h-80" id="co2-chart-container">
                 <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">CO₂ 減排預測</h4>
-                <canvas id="co2-reduction-chart" class="w-full h-64"></canvas>
+                <canvas id="co2-reduction-chart" class="w-full h-64 max-h-80"></canvas>
               </div>
             </div>
           </div>
