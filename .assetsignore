@@ -35,12 +35,6 @@ package*.json
 wrangler.toml
 .assetsignore
 .gitignore
-LICENSE
-
-# Documentation
-README.md
-assets/docs/*.md
-assets/docs/*.docx
 
 # Large binary files and data
 **/*.bin
@@ -51,12 +45,11 @@ assets/docs/*.docx
 **/*.so
 **/*.dylib
 
-# Ignore documentation and development files
-README.md
-LICENSE
-*.md
-
 # Ignore development scripts and configs
 .editorconfig
 .prettierrc*
 .eslintrc*
+eslint.config.js
+
+.wrangler/
+.github/
