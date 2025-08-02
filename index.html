@@ -65,7 +65,7 @@
     </script>
 
     <!-- MathJax for Mathematical Equations -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- MathJax CDN -->
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
       window.MathJax = {
@@ -105,23 +105,23 @@
           </div>
 
           <div class="hidden md:flex space-x-8">
-            <a href="#technology" class="hover:text-electric-blue transition-colors duration-300" aria-label="技術原理">
+            <a href="#technology" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" aria-label="技術原理">
               技術原理
             </a>
-            <a href="#scientific-breakthrough" class="hover:text-electric-blue transition-colors duration-300" aria-label="科學突破">
+            <a href="#scientific-breakthrough" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" aria-label="科學突破">
               科學突破
             </a>
-            <a href="#research" class="hover:text-electric-blue transition-colors duration-300" aria-label="研究成果">
+            <a href="#research" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" aria-label="研究成果">
               研究成果
             </a>
             <a
-              href="#applications"
-              class="hover:text-electric-blue transition-colors duration-300"
+              href="#applications-impact"
+              class="text-gray-100 hover:text-electric-blue transition-colors duration-300"
               aria-label="應用領域"
             >
               應用領域
             </a>
-            <a href="#contact" class="hover:text-electric-blue transition-colors duration-300" aria-label="聯絡我們">
+            <a href="#contact" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" aria-label="聯絡我們">
               聯絡我們
             </a>
           </div>
@@ -137,19 +137,19 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4" role="menu">
           <div class="flex flex-col space-y-4">
-            <a href="#technology" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+            <a href="#technology" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" role="menuitem"
               >技術原理</a
             >
-            <a href="#scientific-breakthrough" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+            <a href="#scientific-breakthrough" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" role="menuitem"
               >科學突破</a
             >
-            <a href="#research" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+            <a href="#research" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" role="menuitem"
               >研究成果</a
             >
-            <a href="#applications" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+            <a href="#applications-impact" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" role="menuitem"
               >應用領域</a
             >
-            <a href="#contact" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+            <a href="#contact" class="text-gray-100 hover:text-electric-blue transition-colors duration-300" role="menuitem"
               >聯絡我們</a
             >
           </div>
@@ -182,7 +182,7 @@
                     革命性發現
                   </span>
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-200 leading-relaxed font-medium">
+                <p class="text-xl md:text-2xl text-gray-100 leading-relaxed font-medium">
                   無燃料、無污染的綠色能源新紀元
                 </p>
               </div>
@@ -220,7 +220,7 @@
                     <div class="text-4xl">🔬</div>
                     <div>
                       <h3 class="text-xl font-bold text-electric-blue mb-2">科學突破</h3>
-                      <p class="text-gray-300">挑戰百年物理定律</p>
+                      <p class="text-gray-100">挑戰百年物理定律</p>
                     </div>
                   </div>
                 </div>
@@ -230,7 +230,7 @@
                     <div class="text-4xl">⚡</div>
                     <div>
                       <h3 class="text-xl font-bold text-energy-gold mb-2">綠色能源</h3>
-                      <p class="text-gray-300">零排放持續發電</p>
+                      <p class="text-gray-100">零排放持續發電</p>
                     </div>
                   </div>
                 </div>
@@ -240,7 +240,7 @@
                     <div class="text-4xl">🌍</div>
                     <div>
                       <h3 class="text-xl font-bold text-plasma-purple mb-2">拯救地球</h3>
-                      <p class="text-gray-300">對抗全球暖化新方案</p>
+                      <p class="text-gray-100">對抗全球暖化新方案</p>
                     </div>
                   </div>
                 </div>
@@ -287,11 +287,11 @@
           <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-6">
               <h3 class="text-2xl font-semibold text-electric-blue">重力場中的離子分離</h3>
-              <p class="text-gray-300 leading-relaxed">
+              <p class="text-gray-100 leading-relaxed">
                 在重力場作用下，不同質量的離子會產生分離效應，形成電場梯度。
                 這種現象打破了傳統熱力學第二定律的限制，實現了熱能的直接轉換。
               </p>
-              <p class="text-gray-300 leading-relaxed">
+              <p class="text-gray-100 leading-relaxed">
                 通過精密控制離子濃度和重力場強度，我們能夠持續產生穩定的電流輸出， 效率遠超傳統熱電轉換技術。
               </p>
             </div>
@@ -318,7 +318,7 @@
           <div class="grid md:grid-cols-3 gap-8">
             <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
               <h3 class="text-xl font-semibold text-electric-blue mb-4">突破卡諾定理限制</h3>
-              <p class="text-gray-300 mb-4">
+              <p class="text-gray-100 mb-4">
                 實驗證明我們的技術效率超越了卡諾定理的理論上限， 開創了能源轉換的新紀元。
               </p>
               <a
@@ -331,7 +331,7 @@
 
             <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
               <h3 class="text-xl font-semibold text-electric-blue mb-4">持續電流產生</h3>
-              <p class="text-gray-300 mb-4">
+              <p class="text-gray-100 mb-4">
                 在嚴格控制的實驗環境中，成功實現了連續穩定的電流輸出， 驗證了技術的可靠性。
               </p>
               <a
@@ -344,7 +344,7 @@
 
             <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
               <h3 class="text-xl font-semibold text-electric-blue mb-4">實驗數據驗證</h3>
-              <p class="text-gray-300 mb-4">
+              <p class="text-gray-100 mb-4">
                 通過托爾曼實驗的改進版本，獲得了可重複的實驗數據， 證實了理論預測的正確性。
               </p>
               <a
@@ -366,7 +366,7 @@
             <h2 id="breakthrough-heading" class="text-4xl md:text-5xl font-bold mb-6 text-energy-gold">
               科學理論突破
             </h2>
-            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p class="text-xl text-gray-100 max-w-3xl mx-auto leading-relaxed">
               重新審視托爾曼實驗，發現挑戰傳統物理定律的革命性機制
             </p>
           </header>
@@ -389,7 +389,7 @@
                     </div>
                     <div class="timeline-content">
                       <h4 class="text-xl font-semibold text-energy-gold mb-2">托爾曼的原始發現</h4>
-                      <p class="text-gray-300">在加速度場中觀察到電解質溶液的電位差現象</p>
+                      <p class="text-gray-100">在加速度場中觀察到電解質溶液的電位差現象</p>
                     </div>
                   </div>
                   
@@ -399,7 +399,7 @@
                     </div>
                     <div class="timeline-content">
                       <h4 class="text-xl font-semibold text-electric-blue mb-2">傳統解釋局限</h4>
-                      <p class="text-gray-300">學界普遍認為此現象僅為瞬時效應，無法持續產生電流</p>
+                      <p class="text-gray-100">學界普遍認為此現象僅為瞬時效應，無法持續產生電流</p>
                     </div>
                   </div>
                   
@@ -409,7 +409,7 @@
                     </div>
                     <div class="timeline-content">
                       <h4 class="text-xl font-semibold text-plasma-purple mb-2">突破性重新詮釋</h4>
-                      <p class="text-gray-300">證實在重力場中可實現連續穩定的電流輸出</p>
+                      <p class="text-gray-100">證實在重力場中可實現連續穩定的電流輸出</p>
                     </div>
                   </div>
                 </div>
@@ -438,7 +438,7 @@
                       <th class="py-4 px-6 text-plasma-purple font-semibold">新發現</th>
                     </tr>
                   </thead>
-                  <tbody class="text-gray-300">
+                  <tbody class="text-gray-100">
                     <tr class="border-b border-white/10 hover:bg-white/5 transition-colors">
                       <td class="py-4 px-6 font-medium">電流持續性</td>
                       <td class="py-4 px-6">僅為瞬時現象</td>
@@ -469,7 +469,7 @@
           <div class="mechanism-explanation mb-32">
             <div class="text-center mb-16">
               <h3 class="text-3xl font-bold text-electric-blue mb-6">熱能轉電能機制</h3>
-              <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+              <p class="text-xl text-gray-100 max-w-4xl mx-auto">
                 重力場中離子分離產生電場，熱振動驅動電子逆電場運動，實現持續的熱電轉換
               </p>
             </div>
@@ -481,7 +481,7 @@
                   1
                 </div>
                 <h4 class="text-xl font-semibold text-energy-gold mb-3">重力分離離子</h4>
-                <p class="text-gray-300 leading-relaxed">
+                <p class="text-gray-100 leading-relaxed">
                   在重力場作用下，不同質量的離子產生分離，重離子沉降至底部，輕離子浮升至頂部
                 </p>
               </div>
@@ -491,7 +491,7 @@
                   2
                 </div>
                 <h4 class="text-xl font-semibold text-electric-blue mb-3">產生穩定電場</h4>
-                <p class="text-gray-300 leading-relaxed">
+                <p class="text-gray-100 leading-relaxed">
                   離子分離導致電荷重分布，自發產生指向上方的穩定電場，形成持續的電位差
                 </p>
               </div>
@@ -501,7 +501,7 @@
                   3
                 </div>
                 <h4 class="text-xl font-semibold text-plasma-purple mb-3">熱振動驅動電流</h4>
-                <p class="text-gray-300 leading-relaxed">
+                <p class="text-gray-100 leading-relaxed">
                   熱振動為電子提供足夠能量，推動其逆電場運動，形成連續穩定的電流輸出
                 </p>
               </div>
@@ -514,7 +514,7 @@
                 <div class="main-equation text-3xl text-white mb-4" id="boltzmann-equation">
                   <!-- MathJax will render here -->
                 </div>
-                <div class="equation-description text-gray-300 mb-6">
+                <div class="equation-description text-gray-100 mb-6">
                   <p>在重力場和電場共同作用下的離子濃度分布</p>
                 </div>
                 <div class="variable-explanations grid md:grid-cols-2 gap-4 text-sm">
@@ -539,7 +539,7 @@
           <div class="theory-comparison mb-32">
             <div class="text-center mb-16">
               <h3 class="text-3xl font-bold text-electric-blue mb-6">與傳統理論對比</h3>
-              <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+              <p class="text-xl text-gray-100 max-w-4xl mx-auto">
                 我們的發現挑戰了三個重要的物理定律，開啟了能源科學的新紀元
               </p>
             </div>
@@ -549,12 +549,12 @@
               <div class="comparison-card bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-energy-gold/50 transition-all duration-300 group">
                 <div class="card-header text-center mb-6">
                   <h4 class="text-2xl font-bold text-energy-gold mb-2">熱力學第二定律</h4>
-                  <p class="text-gray-400">能量流動方向</p>
+                  <p class="text-gray-200">能量流動方向</p>
                 </div>
                 
                 <div class="traditional-view mb-6">
-                  <h5 class="text-lg font-semibold text-gray-300 mb-3">傳統觀點</h5>
-                  <p class="text-gray-300 mb-4">熱只能從高溫流向低溫</p>
+                  <h5 class="text-lg font-semibold text-gray-100 mb-3">傳統觀點</h5>
+                  <p class="text-gray-100 mb-4">熱只能從高溫流向低溫</p>
                   <img
                     src="/assets/images/001-energy-flows-from-hot-to-cold-region.webp"
                     alt="能量從高溫區域流向低溫區域"
@@ -565,7 +565,7 @@
                 
                 <div class="breakthrough-view">
                   <h5 class="text-lg font-semibold text-energy-gold mb-3">新發現</h5>
-                  <p class="text-gray-300 mb-4">重力場下可實現低溫到高溫的能量轉移</p>
+                  <p class="text-gray-100 mb-4">重力場下可實現低溫到高溫的能量轉移</p>
                   <img
                     src="/assets/images/002-energy-flows-from-cold-to-hot-region-under-gravity-abstract-diagram.webp"
                     alt="重力場下能量從低溫區域流向高溫區域的抽象示意圖"
@@ -579,12 +579,12 @@
               <div class="comparison-card bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-electric-blue/50 transition-all duration-300 group">
                 <div class="card-header text-center mb-6">
                   <h4 class="text-2xl font-bold text-electric-blue mb-2">卡諾定理</h4>
-                  <p class="text-gray-400">熱機效率限制</p>
+                  <p class="text-gray-200">熱機效率限制</p>
                 </div>
                 
                 <div class="traditional-view mb-6">
-                  <h5 class="text-lg font-semibold text-gray-300 mb-3">傳統觀點</h5>
-                  <p class="text-gray-300 mb-4">等溫條件下無法產生功</p>
+                  <h5 class="text-lg font-semibold text-gray-100 mb-3">傳統觀點</h5>
+                  <p class="text-gray-100 mb-4">等溫條件下無法產生功</p>
                   <img
                     src="/assets/images/008-illustration-of-carnots-theorem.webp"
                     alt="卡諾定理說明圖"
@@ -595,7 +595,7 @@
                 
                 <div class="breakthrough-view">
                   <h5 class="text-lg font-semibold text-electric-blue mb-3">新發現</h5>
-                  <p class="text-gray-300 mb-4">重力場下等溫系統可持續輸出電能</p>
+                  <p class="text-gray-100 mb-4">重力場下等溫系統可持續輸出電能</p>
                   <img
                     src="/assets/images/009-measured-sample-surpasses-carnots-theorem-limit.webp"
                     alt="測量樣本超越卡諾定理限制"
@@ -609,12 +609,12 @@
               <div class="comparison-card bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-plasma-purple/50 transition-all duration-300 group">
                 <div class="card-header text-center mb-6">
                   <h4 class="text-2xl font-bold text-plasma-purple mb-2">熵值變化</h4>
-                  <p class="text-gray-400">系統無序程度</p>
+                  <p class="text-gray-200">系統無序程度</p>
                 </div>
                 
                 <div class="traditional-view mb-6">
-                  <h5 class="text-lg font-semibold text-gray-300 mb-3">傳統觀點</h5>
-                  <p class="text-gray-300 mb-4">封閉系統熵值只增不減</p>
+                  <h5 class="text-lg font-semibold text-gray-100 mb-3">傳統觀點</h5>
+                  <p class="text-gray-100 mb-4">封閉系統熵值只增不減</p>
                   <img
                     src="/assets/images/010-illustration-of-the-second-law-of-thermodynamics.webp"
                     alt="熱力學第二定律說明圖"
@@ -625,7 +625,7 @@
                 
                 <div class="breakthrough-view">
                   <h5 class="text-lg font-semibold text-plasma-purple mb-3">新發現</h5>
-                  <p class="text-gray-300 mb-4">特定條件下熵值可減少</p>
+                  <p class="text-gray-100 mb-4">特定條件下熵值可減少</p>
                   <img
                     src="/assets/images/011-measured-sample-surpasses-second-law-limit-illustration.webp"
                     alt="測量樣本超越熱力學第二定律限制示意圖"
@@ -641,7 +641,7 @@
           <div class="interactive-simulation">
             <div class="text-center mb-16">
               <h3 class="text-3xl font-bold text-electric-blue mb-6">互動式粒子模擬</h3>
-              <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+              <p class="text-xl text-gray-100 max-w-4xl mx-auto">
                 調整重力強度，觀察不同質量粒子的分離過程和電場變化
               </p>
             </div>
@@ -649,7 +649,7 @@
             <div class="simulation-container bg-black/30 backdrop-blur-sm rounded-xl p-8 border border-white/10">
               <div class="simulation-controls mb-6 flex flex-wrap items-center justify-center gap-4">
                 <div class="control-group">
-                  <label for="gravity-slider" class="block text-sm font-medium text-gray-300 mb-2">
+                  <label for="gravity-slider" class="block text-sm font-medium text-gray-100 mb-2">
                     重力強度
                   </label>
                   <input
@@ -665,7 +665,7 @@
                 </div>
                 
                 <div class="control-group">
-                  <label for="temperature-slider" class="block text-sm font-medium text-gray-300 mb-2">
+                  <label for="temperature-slider" class="block text-sm font-medium text-gray-100 mb-2">
                     熱振動強度
                   </label>
                   <input
@@ -701,15 +701,15 @@
                   <div class="legend-items space-y-2">
                     <div class="legend-item flex items-center space-x-2">
                       <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
-                      <span class="text-gray-300 text-sm">輕粒子 (負離子)</span>
+                      <span class="text-gray-100 text-sm">輕粒子 (負離子)</span>
                     </div>
                     <div class="legend-item flex items-center space-x-2">
                       <div class="w-4 h-4 bg-blue-400 rounded-full"></div>
-                      <span class="text-gray-300 text-sm">重粒子 (正離子)</span>
+                      <span class="text-gray-100 text-sm">重粒子 (正離子)</span>
                     </div>
                     <div class="legend-item flex items-center space-x-2">
                       <div class="w-2 h-2 bg-red-400 rounded-full"></div>
-                      <span class="text-gray-300 text-sm">電子流</span>
+                      <span class="text-gray-100 text-sm">電子流</span>
                     </div>
                   </div>
                 </div>
@@ -719,15 +719,15 @@
                   <h5 class="text-white font-semibold mb-2">即時數據</h5>
                   <div class="data-items space-y-1 text-sm">
                     <div class="data-item">
-                      <span class="text-gray-300">電場強度：</span>
+                      <span class="text-gray-100">電場強度：</span>
                       <span id="electric-field-value" class="text-green-400 font-mono">0.00 V/m</span>
                     </div>
                     <div class="data-item">
-                      <span class="text-gray-300">分離度：</span>
+                      <span class="text-gray-100">分離度：</span>
                       <span id="separation-value" class="text-blue-400 font-mono">0%</span>
                     </div>
                     <div class="data-item">
-                      <span class="text-gray-300">電流密度：</span>
+                      <span class="text-gray-100">電流密度：</span>
                       <span id="current-value" class="text-red-400 font-mono">0.00 A/m²</span>
                     </div>
                   </div>
@@ -746,7 +746,7 @@
             <h2 id="evidence-heading" class="text-4xl md:text-5xl font-bold mb-6 text-deep-space">
               實驗證據：三個月的穩定驗證
             </h2>
-            <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            <p class="text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed">
               透過嚴格控制的實驗環境，我們獲得了持續穩定的電流輸出數據，證實了理論的可靠性
             </p>
           </header>
@@ -755,7 +755,7 @@
           <div class="stable-current-experiment mb-32">
             <div class="text-center mb-16">
               <h3 class="text-3xl font-bold text-electric-blue mb-6">三個月穩定電流實驗</h3>
-              <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+              <p class="text-xl text-gray-700 max-w-4xl mx-auto">
                 在嚴格控制的實驗環境中，連續監測三個月的電壓和電流輸出，驗證技術的長期穩定性
               </p>
             </div>
@@ -765,7 +765,7 @@
               <div class="chart-container bg-gray-50 rounded-xl p-8 border border-gray-200">
                 <div class="chart-header mb-6">
                   <h4 class="text-2xl font-semibold text-gray-800 mb-2">電壓隨時間變化</h4>
-                  <p class="text-gray-600">實時監測數據顯示穩定的電壓輸出</p>
+                  <p class="text-gray-700">實時監測數據顯示穩定的電壓輸出</p>
                 </div>
                 
                 <!-- Chart Canvas -->
@@ -791,7 +791,7 @@
                     class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                     loading="lazy"
                   />
-                  <p class="text-sm text-gray-500 mt-2 text-center">實驗樣品中測量到的連續穩定電流</p>
+                  <p class="text-sm text-gray-600 mt-2 text-center">實驗樣品中測量到的連續穩定電流</p>
                 </div>
                 
                 <!-- Data Table Image -->
@@ -802,13 +802,13 @@
                     class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                     loading="lazy"
                   />
-                  <p class="text-sm text-gray-500 mt-2 text-center">電池正立狀態下的電壓時間數據表</p>
+                  <p class="text-sm text-gray-600 mt-2 text-center">電池正立狀態下的電壓時間數據表</p>
                 </div>
                 
                 <!-- Key Findings -->
                 <div class="key-findings bg-electric-blue/10 rounded-xl p-6 border border-electric-blue/20">
                   <h5 class="text-xl font-semibold text-electric-blue mb-4">關鍵發現</h5>
-                  <ul class="space-y-3 text-gray-700">
+                  <ul class="space-y-3 text-gray-800">
                     <li class="flex items-start space-x-3">
                       <span class="text-electric-blue mt-1">✓</span>
                       <span>連續90天穩定電壓輸出，變異係數小於2%</span>
@@ -831,7 +831,7 @@
           <div class="flip-verification mb-32">
             <div class="text-center mb-16">
               <h3 class="text-3xl font-bold text-plasma-purple mb-6">上下翻轉驗證實驗</h3>
-              <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+              <p class="text-xl text-gray-700 max-w-4xl mx-auto">
                 通過翻轉實驗樣品，觀察電壓方向的即時反轉，驗證重力場對離子分離的直接影響
               </p>
             </div>
@@ -841,7 +841,7 @@
               <div class="flip-simulation-container bg-gray-50 rounded-xl p-8 border border-gray-200">
                 <div class="simulation-header mb-6 text-center">
                   <h4 class="text-2xl font-semibold text-gray-800 mb-2">互動式翻轉模擬</h4>
-                  <p class="text-gray-600">點擊按鈕觀察電壓方向變化</p>
+                  <p class="text-gray-700">點擊按鈕觀察電壓方向變化</p>
                 </div>
                 
                 <!-- 3D Battery Simulation -->
@@ -853,11 +853,11 @@
                         <!-- Voltage Indicators -->
                         <div class="voltage-indicator top absolute -top-6 left-1/2 transform -translate-x-1/2">
                           <div class="voltage-value text-lg font-bold text-red-600" id="top-voltage">+1.2V</div>
-                          <div class="voltage-label text-sm text-gray-600">頂部</div>
+                          <div class="voltage-label text-sm text-gray-700">頂部</div>
                         </div>
                         <div class="voltage-indicator bottom absolute -bottom-6 left-1/2 transform -translate-x-1/2">
                           <div class="voltage-value text-lg font-bold text-blue-600" id="bottom-voltage">0.0V</div>
-                          <div class="voltage-label text-sm text-gray-600">底部</div>
+                          <div class="voltage-label text-sm text-gray-700">底部</div>
                         </div>
                         
                         <!-- Ion Flow Animation -->
@@ -887,11 +887,11 @@
                 <!-- Real-time Data Display -->
                 <div class="real-time-data mt-6 grid grid-cols-2 gap-4">
                   <div class="data-card bg-white rounded-lg p-4 border border-gray-200">
-                    <h6 class="font-semibold text-gray-700 mb-2">電壓差</h6>
+                    <h6 class="font-semibold text-gray-800 mb-2">電壓差</h6>
                     <div class="value text-2xl font-bold text-electric-blue" id="voltage-diff">1.2V</div>
                   </div>
                   <div class="data-card bg-white rounded-lg p-4 border border-gray-200">
-                    <h6 class="font-semibold text-gray-700 mb-2">電場方向</h6>
+                    <h6 class="font-semibold text-gray-800 mb-2">電場方向</h6>
                     <div class="value text-2xl font-bold text-plasma-purple" id="field-direction">向上</div>
                   </div>
                 </div>
@@ -907,7 +907,7 @@
                     class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                     loading="lazy"
                   />
-                  <p class="text-sm text-gray-500 mt-2 text-center">樣品倒立時觀測到的電壓反轉現象</p>
+                  <p class="text-sm text-gray-600 mt-2 text-center">樣品倒立時觀測到的電壓反轉現象</p>
                 </div>
                 
                 <!-- Upside-down Data Table -->
@@ -918,7 +918,7 @@
                     class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
                     loading="lazy"
                   />
-                  <p class="text-sm text-gray-500 mt-2 text-center">電池倒立狀態下的電壓時間數據表</p>
+                  <p class="text-sm text-gray-600 mt-2 text-center">電池倒立狀態下的電壓時間數據表</p>
                 </div>
                 
                 <!-- Comparison Analysis -->
@@ -934,7 +934,7 @@
                           <th class="text-left py-2">電壓差</th>
                         </tr>
                       </thead>
-                      <tbody class="text-gray-700">
+                      <tbody class="text-gray-800">
                         <tr class="border-b border-gray-200">
                           <td class="py-2 font-medium">正立</td>
                           <td class="py-2">+1.2V</td>
@@ -959,7 +959,7 @@
           <div class="equipment-showcase mb-32">
             <div class="text-center mb-16">
               <h3 class="text-3xl font-bold text-energy-gold mb-6">實驗設備與環境</h3>
-              <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+              <p class="text-xl text-gray-700 max-w-4xl mx-auto">
                 採用先進的實驗設備和嚴格控制的環境條件，確保實驗結果的準確性和可重現性
               </p>
             </div>
@@ -976,7 +976,7 @@
                     loading="lazy"
                   />
                   <h5 class="text-lg font-semibold text-gray-800 mb-2">電池結構設計</h5>
-                  <p class="text-gray-600 text-sm">離心式電池結構，最大化重力場效應</p>
+                  <p class="text-gray-700 text-sm">離心式電池結構，最大化重力場效應</p>
                 </div>
                 
                 <div class="equipment-card bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
@@ -987,7 +987,7 @@
                     loading="lazy"
                   />
                   <h5 class="text-lg font-semibold text-gray-800 mb-2">製造組件</h5>
-                  <p class="text-gray-600 text-sm">精密加工的電池組件，確保實驗精度</p>
+                  <p class="text-gray-700 text-sm">精密加工的電池組件，確保實驗精度</p>
                 </div>
                 
                 <div class="equipment-card bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
@@ -998,7 +998,7 @@
                     loading="lazy"
                   />
                   <h5 class="text-lg font-semibold text-gray-800 mb-2">實際裝置</h5>
-                  <p class="text-gray-600 text-sm">實驗室中的實際電池裝置與測量系統</p>
+                  <p class="text-gray-700 text-sm">實驗室中的實際電池裝置與測量系統</p>
                 </div>
               </div>
             </div>
@@ -1014,13 +1014,13 @@
                     class="w-full rounded-xl shadow-lg"
                     loading="lazy"
                   />
-                  <p class="text-sm text-gray-500 mt-2 text-center">嚴格控制溫度和氣流的實驗室環境</p>
+                  <p class="text-sm text-gray-600 mt-2 text-center">嚴格控制溫度和氣流的實驗室環境</p>
                 </div>
                 
                 <div class="environment-controls space-y-6">
                   <div class="control-item bg-gray-50 rounded-xl p-6 border border-gray-200">
                     <h5 class="text-lg font-semibold text-gray-800 mb-3">溫度控制系統</h5>
-                    <ul class="space-y-2 text-gray-600">
+                    <ul class="space-y-2 text-gray-700">
                       <li>• 精度：±0.1°C</li>
                       <li>• 範圍：15°C - 35°C</li>
                       <li>• 連續監測：24小時/天</li>
@@ -1029,7 +1029,7 @@
                   
                   <div class="control-item bg-gray-50 rounded-xl p-6 border border-gray-200">
                     <h5 class="text-lg font-semibold text-gray-800 mb-3">電磁屏蔽措施</h5>
-                    <ul class="space-y-2 text-gray-600">
+                    <ul class="space-y-2 text-gray-700">
                       <li>• 法拉第籠式屏蔽室</li>
                       <li>• 屏蔽效能：>80dB</li>
                       <li>• 隔離外部電磁干擾</li>
@@ -1038,7 +1038,7 @@
                   
                   <div class="control-item bg-gray-50 rounded-xl p-6 border border-gray-200">
                     <h5 class="text-lg font-semibold text-gray-800 mb-3">氣流控制設備</h5>
-                    <ul class="space-y-2 text-gray-600">
+                    <ul class="space-y-2 text-gray-700">
                       <li>• 層流控制系統</li>
                       <li>• 濕度控制：45-55%</li>
                       <li>• 無塵環境等級：Class 1000</li>
@@ -1077,7 +1077,7 @@
                   
                   <div class="test-conclusion bg-gray-50 rounded-xl p-6 border border-gray-200">
                     <h5 class="text-lg font-semibold text-gray-800 mb-3">測試結論</h5>
-                    <p class="text-gray-600 leading-relaxed">
+                    <p class="text-gray-700 leading-relaxed">
                       在10G離心力作用下，電壓輸出顯著增強至原來的10倍，驗證了重力場強度與電壓輸出的正比關係，
                       進一步證實了重力誘發離子分離的理論機制。
                     </p>
@@ -1091,7 +1091,7 @@
                     class="w-full rounded-xl shadow-lg"
                     loading="lazy"
                   />
-                  <p class="text-sm text-gray-500 mt-2 text-center">10G離心機測試下的電池電壓輸出結果</p>
+                  <p class="text-sm text-gray-600 mt-2 text-center">10G離心機測試下的電池電壓輸出結果</p>
                 </div>
               </div>
             </div>
@@ -1099,71 +1099,452 @@
         </div>
       </section>
 
-      <!-- Applications Section -->
-      <section id="applications" class="py-20 px-6" role="region" aria-labelledby="applications-heading">
-        <div class="container mx-auto max-w-6xl">
-          <h2 id="applications-heading" class="text-4xl md:text-5xl font-bold text-center mb-16 text-energy-gold">
-            應用領域
+      <!-- Technical Applications and Impact Section -->
+      <section id="applications-impact" class="py-20 bg-gradient-to-br from-green-50 to-blue-50" role="region" aria-labelledby="applications-heading">
+        <div class="container mx-auto max-w-7xl px-6">
+          <h2 id="applications-heading" class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-800">
+            技術應用前景
           </h2>
 
-          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div
-              class="text-center p-6 bg-gradient-to-b from-electric-blue/20 to-transparent rounded-lg hover:from-electric-blue/30 transition-all duration-300"
-            >
-              <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue rounded-full flex items-center justify-center">
-                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold mb-2">工業廢熱回收</h3>
-              <p class="text-gray-300 text-sm">將工業廢熱轉換為電能，提高能源利用效率</p>
+          <!-- Centrifugal Force Amplification Display -->
+          <div class="efficiency-calculator bg-white rounded-xl p-8 mb-16 shadow-lg" id="efficiency-calculator">
+            <div class="text-center mb-8">
+              <h3 class="text-3xl font-bold text-gray-800 mb-4">離心力放大效應展示</h3>
+              <p class="text-xl text-gray-600">調整離心機轉速，觀察功率輸出的指數級增長</p>
             </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+              <!-- Interactive Calculator -->
+              <div class="calculator-panel">
+                <div class="mb-8">
+                  <label for="rpm-slider" class="block text-lg font-semibold text-gray-700 mb-4">
+                    轉速控制：<span id="rpm-display" class="text-electric-blue">0</span> RPM
+                  </label>
+                  <input 
+                    type="range" 
+                    id="rpm-slider" 
+                    min="0" 
+                    max="1000" 
+                    value="0" 
+                    step="10"
+                    class="calculator-slider"
+                  />
+                </div>
+                
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                  <div class="metric-card bg-green-50 rounded-lg p-4 border border-green-200">
+                    <h4 class="text-sm font-semibold text-gray-600 mb-1">功率輸出</h4>
+                    <div class="text-2xl font-bold text-green-600">
+                      <span id="power-output">72.0</span> <span class="text-sm">W/m³</span>
+                    </div>
+                  </div>
+                  <div class="metric-card bg-blue-50 rounded-lg p-4 border border-blue-200">
+                    <h4 class="text-sm font-semibold text-gray-600 mb-1">效率倍數</h4>
+                    <div class="text-2xl font-bold text-blue-600">
+                      <span id="efficiency-multiplier">1.00</span> <span class="text-sm">倍</span>
+                    </div>
+                  </div>
+                  <div class="metric-card bg-purple-50 rounded-lg p-4 border border-purple-200">
+                    <h4 class="text-sm font-semibold text-gray-600 mb-1">日產電量</h4>
+                    <div class="text-2xl font-bold text-purple-600">
+                      <span id="energy-per-day">1728</span> <span class="text-sm">Wh</span>
+                    </div>
+                  </div>
+                  <div class="metric-card bg-orange-50 rounded-lg p-4 border border-orange-200">
+                    <h4 class="text-sm font-semibold text-gray-600 mb-1">材料應力</h4>
+                    <div class="text-2xl font-bold text-orange-600">正常</div>
+                  </div>
+                </div>
+                
+                <div id="material-warning" class="hidden"></div>
+              </div>
+              
+              <!-- Performance Chart -->
+              <div class="chart-panel">
+                <div class="chart-container bg-gray-50 rounded-lg p-4">
+                  <canvas id="efficiency-chart"></canvas>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Technical Structure Images -->
+            <div class="technical-images grid md:grid-cols-3 gap-6 mt-12">
+              <div class="image-card">
+                <img
+                  src="/assets/images/014-centrifugal-structure-for-efficiency-enhancement.webp"
+                  alt="離心結構效率增強示意圖"
+                  class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                  loading="lazy"
+                />
+                <p class="text-sm text-gray-300 mt-2 text-center">離心結構設計原理</p>
+              </div>
+              <div class="image-card">
+                <img
+                  src="/assets/images/026-fig3-centrifugal-structure-for-efficiency-enhancement.webp"
+                  alt="離心結構效率增強技術圖解"
+                  class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                  loading="lazy"
+                />
+                <p class="text-sm text-gray-300 mt-2 text-center">技術實現方案</p>
+              </div>
+              <div class="image-card">
+                <img
+                  src="/assets/images/027-table1-efficiency-parameters-of-centrifugal-structure.webp"
+                  alt="離心結構效率參數表"
+                  class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
+                  loading="lazy"
+                />
+                <p class="text-sm text-gray-300 mt-2 text-center">效率參數數據</p>
+              </div>
+            </div>
+          </div>
 
-            <div
-              class="text-center p-6 bg-gradient-to-b from-plasma-purple/20 to-transparent rounded-lg hover:from-plasma-purple/30 transition-all duration-300"
-            >
-              <div class="w-16 h-16 mx-auto mb-4 bg-plasma-purple rounded-full flex items-center justify-center">
-                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold mb-2">太空探測器</h3>
-              <p class="text-gray-300 text-sm">在太空環境中利用溫差產生持續電力</p>
+          <!-- Technical Specifications Display -->
+          <div class="tech-specifications mb-16">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl font-bold text-gray-800 mb-4">技術規格與效率參數</h3>
+              <p class="text-xl text-gray-700">基於現有材料和工藝的實際技術指標</p>
             </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div class="tech-spec-card rounded-xl p-6 text-center">
+                <div class="spec-icon w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full flex items-center justify-center">
+                  <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">功率密度</h4>
+                <div class="spec-value">72</div>
+                <div class="spec-unit">瓦/立方公尺</div>
+                <p class="text-sm text-gray-700 mt-2">在現有材料條件下的基礎功率輸出</p>
+              </div>
+              
+              <div class="tech-spec-card rounded-xl p-6 text-center">
+                <div class="spec-icon w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center">
+                  <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">效率提升</h4>
+                <div class="spec-value">16×</div>
+                <div class="spec-unit">轉速加倍時</div>
+                <p class="text-sm text-gray-700 mt-2">離心力平方關係帶來的功率增幅</p>
+              </div>
+              
+              <div class="tech-spec-card rounded-xl p-6 text-center">
+                <div class="spec-icon w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-full flex items-center justify-center">
+                  <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">材料要求</h4>
+                <div class="spec-value">常用</div>
+                <div class="spec-unit">材料即可</div>
+                <p class="text-sm text-gray-700 mt-2">無需特殊材料，工程塑料可承受</p>
+              </div>
+              
+              <div class="tech-spec-card rounded-xl p-6 text-center">
+                <div class="spec-icon w-16 h-16 mx-auto mb-4 bg-orange-100 rounded-full flex items-center justify-center">
+                  <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">運轉條件</h4>
+                <div class="spec-value">常溫</div>
+                <div class="spec-unit">常壓環境</div>
+                <p class="text-sm text-gray-700 mt-2">室溫下正常大氣壓力即可運作</p>
+              </div>
+              
+              <div class="tech-spec-card rounded-xl p-6 text-center">
+                <div class="spec-icon w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+                  <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">維護需求</h4>
+                <div class="spec-value">極低</div>
+                <div class="spec-unit">維護成本</div>
+                <p class="text-sm text-gray-700 mt-2">無易損件，長期免維護運行</p>
+              </div>
+              
+              <div class="tech-spec-card rounded-xl p-6 text-center">
+                <div class="spec-icon w-16 h-16 mx-auto mb-4 bg-teal-100 rounded-full flex items-center justify-center">
+                  <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                  </svg>
+                </div>
+                <h4 class="text-lg font-semibold text-gray-800 mb-2">擴展性</h4>
+                <div class="spec-value">模組化</div>
+                <div class="spec-unit">設計架構</div>
+                <p class="text-sm text-gray-700 mt-2">可根據需求靈活擴展功率規模</p>
+              </div>
+            </div>
+          </div>
 
-            <div
-              class="text-center p-6 bg-gradient-to-b from-energy-gold/20 to-transparent rounded-lg hover:from-energy-gold/30 transition-all duration-300"
-            >
-              <div class="w-16 h-16 mx-auto mb-4 bg-energy-gold rounded-full flex items-center justify-center">
-                <svg class="w-8 h-8 text-deep-space" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold mb-2">可攜式發電</h3>
-              <p class="text-gray-300 text-sm">為偏遠地區提供清潔、持續的電力供應</p>
+          <!-- Application Scenarios Display -->
+          <div class="application-scenarios mb-16">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl font-bold text-gray-800 mb-4">主要應用場景</h3>
+              <p class="text-xl text-gray-700">從家庭到工業，從城市到偏遠地區的全方位應用</p>
             </div>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+              <!-- Household Energy Systems -->
+              <div class="application-card rounded-xl p-8">
+                <div class="application-icon">
+                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                  </svg>
+                </div>
+                <h4 class="text-2xl font-bold text-gray-800 mb-4">家用能源系統</h4>
+                <ul class="space-y-3 text-gray-700 mb-6">
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span>小型離心式發電裝置</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span>24小時持續發電</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span>無需燃料補給</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span>靜音運轉設計</span>
+                  </li>
+                </ul>
+                <div class="bg-green-50 rounded-lg p-4 border border-green-200">
+                  <h5 class="font-semibold text-green-800 mb-2">應用優勢</h5>
+                  <p class="text-sm text-green-800">安裝在屋頂或地下室，為家庭提供穩定清潔電力，可與電網互補使用</p>
+                </div>
+              </div>
+              
+              <!-- Industrial Energy Stations -->
+              <div class="application-card rounded-xl p-8">
+                <div class="application-icon">
+                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-2xl font-bold text-gray-800 mb-4">工業級能源站</h4>
+                <ul class="space-y-3 text-gray-700 mb-6">
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    <span>大型離心陣列</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    <span>兆瓦級功率輸出</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    <span>模組化擴展設計</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                    <span>智能控制系統</span>
+                  </li>
+                </ul>
+                <div class="bg-blue-50 rounded-lg p-4 border border-blue-200">
+                  <h5 class="font-semibold text-blue-800 mb-2">應用優勢</h5>
+                  <p class="text-sm text-blue-800">適合工業園區和大型企業，可替代傳統火力發電，大幅降低碳排放</p>
+                </div>
+              </div>
+              
+              <!-- Remote Area Power Supply -->
+              <div class="application-card rounded-xl p-8">
+                <div class="application-icon">
+                  <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <h4 class="text-2xl font-bold text-gray-800 mb-4">偏遠地區供電</h4>
+                <ul class="space-y-3 text-gray-700 mb-6">
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    <span>獨立電力系統</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    <span>無需電網連接</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    <span>適應惡劣環境</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                    <span class="w-2 h-2 bg-purple-500 rounded-full"></span>
+                    <span>長期穩定運行</span>
+                  </li>
+                </ul>
+                <div class="bg-purple-50 rounded-lg p-4 border border-purple-200">
+                  <h5 class="font-semibold text-purple-800 mb-2">應用優勢</h5>
+                  <p class="text-sm text-purple-800">為山區、島嶼等偏遠地區提供可靠電力，無需複雜的電網基礎設施</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-            <div
-              class="text-center p-6 bg-gradient-to-b from-electric-blue/20 to-transparent rounded-lg hover:from-electric-blue/30 transition-all duration-300"
-            >
-              <div class="w-16 h-16 mx-auto mb-4 bg-electric-blue rounded-full flex items-center justify-center">
-                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path
-                    fill-rule="evenodd"
-                    d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </div>
-              <h3 class="text-lg font-semibold mb-2">醫療設備</h3>
-              <p class="text-gray-300 text-sm">為植入式醫療設備提供長期穩定的電力</p>
+          <!-- Green Energy Comparison Analysis -->
+          <div class="energy-comparison mb-16">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl font-bold text-gray-800 mb-4">綠色能源比較分析</h3>
+              <p class="text-xl text-gray-700">全方位對比各種清潔能源技術的優缺點</p>
             </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+              <!-- Comparison Table -->
+              <div class="comparison-table-container">
+                <table class="energy-comparison-table w-full">
+                  <thead>
+                    <tr class="text-white">
+                      <th>能源類型</th>
+                      <th>穩定性</th>
+                      <th>效率</th>
+                      <th>環保性</th>
+                      <th>成本</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="font-semibold text-black">重力熱電</td>
+                      <td class="comparison-advantage">24小時穩定</td>
+                      <td class="comparison-advantage">72+ W/m³</td>
+                      <td class="comparison-advantage">零污染</td>
+                      <td class="comparison-advantage">低維護</td>
+                    </tr>
+                    <tr>
+                      <td class="font-semibold text-black">太陽能</td>
+                      <td class="comparison-disadvantage">受天氣影響</td>
+                      <td class="comparison-neutral">15-20%</td>
+                      <td class="comparison-advantage">清潔</td>
+                      <td class="comparison-neutral">中等</td>
+                    </tr>
+                    <tr>
+                      <td class="font-semibold text-black">風能</td>
+                      <td class="comparison-disadvantage">不穩定</td>
+                      <td class="comparison-neutral">25-35%</td>
+                      <td class="comparison-neutral">噪音問題</td>
+                      <td class="comparison-neutral">中等</td>
+                    </tr>
+                    <tr>
+                      <td class="font-semibold text-black">核能</td>
+                      <td class="comparison-advantage">穩定</td>
+                      <td class="comparison-advantage">高效率</td>
+                      <td class="comparison-disadvantage">核廢料</td>
+                      <td class="comparison-disadvantage">高成本</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+              <!-- Comparison Chart -->
+              <div class="comparison-chart-container" id="comparison-chart-container">
+                <canvas id="energy-comparison-chart" class="w-full h-80"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Environmental Impact -->
+          <div class="environmental-impact mb-16">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl font-bold text-gray-800 mb-4">全球暖化解決方案</h3>
+              <p class="text-xl text-gray-700">量化環境效益，為地球可持續發展貢獻力量</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+              <div class="impact-metric-card">
+                <div class="metric-value">25.3</div>
+                <div class="metric-label">CO₂ 減排</div>
+                <div class="metric-description">億噸/年 (2035年目標)</div>
+              </div>
+              
+              <div class="impact-metric-card">
+                <div class="metric-value">60%</div>
+                <div class="metric-label">化石燃料替代</div>
+                <div class="metric-description">可替代規模比例</div>
+              </div>
+              
+              <div class="impact-metric-card">
+                <div class="metric-value">15年</div>
+                <div class="metric-label">全球轉換時程</div>
+                <div class="metric-description">預計普及時間</div>
+              </div>
+              
+              <div class="impact-metric-card">
+                <div class="metric-value">98%</div>
+                <div class="metric-label">清潔度評分</div>
+                <div class="metric-description">環境友善指數</div>
+              </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+              <div class="environmental-chart-container max-h-96 h-80" id="environmental-chart-container">
+                <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">清潔能源評比</h4>
+                <canvas id="environmental-impact-chart" class="w-full h-64 max-h-80"></canvas>
+              </div>
+              
+              <div class="co2-chart-container max-h-96 h-80" id="co2-chart-container">
+                <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">CO₂ 減排預測</h4>
+                <canvas id="co2-reduction-chart" class="w-full h-64 max-h-80"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Economic Analysis -->
+          <div class="economic-analysis mb-16">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl font-bold text-gray-800 mb-4">經濟效益分析</h3>
+              <p class="text-xl text-gray-600">全生命週期成本效益評估</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+              <div class="economic-metrics">
+                <div class="grid grid-cols-2 gap-6">
+                  <div class="metric-card bg-green-50 rounded-lg p-6 border border-green-200">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">建置成本</h4>
+                    <div class="text-3xl font-bold text-green-600 mb-2">85%</div>
+                    <p class="text-sm text-gray-700">相較傳統電廠成本</p>
+                  </div>
+                  
+                  <div class="metric-card bg-blue-50 rounded-lg p-6 border border-blue-200">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">運營成本</h4>
+                    <div class="text-3xl font-bold text-blue-600 mb-2">15%</div>
+                    <p class="text-sm text-gray-700">相較火力發電成本</p>
+                  </div>
+                  
+                  <div class="metric-card bg-purple-50 rounded-lg p-6 border border-purple-200">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">投資回收期</h4>
+                    <div class="text-3xl font-bold text-purple-600 mb-2">5-7年</div>
+                    <p class="text-sm text-gray-700">預計回本時間</p>
+                  </div>
+                  
+                  <div class="metric-card bg-orange-50 rounded-lg p-6 border border-orange-200">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">長期效益</h4>
+                    <div class="text-3xl font-bold text-orange-600 mb-2">200%</div>
+                    <p class="text-sm text-gray-700">30年總收益率</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="economic-chart-container">
+                <canvas id="economic-analysis-chart" class="w-full h-80"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Development Roadmap -->
+          <div class="development-roadmap">
+            <div class="text-center mb-12">
+              <h3 class="text-3xl font-bold text-gray-800 mb-4">技術發展路線圖</h3>
+              <p class="text-xl text-gray-700">從實驗室到全球推廣的完整時程規劃</p>
+            </div>
+            
+            <div id="development-roadmap" class="roadmap-timeline-container"></div>
           </div>
         </div>
       </section>
@@ -1172,12 +1553,12 @@
       <section id="contact" class="py-20 px-6 bg-black/40" role="region" aria-labelledby="contact-heading">
         <div class="container mx-auto max-w-4xl text-center">
           <h2 id="contact-heading" class="text-4xl md:text-5xl font-bold mb-8 text-energy-gold">聯絡我們</h2>
-          <p class="text-xl text-gray-300 mb-12">對我們的技術感興趣？歡迎與我們的研究團隊聯繫</p>
+          <p class="text-xl text-gray-100 mb-12">對我們的技術感興趣？歡迎與我們的研究團隊聯繫</p>
 
           <div class="grid md:grid-cols-2 gap-12">
             <div class="space-y-6">
               <h3 class="text-2xl font-semibold text-electric-blue">研究合作</h3>
-              <p class="text-gray-300">我們誠摯邀請全球的研究機構和學者， 共同探索這項突破性技術的無限可能。</p>
+              <p class="text-gray-100">我們誠摯邀請全球的研究機構和學者， 共同探索這項突破性技術的無限可能。</p>
               <button
                 class="bg-electric-blue hover:bg-electric-blue/80 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
               >
@@ -1187,7 +1568,7 @@
 
             <div class="space-y-6">
               <h3 class="text-2xl font-semibold text-plasma-purple">商業應用</h3>
-              <p class="text-gray-300">如果您對技術的商業化應用感興趣， 我們的團隊將為您提供專業的諮詢服務。</p>
+              <p class="text-gray-100">如果您對技術的商業化應用感興趣， 我們的團隊將為您提供專業的諮詢服務。</p>
               <button
                 class="bg-plasma-purple hover:bg-plasma-purple/80 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300"
               >
@@ -1205,7 +1586,7 @@
         <div class="grid md:grid-cols-3 gap-8">
           <div>
             <h3 class="text-xl font-bold text-energy-gold mb-4">重力離子熱電技術</h3>
-            <p class="text-gray-400">致力於推動能源轉換技術的革命性發展， 為人類的可持續發展貢獻力量。</p>
+            <p class="text-gray-200">致力於推動能源轉換技術的革命性發展， 為人類的可持續發展貢獻力量。</p>
           </div>
 
           <div>
@@ -1215,21 +1596,21 @@
                 <li>
                   <a
                     href="/assets/docs/1-an-exception-to-the-second-law-of-thermodynamics-might-change-global-energy-rules.md"
-                    class="text-gray-400 hover:text-electric-blue transition-colors"
+                    class="text-gray-200 hover:text-electric-blue transition-colors"
                     >熱力學第二定律的例外</a
                   >
                 </li>
                 <li>
                   <a
                     href="/assets/docs/3-how-heat-converts-to-electricity-under-gravitational-effect-on-plasma.md"
-                    class="text-gray-400 hover:text-electric-blue transition-colors"
+                    class="text-gray-200 hover:text-electric-blue transition-colors"
                     >重力對電漿的影響</a
                   >
                 </li>
                 <li>
                   <a
                     href="/assets/docs/4-the-question-over-five-thousand-professors-could-not-answer.md"
-                    class="text-gray-400 hover:text-electric-blue transition-colors"
+                    class="text-gray-200 hover:text-electric-blue transition-colors"
                     >五千位教授無法回答的問題</a
                   >
                 </li>
@@ -1239,7 +1620,7 @@
 
           <div>
             <h4 class="text-lg font-semibold text-white mb-4">聯絡方式</h4>
-            <address class="text-gray-400 not-italic">
+            <address class="text-gray-200 not-italic">
               <p>Email: research@gravity-ion-tech.com</p>
               <p>Tel: +886-X-XXXX-XXXX</p>
               <p>研究中心: 台灣</p>
@@ -1248,7 +1629,7 @@
         </div>
 
         <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p class="text-gray-400">&copy; 2024 重力離子熱電技術研究中心. 保留所有權利。</p>
+          <p class="text-gray-200">&copy; 2024 重力離子熱電技術研究中心. 保留所有權利。</p>
         </div>
       </div>
     </footer>
@@ -1261,6 +1642,9 @@
     <script src="/assets/js/math-renderer.js"></script>
     <script src="/assets/js/data-visualization.js"></script>
     <script src="/assets/js/experiment-simulation.js"></script>
+    <script src="/assets/js/efficiency-calculator.js"></script>
+    <script src="/assets/js/impact-charts.js"></script>
+    <script src="/assets/js/roadmap-timeline.js"></script>
     <script src="/assets/js/main.js"></script>
   </body>
 </html>

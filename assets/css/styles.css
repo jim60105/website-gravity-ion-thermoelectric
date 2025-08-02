@@ -5,26 +5,408 @@
   box-sizing: border-box;
 }
 
+/* Applications Impact Section Styles */
+#applications-impact {
+  position: relative;
+  background: linear-gradient(135deg, rgb(240 253 244) 0%, rgb(239 246 255) 100%);
+  overflow: hidden;
+}
+
+#applications-impact::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(5, 150, 105, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(14, 165, 233, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  content: '';
+}
+
+#applications-impact > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Efficiency Calculator Styles */
+.efficiency-calculator {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.calculator-slider {
+  opacity: 0.8;
+  transition: opacity 0.3s;
+  outline: none;
+  border-radius: 4px;
+  background: linear-gradient(to right, #d1d5db, #059669);
+  width: 100%;
+  height: 8px;
+}
+
+.calculator-slider:hover {
+  opacity: 1;
+}
+
+.calculator-slider::-webkit-slider-thumb {
+  appearance: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(5, 150, 105, 0.3);
+  border-radius: 50%;
+  background: #059669;
+  width: 24px;
+  height: 24px;
+}
+
+.calculator-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(5, 150, 105, 0.4);
+}
+
+.calculator-slider::-moz-range-thumb {
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(5, 150, 105, 0.3);
+  border: none;
+  border-radius: 50%;
+  background: #059669;
+  width: 24px;
+  height: 24px;
+}
+
+/* Tech Specifications Cards */
+.tech-spec-card {
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.tech-spec-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.spec-value {
+  background: linear-gradient(135deg, #059669, #0EA5E9);
+  font-weight: 800;
+  font-size: 2.5rem;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.spec-unit {
+  color: #6b7280;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Application Scenario Cards */
+.application-card {
+  position: relative;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+}
+
+.application-card::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  background: linear-gradient(90deg, #059669, #0EA5E9);
+  height: 4px;
+  content: '';
+}
+
+.application-card:hover::before {
+  transform: scaleX(1);
+}
+
+.application-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.application-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 8px 24px rgba(5, 150, 105, 0.3);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #059669, #0EA5E9);
+  width: 80px;
+  height: 80px;
+}
+
+.application-card:hover .application-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 32px rgba(5, 150, 105, 0.4);
+}
+
+/* Energy Comparison Table */
+.energy-comparison-table {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+}
+
+.energy-comparison-table th {
+  background: linear-gradient(135deg, #059669, #0EA5E9);
+  padding: 1rem;
+  color: white;
+  font-weight: 600;
+  text-align: left;
+}
+
+.energy-comparison-table td {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+  padding: 1rem;
+}
+
+.energy-comparison-table tr:hover td {
+  background-color: rgba(5, 150, 105, 0.05);
+}
+
+.comparison-advantage {
+  color: #059669;
+  font-weight: 600;
+}
+
+.comparison-disadvantage {
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.comparison-neutral {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* Impact Metrics Cards */
+.impact-metric-card {
+  position: relative;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.impact-metric-card::before {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  animation: rotate 20s linear infinite;
+  background: conic-gradient(from 0deg, transparent, rgba(5, 150, 105, 0.1), transparent);
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  content: '';
+}
+
+.impact-metric-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+.metric-value {
+  background: linear-gradient(135deg, #059669, #0EA5E9, #8B5CF6);
+  font-weight: 900;
+  font-size: 3rem;
+  -webkit-background-clip: text;
+  position: relative;
+  z-index: 2;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.metric-label {
+  position: relative;
+  z-index: 2;
+  margin-top: 0.5rem;
+  color: #374151;
+  font-weight: 600;
+}
+
+.metric-description {
+  position: relative;
+  z-index: 2;
+  margin-top: 0.5rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Economic Analysis Chart Container */
+.economic-chart-container {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+}
+
+.chart-container {
+  position: relative;
+  margin: 1rem 0;
+  height: 400px;
+}
+
+/* Development Roadmap Timeline */
+.roadmap-timeline-container {
+  padding: 2rem 0;
+}
+
+.timeline-line {
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
+  background: linear-gradient(to bottom, #059669 0%, #0EA5E9 30%, #8B5CF6 70%, #F59E0B 100%);
+}
+
+.milestone-marker {
+  transition: all 0.3s ease;
+}
+
+.milestone-content {
+  transition: all 0.3s ease;
+}
+
+.progress-bar {
+  transition: all 0.3s ease;
+  background: rgba(107, 114, 128, 0.3);
+}
+
+.progress-fill {
+  transition: width 1s ease-out;
+  background: linear-gradient(90deg, #059669, #0EA5E9);
+}
+
+/* Animations */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(5, 150, 105, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(5, 150, 105, 0.6);
+  }
+}
+
+.float-animation {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse-glow-animation {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Responsive Design for Applications Impact */
+@media (max-width: 768px) {
+  .efficiency-calculator {
+    padding: 1.5rem;
+  }
+  
+  .spec-value {
+    font-size: 2rem;
+  }
+  
+  .metric-value {
+    font-size: 2.5rem;
+  }
+  
+  .chart-container {
+    height: 300px;
+  }
+  
+  .milestone-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .milestone-marker {
+    margin: 0 auto 1rem;
+  }
+  
+  .timeline-line {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .application-card {
+    margin-bottom: 1rem;
+  }
+  
+  .energy-comparison-table {
+    font-size: 0.875rem;
+  }
+  
+  .energy-comparison-table th,
+  .energy-comparison-table td {
+    padding: 0.75rem;
+  }
+}
+
 /* Scientific Breakthrough Section Styles */
 #scientific-breakthrough {
-  background: linear-gradient(135deg, #111827 0%, #1e3a8a 25%, #312e81 50%, #1e293b 75%, #0f172a 100%);
   position: relative;
+  background: linear-gradient(135deg, #111827 0%, #1e3a8a 25%, #312e81 50%, #1e293b 75%, #0f172a 100%);
   overflow: hidden;
 }
 
 #scientific-breakthrough::before {
-  content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
+  z-index: 1;
   background: 
     radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 80% 70%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 40% 60%, rgba(138, 43, 226, 0.08) 0%, transparent 50%);
   pointer-events: none;
-  z-index: 1;
+  content: '';
 }
 
 #scientific-breakthrough > .container {
@@ -38,13 +420,13 @@
 }
 
 .timeline-line {
-  background: linear-gradient(to bottom, #ffd700, #3b82f6);
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+  background: linear-gradient(to bottom, #ffd700, #3b82f6);
 }
 
 .timeline-marker {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
   transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
 }
 
 .timeline-marker:hover {
@@ -53,8 +435,8 @@
 }
 
 .timeline-item:nth-child(2) .timeline-marker {
-  background: linear-gradient(135deg, #3b82f6, #1e40af);
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  background: linear-gradient(135deg, #3b82f6, #1e40af);
 }
 
 .timeline-item:nth-child(2) .timeline-marker:hover {
@@ -62,8 +444,8 @@
 }
 
 .timeline-item:nth-child(3) .timeline-marker {
-  background: linear-gradient(135deg, #8a2be2, #6b21a8);
   box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+  background: linear-gradient(135deg, #8a2be2, #6b21a8);
 }
 
 .timeline-item:nth-child(3) .timeline-marker:hover {
@@ -77,14 +459,14 @@
 }
 
 .comparison-table th {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   position: sticky;
   top: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
 }
 
 .comparison-table tr:hover {
-  background: rgba(255, 255, 255, 0.05);
   transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* Mechanism Steps Styles */
@@ -94,14 +476,14 @@
 }
 
 .mechanism-steps .step-card::before {
-  content: '';
   position: absolute;
   top: 0;
   left: -100%;
+  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s ease;
+  content: '';
 }
 
 .mechanism-steps .step-card:hover::before {
@@ -114,37 +496,37 @@
 }
 
 .equation-container .main-equation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
   font-family: 'Times New Roman', serif;
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-  min-height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .variable-explanations .variable {
-  cursor: pointer;
   transition: all 0.3s ease;
+  cursor: pointer;
   border: 1px solid transparent;
 }
 
 .variable-explanations .variable:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: rgba(255, 215, 0, 0.5);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 215, 0, 0.5);
+  background: rgba(255, 255, 255, 0.15) !important;
 }
 
 .variable-explanations .variable.active {
-  background: rgba(255, 215, 0, 0.2) !important;
   border-color: #ffd700;
+  background: rgba(255, 215, 0, 0.2) !important;
 }
 
 /* Theory Comparison Cards */
 .comparison-cards .comparison-card {
   position: relative;
-  overflow: hidden;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
 .comparison-cards .comparison-card:hover {
@@ -153,15 +535,15 @@
 }
 
 .comparison-cards .comparison-card::before {
-  content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #ffd700, #3b82f6, #8a2be2);
+  left: 0;
   opacity: 0;
   transition: opacity 0.3s ease;
+  background: linear-gradient(90deg, #ffd700, #3b82f6, #8a2be2);
+  height: 4px;
+  content: '';
 }
 
 .comparison-cards .comparison-card:hover::before {
@@ -186,10 +568,10 @@
 }
 
 .simulation-controls {
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
-  padding: 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
 }
 
 .control-group {
@@ -201,12 +583,12 @@
 
 /* Custom Slider Styles */
 .slider {
-  width: 120px;
-  height: 6px;
+  transition: background 0.3s ease;
+  outline: none;
   border-radius: 3px;
   background: #374151;
-  outline: none;
-  transition: background 0.3s ease;
+  width: 120px;
+  height: 6px;
 }
 
 .slider:hover {
@@ -215,13 +597,13 @@
 
 .slider::-webkit-slider-thumb {
   appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #ffd700, #f59e0b);
+  transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-  transition: all 0.3s ease;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd700, #f59e0b);
+  width: 18px;
+  height: 18px;
 }
 
 .slider::-webkit-slider-thumb:hover {
@@ -230,19 +612,19 @@
 }
 
 .slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  border: none;
   border-radius: 50%;
   background: linear-gradient(135deg, #ffd700, #f59e0b);
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+  width: 18px;
+  height: 18px;
 }
 
 /* Scientific Particle Canvas */
 #scientific-particle-canvas {
-  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
   border: 2px solid rgba(255, 255, 255, 0.1);
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
 }
 
 .simulation-legend, .simulation-data {
@@ -273,12 +655,12 @@
 /* Enhanced Animation Effects */
 @keyframes scientific-pulse {
   0%, 100% {
-    opacity: 0.8;
     transform: scale(1);
+    opacity: 0.8;
   }
   50% {
-    opacity: 1;
     transform: scale(1.05);
+    opacity: 1;
   }
 }
 
@@ -369,8 +751,8 @@
   
   .comparison-cards .comparison-card:nth-child(3) {
     grid-column: span 2;
-    max-width: 400px;
     margin: 0 auto;
+    max-width: 400px;
   }
 }
 
@@ -387,39 +769,39 @@
 
 @keyframes glow {
   0% {
+    filter: brightness(1);
     text-shadow:
       0 0 20px currentColor,
       0 0 30px currentColor,
       0 0 40px currentColor;
-    filter: brightness(1);
   }
   50% {
+    filter: brightness(1.2);
     text-shadow:
       0 0 10px currentColor,
       0 0 20px currentColor,
       0 0 30px currentColor,
       0 0 40px currentColor,
       0 0 50px currentColor;
-    filter: brightness(1.2);
   }
   100% {
+    filter: brightness(1);
     text-shadow:
       0 0 20px currentColor,
       0 0 30px currentColor,
       0 0 40px currentColor;
-    filter: brightness(1);
   }
 }
 
 @keyframes pulse-breathing {
   0%,
   100% {
-    opacity: 0.6;
     transform: scale(1);
+    opacity: 0.6;
   }
   50% {
-    opacity: 1;
     transform: scale(1.05);
+    opacity: 1;
   }
 }
 
@@ -454,33 +836,33 @@
 
 /* Enhanced Hero Section Styles */
 #hero {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #0f172a 50%, #000000 100%);
   position: relative;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #0f172a 50%, #000000 100%);
   height: calc(100vh - var(--header-height, 80px));
   min-height: 500px; /* Ensure minimum height for content readability */
 }
 
 #hero::before {
-  content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
+  z-index: 1;
   background: 
     radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
     radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 40% 60%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
   pointer-events: none;
-  z-index: 1;
+  content: '';
 }
 
 #particles-canvas {
-  width: 100%;
-  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* Enhanced Text Effects */
@@ -496,19 +878,19 @@
 }
 
 #hero-explore-btn::before {
-  content: '';
   position: absolute;
   top: 0;
   left: -100%;
-  width: 100%;
-  height: 100%;
+  transition: left 0.5s;
   background: linear-gradient(
     90deg,
     transparent,
     rgba(255, 255, 255, 0.2),
     transparent
   );
-  transition: left 0.5s;
+  width: 100%;
+  height: 100%;
+  content: '';
 }
 
 #hero-explore-btn:hover::before {
@@ -516,9 +898,9 @@
 }
 
 #hero-video-btn {
+  animation: shimmer 3s ease-in-out infinite;
   background: linear-gradient(45deg, transparent 30%, rgba(245, 158, 11, 0.1) 50%, transparent 70%);
   background-size: 200% 200%;
-  animation: shimmer 3s ease-in-out infinite;
 }
 
 /* Value Proposition Cards Enhanced */
@@ -546,33 +928,34 @@
 /* Particle system styles */
 .particle {
   position: absolute;
+  animation: particle-float 8s ease-in-out infinite;
   border-radius: 50%;
   pointer-events: none;
-  animation: particle-float 8s ease-in-out infinite;
 }
 
 .particle.ion-positive {
-  background: radial-gradient(circle, #ffd700, #ffa500);
   box-shadow: 0 0 10px #ffd700;
+  background: radial-gradient(circle, #ffd700, #ffa500);
 }
 
 .particle.ion-negative {
-  background: radial-gradient(circle, #00bfff, #0080ff);
   box-shadow: 0 0 10px #00bfff;
+  background: radial-gradient(circle, #00bfff, #0080ff);
 }
 
 .particle.plasma {
-  background: radial-gradient(circle, #8a2be2, #ff1493);
   box-shadow: 0 0 15px #8a2be2;
+  background: radial-gradient(circle, #8a2be2, #ff1493);
 }
 
 /* Energy field effect */
 .energy-field {
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
+  animation: pulse-slow 6s ease-in-out infinite;
   background:
     radial-gradient(
       circle at 20% 80%,
@@ -589,47 +972,46 @@
       rgba(138, 43, 226, 0.1) 0%,
       transparent 50%
     );
-  animation: pulse-slow 6s ease-in-out infinite;
 }
 
 /* Scroll-triggered animations */
 .fade-in-up {
-  opacity: 0;
   transform: translateY(30px);
+  opacity: 0;
   transition:
     opacity 0.6s ease-out,
     transform 0.6s ease-out;
 }
 
 .fade-in-up.active {
-  opacity: 1;
   transform: translateY(0);
+  opacity: 1;
 }
 
 .fade-in-left {
-  opacity: 0;
   transform: translateX(-30px);
+  opacity: 0;
   transition:
     opacity 0.6s ease-out,
     transform 0.6s ease-out;
 }
 
 .fade-in-left.active {
-  opacity: 1;
   transform: translateX(0);
+  opacity: 1;
 }
 
 .fade-in-right {
-  opacity: 0;
   transform: translateX(30px);
+  opacity: 0;
   transition:
     opacity 0.6s ease-out,
     transform 0.6s ease-out;
 }
 
 .fade-in-right.active {
-  opacity: 1;
   transform: translateX(0);
+  opacity: 1;
 }
 
 /* Custom scrollbar */
@@ -642,8 +1024,8 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #00bfff, #8a2be2);
   border-radius: 4px;
+  background: linear-gradient(to bottom, #00bfff, #8a2be2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -653,12 +1035,12 @@
 /* Loading spinner */
 .loading-spinner {
   display: inline-block;
+  animation: spin 1s ease-in-out infinite;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #00bfff;
+  border-radius: 50%;
   width: 20px;
   height: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: #00bfff;
-  animation: spin 1s ease-in-out infinite;
 }
 
 @keyframes spin {
@@ -670,22 +1052,22 @@
 /* Accessibility improvements */
 .sr-only {
   position: absolute;
+  margin: -1px;
+  padding: 0;
   width: 1px;
   height: 1px;
-  padding: 0;
-  margin: -1px;
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
   border: 0;
+  white-space: nowrap;
 }
 
 .focus\:not-sr-only:focus {
   position: static;
+  margin: 0;
+  padding: 0.5rem 1rem;
   width: auto;
   height: auto;
-  padding: 0.5rem 1rem;
-  margin: 0;
   overflow: visible;
   clip: auto;
   white-space: normal;
@@ -695,6 +1077,10 @@
 @media (prefers-contrast: high) {
   .text-gray-300,
   .text-gray-400 {
+    color: #ffffff;
+  }
+
+  .text-gray-200 {
     color: #ffffff;
   }
 
@@ -743,8 +1129,8 @@
   }
 
   section {
-    page-break-inside: avoid;
     break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
 
@@ -837,12 +1223,12 @@ textarea:focus {
   position: absolute;
   top: -40px;
   left: 6px;
-  background: #000;
-  color: #fff;
-  padding: 8px;
-  text-decoration: none;
   z-index: 1000;
   border-radius: 4px;
+  background: #000;
+  padding: 8px;
+  color: #fff;
+  text-decoration: none;
 }
 
 .skip-link:focus {
@@ -851,22 +1237,22 @@ textarea:focus {
 
 /* Error states */
 .error-message {
-  color: #ff6b6b;
-  background: rgba(255, 107, 107, 0.1);
-  border: 1px solid rgba(255, 107, 107, 0.3);
-  padding: 1rem;
-  border-radius: 0.5rem;
   margin: 1rem 0;
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 0.5rem;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 1rem;
+  color: #ff6b6b;
 }
 
 /* Success states */
 .success-message {
-  color: #51cf66;
-  background: rgba(81, 207, 102, 0.1);
-  border: 1px solid rgba(81, 207, 102, 0.3);
-  padding: 1rem;
-  border-radius: 0.5rem;
   margin: 1rem 0;
+  border: 1px solid rgba(81, 207, 102, 0.3);
+  border-radius: 0.5rem;
+  background: rgba(81, 207, 102, 0.1);
+  padding: 1rem;
+  color: #51cf66;
 }
 
 /* Utility classes */
@@ -881,61 +1267,61 @@ textarea:focus {
 
 /* Experimental Evidence Section Styles */
 #experimental-evidence {
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
   position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
 }
 
 /* Chart Container Styles */
 .chart-container {
-  background: rgba(248, 250, 252, 0.8);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(226, 232, 240, 0.5);
   transition: all 0.3s ease;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+  background: rgba(248, 250, 252, 0.8);
 }
 
 .chart-container:hover {
-  background: rgba(248, 250, 252, 0.95);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  background: rgba(248, 250, 252, 0.95);
 }
 
 .chart-control-btn {
-  background: #e2e8f0;
-  color: #475569;
-  padding: 8px 16px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
   transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: #e2e8f0;
+  padding: 8px 16px;
+  color: #475569;
   font-weight: 500;
 }
 
 .chart-control-btn:hover {
-  background: #cbd5e1;
   transform: translateY(-1px);
+  background: #cbd5e1;
 }
 
 .chart-control-btn.active {
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
   background: #2563eb;
   color: white;
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
 }
 
 /* Equipment Cards */
 .equipment-card {
-  transition: all 0.3s ease;
   position: relative;
+  transition: all 0.3s ease;
   overflow: hidden;
 }
 
 .equipment-card::before {
-  content: '';
   position: absolute;
   top: 0;
   left: -100%;
+  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
-  transition: left 0.5s ease;
+  content: '';
 }
 
 .equipment-card:hover::before {
@@ -978,24 +1364,24 @@ textarea:focus {
 
 /* Ion Animation Styles */
 .ion {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
   position: absolute;
   animation: ionFlow 3s infinite linear;
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
 }
 
 .ion.positive {
-  background: #fbbf24;
   left: 20%;
   animation-delay: 0s;
+  background: #fbbf24;
 }
 
 .ion.negative {
-  background: #3b82f6;
   right: 20%;
   animation-delay: 1.5s;
   animation-direction: reverse;
+  background: #3b82f6;
 }
 
 @keyframes ionFlow {
@@ -1013,22 +1399,22 @@ textarea:focus {
 }
 
 .battery-3d.flipped .ion.positive {
-  animation-direction: reverse;
   animation-delay: 1.5s;
+  animation-direction: reverse;
 }
 
 .battery-3d.flipped .ion.negative {
-  animation-direction: normal;
   animation-delay: 0s;
+  animation-direction: normal;
 }
 
 /* Control Button Styles */
 .control-btn {
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
   transition: all 0.3s ease;
+  cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+  font-weight: 600;
 }
 
 .control-btn:hover {
@@ -1056,20 +1442,20 @@ textarea:focus {
 
 /* Control Items */
 .control-item {
-  transition: all 0.3s ease;
   position: relative;
+  transition: all 0.3s ease;
   overflow: hidden;
 }
 
 .control-item::before {
-  content: '';
   position: absolute;
   top: 0;
   left: -100%;
+  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s ease;
+  content: '';
 }
 
 .control-item:hover::before {
@@ -1083,16 +1469,16 @@ textarea:focus {
 
 /* Parameters Grid */
 .parameters-grid .parameter {
-  text-align: center;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 8px;
   transition: all 0.3s ease;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 12px;
+  text-align: center;
 }
 
 .parameters-grid .parameter:hover {
-  background: rgba(255, 255, 255, 0.8);
   transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 /* Key Findings */
@@ -1102,14 +1488,14 @@ textarea:focus {
 }
 
 .key-findings::before {
-  content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0.15) 100%);
   pointer-events: none;
+  content: '';
 }
 
 /* Comparison Analysis */
@@ -1119,14 +1505,14 @@ textarea:focus {
 }
 
 .comparison-analysis::before {
-  content: '';
   position: absolute;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   background: linear-gradient(135deg, rgba(138, 43, 226, 0.05) 0%, rgba(138, 43, 226, 0.15) 100%);
   pointer-events: none;
+  content: '';
 }
 
 .comparison-table table {
@@ -1146,14 +1532,14 @@ textarea:focus {
   }
   
   .chart-control-btn {
-    width: 100%;
     margin-bottom: 8px;
+    width: 100%;
   }
   
   .simulation-controls {
     position: static;
-    transform: none;
     justify-content: center;
+    transform: none;
     margin-top: 16px;
   }
   
