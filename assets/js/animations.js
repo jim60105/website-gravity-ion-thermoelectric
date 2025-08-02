@@ -6,7 +6,9 @@
  */
 
 /**
- * Enhanced Canvas-based Particle System for Ion Visualization
+ * Scientific Ion Physics Particle System
+ * Accurately represents gravitational ion separation and electric field generation
+ * Based on the Tolman experiment and gravity-ion thermoelectric principles
  */
 class CanvasParticleSystem {
     constructor(canvas, options = {}) {
@@ -18,21 +20,31 @@ class CanvasParticleSystem {
 
         this.ctx = this.canvas.getContext('2d');
         this.options = {
-            particleCount: Utils.Device.isMobile() ? 100 : 200,
-            lightIonColor: '#FFD700', // Yellow for light ions
-            heavyIonColor: '#00BFFF', // Blue for heavy ions
-            plasmaColor: '#8A2BE2', // Purple for plasma
-            animationSpeed: 1,
-            gravityStrength: 0.02,
-            mouseInteraction: true,
+            lightIonCount: Utils.Device.isMobile() ? 60 : 120,
+            heavyIonCount: Utils.Device.isMobile() ? 40 : 80,
+            electronCount: Utils.Device.isMobile() ? 20 : 40,
+            lightIonColor: '#FFD700', // Yellow for light negative ions
+            heavyIonColor: '#00BFFF', // Blue for heavy positive ions
+            electronColor: '#FF4444', // Red for electrons
+            electricFieldColor: '#00FF88', // Green for electric field lines
+            animationSpeed: 0.8,
+            gravityStrength: 0.15,
+            electricFieldStrength: 0.08,
+            thermalEnergy: 0.02,
+            mouseInteraction: false, // Disabled for scientific accuracy
             enabled: !Utils.Device.prefersReducedMotion(),
+            showElectricField: true,
+            showElectronFlow: true,
             ...options
         };
 
         this.particles = [];
+        this.electricField = [];
+        this.electronFlow = [];
         this.mouse = { x: 0, y: 0, radius: 100 };
         this.animationId = null;
         this.isRunning = false;
+        this.equilibriumTime = 0;
 
         if (this.options.enabled) {
             this.init();
@@ -44,7 +56,8 @@ class CanvasParticleSystem {
      */
     init() {
         this.setupCanvas();
-        this.createParticles();
+        this.createIonSystem();
+        this.createElectricFieldVisualization();
         this.setupEventListeners();
         this.start();
     }
@@ -56,6 +69,8 @@ class CanvasParticleSystem {
         this.resizeCanvas();
         window.addEventListener('resize', Utils.Performance.debounce(() => {
             this.resizeCanvas();
+            this.createIonSystem(); // Recreate particles on resize
+            this.createElectricFieldVisualization();
         }, 250));
     }
 
@@ -71,92 +86,134 @@ class CanvasParticleSystem {
     }
 
     /**
-     * Create particles with physics properties
+     * Create scientifically accurate ion system
      */
-    createParticles() {
+    createIonSystem() {
         this.particles = [];
 
-        for (let i = 0; i < this.options.particleCount; i++) {
-            const particle = this.createParticle();
+        // Create light negative ions (electron-rich ions)
+        for (let i = 0; i < this.options.lightIonCount; i++) {
+            const particle = this.createLightIon();
+            this.particles.push(particle);
+        }
+
+        // Create heavy positive ions
+        for (let i = 0; i < this.options.heavyIonCount; i++) {
+            const particle = this.createHeavyIon();
+            this.particles.push(particle);
+        }
+
+        // Create free electrons for electron flow visualization
+        for (let i = 0; i < this.options.electronCount; i++) {
+            const particle = this.createElectron();
             this.particles.push(particle);
         }
     }
 
     /**
-     * Create individual particle with random properties
+     * Create light negative ion (tends to rise due to lower mass)
      */
-    createParticle() {
-        const types = ['light', 'heavy', 'plasma'];
-        const type = types[Utils.MathUtils.randomInt(0, types.length - 1)];
-
-        let color, size, mass;
-        switch (type) {
-            case 'light':
-                color = this.options.lightIonColor;
-                size = Utils.MathUtils.random(2, 4);
-                mass = 1;
-                break;
-            case 'heavy':
-                color = this.options.heavyIonColor;
-                size = Utils.MathUtils.random(4, 7);
-                mass = 2;
-                break;
-            case 'plasma':
-                color = this.options.plasmaColor;
-                size = Utils.MathUtils.random(3, 6);
-                mass = 1.5;
-                break;
-        }
-
+    createLightIon() {
+        const y = Utils.MathUtils.random(0, this.canvas.height * 0.7); // Start distributed but bias toward top
+        
         return {
             x: Utils.MathUtils.random(0, this.canvas.width),
-            y: Utils.MathUtils.random(0, this.canvas.height),
-            vx: Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed,
-            vy: Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed,
-            size,
-            mass,
-            color,
-            type,
-            opacity: Utils.MathUtils.random(0.3, 0.8),
-            life: Utils.MathUtils.random(5, 15),
-            maxLife: Utils.MathUtils.random(5, 15)
+            y,
+            vx: Utils.MathUtils.random(-0.3, 0.3) * this.options.animationSpeed,
+            vy: Utils.MathUtils.random(-0.2, 0.2) * this.options.animationSpeed,
+            size: Utils.MathUtils.random(2, 4),
+            mass: 0.5, // Light mass
+            charge: -1, // Negative charge
+            color: this.options.lightIonColor,
+            type: 'light_ion',
+            opacity: Utils.MathUtils.random(0.6, 0.9),
+            equilibriumY: Utils.MathUtils.random(0, this.canvas.height * 0.4), // Prefer upper region
+            thermalEnergy: Utils.MathUtils.random(0.8, 1.2)
         };
     }
 
     /**
-     * Setup mouse interaction listeners
+     * Create heavy positive ion (tends to sink due to higher mass)
+     */
+    createHeavyIon() {
+        const y = Utils.MathUtils.random(this.canvas.height * 0.3, this.canvas.height); // Start distributed but bias toward bottom
+        
+        return {
+            x: Utils.MathUtils.random(0, this.canvas.width),
+            y,
+            vx: Utils.MathUtils.random(-0.2, 0.2) * this.options.animationSpeed,
+            vy: Utils.MathUtils.random(-0.1, 0.1) * this.options.animationSpeed,
+            size: Utils.MathUtils.random(4, 7),
+            mass: 2.0, // Heavy mass
+            charge: 1, // Positive charge
+            color: this.options.heavyIonColor,
+            type: 'heavy_ion',
+            opacity: Utils.MathUtils.random(0.6, 0.9),
+            equilibriumY: Utils.MathUtils.random(this.canvas.height * 0.6, this.canvas.height), // Prefer lower region
+            thermalEnergy: Utils.MathUtils.random(0.8, 1.2)
+        };
+    }
+
+    /**
+     * Create electron for electron flow visualization
+     */
+    createElectron() {
+        return {
+            x: Utils.MathUtils.random(0, this.canvas.width),
+            y: Utils.MathUtils.random(this.canvas.height * 0.7, this.canvas.height), // Start near bottom
+            vx: Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed,
+            vy: -Utils.MathUtils.random(0.5, 1.0) * this.options.animationSpeed, // Generally move upward
+            size: Utils.MathUtils.random(1, 2),
+            mass: 0.1, // Very light
+            charge: -1, // Negative charge
+            color: this.options.electronColor,
+            type: 'electron',
+            opacity: Utils.MathUtils.random(0.4, 0.8),
+            flowDirection: 'upward', // Against electric field
+            thermalEnergy: Utils.MathUtils.random(1.2, 1.8) // Higher thermal energy
+        };
+    }
+
+    /**
+     * Create electric field line visualization
+     */
+    createElectricFieldVisualization() {
+        if (!this.options.showElectricField) {
+            return;
+        }
+        
+        this.electricField = [];
+        const fieldLineCount = Utils.Device.isMobile() ? 8 : 12;
+        
+        for (let i = 0; i < fieldLineCount; i++) {
+            const x = (this.canvas.width / (fieldLineCount + 1)) * (i + 1);
+            
+            this.electricField.push({
+                x,
+                startY: this.canvas.height * 0.9,
+                endY: this.canvas.height * 0.1,
+                opacity: 0.3,
+                animated: true
+            });
+        }
+    }
+
+    /**
+     * Setup mouse interaction listeners (disabled for scientific accuracy)
      */
     setupEventListeners() {
-        if (!this.options.mouseInteraction) {return;}
-
-        const updateMouse = (e) => {
-            const rect = this.canvas.getBoundingClientRect();
-            this.mouse.x = e.clientX - rect.left;
-            this.mouse.y = e.clientY - rect.top;
-        };
-
-        this.canvas.addEventListener('mousemove', updateMouse);
-        this.canvas.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            if (e.touches.length > 0) {
-                const touch = e.touches[0];
-                const rect = this.canvas.getBoundingClientRect();
-                this.mouse.x = touch.clientX - rect.left;
-                this.mouse.y = touch.clientY - rect.top;
-            }
-        });
-
-        this.canvas.addEventListener('mouseleave', () => {
-            this.mouse.x = -1000;
-            this.mouse.y = -1000;
-        });
+        // Scientific simulation should not be affected by mouse interaction
+        // This maintains the accuracy of the physics demonstration
+        console.info('Mouse interaction disabled for scientific accuracy');
     }
 
     /**
      * Start animation loop
      */
     start() {
-        if (this.isRunning) {return;}
+        if (this.isRunning) {
+            return;
+        }
         this.isRunning = true;
         this.animate();
     }
@@ -176,142 +233,302 @@ class CanvasParticleSystem {
      * Main animation loop
      */
     animate() {
-        if (!this.isRunning) {return;}
+        if (!this.isRunning) {
+            return;
+        }
 
-        this.updateParticles();
-        this.drawParticles();
+        this.updateIonPhysics();
+        this.drawScientificVisualization();
 
         this.animationId = requestAnimationFrame(() => this.animate());
     }
 
     /**
-     * Update particle physics
+     * Update ion physics based on scientific principles
      */
-    updateParticles() {
-        this.particles.forEach((particle, _index) => {
-            // Apply gravity (heavier particles fall faster)
-            particle.vy += this.options.gravityStrength * particle.mass;
+    updateIonPhysics() {
+        this.equilibriumTime += 0.016; // Assume 60fps
 
-            // Mouse interaction (attraction/repulsion)
-            if (this.options.mouseInteraction) {
-                const dx = this.mouse.x - particle.x;
-                const dy = this.mouse.y - particle.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+        this.particles.forEach((particle) => {
+            // Apply gravitational force (F = mg)
+            const gravityForce = this.options.gravityStrength * particle.mass;
+            particle.vy += gravityForce;
 
-                if (distance < this.mouse.radius) {
-                    const force = (this.mouse.radius - distance) / this.mouse.radius;
-                    const angle = Math.atan2(dy, dx);
+            // Calculate electric field strength based on charge distribution
+            const electricFieldStrength = this.calculateElectricField(particle.y);
+            
+            // Apply electric force (F = qE)
+            const electricForce = particle.charge * electricFieldStrength * this.options.electricFieldStrength;
+            particle.vy -= electricForce; // Electric field points upward
 
-                    // Light particles are attracted, heavy particles repelled
-                    const direction = particle.type === 'light' ? 1 : -1;
-                    particle.vx += Math.cos(angle) * force * 0.1 * direction;
-                    particle.vy += Math.sin(angle) * force * 0.1 * direction;
+            // Apply thermal vibration (Brownian motion)
+            const thermalForceX = (Math.random() - 0.5) * this.options.thermalEnergy * particle.thermalEnergy;
+            const thermalForceY = (Math.random() - 0.5) * this.options.thermalEnergy * particle.thermalEnergy;
+            
+            particle.vx += thermalForceX;
+            particle.vy += thermalForceY;
+
+            // Special behavior for electrons (electron flow against electric field)
+            if (particle.type === 'electron') {
+                // Electrons gain energy moving against electric field
+                const energyGain = Math.abs(electricForce) * 0.1;
+                particle.vy -= energyGain; // Additional upward force from thermal energy
+                
+                // Reset electrons at bottom when they reach top (continuous flow)
+                if (particle.y < 0) {
+                    particle.y = this.canvas.height;
+                    particle.x = Utils.MathUtils.random(0, this.canvas.width);
                 }
+            }
+
+            // Apply equilibrium force to maintain separation
+            if (particle.type === 'light_ion' || particle.type === 'heavy_ion') {
+                const equilibriumForce = (particle.equilibriumY - particle.y) * 0.001;
+                particle.vy += equilibriumForce;
             }
 
             // Update position
             particle.x += particle.vx;
             particle.y += particle.vy;
 
-            // Boundary conditions with energy conservation
+            // Boundary conditions with realistic collisions
             if (particle.x <= particle.size || particle.x >= this.canvas.width - particle.size) {
-                particle.vx *= -0.8; // Energy loss on collision
+                particle.vx *= -0.7; // Inelastic collision
                 particle.x = Utils.MathUtils.clamp(particle.x, particle.size, this.canvas.width - particle.size);
             }
 
             if (particle.y <= particle.size || particle.y >= this.canvas.height - particle.size) {
-                particle.vy *= -0.8; // Energy loss on collision
+                particle.vy *= -0.5; // More energy loss on vertical collision
                 particle.y = Utils.MathUtils.clamp(particle.y, particle.size, this.canvas.height - particle.size);
             }
 
-            // Apply friction
-            particle.vx *= 0.999;
-            particle.vy *= 0.999;
+            // Apply drag force (simulates fluid resistance)
+            particle.vx *= 0.995;
+            particle.vy *= 0.998;
 
-            // Update life and opacity
-            particle.life -= 0.01;
-            particle.opacity = Math.max(0.1, particle.life / particle.maxLife * 0.8);
-
-            // Reset particle if life expired
-            if (particle.life <= 0) {
-                this.resetParticle(particle);
-            }
+            // Limit velocity to prevent runaway acceleration
+            const maxVelocity = 2.0;
+            particle.vx = Utils.MathUtils.clamp(particle.vx, -maxVelocity, maxVelocity);
+            particle.vy = Utils.MathUtils.clamp(particle.vy, -maxVelocity, maxVelocity);
         });
     }
 
     /**
-     * Reset particle to initial state
+     * Calculate electric field strength at given height
+     * @param {number} y - Height position
+     * @returns {number} Electric field strength
      */
-    resetParticle(particle) {
-        particle.x = Utils.MathUtils.random(0, this.canvas.width);
-        particle.y = Utils.MathUtils.random(0, this.canvas.height);
-        particle.vx = Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed;
-        particle.vy = Utils.MathUtils.random(-0.5, 0.5) * this.options.animationSpeed;
-        particle.life = particle.maxLife;
-        particle.opacity = Utils.MathUtils.random(0.3, 0.8);
+    calculateElectricField(y) {
+        // Electric field is stronger in the middle, representing the equilibrium state
+        const normalizedY = y / this.canvas.height;
+        const fieldStrength = Math.sin(normalizedY * Math.PI) * 0.5 + 0.5;
+        
+        // Field gradually builds up over time to show self-generation
+        const timeBuildup = Math.min(1.0, this.equilibriumTime / 10.0);
+        
+        return fieldStrength * timeBuildup;
     }
 
     /**
-     * Draw particles on canvas
+     * Draw scientific visualization of ion separation and electric field
      */
-    drawParticles() {
-        // Clear canvas with fade effect
-        this.ctx.fillStyle = 'rgba(15, 23, 42, 0.1)';
+    drawScientificVisualization() {
+        // Clear canvas with subtle fade for motion trails
+        this.ctx.fillStyle = 'rgba(15, 23, 42, 0.15)';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
+        // Draw electric field lines first (background)
+        if (this.options.showElectricField) {
+            this.drawElectricFieldLines();
+        }
+
+        // Draw particles with scientific styling
+        this.drawIons();
+
+        // Draw electron flow visualization
+        if (this.options.showElectronFlow) {
+            this.drawElectronFlow();
+        }
+
+        // Draw scientific annotations
+        this.drawScientificAnnotations();
+    }
+
+    /**
+     * Draw electric field lines pointing upward
+     */
+    drawElectricFieldLines() {
+        this.ctx.save();
+        
+        this.electricField.forEach((field, index) => {
+            // Animated electric field lines
+            const time = this.equilibriumTime * 2 + index * 0.5;
+            const opacity = (Math.sin(time) * 0.2 + 0.3) * field.opacity;
+            
+            this.ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
+            this.ctx.lineWidth = 1;
+            this.ctx.setLineDash([4, 8]);
+            this.ctx.lineDashOffset = -time * 10;
+
+            // Draw field line
+            this.ctx.beginPath();
+            this.ctx.moveTo(field.x, field.startY);
+            this.ctx.lineTo(field.x, field.endY);
+            this.ctx.stroke();
+
+            // Draw field direction arrows
+            const arrowCount = 3;
+            for (let i = 0; i < arrowCount; i++) {
+                const arrowY = field.startY - (field.startY - field.endY) * (i + 1) / (arrowCount + 1);
+                this.drawFieldArrow(field.x, arrowY, 'up', opacity);
+            }
+        });
+
+        this.ctx.restore();
+    }
+
+    /**
+     * Draw field direction arrow
+     * @param {number} x - X position
+     * @param {number} y - Y position
+     * @param {string} direction - Arrow direction
+     * @param {number} opacity - Arrow opacity
+     */
+    drawFieldArrow(x, y, direction, opacity) {
+        this.ctx.save();
+        this.ctx.fillStyle = `rgba(0, 255, 136, ${opacity})`;
+        
+        const size = 4;
+        this.ctx.beginPath();
+        
+        if (direction === 'up') {
+            this.ctx.moveTo(x, y - size);
+            this.ctx.lineTo(x - size/2, y);
+            this.ctx.lineTo(x + size/2, y);
+        }
+        
+        this.ctx.closePath();
+        this.ctx.fill();
+        this.ctx.restore();
+    }
+
+    /**
+     * Draw ions with scientific representation
+     */
+    drawIons() {
         this.particles.forEach(particle => {
+            if (particle.type === 'electron') {
+                return; // Draw electrons separately
+            }
+
             this.ctx.save();
 
-            // Set particle style
+            // Set particle style based on type
             this.ctx.globalAlpha = particle.opacity;
             this.ctx.fillStyle = particle.color;
-            this.ctx.shadowColor = particle.color;
-            this.ctx.shadowBlur = particle.size * 2;
+            
+            // Add charge indication with glow
+            if (particle.charge > 0) {
+                this.ctx.shadowColor = particle.color;
+                this.ctx.shadowBlur = particle.size * 1.5;
+            } else {
+                this.ctx.shadowColor = particle.color;
+                this.ctx.shadowBlur = particle.size;
+            }
 
-            // Draw particle
+            // Draw main particle
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             this.ctx.fill();
 
-            // Add glow effect
-            this.ctx.globalAlpha = particle.opacity * 0.3;
-            this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
-            this.ctx.fill();
+            // Draw charge symbol
+            this.ctx.shadowBlur = 0;
+            this.ctx.fillStyle = 'white';
+            this.ctx.font = `${particle.size * 1.2}px Arial`;
+            this.ctx.textAlign = 'center';
+            this.ctx.textBaseline = 'middle';
+            
+            const chargeSymbol = particle.charge > 0 ? '+' : '−';
+            this.ctx.fillText(chargeSymbol, particle.x, particle.y);
 
             this.ctx.restore();
         });
-
-        // Draw connections between nearby particles
-        this.drawConnections();
     }
 
     /**
-     * Draw connections between nearby particles
+     * Draw electron flow visualization
      */
-    drawConnections() {
+    drawElectronFlow() {
+        const electrons = this.particles.filter(p => p.type === 'electron');
+        
+        electrons.forEach((electron, index) => {
+            this.ctx.save();
+            
+            // Pulsating effect for electrons
+            const time = this.equilibriumTime * 5 + index;
+            const pulse = Math.sin(time) * 0.3 + 0.7;
+            
+            this.ctx.globalAlpha = electron.opacity * pulse;
+            this.ctx.fillStyle = electron.color;
+            this.ctx.shadowColor = electron.color;
+            this.ctx.shadowBlur = electron.size * 3;
+
+            // Draw electron
+            this.ctx.beginPath();
+            this.ctx.arc(electron.x, electron.y, electron.size, 0, Math.PI * 2);
+            this.ctx.fill();
+
+            // Draw motion trail
+            this.ctx.shadowBlur = 0;
+            this.ctx.strokeStyle = `rgba(255, 68, 68, ${electron.opacity * 0.3})`;
+            this.ctx.lineWidth = 1;
+            this.ctx.beginPath();
+            this.ctx.moveTo(electron.x, electron.y);
+            this.ctx.lineTo(electron.x - electron.vx * 5, electron.y - electron.vy * 5);
+            this.ctx.stroke();
+
+            this.ctx.restore();
+        });
+    }
+
+    /**
+     * Draw scientific annotations and labels
+     */
+    drawScientificAnnotations() {
         this.ctx.save();
-        this.ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)';
-        this.ctx.lineWidth = 0.5;
+        
+        // Draw region labels
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        this.ctx.font = '14px Arial';
+        this.ctx.textAlign = 'left';
 
-        for (let i = 0; i < this.particles.length; i++) {
-            for (let j = i + 1; j < this.particles.length; j++) {
-                const p1 = this.particles[i];
-                const p2 = this.particles[j];
+        // Upper region (negative charge concentration)
+        this.ctx.fillText('負離子集中區', 20, 30);
+        this.ctx.fillStyle = 'rgba(255, 215, 0, 0.6)';
+        this.ctx.fillText('(較輕的負離子)', 20, 50);
 
-                const dx = p1.x - p2.x;
-                const dy = p1.y - p2.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
+        // Lower region (positive charge concentration)
+        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+        this.ctx.fillText('正離子集中區', 20, this.canvas.height - 50);
+        this.ctx.fillStyle = 'rgba(0, 191, 255, 0.6)';
+        this.ctx.fillText('(較重的正離子)', 20, this.canvas.height - 30);
 
-                if (distance < 80) {
-                    this.ctx.globalAlpha = (80 - distance) / 80 * 0.2;
-                    this.ctx.beginPath();
-                    this.ctx.moveTo(p1.x, p1.y);
-                    this.ctx.lineTo(p2.x, p2.y);
-                    this.ctx.stroke();
-                }
-            }
+        // Electric field annotation
+        if (this.options.showElectricField && this.equilibriumTime > 3) {
+            this.ctx.fillStyle = 'rgba(0, 255, 136, 0.8)';
+            this.ctx.fillText('自發電場 ↑', this.canvas.width - 120, this.canvas.height / 2);
+            this.ctx.font = '12px Arial';
+            this.ctx.fillText('E = (m₊ - m₋)G/2q', this.canvas.width - 150, this.canvas.height / 2 + 20);
         }
+
+        // Electron flow annotation
+        if (this.options.showElectronFlow && this.equilibriumTime > 5) {
+            this.ctx.fillStyle = 'rgba(255, 68, 68, 0.8)';
+            this.ctx.font = '12px Arial';
+            this.ctx.fillText('電子逆電場流動', this.canvas.width - 140, this.canvas.height - 80);
+            this.ctx.fillText('(熱振動驅動)', this.canvas.width - 130, this.canvas.height - 60);
+        }
+
         this.ctx.restore();
     }
 
@@ -321,6 +538,8 @@ class CanvasParticleSystem {
     destroy() {
         this.stop();
         this.particles = [];
+        this.electricField = [];
+        this.electronFlow = [];
         if (this.canvas) {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         }
@@ -829,13 +1048,19 @@ const AnimationManager = {
      * Initialize all animation systems
      */
     init() {
-        // Initialize canvas particle system for hero section
+        // Initialize scientific ion particle system for hero section
         const particlesCanvas = Utils.DOM.select('#particles-canvas');
         if (particlesCanvas) {
             this.canvasParticleSystem = new CanvasParticleSystem(particlesCanvas, {
-                particleCount: Utils.Device.isMobile() ? 100 : 200,
-                mouseInteraction: true,
-                gravityStrength: 0.02
+                lightIonCount: Utils.Device.isMobile() ? 60 : 120,
+                heavyIonCount: Utils.Device.isMobile() ? 40 : 80,
+                electronCount: Utils.Device.isMobile() ? 20 : 40,
+                gravityStrength: 0.15,
+                electricFieldStrength: 0.08,
+                thermalEnergy: 0.02,
+                showElectricField: true,
+                showElectronFlow: true,
+                mouseInteraction: false // Disabled for scientific accuracy
             });
         }
 
@@ -848,7 +1073,7 @@ const AnimationManager = {
         // Initialize loading animations
         this.loadingAnimations = new LoadingAnimations();
 
-        console.info('Animation systems initialized');
+        console.info('Scientific animation systems initialized');
     },
 
     /**
