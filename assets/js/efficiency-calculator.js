@@ -64,6 +64,12 @@ class EfficiencyCalculator {
             return;
         }
 
+        // Check if Chart.js is available
+        if (typeof Chart === 'undefined') {
+            console.warn('Chart.js not loaded or canvas not found');
+            return;
+        }
+
         const ctx = chartCanvas.getContext('2d');
 
         // Generate scientifically accurate data points
@@ -80,13 +86,36 @@ class EfficiencyCalculator {
                 scales: {
                     x: {
                         display: true,
+                        type: 'linear',
+                        position: 'bottom',
+                        min: 0,
+                        max: 50000,
                         title: {
                             display: true,
                             text: '轉速 (RPM)',
-                            color: '#374151'
+                            color: '#374151',
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            }
                         },
                         grid: {
                             color: 'rgba(156, 163, 175, 0.3)'
+                        },
+                        ticks: {
+                            stepSize: 5000, // Smaller step size for better granularity
+                            maxTicksLimit: 12, // Limit number of ticks to avoid crowding
+                            callback: function(value, index, values) {
+                                if (value === 0) return '0';
+                                if (value >= 1000) {
+                                    return (value / 1000) + 'K';
+                                }
+                                return value;
+                            },
+                            color: '#6B7280',
+                            font: {
+                                size: 10
+                            }
                         }
                     },
                     y: {
@@ -95,23 +124,37 @@ class EfficiencyCalculator {
                         title: {
                             display: true,
                             text: '功率密度 (W/m³)',
-                            color: '#374151'
+                            color: '#374151',
+                            font: {
+                                size: 12,
+                                weight: 'bold'
+                            }
                         },
                         grid: {
                             color: 'rgba(156, 163, 175, 0.3)'
                         },
                         min: 1e-20, // Set minimum to handle very small values
+                        max: 100, // Set reasonable maximum
                         ticks: {
+                            maxTicksLimit: 8, // Limit ticks for better readability
                             callback: function(value, index, values) {
                                 // Format y-axis labels with scientific notation when needed
                                 if (value === 0) return '0';
-                                if (value < 0.01) {
+                                if (value < 1e-15) {
+                                    return value.toExponential(0);
+                                } else if (value < 0.001) {
                                     return value.toExponential(1);
+                                } else if (value < 1) {
+                                    return value.toFixed(3);
                                 } else if (value >= 1000) {
                                     return value.toLocaleString('en-US');
                                 } else {
-                                    return value.toFixed(2);
+                                    return value.toFixed(1);
                                 }
+                            },
+                            color: '#6B7280',
+                            font: {
+                                size: 10
                             }
                         }
                     }
@@ -150,8 +193,7 @@ class EfficiencyCalculator {
     }
 
     generateDatasets() {
-        const maxRpm = 100000; // Increase to 100,000 RPM to match paper calculations
-        const step = 2000; // Larger step for better performance
+        const maxRpm = 50000; // Maximum RPM for calculation
         
         // Generate data for different ion systems
         const ionSystems = [
@@ -163,16 +205,25 @@ class EfficiencyCalculator {
         const datasets = ionSystems.map(system => {
             const dataPoints = [];
             
-            for (let rpm = 0; rpm <= maxRpm; rpm += step) {
+            // Generate more data points across the entire range for better visualization
+            // Use smaller steps for better curve resolution
+            for (let rpm = 0; rpm <= maxRpm; rpm += 1000) {
                 try {
                     const power = this.calculateScientificPowerOutput(rpm, system);
-                    if (power > 0 || rpm === 0) { // Include zero point and positive values
+                    // Only include points with meaningful power output
+                    if (power > 1e-20) {
                         dataPoints.push({ x: rpm, y: power });
                     }
                 } catch (error) {
-                    // If calculation fails (e.g., exceeds material limits), continue with next point
+                    // If calculation fails (e.g., exceeds material limits), skip this point
                     console.warn(`Calculation failed at ${rpm} RPM:`, error.message);
                 }
+            }
+            
+            // Ensure we have at least some data points
+            if (dataPoints.length === 0) {
+                // Add a single point at 0 to prevent empty dataset
+                dataPoints.push({ x: 0, y: 1e-20 });
             }
 
             return {
@@ -412,10 +463,20 @@ class EfficiencyCalculator {
     }
 }
 
-// Auto-initialize when DOM is loaded
+// Auto-initialize when DOM is loaded and Chart.js is available
 document.addEventListener('DOMContentLoaded', () => {
-    const calculatorContainer = document.getElementById('efficiency-calculator');
-    if (calculatorContainer) {
-        window.efficiencyCalculator = new EfficiencyCalculator('efficiency-calculator');
-    }
+    // Wait for Chart.js to be loaded
+    const checkChart = () => {
+        if (typeof Chart !== 'undefined') {
+            const calculatorContainer = document.getElementById('efficiency-calculator');
+            if (calculatorContainer) {
+                window.efficiencyCalculator = new EfficiencyCalculator('efficiency-calculator');
+            }
+        } else {
+            // Chart.js not loaded yet, wait a bit more
+            setTimeout(checkChart, 100);
+        }
+    };
+    
+    checkChart();
 });
