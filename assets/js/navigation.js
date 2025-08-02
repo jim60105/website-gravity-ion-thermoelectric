@@ -103,6 +103,62 @@ class NavigationController {
                 this.closeMobileMenu();
             }
         });
+
+        // Back to Top Button functionality
+        this.setupBackToTopButton();
+    }
+
+    /**
+     * Setup Back to Top button functionality
+     */
+    setupBackToTopButton() {
+        const backToTopButton = document.getElementById('back-to-top');
+        if (!backToTopButton) return;
+
+        // Show/hide button based on scroll position
+        const toggleBackToTopButton = () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+                setTimeout(() => {
+                    backToTopButton.style.opacity = '1';
+                    backToTopButton.style.transform = 'scale(1)';
+                }, 10);
+            } else {
+                backToTopButton.style.opacity = '0';
+                backToTopButton.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    if (window.pageYOffset <= 300) {
+                        backToTopButton.style.display = 'none';
+                    }
+                }, 300);
+            }
+        };
+
+        // Add scroll listener for back to top button
+        window.addEventListener('scroll', 
+            Utils.Performance.throttle(toggleBackToTopButton, 100)
+        );
+
+        // Handle button click
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            // Track back to top interaction
+            if (typeof Utils !== 'undefined' && Utils.Analytics) {
+                Utils.Analytics.trackInteraction('back_to_top_click', {
+                    fromPosition: window.pageYOffset,
+                    fromSection: this.currentSection
+                });
+            }
+        });
+
+        // Initialize button state
+        backToTopButton.style.opacity = '0';
+        backToTopButton.style.transform = 'scale(0.8)';
+        backToTopButton.style.transition = 'all 0.3s ease';
     }
 
     /**
