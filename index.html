@@ -64,6 +64,23 @@
       };
     </script>
 
+    <!-- MathJax for Mathematical Equations -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true,
+          processEnvironments: true
+        },
+        options: {
+          skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+      };
+    </script>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
@@ -87,6 +104,9 @@
           <div class="hidden md:flex space-x-8">
             <a href="#technology" class="hover:text-electric-blue transition-colors duration-300" aria-label="技術原理">
               技術原理
+            </a>
+            <a href="#scientific-breakthrough" class="hover:text-electric-blue transition-colors duration-300" aria-label="科學突破">
+              科學突破
             </a>
             <a href="#research" class="hover:text-electric-blue transition-colors duration-300" aria-label="研究成果">
               研究成果
@@ -116,6 +136,9 @@
           <div class="flex flex-col space-y-4">
             <a href="#technology" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
               >技術原理</a
+            >
+            <a href="#scientific-breakthrough" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
+              >科學突破</a
             >
             <a href="#research" class="hover:text-electric-blue transition-colors duration-300" role="menuitem"
               >研究成果</a
@@ -332,6 +355,386 @@
         </div>
       </section>
 
+      <!-- Scientific Breakthrough Section -->
+      <section id="scientific-breakthrough" class="py-20 bg-gradient-to-br from-gray-900 to-blue-900" role="region" aria-labelledby="breakthrough-heading">
+        <div class="container mx-auto max-w-7xl px-6">
+          <!-- Section Header -->
+          <header class="text-center mb-20">
+            <h2 id="breakthrough-heading" class="text-4xl md:text-5xl font-bold mb-6 text-energy-gold">
+              科學理論突破
+            </h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              重新審視托爾曼實驗，發現挑戰傳統物理定律的革命性機制
+            </p>
+          </header>
+
+          <!-- Tolman Experiment Rediscovery -->
+          <div class="tolman-discovery mb-32">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+              <div class="space-y-8">
+                <h3 class="text-3xl font-bold text-electric-blue mb-6">
+                  百年前的實驗，今日的重大發現
+                </h3>
+                
+                <!-- Timeline Visualization -->
+                <div class="timeline-container relative">
+                  <div class="timeline-line absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-energy-gold to-electric-blue"></div>
+                  
+                  <div class="timeline-item flex items-start space-x-6 mb-8">
+                    <div class="timeline-marker w-16 h-16 bg-energy-gold rounded-full flex items-center justify-center text-deep-space font-bold text-lg shrink-0">
+                      1910
+                    </div>
+                    <div class="timeline-content">
+                      <h4 class="text-xl font-semibold text-energy-gold mb-2">托爾曼的原始發現</h4>
+                      <p class="text-gray-300">在加速度場中觀察到電解質溶液的電位差現象</p>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-item flex items-start space-x-6 mb-8">
+                    <div class="timeline-marker w-16 h-16 bg-electric-blue rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">
+                      百年
+                    </div>
+                    <div class="timeline-content">
+                      <h4 class="text-xl font-semibold text-electric-blue mb-2">傳統解釋局限</h4>
+                      <p class="text-gray-300">學界普遍認為此現象僅為瞬時效應，無法持續產生電流</p>
+                    </div>
+                  </div>
+                  
+                  <div class="timeline-item flex items-start space-x-6">
+                    <div class="timeline-marker w-16 h-16 bg-plasma-purple rounded-full flex items-center justify-center text-white font-bold text-lg shrink-0">
+                      今日
+                    </div>
+                    <div class="timeline-content">
+                      <h4 class="text-xl font-semibold text-plasma-purple mb-2">突破性重新詮釋</h4>
+                      <p class="text-gray-300">證實在重力場中可實現連續穩定的電流輸出</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="relative">
+                <img
+                  src="/assets/images/004-tolmans-discovery-voltage-difference-of-lithium-and-potassium-iodide-solutions-under-acceleration-or-gravity.webp"
+                  alt="托爾曼發現：鋰離子和鉀離子碘化物溶液在加速度或重力下的電位差"
+                  class="w-full rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl"></div>
+              </div>
+            </div>
+            
+            <!-- Comparison Table -->
+            <div class="comparison-table mt-16 bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
+              <h4 class="text-2xl font-bold text-center mb-8 text-energy-gold">傳統解釋 vs 新發現對比</h4>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                  <thead>
+                    <tr class="border-b border-white/20">
+                      <th class="py-4 px-6 text-electric-blue font-semibold">觀點</th>
+                      <th class="py-4 px-6 text-energy-gold font-semibold">傳統解釋</th>
+                      <th class="py-4 px-6 text-plasma-purple font-semibold">新發現</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-gray-300">
+                    <tr class="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td class="py-4 px-6 font-medium">電流持續性</td>
+                      <td class="py-4 px-6">僅為瞬時現象</td>
+                      <td class="py-4 px-6">可實現連續穩定輸出</td>
+                    </tr>
+                    <tr class="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td class="py-4 px-6 font-medium">能量來源</td>
+                      <td class="py-4 px-6">無持續能量輸入</td>
+                      <td class="py-4 px-6">熱振動提供驅動力</td>
+                    </tr>
+                    <tr class="border-b border-white/10 hover:bg-white/5 transition-colors">
+                      <td class="py-4 px-6 font-medium">物理機制</td>
+                      <td class="py-4 px-6">單純慣性效應</td>
+                      <td class="py-4 px-6">重力誘發的電場自發生成</td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                      <td class="py-4 px-6 font-medium">理論意義</td>
+                      <td class="py-4 px-6">符合傳統熱力學定律</td>
+                      <td class="py-4 px-6">挑戰熱力學第二定律</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Heat-to-Electric Mechanism Explanation -->
+          <div class="mechanism-explanation mb-32">
+            <div class="text-center mb-16">
+              <h3 class="text-3xl font-bold text-electric-blue mb-6">熱能轉電能機制</h3>
+              <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                重力場中離子分離產生電場，熱振動驅動電子逆電場運動，實現持續的熱電轉換
+              </p>
+            </div>
+            
+            <!-- Step-by-step Mechanism -->
+            <div class="mechanism-steps grid md:grid-cols-3 gap-8 mb-16">
+              <div class="step-card bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-energy-gold/50 transition-all duration-300 group">
+                <div class="step-number w-12 h-12 bg-energy-gold text-deep-space rounded-full flex items-center justify-center font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
+                  1
+                </div>
+                <h4 class="text-xl font-semibold text-energy-gold mb-3">重力分離離子</h4>
+                <p class="text-gray-300 leading-relaxed">
+                  在重力場作用下，不同質量的離子產生分離，重離子沉降至底部，輕離子浮升至頂部
+                </p>
+              </div>
+              
+              <div class="step-card bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-electric-blue/50 transition-all duration-300 group">
+                <div class="step-number w-12 h-12 bg-electric-blue text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
+                  2
+                </div>
+                <h4 class="text-xl font-semibold text-electric-blue mb-3">產生穩定電場</h4>
+                <p class="text-gray-300 leading-relaxed">
+                  離子分離導致電荷重分布，自發產生指向上方的穩定電場，形成持續的電位差
+                </p>
+              </div>
+              
+              <div class="step-card bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-plasma-purple/50 transition-all duration-300 group">
+                <div class="step-number w-12 h-12 bg-plasma-purple text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 group-hover:scale-110 transition-transform">
+                  3
+                </div>
+                <h4 class="text-xl font-semibold text-plasma-purple mb-3">熱振動驅動電流</h4>
+                <p class="text-gray-300 leading-relaxed">
+                  熱振動為電子提供足夠能量，推動其逆電場運動，形成連續穩定的電流輸出
+                </p>
+              </div>
+            </div>
+            
+            <!-- Boltzmann Equation Display -->
+            <div class="boltzmann-equation bg-black/20 backdrop-blur-sm rounded-xl p-8 border border-white/10">
+              <h4 class="text-2xl font-bold text-center mb-6 text-energy-gold">波茲曼方程式展示</h4>
+              <div class="equation-container text-center">
+                <div class="main-equation text-3xl text-white mb-4" id="boltzmann-equation">
+                  <!-- MathJax will render here -->
+                </div>
+                <div class="equation-description text-gray-300 mb-6">
+                  <p>在重力場和電場共同作用下的離子濃度分布</p>
+                </div>
+                <div class="variable-explanations grid md:grid-cols-2 gap-4 text-sm">
+                  <div class="variable bg-white/5 rounded-lg p-3 hover:bg-white/10 transition-colors cursor-pointer" data-variable="n">
+                    <span class="font-mono text-energy-gold">n(z)</span> - 高度 z 處的離子濃度
+                  </div>
+                  <div class="variable bg-white/5 rounded-lg p-3 hover:bg-white/10 transition-colors cursor-pointer" data-variable="m">
+                    <span class="font-mono text-electric-blue">m</span> - 離子質量
+                  </div>
+                  <div class="variable bg-white/5 rounded-lg p-3 hover:bg-white/10 transition-colors cursor-pointer" data-variable="g">
+                    <span class="font-mono text-plasma-purple">g</span> - 重力加速度
+                  </div>
+                  <div class="variable bg-white/5 rounded-lg p-3 hover:bg-white/10 transition-colors cursor-pointer" data-variable="E">
+                    <span class="font-mono text-energy-gold">E</span> - 電場強度
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Theory Comparison Cards -->
+          <div class="theory-comparison mb-32">
+            <div class="text-center mb-16">
+              <h3 class="text-3xl font-bold text-electric-blue mb-6">與傳統理論對比</h3>
+              <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                我們的發現挑戰了三個重要的物理定律，開啟了能源科學的新紀元
+              </p>
+            </div>
+            
+            <div class="comparison-cards grid lg:grid-cols-3 gap-8">
+              <!-- Card 1: Second Law of Thermodynamics -->
+              <div class="comparison-card bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-energy-gold/50 transition-all duration-300 group">
+                <div class="card-header text-center mb-6">
+                  <h4 class="text-2xl font-bold text-energy-gold mb-2">熱力學第二定律</h4>
+                  <p class="text-gray-400">能量流動方向</p>
+                </div>
+                
+                <div class="traditional-view mb-6">
+                  <h5 class="text-lg font-semibold text-gray-300 mb-3">傳統觀點</h5>
+                  <p class="text-gray-300 mb-4">熱只能從高溫流向低溫</p>
+                  <img
+                    src="/assets/images/001-energy-flows-from-hot-to-cold-region.webp"
+                    alt="能量從高溫區域流向低溫區域"
+                    class="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                
+                <div class="breakthrough-view">
+                  <h5 class="text-lg font-semibold text-energy-gold mb-3">新發現</h5>
+                  <p class="text-gray-300 mb-4">重力場下可實現低溫到高溫的能量轉移</p>
+                  <img
+                    src="/assets/images/002-energy-flows-from-cold-to-hot-region-under-gravity-abstract-diagram.webp"
+                    alt="重力場下能量從低溫區域流向高溫區域的抽象示意圖"
+                    class="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              
+              <!-- Card 2: Carnot's Theorem -->
+              <div class="comparison-card bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-electric-blue/50 transition-all duration-300 group">
+                <div class="card-header text-center mb-6">
+                  <h4 class="text-2xl font-bold text-electric-blue mb-2">卡納定理</h4>
+                  <p class="text-gray-400">熱機效率限制</p>
+                </div>
+                
+                <div class="traditional-view mb-6">
+                  <h5 class="text-lg font-semibold text-gray-300 mb-3">傳統觀點</h5>
+                  <p class="text-gray-300 mb-4">等溫條件下無法產生功</p>
+                  <img
+                    src="/assets/images/008-illustration-of-carnots-theorem.webp"
+                    alt="卡納定理說明圖"
+                    class="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                
+                <div class="breakthrough-view">
+                  <h5 class="text-lg font-semibold text-electric-blue mb-3">新發現</h5>
+                  <p class="text-gray-300 mb-4">重力場下等溫系統可持續輸出電能</p>
+                  <img
+                    src="/assets/images/009-measured-sample-surpasses-carnots-theorem-limit.webp"
+                    alt="測量樣本超越卡納定理限制"
+                    class="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+              
+              <!-- Card 3: Entropy Change -->
+              <div class="comparison-card bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-plasma-purple/50 transition-all duration-300 group">
+                <div class="card-header text-center mb-6">
+                  <h4 class="text-2xl font-bold text-plasma-purple mb-2">熵值變化</h4>
+                  <p class="text-gray-400">系統無序程度</p>
+                </div>
+                
+                <div class="traditional-view mb-6">
+                  <h5 class="text-lg font-semibold text-gray-300 mb-3">傳統觀點</h5>
+                  <p class="text-gray-300 mb-4">封閉系統熵值只增不減</p>
+                  <img
+                    src="/assets/images/010-illustration-of-the-second-law-of-thermodynamics.webp"
+                    alt="熱力學第二定律說明圖"
+                    class="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+                
+                <div class="breakthrough-view">
+                  <h5 class="text-lg font-semibold text-plasma-purple mb-3">新發現</h5>
+                  <p class="text-gray-300 mb-4">特定條件下熵值可減少</p>
+                  <img
+                    src="/assets/images/011-measured-sample-surpasses-second-law-limit-illustration.webp"
+                    alt="測量樣本超越熱力學第二定律限制示意圖"
+                    class="w-full rounded-lg"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Particle Simulation -->
+          <div class="interactive-simulation">
+            <div class="text-center mb-16">
+              <h3 class="text-3xl font-bold text-electric-blue mb-6">互動式粒子模擬</h3>
+              <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                調整重力強度，觀察不同質量粒子的分離過程和電場變化
+              </p>
+            </div>
+            
+            <div class="simulation-container bg-black/30 backdrop-blur-sm rounded-xl p-8 border border-white/10">
+              <div class="simulation-controls mb-6 flex flex-wrap items-center justify-center gap-4">
+                <div class="control-group">
+                  <label for="gravity-slider" class="block text-sm font-medium text-gray-300 mb-2">
+                    重力強度
+                  </label>
+                  <input
+                    type="range"
+                    id="gravity-slider"
+                    min="0.1"
+                    max="2.0"
+                    step="0.1"
+                    value="1.0"
+                    class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  />
+                  <span id="gravity-value" class="text-energy-gold font-mono">1.0g</span>
+                </div>
+                
+                <div class="control-group">
+                  <label for="temperature-slider" class="block text-sm font-medium text-gray-300 mb-2">
+                    熱振動強度
+                  </label>
+                  <input
+                    type="range"
+                    id="temperature-slider"
+                    min="0.5"
+                    max="3.0"
+                    step="0.1"
+                    value="1.0"
+                    class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                  />
+                  <span id="temperature-value" class="text-electric-blue font-mono">1.0</span>
+                </div>
+                
+                <button
+                  id="reset-simulation"
+                  class="bg-plasma-purple hover:bg-plasma-purple/80 text-white px-6 py-2 rounded-lg transition-colors duration-300"
+                >
+                  重置模擬
+                </button>
+              </div>
+              
+              <div class="simulation-display relative bg-black/50 rounded-lg overflow-hidden">
+                <canvas
+                  id="scientific-particle-canvas"
+                  class="w-full h-96"
+                  aria-label="粒子模擬器 - 顯示重力場對不同質量粒子的影響"
+                ></canvas>
+                
+                <!-- Particle Legend -->
+                <div class="simulation-legend absolute top-4 left-4 bg-black/70 backdrop-blur-sm rounded-lg p-4">
+                  <h5 class="text-white font-semibold mb-2">粒子圖例</h5>
+                  <div class="legend-items space-y-2">
+                    <div class="legend-item flex items-center space-x-2">
+                      <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                      <span class="text-gray-300 text-sm">輕粒子 (負離子)</span>
+                    </div>
+                    <div class="legend-item flex items-center space-x-2">
+                      <div class="w-4 h-4 bg-blue-400 rounded-full"></div>
+                      <span class="text-gray-300 text-sm">重粒子 (正離子)</span>
+                    </div>
+                    <div class="legend-item flex items-center space-x-2">
+                      <div class="w-2 h-2 bg-red-400 rounded-full"></div>
+                      <span class="text-gray-300 text-sm">電子流</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Real-time Data Display -->
+                <div class="simulation-data absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-lg p-4">
+                  <h5 class="text-white font-semibold mb-2">即時數據</h5>
+                  <div class="data-items space-y-1 text-sm">
+                    <div class="data-item">
+                      <span class="text-gray-300">電場強度：</span>
+                      <span id="electric-field-value" class="text-green-400 font-mono">0.00 V/m</span>
+                    </div>
+                    <div class="data-item">
+                      <span class="text-gray-300">分離度：</span>
+                      <span id="separation-value" class="text-blue-400 font-mono">0%</span>
+                    </div>
+                    <div class="data-item">
+                      <span class="text-gray-300">電流密度：</span>
+                      <span id="current-value" class="text-red-400 font-mono">0.00 A/m²</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Applications Section -->
       <section id="applications" class="py-20 px-6" role="region" aria-labelledby="applications-heading">
         <div class="container mx-auto max-w-6xl">
@@ -489,6 +892,9 @@
     <!-- Scripts -->
     <script src="/assets/js/utils.js"></script>
     <script src="/assets/js/animations.js"></script>
+    <script src="/assets/js/scientific-animations.js"></script>
+    <script src="/assets/js/particle-simulator.js"></script>
+    <script src="/assets/js/math-renderer.js"></script>
     <script src="/assets/js/main.js"></script>
   </body>
 </html>
