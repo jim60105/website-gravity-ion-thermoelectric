@@ -520,51 +520,10 @@ class GravityIonApp {
      * Setup performance optimizations
      */
     setupPerformanceOptimizations() {
-        // Preload critical resources
-        this.preloadCriticalResources();
-
-        // Setup resource hints
-        this.setupResourceHints();
-
-        // Monitor performance
+        // Monitor performance in debug mode
         if (AppConfig.debug) {
             this.monitorPerformance();
         }
-    }
-
-    /**
-     * Preload critical resources
-     */
-    preloadCriticalResources() {
-        const criticalImages = [
-            '/assets/images/001-energy-flows-from-hot-to-cold-region.webp',
-            '/assets/images/003-lithium-and-potassium-ion-fields-connected-in-parallel-generate-current-under-gravity.webp'
-        ];
-
-        criticalImages.forEach(src => {
-            const link = Utils.DOM.createElement('link', {
-                rel: 'preload',
-                as: 'image',
-                href: src
-            });
-            document.head.appendChild(link);
-        });
-    }
-
-    /**
-     * Setup resource hints
-     */
-    setupResourceHints() {
-        // DNS prefetch for external domains
-        const dnsPrefetch = ['https://cdn.tailwindcss.com'];
-
-        dnsPrefetch.forEach(domain => {
-            const link = Utils.DOM.createElement('link', {
-                rel: 'dns-prefetch',
-                href: domain
-            });
-            document.head.appendChild(link);
-        });
     }
 
     /**
