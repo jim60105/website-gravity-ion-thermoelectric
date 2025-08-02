@@ -5,6 +5,140 @@
   box-sizing: border-box;
 }
 
+/* Navigation System Styles */
+header {
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+header.scrolled {
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Navigation Link Styles */
+.nav-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #3b82f6, #fbbf24);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: #fbbf24 !important;
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #fbbf24;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px #fbbf24;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Mobile Menu Styles */
+#mobile-menu {
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 8px;
+  margin-top: 1rem;
+  padding: 1rem;
+}
+
+#mobile-menu.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+}
+
+#mobile-menu:not(.hidden) {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Mobile Menu Button Animation */
+#mobile-menu-button {
+  transition: all 0.3s ease;
+}
+
+#mobile-menu-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+#mobile-menu-button svg {
+  transition: transform 0.3s ease;
+}
+
+#mobile-menu-button[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Navigation Focus States */
+.nav-link:focus,
+#mobile-menu-button:focus {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Navigation Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .nav-link::before,
+  .nav-link.active::after,
+  #mobile-menu {
+    transition: none;
+    animation: none;
+  }
+}
+
 /* Call to Action Section Styles */
 #call-to-action {
   position: relative;
