@@ -47,7 +47,7 @@ Allow: /
 Crawl-delay: 2
 
 # Sitemap location
-Sitemap: https://gravity-ion-thermoelectric.com/sitemap.xml
+Sitemap: https://website-gravity-ion-thermoelectric.jim60105.workers.dev/sitemap.xml
 
 # Contact information for crawlers
 # Webmaster: research@gravity-ion-tech.com

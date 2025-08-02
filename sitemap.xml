@@ -5,15 +5,15 @@
 
   <!-- Main page with sections -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://gravity-ion-thermoelectric.com/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://gravity-ion-thermoelectric.com/cn/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://gravity-ion-thermoelectric.com/en/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/cn/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/en/" />
     <image:image>
-      <image:loc>https://gravity-ion-thermoelectric.com/assets/images/og-image.webp</image:loc>
+      <image:loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/images/og-image.webp</image:loc>
       <image:title>重力離子熱電技術</image:title>
       <image:caption>革命性的重力離子熱電技術展示</image:caption>
     </image:image>
@@ -21,7 +21,7 @@
 
   <!-- Hero section -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/#hero</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#hero</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -29,7 +29,7 @@
 
   <!-- Scientific breakthrough section -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/#scientific-breakthrough</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#scientific-breakthrough</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -37,7 +37,7 @@
 
   <!-- Experimental evidence section -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/#experimental-evidence</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#experimental-evidence</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -45,7 +45,7 @@
 
   <!-- Applications and impact section -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/#applications-impact</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#applications-impact</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -53,7 +53,7 @@
 
   <!-- Academic recognition section -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/#academic-recognition</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#academic-recognition</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -61,7 +61,7 @@
 
   <!-- Call to action section -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/#call-to-action</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/#call-to-action</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -69,35 +69,35 @@
 
   <!-- Research documents -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/assets/docs/1-an-exception-to-the-second-law-of-thermodynamics-might-change-global-energy-rules.md</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/1-an-exception-to-the-second-law-of-thermodynamics-might-change-global-energy-rules.md</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/assets/docs/2-heat-to-electricity-conversion-under-gravity-simplified.md</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/2-heat-to-electricity-conversion-under-gravity-simplified.md</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/assets/docs/3-how-heat-converts-to-electricity-under-gravitational-effect-on-plasma.md</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/3-how-heat-converts-to-electricity-under-gravitational-effect-on-plasma.md</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/assets/docs/4-the-question-over-five-thousand-professors-could-not-answer.md</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/4-the-question-over-five-thousand-professors-could-not-answer.md</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.md</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.md</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -105,21 +105,21 @@
 
   <!-- Future language versions -->
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/en/</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/en/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://gravity-ion-thermoelectric.com/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://gravity-ion-thermoelectric.com/en/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/en/" />
   </url>
 
   <url>
-    <loc>https://gravity-ion-thermoelectric.com/cn/</loc>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/cn/</loc>
     <lastmod>2024-08-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://gravity-ion-thermoelectric.com/" />
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://gravity-ion-thermoelectric.com/cn/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/cn/" />
   </url>
 
 </urlset>
