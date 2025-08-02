@@ -80,11 +80,11 @@ class CanvasParticleSystem {
     resizeCanvas() {
         const header = Utils.DOM.select('header');
         const headerHeight = header ? header.offsetHeight : 0;
-        
+
         // Calculate canvas dimensions: full viewport width, viewport height minus header
         const canvasWidth = window.innerWidth;
         const canvasHeight = window.innerHeight - headerHeight;
-        
+
         this.canvas.width = canvasWidth;
         this.canvas.height = canvasHeight;
         this.canvas.style.width = canvasWidth + 'px';
@@ -121,7 +121,7 @@ class CanvasParticleSystem {
      */
     createLightIon() {
         const y = Utils.MathUtils.random(0, this.canvas.height * 0.7); // Start distributed but bias toward top
-        
+
         return {
             x: Utils.MathUtils.random(0, this.canvas.width),
             y,
@@ -143,7 +143,7 @@ class CanvasParticleSystem {
      */
     createHeavyIon() {
         const y = Utils.MathUtils.random(this.canvas.height * 0.3, this.canvas.height); // Start distributed but bias toward bottom
-        
+
         return {
             x: Utils.MathUtils.random(0, this.canvas.width),
             y,
@@ -187,13 +187,13 @@ class CanvasParticleSystem {
         if (!this.options.showElectricField) {
             return;
         }
-        
+
         this.electricField = [];
         const fieldLineCount = Utils.Device.isMobile() ? 8 : 12;
-        
+
         for (let i = 0; i < fieldLineCount; i++) {
             const x = (this.canvas.width / (fieldLineCount + 1)) * (i + 1);
-            
+
             this.electricField.push({
                 x,
                 startY: this.canvas.height * 0.9,
@@ -262,7 +262,7 @@ class CanvasParticleSystem {
 
             // Calculate electric field strength based on charge distribution
             const electricFieldStrength = this.calculateElectricField(particle.y);
-            
+
             // Apply electric force (F = qE)
             const electricForce = particle.charge * electricFieldStrength * this.options.electricFieldStrength;
             particle.vy -= electricForce; // Electric field points upward
@@ -270,7 +270,7 @@ class CanvasParticleSystem {
             // Apply thermal vibration (Brownian motion)
             const thermalForceX = (Math.random() - 0.5) * this.options.thermalEnergy * particle.thermalEnergy;
             const thermalForceY = (Math.random() - 0.5) * this.options.thermalEnergy * particle.thermalEnergy;
-            
+
             particle.vx += thermalForceX;
             particle.vy += thermalForceY;
 
@@ -279,7 +279,7 @@ class CanvasParticleSystem {
                 // Electrons gain energy moving against electric field
                 const energyGain = Math.abs(electricForce) * 0.1;
                 particle.vy -= energyGain; // Additional upward force from thermal energy
-                
+
                 // Reset electrons at bottom when they reach top (continuous flow)
                 if (particle.y < 0) {
                     particle.y = this.canvas.height;
@@ -328,10 +328,10 @@ class CanvasParticleSystem {
         // Electric field is stronger in the middle, representing the equilibrium state
         const normalizedY = y / this.canvas.height;
         const fieldStrength = Math.sin(normalizedY * Math.PI) * 0.5 + 0.5;
-        
+
         // Field gradually builds up over time to show self-generation
         const timeBuildup = Math.min(1.0, this.equilibriumTime / 10.0);
-        
+
         return fieldStrength * timeBuildup;
     }
 
@@ -365,12 +365,12 @@ class CanvasParticleSystem {
      */
     drawElectricFieldLines() {
         this.ctx.save();
-        
+
         this.electricField.forEach((field, index) => {
             // Animated electric field lines
             const time = this.equilibriumTime * 2 + index * 0.5;
             const opacity = (Math.sin(time) * 0.2 + 0.3) * field.opacity;
-            
+
             this.ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
             this.ctx.lineWidth = 1;
             this.ctx.setLineDash([4, 8]);
@@ -403,16 +403,16 @@ class CanvasParticleSystem {
     drawFieldArrow(x, y, direction, opacity) {
         this.ctx.save();
         this.ctx.fillStyle = `rgba(0, 255, 136, ${opacity})`;
-        
+
         const size = 4;
         this.ctx.beginPath();
-        
+
         if (direction === 'up') {
             this.ctx.moveTo(x, y - size);
             this.ctx.lineTo(x - size/2, y);
             this.ctx.lineTo(x + size/2, y);
         }
-        
+
         this.ctx.closePath();
         this.ctx.fill();
         this.ctx.restore();
@@ -432,7 +432,7 @@ class CanvasParticleSystem {
             // Set particle style based on type
             this.ctx.globalAlpha = particle.opacity;
             this.ctx.fillStyle = particle.color;
-            
+
             // Add charge indication with glow
             if (particle.charge > 0) {
                 this.ctx.shadowColor = particle.color;
@@ -453,7 +453,7 @@ class CanvasParticleSystem {
             this.ctx.font = `${particle.size * 1.2}px Arial`;
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
-            
+
             const chargeSymbol = particle.charge > 0 ? '+' : '−';
             this.ctx.fillText(chargeSymbol, particle.x, particle.y);
 
@@ -466,14 +466,14 @@ class CanvasParticleSystem {
      */
     drawElectronFlow() {
         const electrons = this.particles.filter(p => p.type === 'electron');
-        
+
         electrons.forEach((electron, index) => {
             this.ctx.save();
-            
+
             // Pulsating effect for electrons
             const time = this.equilibriumTime * 5 + index;
             const pulse = Math.sin(time) * 0.3 + 0.7;
-            
+
             this.ctx.globalAlpha = electron.opacity * pulse;
             this.ctx.fillStyle = electron.color;
             this.ctx.shadowColor = electron.color;
@@ -502,7 +502,7 @@ class CanvasParticleSystem {
      */
     drawScientificAnnotations() {
         this.ctx.save();
-        
+
         // Draw region labels
         this.ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
         this.ctx.font = '14px Arial';
