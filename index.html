@@ -81,6 +81,9 @@
       };
     </script>
 
+    <!-- Chart.js for Data Visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/styles.css" />
   </head>
@@ -575,7 +578,7 @@
               <!-- Card 2: Carnot's Theorem -->
               <div class="comparison-card bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-electric-blue/50 transition-all duration-300 group">
                 <div class="card-header text-center mb-6">
-                  <h4 class="text-2xl font-bold text-electric-blue mb-2">卡納定理</h4>
+                  <h4 class="text-2xl font-bold text-electric-blue mb-2">卡諾定理</h4>
                   <p class="text-gray-400">熱機效率限制</p>
                 </div>
                 
@@ -584,7 +587,7 @@
                   <p class="text-gray-300 mb-4">等溫條件下無法產生功</p>
                   <img
                     src="/assets/images/008-illustration-of-carnots-theorem.webp"
-                    alt="卡納定理說明圖"
+                    alt="卡諾定理說明圖"
                     class="w-full rounded-lg"
                     loading="lazy"
                   />
@@ -595,7 +598,7 @@
                   <p class="text-gray-300 mb-4">重力場下等溫系統可持續輸出電能</p>
                   <img
                     src="/assets/images/009-measured-sample-surpasses-carnots-theorem-limit.webp"
-                    alt="測量樣本超越卡納定理限制"
+                    alt="測量樣本超越卡諾定理限制"
                     class="w-full rounded-lg"
                     loading="lazy"
                   />
@@ -728,6 +731,367 @@
                       <span id="current-value" class="text-red-400 font-mono">0.00 A/m²</span>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experimental Evidence Section -->
+      <section id="experimental-evidence" class="py-20 bg-white text-gray-900" role="region" aria-labelledby="evidence-heading">
+        <div class="container mx-auto max-w-7xl px-6">
+          <!-- Section Header -->
+          <header class="text-center mb-20">
+            <h2 id="evidence-heading" class="text-4xl md:text-5xl font-bold mb-6 text-deep-space">
+              實驗證據：三個月的穩定驗證
+            </h2>
+            <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              透過嚴格控制的實驗環境，我們獲得了持續穩定的電流輸出數據，證實了理論的可靠性
+            </p>
+          </header>
+
+          <!-- Stable Current Experiment -->
+          <div class="stable-current-experiment mb-32">
+            <div class="text-center mb-16">
+              <h3 class="text-3xl font-bold text-electric-blue mb-6">三個月穩定電流實驗</h3>
+              <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                在嚴格控制的實驗環境中，連續監測三個月的電壓和電流輸出，驗證技術的長期穩定性
+              </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
+              <!-- Interactive Chart Container -->
+              <div class="chart-container bg-gray-50 rounded-xl p-8 border border-gray-200">
+                <div class="chart-header mb-6">
+                  <h4 class="text-2xl font-semibold text-gray-800 mb-2">電壓隨時間變化</h4>
+                  <p class="text-gray-600">實時監測數據顯示穩定的電壓輸出</p>
+                </div>
+                
+                <!-- Chart Canvas -->
+                <div class="chart-wrapper relative">
+                  <canvas id="voltage-time-chart" class="w-full h-80" aria-label="電壓隨時間變化圖表"></canvas>
+                </div>
+                
+                <!-- Chart Controls -->
+                <div class="chart-controls mt-6 flex flex-wrap gap-4 justify-center">
+                  <button class="chart-control-btn active" data-period="1month">1個月</button>
+                  <button class="chart-control-btn" data-period="3months">3個月</button>
+                  <button class="chart-control-btn" data-period="detailed">詳細數據</button>
+                </div>
+              </div>
+              
+              <!-- Experimental Data Display -->
+              <div class="experiment-data space-y-8">
+                <!-- Main Image -->
+                <div class="main-experiment-image">
+                  <img
+                    src="/assets/images/006-measured-continuous-and-stable-current-in-kuo-tso-chens-sample.webp"
+                    alt="郭祚真樣品中測量到的連續穩定電流"
+                    class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                    loading="lazy"
+                  />
+                  <p class="text-sm text-gray-500 mt-2 text-center">實驗樣品中測量到的連續穩定電流</p>
+                </div>
+                
+                <!-- Data Table Image -->
+                <div class="data-table-image">
+                  <img
+                    src="/assets/images/036-table2-output-voltage-vs-time-of-battery-standing-upright.webp"
+                    alt="電池正立時輸出電壓與時間關係表"
+                    class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                    loading="lazy"
+                  />
+                  <p class="text-sm text-gray-500 mt-2 text-center">電池正立狀態下的電壓時間數據表</p>
+                </div>
+                
+                <!-- Key Findings -->
+                <div class="key-findings bg-electric-blue/10 rounded-xl p-6 border border-electric-blue/20">
+                  <h5 class="text-xl font-semibold text-electric-blue mb-4">關鍵發現</h5>
+                  <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-start space-x-3">
+                      <span class="text-electric-blue mt-1">✓</span>
+                      <span>連續90天穩定電壓輸出，變異係數小於2%</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                      <span class="text-electric-blue mt-1">✓</span>
+                      <span>無外部電源輸入，完全自發性電流產生</span>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                      <span class="text-electric-blue mt-1">✓</span>
+                      <span>電流密度達到 10⁻⁸ A/cm²，符合理論預測</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flip Verification Experiment -->
+          <div class="flip-verification mb-32">
+            <div class="text-center mb-16">
+              <h3 class="text-3xl font-bold text-plasma-purple mb-6">上下翻轉驗證實驗</h3>
+              <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                通過翻轉實驗樣品，觀察電壓方向的即時反轉，驗證重力場對離子分離的直接影響
+              </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+              <!-- Interactive Flip Simulation -->
+              <div class="flip-simulation-container bg-gray-50 rounded-xl p-8 border border-gray-200">
+                <div class="simulation-header mb-6 text-center">
+                  <h4 class="text-2xl font-semibold text-gray-800 mb-2">互動式翻轉模擬</h4>
+                  <p class="text-gray-600">點擊按鈕觀察電壓方向變化</p>
+                </div>
+                
+                <!-- 3D Battery Simulation -->
+                <div class="battery-simulation relative bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg h-80 overflow-hidden">
+                  <div id="battery-container" class="battery-3d w-full h-full flex items-center justify-center transition-transform duration-1000">
+                    <!-- Battery Visual -->
+                    <div class="battery-visual relative">
+                      <div class="battery-body w-32 h-48 bg-gradient-to-b from-yellow-400 to-orange-500 rounded-lg shadow-lg relative">
+                        <!-- Voltage Indicators -->
+                        <div class="voltage-indicator top absolute -top-6 left-1/2 transform -translate-x-1/2">
+                          <div class="voltage-value text-lg font-bold text-red-600" id="top-voltage">+1.2V</div>
+                          <div class="voltage-label text-sm text-gray-600">頂部</div>
+                        </div>
+                        <div class="voltage-indicator bottom absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+                          <div class="voltage-value text-lg font-bold text-blue-600" id="bottom-voltage">0.0V</div>
+                          <div class="voltage-label text-sm text-gray-600">底部</div>
+                        </div>
+                        
+                        <!-- Ion Flow Animation -->
+                        <div class="ion-flow absolute inset-0 pointer-events-none">
+                          <div class="positive-ions">
+                            <div class="ion positive animate-pulse"></div>
+                          </div>
+                          <div class="negative-ions">
+                            <div class="ion negative animate-pulse"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Simulation Controls -->
+                  <div class="simulation-controls absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
+                    <button id="flip-upright" class="control-btn bg-electric-blue text-white px-4 py-2 rounded-lg hover:bg-electric-blue/80 transition-colors">
+                      正立
+                    </button>
+                    <button id="flip-upside-down" class="control-btn bg-plasma-purple text-white px-4 py-2 rounded-lg hover:bg-plasma-purple/80 transition-colors">
+                      倒立
+                    </button>
+                  </div>
+                </div>
+                
+                <!-- Real-time Data Display -->
+                <div class="real-time-data mt-6 grid grid-cols-2 gap-4">
+                  <div class="data-card bg-white rounded-lg p-4 border border-gray-200">
+                    <h6 class="font-semibold text-gray-700 mb-2">電壓差</h6>
+                    <div class="value text-2xl font-bold text-electric-blue" id="voltage-diff">1.2V</div>
+                  </div>
+                  <div class="data-card bg-white rounded-lg p-4 border border-gray-200">
+                    <h6 class="font-semibold text-gray-700 mb-2">電場方向</h6>
+                    <div class="value text-2xl font-bold text-plasma-purple" id="field-direction">向上</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Experimental Results -->
+              <div class="flip-results space-y-8">
+                <!-- Flip Experiment Image -->
+                <div class="flip-experiment-image">
+                  <img
+                    src="/assets/images/007-reversed-voltage-when-sample-is-upside-down-kuo-tso-chen.webp"
+                    alt="樣品倒立時電壓反轉現象"
+                    class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                    loading="lazy"
+                  />
+                  <p class="text-sm text-gray-500 mt-2 text-center">樣品倒立時觀測到的電壓反轉現象</p>
+                </div>
+                
+                <!-- Upside-down Data Table -->
+                <div class="upside-down-data">
+                  <img
+                    src="/assets/images/037-table3-output-voltage-vs-time-of-battery-upside-down.webp"
+                    alt="電池倒立時輸出電壓與時間關係表"
+                    class="w-full rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                    loading="lazy"
+                  />
+                  <p class="text-sm text-gray-500 mt-2 text-center">電池倒立狀態下的電壓時間數據表</p>
+                </div>
+                
+                <!-- Comparison Analysis -->
+                <div class="comparison-analysis bg-plasma-purple/10 rounded-xl p-6 border border-plasma-purple/20">
+                  <h5 class="text-xl font-semibold text-plasma-purple mb-4">對比分析</h5>
+                  <div class="comparison-table overflow-x-auto">
+                    <table class="w-full text-sm">
+                      <thead>
+                        <tr class="border-b border-plasma-purple/20">
+                          <th class="text-left py-2">狀態</th>
+                          <th class="text-left py-2">上端電壓</th>
+                          <th class="text-left py-2">下端電壓</th>
+                          <th class="text-left py-2">電壓差</th>
+                        </tr>
+                      </thead>
+                      <tbody class="text-gray-700">
+                        <tr class="border-b border-gray-200">
+                          <td class="py-2 font-medium">正立</td>
+                          <td class="py-2">+1.2V</td>
+                          <td class="py-2">0.0V</td>
+                          <td class="py-2 text-electric-blue">+1.2V</td>
+                        </tr>
+                        <tr>
+                          <td class="py-2 font-medium">倒立</td>
+                          <td class="py-2">0.0V</td>
+                          <td class="py-2">+1.2V</td>
+                          <td class="py-2 text-plasma-purple">-1.2V</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Equipment and Environment Showcase -->
+          <div class="equipment-showcase mb-32">
+            <div class="text-center mb-16">
+              <h3 class="text-3xl font-bold text-energy-gold mb-6">實驗設備與環境</h3>
+              <p class="text-xl text-gray-600 max-w-4xl mx-auto">
+                採用先進的實驗設備和嚴格控制的環境條件，確保實驗結果的準確性和可重現性
+              </p>
+            </div>
+            
+            <!-- Equipment Structure -->
+            <div class="equipment-structure mb-16">
+              <h4 class="text-2xl font-semibold text-gray-800 mb-8 text-center">實驗裝置結構</h4>
+              <div class="grid md:grid-cols-3 gap-8">
+                <div class="equipment-card bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                  <img
+                    src="/assets/images/032-fig8-structure-of-centrifugal-battery-used-in-experiment.webp"
+                    alt="實驗用離心電池結構圖"
+                    class="w-full rounded-lg mb-4"
+                    loading="lazy"
+                  />
+                  <h5 class="text-lg font-semibold text-gray-800 mb-2">電池結構設計</h5>
+                  <p class="text-gray-600 text-sm">離心式電池結構，最大化重力場效應</p>
+                </div>
+                
+                <div class="equipment-card bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                  <img
+                    src="/assets/images/033-fig9-components-of-centrifugal-battery-manufacturing.webp"
+                    alt="離心電池製造組件"
+                    class="w-full rounded-lg mb-4"
+                    loading="lazy"
+                  />
+                  <h5 class="text-lg font-semibold text-gray-800 mb-2">製造組件</h5>
+                  <p class="text-gray-600 text-sm">精密加工的電池組件，確保實驗精度</p>
+                </div>
+                
+                <div class="equipment-card bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow">
+                  <img
+                    src="/assets/images/034-fig10-photos-of-battery-setup-and-output-connections.webp"
+                    alt="電池裝置與輸出連接實際照片"
+                    class="w-full rounded-lg mb-4"
+                    loading="lazy"
+                  />
+                  <h5 class="text-lg font-semibold text-gray-800 mb-2">實際裝置</h5>
+                  <p class="text-gray-600 text-sm">實驗室中的實際電池裝置與測量系統</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Controlled Environment -->
+            <div class="controlled-environment mb-16">
+              <h4 class="text-2xl font-semibold text-gray-800 mb-8 text-center">嚴格控制環境</h4>
+              <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="environment-image">
+                  <img
+                    src="/assets/images/012-lab-environment-with-strict-control-of-temperature-and-airflow.webp"
+                    alt="嚴格控制溫度和氣流的實驗室環境"
+                    class="w-full rounded-xl shadow-lg"
+                    loading="lazy"
+                  />
+                  <p class="text-sm text-gray-500 mt-2 text-center">嚴格控制溫度和氣流的實驗室環境</p>
+                </div>
+                
+                <div class="environment-controls space-y-6">
+                  <div class="control-item bg-gray-50 rounded-xl p-6 border border-gray-200">
+                    <h5 class="text-lg font-semibold text-gray-800 mb-3">溫度控制系統</h5>
+                    <ul class="space-y-2 text-gray-600">
+                      <li>• 精度：±0.1°C</li>
+                      <li>• 範圍：15°C - 35°C</li>
+                      <li>• 連續監測：24小時/天</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="control-item bg-gray-50 rounded-xl p-6 border border-gray-200">
+                    <h5 class="text-lg font-semibold text-gray-800 mb-3">電磁屏蔽措施</h5>
+                    <ul class="space-y-2 text-gray-600">
+                      <li>• 法拉第籠式屏蔽室</li>
+                      <li>• 屏蔽效能：>80dB</li>
+                      <li>• 隔離外部電磁干擾</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="control-item bg-gray-50 rounded-xl p-6 border border-gray-200">
+                    <h5 class="text-lg font-semibold text-gray-800 mb-3">氣流控制設備</h5>
+                    <ul class="space-y-2 text-gray-600">
+                      <li>• 層流控制系統</li>
+                      <li>• 濕度控制：45-55%</li>
+                      <li>• 無塵環境等級：Class 1000</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Centrifuge Test Results -->
+            <div class="centrifuge-tests">
+              <h4 class="text-2xl font-semibold text-gray-800 mb-8 text-center">離心機測試結果</h4>
+              <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="centrifuge-data space-y-6">
+                  <div class="test-parameters bg-energy-gold/10 rounded-xl p-6 border border-energy-gold/20">
+                    <h5 class="text-xl font-semibold text-energy-gold mb-4">測試參數</h5>
+                    <div class="parameters-grid grid grid-cols-2 gap-4">
+                      <div class="parameter">
+                        <div class="label text-sm text-gray-600">離心力</div>
+                        <div class="value text-lg font-bold text-gray-800">10G</div>
+                      </div>
+                      <div class="parameter">
+                        <div class="label text-sm text-gray-600">轉速</div>
+                        <div class="value text-lg font-bold text-gray-800">3000 RPM</div>
+                      </div>
+                      <div class="parameter">
+                        <div class="label text-sm text-gray-600">測試時長</div>
+                        <div class="value text-lg font-bold text-gray-800">2小時</div>
+                      </div>
+                      <div class="parameter">
+                        <div class="label text-sm text-gray-600">電壓增強</div>
+                        <div class="value text-lg font-bold text-energy-gold">10倍</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="test-conclusion bg-gray-50 rounded-xl p-6 border border-gray-200">
+                    <h5 class="text-lg font-semibold text-gray-800 mb-3">測試結論</h5>
+                    <p class="text-gray-600 leading-relaxed">
+                      在10G離心力作用下，電壓輸出顯著增強至原來的10倍，驗證了重力場強度與電壓輸出的正比關係，
+                      進一步證實了重力誘發離子分離的理論機制。
+                    </p>
+                  </div>
+                </div>
+                
+                <div class="centrifuge-image">
+                  <img
+                    src="/assets/images/035-fig11-output-voltage-of-battery-under-10G-centrifuge.webp"
+                    alt="10G離心機下電池的輸出電壓"
+                    class="w-full rounded-xl shadow-lg"
+                    loading="lazy"
+                  />
+                  <p class="text-sm text-gray-500 mt-2 text-center">10G離心機測試下的電池電壓輸出結果</p>
                 </div>
               </div>
             </div>
@@ -895,6 +1259,8 @@
     <script src="/assets/js/scientific-animations.js"></script>
     <script src="/assets/js/particle-simulator.js"></script>
     <script src="/assets/js/math-renderer.js"></script>
+    <script src="/assets/js/data-visualization.js"></script>
+    <script src="/assets/js/experiment-simulation.js"></script>
     <script src="/assets/js/main.js"></script>
   </body>
 </html>
