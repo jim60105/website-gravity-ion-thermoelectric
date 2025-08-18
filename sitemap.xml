@@ -5,7 +5,7 @@
 
   <url>
     <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/</loc>
-    <lastmod>2024-08-02</lastmod>
+    <lastmod>2025-08-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/" />
@@ -18,36 +18,8 @@
 
   <!-- Research documents -->
   <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/1-an-exception-to-the-second-law-of-thermodynamics-might-change-global-energy-rules.md</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/2-heat-to-electricity-conversion-under-gravity-simplified.md</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/3-how-heat-converts-to-electricity-under-gravitational-effect-on-plasma.md</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/4-the-question-over-five-thousand-professors-could-not-answer.md</loc>
-    <lastmod>2024-08-02</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.md</loc>
-    <lastmod>2024-08-02</lastmod>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.pdf</loc>
+    <lastmod>2025-08-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
