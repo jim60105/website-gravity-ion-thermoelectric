@@ -18,7 +18,7 @@ class NavigationController {
         this.currentSection = '';
         this.scrollThreshold = 100;
         this.isScrolling = false;
-        
+
         this.init();
     }
 
@@ -32,7 +32,7 @@ class NavigationController {
         this.setupSmoothScrolling();
         this.setupMobileMenu();
         this.updateActiveSection();
-        
+
         console.info('Navigation system initialized');
     }
 
@@ -59,12 +59,12 @@ class NavigationController {
      */
     setupEventListeners() {
         // Throttled scroll handler for performance
-        window.addEventListener('scroll', 
+        window.addEventListener('scroll',
             Utils.Performance.throttle(this.handleScroll.bind(this), 16)
         );
-        
+
         // Resize handler to recalculate section positions
-        window.addEventListener('resize', 
+        window.addEventListener('resize',
             Utils.Performance.debounce(this.handleResize.bind(this), 250)
         );
 
@@ -89,8 +89,8 @@ class NavigationController {
 
         // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (this.mobileMenu && 
-                !this.mobileMenu.contains(e.target) && 
+            if (this.mobileMenu &&
+                !this.mobileMenu.contains(e.target) &&
                 !this.mobileMenuButton.contains(e.target) &&
                 !this.mobileMenu.classList.contains('hidden')) {
                 this.closeMobileMenu();
@@ -113,7 +113,7 @@ class NavigationController {
      */
     setupBackToTopButton() {
         const backToTopButton = document.getElementById('back-to-top');
-        if (!backToTopButton) return;
+        if (!backToTopButton) {return;}
 
         // Show/hide button based on scroll position
         const toggleBackToTopButton = () => {
@@ -135,7 +135,7 @@ class NavigationController {
         };
 
         // Add scroll listener for back to top button
-        window.addEventListener('scroll', 
+        window.addEventListener('scroll',
             Utils.Performance.throttle(toggleBackToTopButton, 100)
         );
 
@@ -165,8 +165,8 @@ class NavigationController {
      * Handle scroll events for scroll spy and header effects
      */
     handleScroll() {
-        if (this.isScrolling) return;
-        
+        if (this.isScrolling) {return;}
+
         this.updateActiveSection();
         this.updateHeaderAppearance();
     }
@@ -184,13 +184,13 @@ class NavigationController {
      */
     handleNavClick(e) {
         e.preventDefault();
-        
+
         const href = e.target.getAttribute('href');
         const targetSection = document.querySelector(href);
-        
+
         if (targetSection) {
             this.smoothScrollToSection(targetSection);
-            
+
             // Track navigation interaction
             if (typeof Utils !== 'undefined' && Utils.Analytics) {
                 Utils.Analytics.trackInteraction('navigation_click', {
@@ -206,17 +206,17 @@ class NavigationController {
      */
     smoothScrollToSection(targetSection) {
         this.isScrolling = true;
-        
+
         const headerHeight = this.header ? this.header.offsetHeight : 0;
         const targetPosition = targetSection.offsetTop - headerHeight - 20;
-        
+
         // Use modern smooth scrolling if available
         if ('scrollBehavior' in document.documentElement.style) {
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
-            
+
             // Reset scrolling flag after animation
             setTimeout(() => {
                 this.isScrolling = false;
@@ -237,12 +237,12 @@ class NavigationController {
         let startTime = null;
 
         const animation = (currentTime) => {
-            if (startTime === null) startTime = currentTime;
+            if (startTime === null) {startTime = currentTime;}
             const timeElapsed = currentTime - startTime;
             const run = this.easeInOutQuad(timeElapsed, startPosition, distance, duration);
-            
+
             window.scrollTo(0, run);
-            
+
             if (timeElapsed < duration) {
                 requestAnimationFrame(animation);
             } else {
@@ -258,7 +258,7 @@ class NavigationController {
      */
     easeInOutQuad(t, b, c, d) {
         t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
+        if (t < 1) {return c / 2 * t * t + b;}
         t--;
         return -c / 2 * (t * (t - 2) - 1) + b;
     }
@@ -310,12 +310,12 @@ class NavigationController {
      * Update active section based on scroll position
      */
     updateActiveSection() {
-        if (this.observer) return; // Using intersection observer
+        if (this.observer) {return;} // Using intersection observer
 
         const scrollPosition = window.pageYOffset + window.innerHeight / 3;
-        
+
         let activeSection = '';
-        
+
         // Find the section that's currently in view
         for (let i = this.sections.length - 1; i >= 0; i--) {
             const section = this.sections[i];
@@ -334,15 +334,15 @@ class NavigationController {
      * Set the active section and update navigation
      */
     setActiveSection(sectionId) {
-        if (sectionId === this.currentSection) return;
-        
+        if (sectionId === this.currentSection) {return;}
+
         this.currentSection = sectionId;
-        
+
         // Update navigation link states
         this.navLinks.forEach(link => {
             const href = link.getAttribute('href');
             const isActive = href === `#${sectionId}`;
-            
+
             link.classList.toggle('active', isActive);
             link.setAttribute('aria-current', isActive ? 'page' : 'false');
         });
@@ -361,11 +361,11 @@ class NavigationController {
      * Update header appearance based on scroll position
      */
     updateHeaderAppearance() {
-        if (!this.header) return;
-        
+        if (!this.header) {return;}
+
         const scrolled = window.pageYOffset > this.scrollThreshold;
         this.header.classList.toggle('scrolled', scrolled);
-        
+
         // Add backdrop blur effect when scrolled
         if (scrolled) {
             this.header.style.backdropFilter = 'blur(10px)';
@@ -390,7 +390,7 @@ class NavigationController {
      * Setup mobile menu functionality
      */
     setupMobileMenu() {
-        if (!this.mobileMenuButton || !this.mobileMenu) return;
+        if (!this.mobileMenuButton || !this.mobileMenu) {return;}
 
         // Ensure proper ARIA attributes
         this.mobileMenuButton.setAttribute('aria-expanded', 'false');
@@ -403,7 +403,7 @@ class NavigationController {
      */
     toggleMobileMenu() {
         const isHidden = this.mobileMenu.classList.contains('hidden');
-        
+
         if (isHidden) {
             this.openMobileMenu();
         } else {
@@ -418,7 +418,7 @@ class NavigationController {
         this.mobileMenu.classList.remove('hidden');
         this.mobileMenuButton.setAttribute('aria-expanded', 'true');
         this.mobileMenu.setAttribute('aria-hidden', 'false');
-        
+
         // Focus first menu item for accessibility
         const firstMenuItem = this.mobileMenu.querySelector('a');
         if (firstMenuItem) {
@@ -436,10 +436,10 @@ class NavigationController {
         this.mobileMenu.classList.add('hidden');
         this.mobileMenuButton.setAttribute('aria-expanded', 'false');
         this.mobileMenu.setAttribute('aria-hidden', 'true');
-        
+
         // Restore body scroll
         document.body.style.overflow = '';
-        
+
         // Return focus to menu button
         this.mobileMenuButton.focus();
     }
@@ -468,12 +468,12 @@ class NavigationController {
         if (this.observer) {
             this.observer.disconnect();
         }
-        
+
         // Remove event listeners
         this.navLinks.forEach(link => {
             link.removeEventListener('click', this.handleNavClick);
         });
-        
+
         if (this.mobileMenuButton) {
             this.mobileMenuButton.removeEventListener('click', this.toggleMobileMenu);
         }

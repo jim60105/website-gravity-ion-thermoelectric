@@ -12,7 +12,7 @@ class EfficiencyCalculator {
         this.currentIonSystem = 'HI'; // Default to hydrogen iodide (most efficient)
         this.physicsEngine = new PhysicsEngine();
         this.chart = null;
-        
+
         // Current structural parameters (can be adjusted)
         this.structure = {
             r1: 0.0025,    // Inner radius (m)
@@ -106,7 +106,7 @@ class EfficiencyCalculator {
                             stepSize: 5000, // Smaller step size for better granularity
                             maxTicksLimit: 12, // Limit number of ticks to avoid crowding
                             callback: function(value, index, values) {
-                                if (value === 0) return '0';
+                                if (value === 0) {return '0';}
                                 if (value >= 1000) {
                                     return (value / 1000) + 'K';
                                 }
@@ -139,7 +139,7 @@ class EfficiencyCalculator {
                             maxTicksLimit: 8, // Limit ticks for better readability
                             callback: function(value, index, values) {
                                 // Format y-axis labels with scientific notation when needed
-                                if (value === 0) return '0';
+                                if (value === 0) {return '0';}
                                 if (value < 1e-15) {
                                     return value.toExponential(0);
                                 } else if (value < 0.001) {
@@ -194,7 +194,7 @@ class EfficiencyCalculator {
 
     generateDatasets() {
         const maxRpm = 50000; // Maximum RPM for calculation
-        
+
         // Generate data for different ion systems
         const ionSystems = [
             { anion: 'I-', cation: 'H+', name: 'HI (氫碘酸)', color: '#059669', conductivity: 0.85 },
@@ -204,7 +204,7 @@ class EfficiencyCalculator {
 
         const datasets = ionSystems.map(system => {
             const dataPoints = [];
-            
+
             // Generate more data points across the entire range for better visualization
             // Use smaller steps for better curve resolution
             for (let rpm = 0; rpm <= maxRpm; rpm += 1000) {
@@ -219,7 +219,7 @@ class EfficiencyCalculator {
                     console.warn(`Calculation failed at ${rpm} RPM:`, error.message);
                 }
             }
-            
+
             // Ensure we have at least some data points
             if (dataPoints.length === 0) {
                 // Add a single point at 0 to prevent empty dataset
@@ -288,13 +288,13 @@ class EfficiencyCalculator {
 
         // Check safety limits first (but don't stop calculations, just warn)
         const safety = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
-        
+
         // Calculate centrifugal acceleration
         const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
-        
+
         // Use effective height (inner radius for electrolyte column)
         const height = this.structure.r1;
-        
+
         // Calculate power density using real physics
         const powerData = this.physicsEngine.calculatePowerDensity(
             ionSystem.anion,
@@ -324,31 +324,31 @@ class EfficiencyCalculator {
                 'LiCl': { anion: 'Cl-', cation: 'Li+', conductivity: 0.7, name: '氯化鋰' },
                 'KCl': { anion: 'Cl-', cation: 'K+', conductivity: 0.6, name: '氯化鉀' }
             };
-            
+
             const currentSystem = systems[this.currentIonSystem] || systems['HI'];
-            
+
             // Calculate power output
             const powerOutput = this.calculateScientificPowerOutput(rpm, currentSystem);
-            
+
             // Calculate additional metrics
             const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
             const safety = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
-            
+
             // Calculate efficiency relative to baseline (72 W/m³ at optimal conditions)
             const baselinePower = 72; // HI system at optimal conditions
             const efficiency = powerOutput / baselinePower;
-            
+
             // Update display values with proper formatting
             this.updateDisplay('power-output', powerOutput);
             this.updateDisplay('efficiency-multiplier', efficiency);
             this.updateDisplay('energy-per-day', powerOutput * 24);
-            
+
             // Update acceleration display if element exists
             this.updateDisplay('acceleration', `${(acceleration / 9.81).toFixed(1)}g`);
-            
+
             // Update material stress warning with real physics
             this.updateMaterialWarning(safety);
-            
+
             // Update chart current point
             if (this.chart) {
                 const currentPointDataset = this.chart.data.datasets.find(ds => ds.label === '當前設定');
@@ -357,7 +357,7 @@ class EfficiencyCalculator {
                     this.chart.update('none');
                 }
             }
-            
+
         } catch (error) {
             console.error('Calculation error:', error);
             this.updateDisplay('power-output', '0.00');
@@ -414,7 +414,7 @@ class EfficiencyCalculator {
         };
 
         const level = safety.warningLevel || 'danger';
-        
+
         if (level === 'safe') {
             warningElement.classList.add('hidden');
         } else {
@@ -438,7 +438,7 @@ class EfficiencyCalculator {
             const powerOutput = this.calculateScientificPowerOutput(this.currentRPM);
             const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(this.currentRPM, this.structure.r3);
             const safety = this.physicsEngine.validateSafetyLimits(this.currentRPM, this.structure);
-            
+
             return {
                 rpm: this.currentRPM,
                 powerOutput: powerOutput,
@@ -477,6 +477,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(checkChart, 100);
         }
     };
-    
+
     checkChart();
 });

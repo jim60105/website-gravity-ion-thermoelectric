@@ -186,6 +186,7 @@
     <!-- Critical JavaScript (loaded with defer) -->
     <script defer src="/assets/js/utils.js"></script>
     <script defer src="/assets/js/main.js"></script>
+    <script defer src="/assets/js/tech-details-accordion.js"></script>
   </head>
   <body class="font-sans antialiased bg-gradient-to-br from-deep-space via-blue-900 to-purple-900 text-white">
     <!-- Skip Navigation Link for Accessibility -->
@@ -423,12 +424,92 @@
               <p class="text-gray-100 mb-4">
                 在嚴格控制的實驗環境中，達成了連續穩定的電流輸出， 驗證了技術的可靠性。
               </p>
-              <a
-                href="/assets/docs/2-heat-to-electricity-conversion-under-gravity-simplified.md"
-                class="text-energy-gold hover:underline"
+              
+              <!-- 手風琴觸發按鈕 -->
+              <button
+                id="tech-details-toggle"
+                class="text-energy-gold hover:underline focus:outline-none focus:ring-2 focus:ring-energy-gold focus:ring-opacity-50 rounded"
+                aria-expanded="false"
+                aria-controls="tech-details-content"
+                data-accordion-trigger
               >
-                技術詳解 →
-              </a>
+                <span class="accordion-text">技術詳解 →</span>
+              </button>
+              
+              <!-- 可收合內容區域 -->
+              <div
+                id="tech-details-content"
+                class="accordion-content mt-4 overflow-hidden transition-all duration-500 ease-in-out"
+                style="max-height: 0; opacity: 0;"
+                aria-hidden="true"
+                data-accordion-content
+              >
+                <div class="accordion-inner-content pt-4 border-t border-white/20">
+                  <h4 class="text-lg font-semibold text-electric-blue mb-4">深度技術解析影片</h4>
+                  <p class="text-gray-200 mb-6">
+                    通過以下兩個關鍵片段，深入了解持續電流產生的物理機制與實驗證據。
+                  </p>
+                  
+                  <!-- 影片容器 -->
+                  <div class="videos-container space-y-8">
+                    <!-- 影片 1 -->
+                    <div class="video-wrapper">
+                      <h5 class="text-lg font-medium text-energy-gold mb-3">片段一：核心原理解析 (9:54-11:53)</h5>
+                      <div class="video-container bg-black rounded-lg overflow-hidden" style="aspect-ratio: 16/9; max-width: 800px; margin: 0 auto;">
+                        <iframe
+                          id="video-1"
+                          class="w-full h-full"
+                          src="https://www.youtube-nocookie.com/embed/NA_FsBknLV0?start=594&end=713&loop=1&playlist=NA_FsBknLV0&controls=1&modestbranding=1&rel=0"
+                          title="重力離子熱電轉換核心原理"
+                          frameborder="0"
+                          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerpolicy="strict-origin-when-cross-origin"
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    </div>
+                    
+                    <!-- 影片 2 -->
+                    <div class="video-wrapper">
+                      <h5 class="text-lg font-medium text-energy-gold mb-3">片段二：實驗驗證過程 (4:25-5:48)</h5>
+                      <div class="video-container bg-black rounded-lg overflow-hidden" style="aspect-ratio: 16/9; max-width: 800px; margin: 0 auto;">
+                        <iframe
+                          id="video-2"
+                          class="w-full h-full"
+                          src="https://www.youtube-nocookie.com/embed/NA_FsBknLV0?start=265&end=348&loop=1&playlist=NA_FsBknLV0&controls=1&modestbranding=1&rel=0"
+                          title="重力離子熱電轉換實驗驗證"
+                          frameborder="0"
+                          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          referrerpolicy="strict-origin-when-cross-origin"
+                          allowfullscreen
+                        ></iframe>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- 額外資源連結 -->
+                  <div class="mt-6 pt-4 border-t border-white/10">
+                    <p class="text-sm text-gray-300 mb-3">相關資源：</p>
+                    <div class="flex flex-wrap gap-3">
+                      <a
+                        href="/assets/docs/2-heat-to-electricity-conversion-under-gravity-simplified.md"
+                        class="text-xs bg-white/10 hover:bg-white/20 text-gray-200 px-3 py-1 rounded-full transition-colors duration-300"
+                        target="_blank"
+                      >
+                        📄 技術文件
+                      </a>
+                      <a
+                        href="https://youtu.be/NA_FsBknLV0"
+                        class="text-xs bg-red-600/80 hover:bg-red-600 text-white px-3 py-1 rounded-full transition-colors duration-300"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        🎥 完整影片
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </article>
 
             <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">

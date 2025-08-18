@@ -2109,3 +2109,164 @@ html {
     scroll-behavior: auto;
   }
 }
+
+/* ========================================
+   技術詳解手風琴組件樣式
+   ======================================== */
+
+/* 手風琴基礎樣式 */
+.accordion-content {
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.3s ease;
+}
+
+.accordion-content.expanded {
+  opacity: 1 !important;
+  max-height: 2000px !important; /* 增加高度以容納更大的影片 */
+}
+
+.accordion-content.collapsed {
+  opacity: 0 !important;
+  max-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* 觸發按鈕動畫 */
+[data-accordion-trigger] {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+[data-accordion-trigger]:hover {
+  transform: translateX(4px);
+}
+
+[data-accordion-trigger]::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #f59e0b, #eab308);
+  transition: width 0.3s ease;
+}
+
+[data-accordion-trigger]:hover::after {
+  width: 100%;
+}
+
+/* 展開時按鈕樣式變化 */
+[data-accordion-trigger][aria-expanded="true"] .accordion-text::after {
+  content: " ↑";
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+[data-accordion-trigger][aria-expanded="false"] .accordion-text::after {
+  content: " →";
+  margin-left: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+/* 影片容器樣式 */
+.videos-container {
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.video-wrapper {
+  animation: fadeInScale 0.5s ease-out both;
+}
+
+.video-wrapper:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.video-wrapper:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.video-container {
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.video-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.video-container iframe {
+  border-radius: 8px;
+}
+
+/* 載入狀態樣式 - 已移除 */
+/* 根據用戶反饋移除載入動畫 */
+
+/* 動畫定義 */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .videos-container {
+    /* 保持垂直布局，不需要改變 */
+  }
+  
+  .accordion-content.expanded {
+    max-height: 1800px !important; /* 增加高度以容納更大的影片 */
+  }
+  
+  .video-wrapper h5 {
+    font-size: 1rem;
+  }
+  
+  .video-container {
+    max-width: 100% !important;
+  }
+}
+
+/* 無障礙功能增強 */
+@media (prefers-reduced-motion: reduce) {
+  .accordion-content,
+  .video-container,
+  [data-accordion-trigger] {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* 焦點狀態優化 */
+[data-accordion-trigger]:focus {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
