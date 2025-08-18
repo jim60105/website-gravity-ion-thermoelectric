@@ -28,13 +28,15 @@ class CanvasParticleSystem {
             electronColor: '#FF4444', // Red for electrons
             electricFieldColor: '#00FF88', // Green for electric field lines
             animationSpeed: 0.8,
-            gravityStrength: 0.15,
-            electricFieldStrength: 0.08,
-            thermalEnergy: 0.02,
+            gravityStrength: 0.12, // Reduced gravity for more thermal motion
+            electricFieldStrength: 0.06, // Reduced electric field for better mixing
+            thermalEnergy: 0.035, // Increased base thermal energy
             mouseInteraction: false, // Disabled for scientific accuracy
             enabled: !Utils.Device.prefersReducedMotion(),
             showElectricField: true,
             showElectronFlow: true,
+            verticalMixingRate: 0.03, // New parameter for vertical mixing
+            concentrationGradient: 1.8, // New parameter for concentration effects
             ...options
         };
 
@@ -120,7 +122,7 @@ class CanvasParticleSystem {
      * Create light negative ion (tends to rise due to lower mass)
      */
     createLightIon() {
-        const y = Utils.MathUtils.random(0, this.canvas.height * 0.7); // Start distributed but bias toward top
+        const y = Utils.MathUtils.random(0, this.canvas.height * 0.6); // Adjusted range for better mixing
 
         return {
             x: Utils.MathUtils.random(0, this.canvas.width),
@@ -134,7 +136,9 @@ class CanvasParticleSystem {
             type: 'light_ion',
             opacity: Utils.MathUtils.random(0.6, 0.9),
             equilibriumY: Utils.MathUtils.random(0, this.canvas.height * 0.4), // Prefer upper region
-            thermalEnergy: Utils.MathUtils.random(0.8, 1.2)
+            thermalEnergy: Utils.MathUtils.random(1.0, 1.5), // Enhanced thermal energy for more activity
+            jumpProbability: 0.20, // Higher probability for lighter ions
+            jumpEnergyMultiplier: 2.0
         };
     }
 
@@ -142,7 +146,7 @@ class CanvasParticleSystem {
      * Create heavy positive ion (tends to sink due to higher mass)
      */
     createHeavyIon() {
-        const y = Utils.MathUtils.random(this.canvas.height * 0.3, this.canvas.height); // Start distributed but bias toward bottom
+        const y = Utils.MathUtils.random(this.canvas.height * 0.4, this.canvas.height); // Adjusted starting range
 
         return {
             x: Utils.MathUtils.random(0, this.canvas.width),
@@ -155,8 +159,10 @@ class CanvasParticleSystem {
             color: this.options.heavyIonColor,
             type: 'heavy_ion',
             opacity: Utils.MathUtils.random(0.6, 0.9),
-            equilibriumY: Utils.MathUtils.random(this.canvas.height * 0.6, this.canvas.height), // Prefer lower region
-            thermalEnergy: Utils.MathUtils.random(0.8, 1.2)
+            equilibriumY: Utils.MathUtils.random(this.canvas.height * 0.5, this.canvas.height * 0.9), // Adjusted equilibrium range
+            thermalEnergy: Utils.MathUtils.random(1.2, 1.8), // Increased thermal energy for upward jumping
+            jumpProbability: 0.15, // Probability of thermal jump per frame
+            jumpEnergyMultiplier: 2.5 // Energy multiplier during thermal jumps
         };
     }
 
@@ -274,6 +280,16 @@ class CanvasParticleSystem {
             particle.vx += thermalForceX;
             particle.vy += thermalForceY;
 
+            // Enhanced thermal jumping mechanism for ions
+            if (particle.type === 'heavy_ion' || particle.type === 'light_ion') {
+                // Calculate thermal jump force for upward motion
+                const jumpForce = this.calculateThermalJumpForce(particle);
+                particle.vy += jumpForce;
+
+                // Update particle appearance based on concentration density
+                this.updateParticleConcentrationEffects(particle);
+            }
+
             // Special behavior for electrons (electron flow against electric field)
             if (particle.type === 'electron') {
                 // Electrons gain energy moving against electric field
@@ -287,9 +303,9 @@ class CanvasParticleSystem {
                 }
             }
 
-            // Apply equilibrium force to maintain separation
+            // Apply equilibrium force to maintain separation with enhanced effect
             if (particle.type === 'light_ion' || particle.type === 'heavy_ion') {
-                const equilibriumForce = (particle.equilibriumY - particle.y) * 0.001;
+                const equilibriumForce = (particle.equilibriumY - particle.y) * 0.002; // Increased from 0.001
                 particle.vy += equilibriumForce;
             }
 
@@ -333,6 +349,74 @@ class CanvasParticleSystem {
         const timeBuildup = Math.min(1.0, this.equilibriumTime / 10.0);
 
         return fieldStrength * timeBuildup;
+    }
+
+    /**
+     * Calculate thermal vibration driven jumping force
+     * @param {Object} particle - Particle object
+     * @returns {number} Vertical jumping force
+     */
+    calculateThermalJumpForce(particle) {
+        // Check if particle should jump based on probability
+        if (Math.random() > particle.jumpProbability) {
+            return 0;
+        }
+
+        const baseEnergy = particle.thermalEnergy;
+        const massEffect = 1 / particle.mass; // Heavier particles jump less
+        
+        // Heavy ions get occasional strong upward jumps
+        if (particle.type === 'heavy_ion') {
+            const strongJumpChance = Math.random() < 0.3; // 30% chance for strong jump
+            const jumpMultiplier = strongJumpChance ? particle.jumpEnergyMultiplier : 1.0;
+            return baseEnergy * massEffect * jumpMultiplier * -0.8; // Upward force
+        }
+        
+        // Light ions get more frequent but gentler jumps
+        const jumpMultiplier = Math.random() < 0.1 ? particle.jumpEnergyMultiplier * 0.8 : 1.0;
+        return baseEnergy * massEffect * jumpMultiplier * -0.6;
+    }
+
+    /**
+     * Calculate concentration density based on Boltzmann distribution
+     * @param {Object} particle - Particle object
+     * @param {number} y - Height position
+     * @returns {number} Concentration density factor
+     */
+    calculateConcentrationDensity(particle, y) {
+        const normalizedHeight = y / this.canvas.height;
+        
+        if (particle.type === 'heavy_ion') {
+            // Heavy ions concentrated toward bottom (exponential decay upward)
+            return Math.exp(-this.options.concentrationGradient * (1 - normalizedHeight));
+        } else if (particle.type === 'light_ion') {
+            // Light ions concentrated toward top (exponential decay downward)
+            return Math.exp(-this.options.concentrationGradient * normalizedHeight);
+        }
+        
+        return 1.0; // Default for other particle types
+    }
+
+    /**
+     * Update particle appearance based on concentration density
+     * @param {Object} particle - Particle object
+     */
+    updateParticleConcentrationEffects(particle) {
+        // Calculate density at current position
+        const density = this.calculateConcentrationDensity(particle, particle.y);
+        
+        // Adjust opacity based on concentration (higher concentration = more visible)
+        const baseOpacity = particle.type === 'heavy_ion' ? 0.6 : 0.7;
+        particle.opacity = Math.max(0.3, Math.min(0.95, baseOpacity + density * 0.3));
+        
+        // Adjust size based on thermal energy state
+        const energyFactor = particle.thermalEnergy / 1.5;
+        const baseSize = particle.type === 'heavy_ion' ? 5 : 3;
+        particle.renderSize = baseSize * (0.8 + 0.4 * energyFactor);
+        
+        // Enhance color brightness when at non-equilibrium positions
+        const heightFactor = 1 - Math.abs(particle.y - particle.equilibriumY) / this.canvas.height;
+        particle.brightnessFactor = 1 + (1 - heightFactor) * 0.3;
     }
 
     /**
@@ -429,28 +513,35 @@ class CanvasParticleSystem {
 
             this.ctx.save();
 
-            // Set particle style based on type
+            // Use dynamic opacity and size from concentration effects
             this.ctx.globalAlpha = particle.opacity;
-            this.ctx.fillStyle = particle.color;
+            
+            // Apply brightness factor to color
+            const brightnessFactor = particle.brightnessFactor || 1.0;
+            const adjustedColor = this.adjustColorBrightness(particle.color, brightnessFactor);
+            this.ctx.fillStyle = adjustedColor;
+
+            // Use dynamic size if available
+            const particleSize = particle.renderSize || particle.size;
 
             // Add charge indication with glow
             if (particle.charge > 0) {
-                this.ctx.shadowColor = particle.color;
-                this.ctx.shadowBlur = particle.size * 1.5;
+                this.ctx.shadowColor = adjustedColor;
+                this.ctx.shadowBlur = particleSize * 1.5;
             } else {
-                this.ctx.shadowColor = particle.color;
-                this.ctx.shadowBlur = particle.size;
+                this.ctx.shadowColor = adjustedColor;
+                this.ctx.shadowBlur = particleSize;
             }
 
             // Draw main particle
             this.ctx.beginPath();
-            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.arc(particle.x, particle.y, particleSize, 0, Math.PI * 2);
             this.ctx.fill();
 
             // Draw charge symbol
             this.ctx.shadowBlur = 0;
             this.ctx.fillStyle = 'white';
-            this.ctx.font = `${particle.size * 1.2}px Arial`;
+            this.ctx.font = `${particleSize * 1.2}px Arial`;
             this.ctx.textAlign = 'center';
             this.ctx.textBaseline = 'middle';
 
@@ -459,6 +550,24 @@ class CanvasParticleSystem {
 
             this.ctx.restore();
         });
+    }
+
+    /**
+     * Adjust color brightness
+     * @param {string} color - Original color (hex format)
+     * @param {number} factor - Brightness factor (1.0 = normal, >1.0 = brighter, <1.0 = darker)
+     * @returns {string} Adjusted color
+     */
+    adjustColorBrightness(color, factor) {
+        // Simple brightness adjustment for hex colors
+        if (color.startsWith('#')) {
+            const hex = color.slice(1);
+            const r = Math.min(255, Math.round(parseInt(hex.slice(0, 2), 16) * factor));
+            const g = Math.min(255, Math.round(parseInt(hex.slice(2, 4), 16) * factor));
+            const b = Math.min(255, Math.round(parseInt(hex.slice(4, 6), 16) * factor));
+            return `rgb(${r}, ${g}, ${b})`;
+        }
+        return color; // Return original if not hex format
     }
 
     /**
@@ -1061,9 +1170,11 @@ const AnimationManager = {
                 lightIonCount: Utils.Device.isMobile() ? 60 : 120,
                 heavyIonCount: Utils.Device.isMobile() ? 40 : 80,
                 electronCount: Utils.Device.isMobile() ? 20 : 40,
-                gravityStrength: 0.15,
-                electricFieldStrength: 0.08,
-                thermalEnergy: 0.02,
+                gravityStrength: 0.12, // Reduced for better thermal motion
+                electricFieldStrength: 0.06, // Reduced for better mixing
+                thermalEnergy: 0.035, // Increased for enhanced effects
+                verticalMixingRate: 0.03, // Enhanced vertical mixing
+                concentrationGradient: 1.8, // Concentration gradient strength
                 showElectricField: true,
                 showElectronFlow: true,
                 mouseInteraction: false // Disabled for scientific accuracy
