@@ -1858,10 +1858,13 @@ textarea:focus {
 /* Flip Simulation Styles */
 .battery-simulation {
   perspective: 1000px;
+  min-height: 400px; /* Increased height to accommodate all elements */
 }
 
 .battery-3d {
   transform-style: preserve-3d;
+  position: relative;
+  padding: 60px 20px; /* Add padding for voltage indicators */
 }
 
 .battery-3d.flipped {
@@ -1870,18 +1873,29 @@ textarea:focus {
 
 .battery-visual {
   transform-style: preserve-3d;
+  position: relative;
+  z-index: 5;
 }
 
 .voltage-indicator {
   transition: all 0.5s ease;
+  z-index: 10;
+  pointer-events: none;
+  min-height: 40px; /* Ensure minimum height for text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .battery-3d.flipped .voltage-indicator.top {
-  transform: translateX(-50%) rotateX(180deg);
+  transform: translateX(-50%) rotateX(180deg) translateZ(10px);
+  top: -50px; /* Adjusted for better spacing */
 }
 
 .battery-3d.flipped .voltage-indicator.bottom {
-  transform: translateX(-50%) rotateX(180deg);
+  transform: translateX(-50%) rotateX(180deg) translateZ(10px);
+  bottom: -50px; /* Adjusted for better spacing */
 }
 
 /* Ion Animation Styles */
@@ -1937,6 +1951,9 @@ textarea:focus {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: none;
   font-weight: 600;
+  min-width: 80px; /* Ensure consistent button size */
+  position: relative;
+  z-index: 15; /* Ensure buttons are above other elements */
 }
 
 .control-btn:hover {
@@ -1946,6 +1963,22 @@ textarea:focus {
 
 .control-btn:active {
   transform: translateY(0);
+}
+
+/* Simulation Controls Container */
+.simulation-controls {
+  position: absolute;
+  bottom: 20px; /* Adjusted to prevent overlap */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  gap: 1rem;
 }
 
 /* Data Cards */
@@ -2074,18 +2107,93 @@ textarea:focus {
   }
 }
 
+@media (max-width: 768px) {
+  .equipment-card {
+    padding: 16px;
+  }
+  
+  .battery-simulation {
+    min-height: 350px; /* Slightly smaller on mobile but still adequate */
+  }
+  
+  .battery-3d {
+    padding: 50px 15px; /* Reduced padding for mobile */
+  }
+  
+  .battery-visual .battery-body {
+    width: 80px; /* Larger than before but still mobile-friendly */
+    height: 120px;
+  }
+  
+  .voltage-indicator {
+    font-size: 14px;
+    min-height: 35px;
+  }
+  
+  .voltage-value {
+    font-size: 16px !important; /* Ensure readability */
+  }
+  
+  .voltage-label {
+    font-size: 12px;
+  }
+  
+  .simulation-controls {
+    bottom: 15px;
+    padding: 6px;
+  }
+  
+  .control-btn {
+    min-width: 60px;
+    padding: 8px 12px !important;
+    font-size: 14px;
+  }
+  
+  .parameters-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 480px) {
   .equipment-card {
     padding: 16px;
   }
   
+  .battery-simulation {
+    min-height: 320px;
+  }
+  
+  .battery-3d {
+    padding: 45px 10px;
+  }
+  
   .battery-visual .battery-body {
-    width: 24px;
-    height: 36px;
+    width: 70px;
+    height: 100px;
   }
   
   .voltage-indicator {
-    font-size: 14px;
+    font-size: 12px;
+    min-height: 30px;
+  }
+  
+  .voltage-value {
+    font-size: 14px !important;
+  }
+  
+  .voltage-label {
+    font-size: 11px;
+  }
+  
+  .simulation-controls {
+    bottom: 10px;
+    padding: 4px;
+  }
+  
+  .control-btn {
+    min-width: 50px;
+    padding: 6px 10px !important;
+    font-size: 12px;
   }
   
   .parameters-grid {

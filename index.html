@@ -1015,18 +1015,19 @@
                 </div>
                 
                 <!-- 3D Battery Simulation -->
-                <div class="battery-simulation relative bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg h-80 overflow-hidden">
-                  <div id="battery-container" class="battery-3d w-full h-full flex items-center justify-center transition-transform duration-1000">
+                <div class="battery-simulation relative bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg min-h-[400px] overflow-visible">
+                  <div id="battery-container" class="battery-3d w-full h-full flex items-center justify-center transition-transform duration-1000"
+                    >
                     <!-- Battery Visual -->
                     <div class="battery-visual relative">
                       <div class="battery-body w-32 h-48 bg-gradient-to-b from-yellow-400 to-orange-500 rounded-lg shadow-lg relative">
                         <!-- Voltage Indicators -->
-                        <div class="voltage-indicator top absolute -top-6 left-1/2 transform -translate-x-1/2">
-                          <div class="voltage-value text-lg font-bold text-red-600" id="top-voltage">+1.2V</div>
+                        <div class="voltage-indicator top absolute -top-12 left-1/2 transform -translate-x-1/2">
+                          <div class="voltage-value text-lg font-bold text-red-600" id="top-voltage">+12.0mV</div>
                           <div class="voltage-label text-sm text-gray-700">頂部</div>
                         </div>
-                        <div class="voltage-indicator bottom absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-                          <div class="voltage-value text-lg font-bold text-blue-600" id="bottom-voltage">0.0V</div>
+                        <div class="voltage-indicator bottom absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+                          <div class="voltage-value text-lg font-bold text-blue-600" id="bottom-voltage">0.0mV</div>
                           <div class="voltage-label text-sm text-gray-700">底部</div>
                         </div>
                         
@@ -1044,11 +1045,11 @@
                   </div>
                   
                   <!-- Simulation Controls -->
-                  <div class="simulation-controls absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
-                    <button id="flip-upright" class="control-btn bg-electric-blue text-white px-4 py-2 rounded-lg hover:bg-electric-blue/80 transition-colors">
+                  <div class="simulation-controls">
+                    <button id="flip-upright" class="control-btn bg-electric-blue text-white px-4 py-2 rounded-lg hover:bg-electric-blue/80 transition-colors disabled:opacity-50">
                       正立
                     </button>
-                    <button id="flip-upside-down" class="control-btn bg-plasma-purple text-white px-4 py-2 rounded-lg hover:bg-plasma-purple/80 transition-colors">
+                    <button id="flip-upside-down" class="control-btn bg-plasma-purple text-white px-4 py-2 rounded-lg hover:bg-plasma-purple/80 transition-colors disabled:opacity-50">
                       倒立
                     </button>
                   </div>
@@ -1058,7 +1059,7 @@
                 <div class="real-time-data mt-6 grid grid-cols-2 gap-4">
                   <div class="data-card bg-white rounded-lg p-4 border border-gray-200">
                     <h6 class="font-semibold text-gray-800 mb-2">電壓差</h6>
-                    <div class="value text-2xl font-bold text-electric-blue" id="voltage-diff">1.2V</div>
+                    <div class="value text-2xl font-bold text-electric-blue" id="voltage-diff">+12.0mV</div>
                   </div>
                   <div class="data-card bg-white rounded-lg p-4 border border-gray-200">
                     <h6 class="font-semibold text-gray-800 mb-2">電場方向</h6>
@@ -1107,15 +1108,15 @@
                       <tbody class="text-gray-800">
                         <tr class="border-b border-gray-200">
                           <td class="py-2 font-medium">正立</td>
-                          <td class="py-2">+1.2V</td>
-                          <td class="py-2">0.0V</td>
-                          <td class="py-2 text-electric-blue">+1.2V</td>
+                          <td class="py-2">+12.0mV</td>
+                          <td class="py-2">0.0mV</td>
+                          <td class="py-2 text-electric-blue">+12.0mV</td>
                         </tr>
                         <tr>
                           <td class="py-2 font-medium">倒立</td>
-                          <td class="py-2">0.0V</td>
-                          <td class="py-2">+1.2V</td>
-                          <td class="py-2 text-plasma-purple">-1.2V</td>
+                          <td class="py-2">0.0mV</td>
+                          <td class="py-2">+12.0mV</td>
+                          <td class="py-2 text-plasma-purple">-12.0mV</td>
                         </tr>
                       </tbody>
                     </table>

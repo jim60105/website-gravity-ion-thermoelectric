@@ -9,15 +9,15 @@ class ExperimentSimulation {
     this.animationDuration = 1000;
     this.voltageData = {
       upright: {
-        top: 1.2,
+        top: 0.012,
         bottom: 0.0,
-        difference: 1.2,
+        difference: 0.012,
         direction: '向上'
       },
       upsideDown: {
         top: 0.0,
-        bottom: 1.2,
-        difference: -1.2,
+        bottom: 0.012,
+        difference: -0.012,
         direction: '向下'
       }
     };
@@ -110,25 +110,25 @@ class ExperimentSimulation {
   updateDisplayValues(state) {
     const data = this.voltageData[state];
 
-    // Update voltage indicators
+    // Update voltage indicators (convert to mV for display)
     const topVoltage = document.getElementById('top-voltage');
     const bottomVoltage = document.getElementById('bottom-voltage');
 
     if (topVoltage && bottomVoltage) {
-      topVoltage.textContent = `${data.top > 0 ? '+' : ''}${data.top.toFixed(1)}V`;
-      bottomVoltage.textContent = `${data.bottom > 0 ? '+' : ''}${data.bottom.toFixed(1)}V`;
+      topVoltage.textContent = `${data.top > 0 ? '+' : ''}${(data.top * 1000).toFixed(1)}mV`;
+      bottomVoltage.textContent = `${data.bottom > 0 ? '+' : ''}${(data.bottom * 1000).toFixed(1)}mV`;
 
       // Update colors based on polarity
       topVoltage.className = `voltage-value text-lg font-bold ${data.top > 0 ? 'text-red-600' : 'text-blue-600'}`;
       bottomVoltage.className = `voltage-value text-lg font-bold ${data.bottom > 0 ? 'text-red-600' : 'text-blue-600'}`;
     }
 
-    // Update real-time data cards
+    // Update real-time data cards (convert to mV for display)
     const voltageDiff = document.getElementById('voltage-diff');
     const fieldDirection = document.getElementById('field-direction');
 
     if (voltageDiff) {
-      voltageDiff.textContent = `${data.difference > 0 ? '+' : ''}${data.difference.toFixed(1)}V`;
+      voltageDiff.textContent = `${data.difference > 0 ? '+' : ''}${(data.difference * 1000).toFixed(1)}mV`;
       voltageDiff.className = `value text-2xl font-bold ${data.difference > 0 ? 'text-electric-blue' : 'text-red-600'}`;
     }
 
@@ -192,10 +192,10 @@ class ExperimentSimulation {
       const fluctuation = (Math.random() - 0.5) * 0.02;
       const newDifference = baseData.difference + fluctuation;
 
-      // Update display with fluctuations
+      // Update display with fluctuations (convert to mV)
       const voltageDiff = document.getElementById('voltage-diff');
       if (voltageDiff) {
-        voltageDiff.textContent = `${newDifference > 0 ? '+' : ''}${newDifference.toFixed(3)}V`;
+        voltageDiff.textContent = `${newDifference > 0 ? '+' : ''}${(newDifference * 1000).toFixed(3)}mV`;
       }
     }, 2000); // Update every 2 seconds
   }
