@@ -101,9 +101,14 @@ This is a modern promotional website showcasing revolutionary gravity ion thermo
 
 ### Available Scripts
 
-- `npm start`: Start development server (This command will keep running until you stop it; you should run it in the background to prevent it from blocking your workflow.)
-- `npm run lint`: Run ESLint code quality checks
-- `npm run format`: Format code using Prettier
+> Note: Use #runTasks to run tasks.
+
+- `#runTasks install`: Install project dependencies
+- `#runTasks start`: Start development server
+
+NEVER START THE HTTP-SERVER WITH NPX COMMAND!!!  
+NEVER START THE HTTP-SERVER WITH NPX COMMAND!!!  
+NEVER START THE HTTP-SERVER WITH NPX COMMAND!!!
 
 ### Key Components
 
