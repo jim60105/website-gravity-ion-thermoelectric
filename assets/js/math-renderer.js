@@ -50,7 +50,7 @@ class MathRenderer {
     setupEquations() {
         // Define Boltzmann equation with gravity and electric field
         this.defineEquation('boltzmann', {
-            latex: `n(z) = n_0 \\exp\\left(\\frac{-(m - q E/g) g z}{k_B T}\\right)`,
+            latex: `n(z) = n_0 \\exp\\left(\\frac{-(m G - q E) z}{k_B T}\\right)`,
             description: 'Modified Boltzmann distribution under gravity and electric field',
             variables: {
                 'n(z)': 'Ion concentration at height z',
@@ -58,7 +58,7 @@ class MathRenderer {
                 'm': 'Ion mass difference',
                 'q': 'Ion charge',
                 'E': 'Electric field strength',
-                'g': 'Gravitational acceleration',
+                'G': 'Gravitational constant',
                 'z': 'Height',
                 'k_B': 'Boltzmann constant',
                 'T': 'Temperature'

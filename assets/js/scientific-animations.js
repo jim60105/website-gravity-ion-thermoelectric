@@ -60,7 +60,7 @@ class ScientificAnimationManager {
 
         // Define the Boltzmann equation with gravity and electric field terms
         const boltzmannEquation = `
-            $$n(z) = n_0 \\exp\\left(\\frac{-(m - q E/g) g z}{k_B T}\\right)$$
+            $$n(z) = n_0 \\exp\\left(\\frac{-(m G - q E) z}{k_B T}\\right)$$
         `;
 
         // Set the equation content
@@ -88,10 +88,10 @@ class ScientificAnimationManager {
             color: '#3b82f6'
         });
 
-        this.variableExplanations.set('g', {
-            symbol: 'g',
-            description: '重力加速度',
-            unit: 'm/s²',
+        this.variableExplanations.set('G', {
+            symbol: 'G',
+            description: '重力常數',
+            unit: 'm³/kg⋅s²',
             color: '#8a2be2'
         });
 
