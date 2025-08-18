@@ -1,6 +1,6 @@
 /**
  * Accessibility Enhancement Module
- * 
+ *
  * This module provides comprehensive accessibility features including:
  * - Enhanced keyboard navigation
  * - Screen reader improvements
@@ -21,11 +21,11 @@ class AccessibilityEnhancer {
             '[tabindex]:not([tabindex="-1"])',
             '[contenteditable="true"]'
         ];
-        
+
         this.currentFocusIndex = -1;
         this.focusTracker = [];
         this.announcements = [];
-        
+
         this.init();
     }
 
@@ -55,7 +55,7 @@ class AccessibilityEnhancer {
         this.monitorColorContrast();
         this.setupAnnouncementSystem();
         this.enhanceFormAccessibility();
-        
+
         console.info('[Accessibility] Enhancement systems initialized');
     }
 
@@ -100,10 +100,10 @@ class AccessibilityEnhancer {
         const focusableElements = this.getFocusableElements();
         const currentElement = document.activeElement;
         const currentIndex = Array.from(focusableElements).indexOf(currentElement);
-        
+
         // Track focus for better management
         this.currentFocusIndex = currentIndex;
-        
+
         // Handle modal trapping
         const modal = currentElement.closest('[role="dialog"], .modal');
         if (modal) {
@@ -135,13 +135,13 @@ class AccessibilityEnhancer {
      */
     handleActivation(e) {
         const target = e.target;
-        
+
         // Enhanced button activation
         if (target.matches('[role="button"]:not(button)')) {
             e.preventDefault();
             target.click();
         }
-        
+
         // Enhanced link activation
         if (target.matches('a[href^="#"]')) {
             e.preventDefault();
@@ -154,17 +154,17 @@ class AccessibilityEnhancer {
      */
     handleArrowNavigation(e) {
         const target = e.target;
-        
+
         // Navigation menu arrow support
         if (target.closest('nav')) {
             this.handleMenuArrowNavigation(e);
         }
-        
+
         // Tab panel navigation
         if (target.closest('[role="tablist"]')) {
             this.handleTabArrowNavigation(e);
         }
-        
+
         // Slider/carousel navigation
         if (target.closest('[role="slider"], .carousel')) {
             this.handleSliderNavigation(e);
@@ -176,10 +176,10 @@ class AccessibilityEnhancer {
      */
     handleHomeEndNavigation(e) {
         const container = e.target.closest('nav, [role="tablist"], [role="menu"]');
-        if (!container) return;
-        
+        if (!container) {return;}
+
         const focusableElements = container.querySelectorAll(this.focusableElements.join(', '));
-        
+
         if (e.key === 'Home' && focusableElements.length > 0) {
             e.preventDefault();
             focusableElements[0].focus();
@@ -253,13 +253,13 @@ class AccessibilityEnhancer {
     enhanceScreenReaderSupport() {
         // Add live regions for dynamic content
         this.setupLiveRegions();
-        
+
         // Enhance image descriptions
         this.enhanceImageDescriptions();
-        
+
         // Add context descriptions
         this.addContextDescriptions();
-        
+
         // Enhance table accessibility
         this.enhanceTableAccessibility();
     }
@@ -285,20 +285,20 @@ class AccessibilityEnhancer {
         const context = img.closest('section, article, div[class*="card"]');
         const heading = context?.querySelector('h1, h2, h3, h4, h5, h6');
         const contextName = heading?.textContent || '';
-        
+
         // Scientific diagrams
         if (filename.includes('energy') || filename.includes('thermodynamic')) {
             return `${contextName} 相關的科學示意圖`;
         }
-        
+
         if (filename.includes('experiment') || filename.includes('test')) {
             return `${contextName} 實驗設備圖片`;
         }
-        
+
         if (filename.includes('chart') || filename.includes('graph')) {
             return `${contextName} 數據圖表`;
         }
-        
+
         return contextName ? `${contextName} 相關圖片` : '科學研究相關圖片';
     }
 
@@ -331,15 +331,15 @@ class AccessibilityEnhancer {
         if (element.classList.contains('particle-simulator')) {
             return '這是一個互動式粒子模擬器，您可以調整重力和熱振動參數來觀察離子分離效果';
         }
-        
+
         if (element.classList.contains('chart-container')) {
             return '這是一個互動式圖表，顯示實驗數據和研究結果';
         }
-        
+
         if (element.classList.contains('slider')) {
             return '使用左右箭頭鍵或滑鼠拖拽來調整數值';
         }
-        
+
         return null;
     }
 
@@ -396,22 +396,22 @@ class AccessibilityEnhancer {
     announceToScreenReader(message, priority = 'polite') {
         const regionId = priority === 'assertive' ? 'aria-live-assertive' : 'aria-live-polite';
         const region = document.getElementById(regionId);
-        
+
         if (region) {
             // Clear previous announcement
             region.textContent = '';
-            
+
             // Add new announcement with slight delay
             setTimeout(() => {
                 region.textContent = message;
-                
+
                 // Clear after announcement
                 setTimeout(() => {
                     region.textContent = '';
                 }, 2000);
             }, 100);
         }
-        
+
         console.info(`[Accessibility] Announced: ${message}`);
     }
 
@@ -421,9 +421,9 @@ class AccessibilityEnhancer {
     setupMotionPreferences() {
         // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-        
+
         this.updateMotionSettings(prefersReducedMotion.matches);
-        
+
         // Listen for changes
         prefersReducedMotion.addEventListener('change', (e) => {
             this.updateMotionSettings(e.matches);
@@ -436,7 +436,7 @@ class AccessibilityEnhancer {
     updateMotionSettings(reduceMotion) {
         if (reduceMotion) {
             document.documentElement.classList.add('reduce-motion');
-            
+
             // Disable animations
             const style = document.createElement('style');
             style.textContent = `
@@ -449,11 +449,11 @@ class AccessibilityEnhancer {
             `;
             style.id = 'reduced-motion-styles';
             document.head.appendChild(style);
-            
+
             console.info('[Accessibility] Reduced motion preferences applied');
         } else {
             document.documentElement.classList.remove('reduce-motion');
-            
+
             // Remove reduced motion styles
             const existingStyle = document.getElementById('reduced-motion-styles');
             if (existingStyle) {
@@ -496,12 +496,12 @@ class AccessibilityEnhancer {
         const context = button.closest('section, article, div[class*="card"]');
         const heading = context?.querySelector('h1, h2, h3, h4, h5, h6');
         const contextName = heading?.textContent || '內容';
-        
-        if (button.classList.contains('share')) return `分享 ${contextName}`;
-        if (button.classList.contains('download')) return `下載 ${contextName}`;
-        if (button.classList.contains('close')) return `關閉 ${contextName}`;
-        if (button.classList.contains('menu')) return '開啟選單';
-        
+
+        if (button.classList.contains('share')) {return `分享 ${contextName}`;}
+        if (button.classList.contains('download')) {return `下載 ${contextName}`;}
+        if (button.classList.contains('close')) {return `關閉 ${contextName}`;}
+        if (button.classList.contains('menu')) {return '開啟選單';}
+
         return '按鈕';
     }
 
@@ -513,7 +513,7 @@ class AccessibilityEnhancer {
         const context = link.closest('section, article, div[class*="card"]');
         const heading = context?.querySelector('h1, h2, h3, h4, h5, h6');
         const contextName = heading?.textContent || '';
-        
+
         if (href?.startsWith('#')) {
             const targetId = href.substring(1);
             const target = document.getElementById(targetId);
@@ -522,15 +522,15 @@ class AccessibilityEnhancer {
                 return `前往 ${targetHeading?.textContent || targetId}`;
             }
         }
-        
+
         if (href?.includes('youtube.com') || href?.includes('youtu.be')) {
             return `觀看影片：${contextName}`;
         }
-        
+
         if (href?.includes('.pdf') || href?.includes('vixra.org')) {
             return `下載文件：${contextName}`;
         }
-        
+
         return contextName ? `閱讀更多：${contextName}` : '連結';
     }
 
@@ -562,7 +562,7 @@ class AccessibilityEnhancer {
             const styles = window.getComputedStyle(element);
             const bgColor = styles.backgroundColor;
             const textColor = styles.color;
-            
+
             // Basic contrast checking (you might want to implement a more robust solution)
             if (bgColor !== 'rgba(0, 0, 0, 0)' && textColor !== 'rgba(0, 0, 0, 0)') {
                 const contrast = this.calculateContrast(bgColor, textColor);
@@ -588,13 +588,13 @@ class AccessibilityEnhancer {
             // This is a placeholder implementation
             return 0.5; // Placeholder
         };
-        
+
         const lum1 = getLuminance(color1);
         const lum2 = getLuminance(color2);
-        
+
         const lighter = Math.max(lum1, lum2);
         const darker = Math.min(lum1, lum2);
-        
+
         return (lighter + 0.05) / (darker + 0.05);
     }
 
@@ -650,11 +650,11 @@ class AccessibilityEnhancer {
      */
     getInputLabel(input) {
         const label = document.querySelector(`label[for="${input.id}"]`);
-        if (label) return label.textContent;
-        
+        if (label) {return label.textContent;}
+
         const ariaLabel = input.getAttribute('aria-label');
-        if (ariaLabel) return ariaLabel;
-        
+        if (ariaLabel) {return ariaLabel;}
+
         return input.placeholder || '輸入欄位';
     }
 
@@ -672,13 +672,13 @@ class AccessibilityEnhancer {
         if (element.hasAttribute('aria-label')) {
             return element.getAttribute('aria-label');
         }
-        
+
         if (element.hasAttribute('aria-labelledby')) {
             const labelId = element.getAttribute('aria-labelledby');
             const label = document.getElementById(labelId);
-            if (label) return label.textContent;
+            if (label) {return label.textContent;}
         }
-        
+
         return element.textContent || element.tagName.toLowerCase();
     }
 
@@ -693,7 +693,7 @@ class AccessibilityEnhancer {
             rect.bottom <= window.innerHeight &&
             rect.right <= window.innerWidth
         );
-        
+
         if (!isVisible) {
             element.scrollIntoView({
                 behavior: 'smooth',

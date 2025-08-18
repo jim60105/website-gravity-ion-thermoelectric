@@ -11,7 +11,7 @@ class PhysicsEngine {
         this.CONSTANTS = {
             BOLTZMANN_CONSTANT: 1.380649e-23,     // J/K (Boltzmann constant)
             ELECTRON_CHARGE: 1.602176634e-19,     // C (elementary charge)
-            
+
             // Ion masses (kg) - from paper and atomic data
             ION_MASSES: {
                 'H+': 1.1526e-26,                 // Hydrogen ion
@@ -20,14 +20,14 @@ class PhysicsEngine {
                 'Cl-': 5.887e-26,                 // Chloride ion
                 'K+': 6.493e-26                   // Potassium ion
             },
-            
+
             // Material properties for structural calculations
             MATERIAL_PROPERTIES: {
                 ALUMINUM_ALLOY_YIELD: 670e6,       // Pa (yield strength)
                 ALUMINUM_DENSITY: 2700,            // kg/m³
                 SOLUTION_DENSITY: 1000             // kg/m³
             },
-            
+
             // Default structural parameters (from paper Table 1)
             DEFAULT_STRUCTURE: {
                 r1: 0.0025,                        // Inner radius (m)
@@ -36,7 +36,7 @@ class PhysicsEngine {
                 d: 0.0021                          // Material thickness (m) = 0.84 × r1
             }
         };
-        
+
         this.temperature = 298.15; // Room temperature (K)
     }
 
@@ -50,7 +50,7 @@ class PhysicsEngine {
      * @returns {number} Concentration ratio
      */
     calculateBoltzmannRatio(ionMass, acceleration, heightDifference, temperature = this.temperature) {
-        const exponent = -(ionMass * acceleration * heightDifference) / 
+        const exponent = -(ionMass * acceleration * heightDifference) /
                         (this.CONSTANTS.BOLTZMANN_CONSTANT * temperature);
         return Math.exp(exponent);
     }
@@ -101,12 +101,12 @@ class PhysicsEngine {
      */
     calculateMaxRotationalSpeed(structure = this.CONSTANTS.DEFAULT_STRUCTURE) {
         const { r1, r2, r3, d } = structure;
-        const { ALUMINUM_ALLOY_YIELD: Y, ALUMINUM_DENSITY: rho_solid, SOLUTION_DENSITY: rho_liquid } = 
+        const { ALUMINUM_ALLOY_YIELD: Y, ALUMINUM_DENSITY: rho_solid, SOLUTION_DENSITY: rho_liquid } =
               this.CONSTANTS.MATERIAL_PROPERTIES;
 
         const numerator = ((r2*r2 - r1*r1) + (r3 - r1)*d) * Y;
         const denominator = r3*r3 * (rho_solid*(r2*r2 - r1*r1) + rho_liquid*r1*r1);
-        
+
         const omegaSquared = numerator / denominator;
         return Math.sqrt(Math.max(0, omegaSquared)); // Ensure non-negative
     }
@@ -124,23 +124,23 @@ class PhysicsEngine {
     calculatePowerDensity(anion, cation, acceleration, height, conductivity = 0.85) {
         const anionMass = this.CONSTANTS.ION_MASSES[anion];
         const cationMass = this.CONSTANTS.ION_MASSES[cation];
-        
+
         if (!anionMass || !cationMass) {
             throw new Error(`Unknown ion type: ${anion} or ${cation}`);
         }
 
         // Calculate voltage difference
         const voltageDifference = this.calculateVoltageDifference(anionMass, cationMass, acceleration, height);
-        
+
         // Maximum output voltage is half the open-circuit voltage
         const outputVoltage = voltageDifference / 2;
-        
+
         // Calculate resistance for 1 m³ (R = 1/σ for unit cube)
         const resistance = 1 / conductivity;
-        
+
         // Power = V²/R
         const powerDensity = (outputVoltage * outputVoltage) / resistance;
-        
+
         return {
             voltageDifference,
             outputVoltage,
@@ -176,7 +176,7 @@ class PhysicsEngine {
     calculateIonSystemPerformance(rpm, structure = this.CONSTANTS.DEFAULT_STRUCTURE) {
         const acceleration = this.calculateCentrifugalAcceleration(rpm, structure.r3);
         const height = structure.r1; // Effective height for calculation
-        
+
         const systems = [
             { anion: 'I-', cation: 'H+', name: 'HI', conductivity: 0.85 },
             { anion: 'Cl-', cation: 'Li+', name: 'LiCl', conductivity: 0.7 },
@@ -185,13 +185,13 @@ class PhysicsEngine {
 
         return systems.map(system => {
             const performance = this.calculatePowerDensity(
-                system.anion, 
-                system.cation, 
-                acceleration, 
-                height, 
+                system.anion,
+                system.cation,
+                acceleration,
+                height,
                 system.conductivity
             );
-            
+
             return {
                 ...system,
                 ...performance,
@@ -212,9 +212,9 @@ class PhysicsEngine {
         const omega = (2 * Math.PI * rpm) / 60;
         const maxOmega = this.calculateMaxRotationalSpeed(structure);
         const maxRpm = (maxOmega * 60) / (2 * Math.PI);
-        
+
         const safetyFactor = maxOmega > 0 ? omega / maxOmega : Infinity;
-        
+
         return {
             currentRpm: rpm,
             maxSafeRpm: maxRpm,
@@ -230,9 +230,9 @@ class PhysicsEngine {
      * @returns {string} Warning level
      */
     getWarningLevel(safetyFactor) {
-        if (safetyFactor <= 0.6) return 'safe';
-        if (safetyFactor <= 0.8) return 'caution';
-        if (safetyFactor <= 1.0) return 'warning';
+        if (safetyFactor <= 0.6) {return 'safe';}
+        if (safetyFactor <= 0.8) {return 'caution';}
+        if (safetyFactor <= 1.0) {return 'warning';}
         return 'danger';
     }
 }

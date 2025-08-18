@@ -364,14 +364,14 @@ class CanvasParticleSystem {
 
         const baseEnergy = particle.thermalEnergy;
         const massEffect = 1 / particle.mass; // Heavier particles jump less
-        
+
         // Heavy ions get occasional strong upward jumps
         if (particle.type === 'heavy_ion') {
             const strongJumpChance = Math.random() < 0.3; // 30% chance for strong jump
             const jumpMultiplier = strongJumpChance ? particle.jumpEnergyMultiplier : 1.0;
             return baseEnergy * massEffect * jumpMultiplier * -0.8; // Upward force
         }
-        
+
         // Light ions get more frequent but gentler jumps
         const jumpMultiplier = Math.random() < 0.1 ? particle.jumpEnergyMultiplier * 0.8 : 1.0;
         return baseEnergy * massEffect * jumpMultiplier * -0.6;
@@ -385,7 +385,7 @@ class CanvasParticleSystem {
      */
     calculateConcentrationDensity(particle, y) {
         const normalizedHeight = y / this.canvas.height;
-        
+
         if (particle.type === 'heavy_ion') {
             // Heavy ions concentrated toward bottom (exponential decay upward)
             return Math.exp(-this.options.concentrationGradient * (1 - normalizedHeight));
@@ -393,7 +393,7 @@ class CanvasParticleSystem {
             // Light ions concentrated toward top (exponential decay downward)
             return Math.exp(-this.options.concentrationGradient * normalizedHeight);
         }
-        
+
         return 1.0; // Default for other particle types
     }
 
@@ -404,16 +404,16 @@ class CanvasParticleSystem {
     updateParticleConcentrationEffects(particle) {
         // Calculate density at current position
         const density = this.calculateConcentrationDensity(particle, particle.y);
-        
+
         // Adjust opacity based on concentration (higher concentration = more visible)
         const baseOpacity = particle.type === 'heavy_ion' ? 0.6 : 0.7;
         particle.opacity = Math.max(0.3, Math.min(0.95, baseOpacity + density * 0.3));
-        
+
         // Adjust size based on thermal energy state
         const energyFactor = particle.thermalEnergy / 1.5;
         const baseSize = particle.type === 'heavy_ion' ? 5 : 3;
         particle.renderSize = baseSize * (0.8 + 0.4 * energyFactor);
-        
+
         // Enhance color brightness when at non-equilibrium positions
         const heightFactor = 1 - Math.abs(particle.y - particle.equilibriumY) / this.canvas.height;
         particle.brightnessFactor = 1 + (1 - heightFactor) * 0.3;
@@ -515,7 +515,7 @@ class CanvasParticleSystem {
 
             // Use dynamic opacity and size from concentration effects
             this.ctx.globalAlpha = particle.opacity;
-            
+
             // Apply brightness factor to color
             const brightnessFactor = particle.brightnessFactor || 1.0;
             const adjustedColor = this.adjustColorBrightness(particle.color, brightnessFactor);

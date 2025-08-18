@@ -11,7 +11,7 @@ class TechDetailsAccordion {
         this.contentContainer = null;
         this.isExpanded = false;
         this.videosLoaded = false;
-        
+
         this.init();
     }
 
@@ -30,12 +30,12 @@ class TechDetailsAccordion {
     findElements() {
         this.triggerButton = document.getElementById('tech-details-toggle');
         this.contentContainer = document.getElementById('tech-details-content');
-        
+
         if (!this.triggerButton || !this.contentContainer) {
             console.error('TechDetailsAccordion: Required elements not found');
             return false;
         }
-        
+
         return true;
     }
 
@@ -81,7 +81,7 @@ class TechDetailsAccordion {
         this.triggerButton.setAttribute('role', 'button');
         this.triggerButton.setAttribute('aria-expanded', 'false');
         this.triggerButton.setAttribute('aria-controls', 'tech-details-content');
-        
+
         this.contentContainer.setAttribute('role', 'region');
         this.contentContainer.setAttribute('aria-labelledby', 'tech-details-toggle');
         this.contentContainer.setAttribute('aria-hidden', 'true');
@@ -107,21 +107,21 @@ class TechDetailsAccordion {
         }
 
         console.log('Expanding tech details accordion');
-        
+
         // 更新狀態
         this.isExpanded = true;
-        
+
         // 更新 ARIA 屬性
         this.triggerButton.setAttribute('aria-expanded', 'true');
         this.contentContainer.setAttribute('aria-hidden', 'false');
-        
+
         // 添加展開樣式
         this.contentContainer.classList.remove('collapsed');
         this.contentContainer.classList.add('expanded');
-        
+
         // 計算並設置內容高度
         this.updateContentHeight();
-        
+
         // 初始化影片載入狀態
         if (!this.videosLoaded) {
             setTimeout(() => {
@@ -147,14 +147,14 @@ class TechDetailsAccordion {
         }
 
         console.log('Collapsing tech details accordion');
-        
+
         // 更新狀態
         this.isExpanded = false;
-        
+
         // 更新 ARIA 屬性
         this.triggerButton.setAttribute('aria-expanded', 'false');
         this.contentContainer.setAttribute('aria-hidden', 'true');
-        
+
         // 添加收合樣式
         this.contentContainer.classList.remove('expanded');
         this.contentContainer.classList.add('collapsed');
@@ -179,7 +179,7 @@ class TechDetailsAccordion {
     }
 
     /**
-     * 初始化影片
+     * 初始化影片 - 簡化版本，移除載入動畫
      */
     initializeVideos() {
         if (this.videosLoaded) {
@@ -187,30 +187,19 @@ class TechDetailsAccordion {
         }
 
         console.log('Initializing YouTube videos');
-        
+
         const videoContainers = this.contentContainer.querySelectorAll('.video-container');
-        
+
         videoContainers.forEach((container, index) => {
-            // 添加載入狀態
-            container.classList.add('loading');
-            
             const iframe = container.querySelector('iframe');
             if (iframe) {
-                // iframe 載入完成後移除 loading 狀態
-                iframe.addEventListener('load', () => {
-                    setTimeout(() => {
-                        container.classList.remove('loading');
-                    }, 500);
-                });
-
                 // 設置錯誤處理
                 iframe.addEventListener('error', () => {
-                    container.classList.remove('loading');
                     this.handleVideoError(container, index + 1);
                 });
             }
         });
-        
+
         this.videosLoaded = true;
     }
 
@@ -219,7 +208,7 @@ class TechDetailsAccordion {
      */
     handleVideoError(container, videoNumber) {
         console.error(`Video ${videoNumber} failed to load`);
-        
+
         const errorMessage = document.createElement('div');
         errorMessage.className = 'video-error flex items-center justify-center h-full text-gray-400 text-sm';
         errorMessage.innerHTML = `
@@ -231,7 +220,7 @@ class TechDetailsAccordion {
                 </a>
             </div>
         `;
-        
+
         const iframe = container.querySelector('iframe');
         if (iframe) {
             iframe.style.display = 'none';
@@ -249,11 +238,11 @@ class TechDetailsAccordion {
 
         const rect = this.contentContainer.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
-        
+
         // 如果內容底部超出視窗，平滑滾動到合適位置
         if (rect.bottom > viewportHeight) {
             const targetY = window.pageYOffset + rect.top - 100; // 100px 的上邊距
-            
+
             window.scrollTo({
                 top: targetY,
                 behavior: 'smooth'
@@ -271,7 +260,7 @@ class TechDetailsAccordion {
                 isExpanded: this.isExpanded
             }
         });
-        
+
         document.dispatchEvent(event);
     }
 
@@ -293,9 +282,9 @@ class TechDetailsAccordion {
             this.triggerButton.removeEventListener('click', this.toggle);
             this.triggerButton.removeEventListener('keydown', this.toggle);
         }
-        
+
         this.videosLoaded = false;
-        
+
         console.log('TechDetailsAccordion destroyed');
     }
 }
@@ -303,7 +292,7 @@ class TechDetailsAccordion {
 // 自動初始化
 document.addEventListener('DOMContentLoaded', () => {
     const techAccordion = new TechDetailsAccordion();
-    
+
     // 將實例掛載到全局以便調試
     if (typeof window !== 'undefined') {
         window.techDetailsAccordion = techAccordion;

@@ -2123,7 +2123,7 @@ html {
 
 .accordion-content.expanded {
   opacity: 1 !important;
-  max-height: 1000px !important; /* 足夠大的值確保內容完全展開 */
+  max-height: 2000px !important; /* 增加高度以容納更大的影片 */
 }
 
 .accordion-content.collapsed {
@@ -2203,21 +2203,8 @@ html {
   border-radius: 8px;
 }
 
-/* 載入狀態樣式 */
-.video-container.loading::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(245, 158, 11, 0.3);
-  border-left-color: #f59e0b;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  z-index: 10;
-}
+/* 載入狀態樣式 - 已移除 */
+/* 根據用戶反饋移除載入動畫 */
 
 /* 動畫定義 */
 @keyframes slideInUp {
@@ -2251,16 +2238,19 @@ html {
 /* 響應式設計 */
 @media (max-width: 768px) {
   .videos-container {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+    /* 保持垂直布局，不需要改變 */
   }
   
   .accordion-content.expanded {
-    max-height: 1500px !important; /* 手機版需要更大的高度 */
+    max-height: 1800px !important; /* 增加高度以容納更大的影片 */
   }
   
   .video-wrapper h5 {
-    font-size: 0.875rem;
+    font-size: 1rem;
+  }
+  
+  .video-container {
+    max-width: 100% !important;
   }
 }
 
