@@ -2345,10 +2345,6 @@ html {
 
 /* 響應式設計 */
 @media (max-width: 768px) {
-  .videos-container {
-    /* 保持垂直布局，不需要改變 */
-  }
-  
   .accordion-content.expanded {
     max-height: 1800px !important; /* 增加高度以容納更大的影片 */
   }
@@ -2377,4 +2373,316 @@ html {
   outline: 2px solid #f59e0b;
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ========================================
+   實驗數據手風琴組件樣式
+   ======================================== */
+
+/* 實驗圖片容器樣式 */
+.experiment-images-container {
+  animation: slideInUp 0.6s ease-out 0.2s both;
+}
+
+.experiment-image-item {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.experiment-image-item:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.experiment-image-item.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* 圖片容器樣式 */
+.experiment-image-item .image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.experiment-image-item .image-container:hover {
+  transform: scale(1.02);
+}
+
+.experiment-image-item img {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 8px;
+}
+
+.experiment-image-item img.lazy {
+  opacity: 0.3;
+  filter: blur(2px);
+}
+
+.experiment-image-item img.loaded {
+  opacity: 1;
+  filter: none;
+}
+
+/* 圖片標題樣式 */
+.experiment-image-item h5 {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.experiment-image-item h5::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 20px;
+  background: linear-gradient(180deg, #f59e0b, #eab308);
+  border-radius: 2px;
+}
+
+/* 圖片描述樣式 */
+.experiment-image-item p {
+  font-style: italic;
+  line-height: 1.5;
+  border-left: 2px solid rgba(245, 158, 11, 0.3);
+  padding-left: 0.75rem;
+  margin-left: 1rem;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .experiment-image-item {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .experiment-image-item h5 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .experiment-image-item p {
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+
+/* 實驗數據手風琴特定樣式 */
+#experiment-data-content {
+  border-radius: 8px;
+}
+
+#experiment-data-content .accordion-inner-content {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(51, 65, 85, 0.3));
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+/* 載入動畫 */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 圖片預載入效果 */
+.experiment-image-item img[data-src] {
+  background-size: 200% 200%;
+  background-position: 0% 0%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 200%;
+  }
+  100% {
+    background-position: -200% -200%;
+  }
+}
+
+/* 統一手風琴標籤頁樣式 */
+.tab-navigation {
+  margin-bottom: 1.5rem;
+}
+
+.tab-button {
+  position: relative;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  outline: none;
+}
+
+.tab-button:focus {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.tab-button.active {
+  color: #fbbf24;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-color: #fbbf24;
+}
+
+.tab-button:not(.active):hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-content {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-content.hidden {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 響應式標籤頁 */
+@media (max-width: 768px) {
+  .tab-navigation .flex {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .tab-button {
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border-bottom: none !important;
+  }
+  
+  .tab-button.active {
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+  }
+}
+
+/* 影片容器優化 */
+.video-container iframe {
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .video-container {
+    max-width: 100% !important;
+  }
+}
+
+/* 全寬度統一手風琴樣式 */
+#unified-accordion-content {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+#unified-accordion-content.expanded {
+  max-height: none !important;
+  opacity: 1 !important;
+  visibility: visible;
+}
+
+/* 實驗圖片網格優化 */
+.experiment-images-container {
+  gap: 2rem;
+}
+
+.experiment-image-item {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.experiment-image-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.2);
+}
+
+.experiment-image-item.visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* 影片佈局改進 */
+.videos-container.grid {
+  gap: 2rem;
+}
+
+.video-wrapper {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.video-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.2);
+}
+
+/* 響應式改進 */
+@media (max-width: 1024px) {
+  .videos-container.grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .experiment-images-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  #unified-accordion-content .accordion-inner-content {
+    padding: 1.5rem;
+  }
+  
+  .tab-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .experiment-images-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }

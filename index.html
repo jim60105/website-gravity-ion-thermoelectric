@@ -186,7 +186,7 @@
     <!-- Critical JavaScript (loaded with defer) -->
     <script defer src="/assets/js/utils.js"></script>
     <script defer src="/assets/js/main.js"></script>
-    <script defer src="/assets/js/tech-details-accordion.js"></script>
+    <script defer src="/assets/js/unified-accordion.js"></script>
   </head>
   <body class="font-sans antialiased bg-gradient-to-br from-deep-space via-blue-900 to-purple-900 text-white">
     <!-- Skip Navigation Link for Accessibility -->
@@ -405,7 +405,8 @@
             研究成果
           </h2>
 
-          <div class="grid md:grid-cols-3 gap-8">
+          <!-- 三欄研究成果摘要 -->
+          <div class="grid md:grid-cols-3 gap-8 mb-12">
             <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
               <h3 class="text-xl font-semibold text-electric-blue mb-4">突破卡諾定理限制</h3>
               <p class="text-gray-100 mb-4">
@@ -424,38 +425,87 @@
               <p class="text-gray-100 mb-4">
                 在嚴格控制的實驗環境中，達成了連續穩定的電流輸出， 驗證了技術的可靠性。
               </p>
-              
-              <!-- 手風琴觸發按鈕 -->
+              <!-- 統一手風琴觸發按鈕 -->
               <button
-                id="tech-details-toggle"
+                id="unified-accordion-toggle"
                 class="text-energy-gold hover:underline focus:outline-none focus:ring-2 focus:ring-energy-gold focus:ring-opacity-50 rounded"
                 aria-expanded="false"
-                aria-controls="tech-details-content"
+                aria-controls="unified-accordion-content"
                 data-accordion-trigger
               >
-                <span class="accordion-text">技術詳解 →</span>
+                <span class="accordion-text">詳細資料</span>
               </button>
-              
-              <!-- 可收合內容區域 -->
-              <div
-                id="tech-details-content"
-                class="accordion-content mt-4 overflow-hidden transition-all duration-500 ease-in-out"
-                style="max-height: 0; opacity: 0;"
-                aria-hidden="true"
-                data-accordion-content
+            </article>
+
+            <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
+              <h3 class="text-xl font-semibold text-electric-blue mb-4">實驗數據驗證</h3>
+              <p class="text-gray-100 mb-4">
+                通過托爾曼實驗的改進版本，獲得了可重複的實驗數據， 證實了理論預測的正確性。
+              </p>
+              <button
+                class="text-energy-gold hover:underline focus:outline-none focus:ring-2 focus:ring-energy-gold focus:ring-opacity-50 rounded"
+                onclick="openExperimentDataTab()"
               >
-                <div class="accordion-inner-content pt-4 border-t border-white/20">
-                  <h4 class="text-lg font-semibold text-electric-blue mb-4">深度技術解析影片</h4>
-                  <p class="text-gray-200 mb-6">
+                實驗數據報告 →
+              </button>
+            </article>
+          </div>
+
+          <!-- 統一的手風琴內容區域 - 使用全寬度 -->
+          <div
+            id="unified-accordion-content"
+            class="accordion-content overflow-hidden transition-all duration-500 ease-in-out bg-white/5 backdrop-blur-sm rounded-lg"
+            style="max-height: 0; opacity: 0;"
+            aria-hidden="true"
+            data-accordion-content
+          >
+            <div class="accordion-inner-content p-8">
+              
+              <!-- 標籤頁導航 -->
+              <div class="tab-navigation mb-8">
+                <div class="flex flex-wrap gap-2 border-b border-white/20">
+                  <button
+                    id="tech-videos-tab"
+                    class="tab-button active px-6 py-3 text-base font-medium rounded-t-lg border-b-2 border-energy-gold text-energy-gold bg-white/10 transition-all duration-300"
+                    data-tab="tech-videos"
+                    aria-selected="true"
+                    role="tab"
+                  >
+                    📹 深度技術解析影片
+                  </button>
+                  <button
+                    id="experiment-data-tab"
+                    class="tab-button px-6 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300"
+                    data-tab="experiment-data"
+                    aria-selected="false"
+                    role="tab"
+                  >
+                    📊 實驗圖表與數據
+                  </button>
+                </div>
+              </div>
+
+              <!-- 標籤頁內容容器 -->
+              <div class="tab-content-container">
+                
+                <!-- 技術解析影片內容 -->
+                <div
+                  id="tech-videos-content"
+                  class="tab-content active"
+                  role="tabpanel"
+                  aria-labelledby="tech-videos-tab"
+                >
+                  <h4 class="text-2xl font-semibold text-electric-blue mb-6">深度技術解析影片</h4>
+                  <p class="text-gray-200 mb-8 text-lg">
                     通過以下兩個關鍵片段，深入了解持續電流產生的物理機制與實驗證據。
                   </p>
                   
-                  <!-- 影片容器 -->
-                  <div class="videos-container space-y-8">
+                  <!-- 影片容器 - 使用更好的響應式佈局 -->
+                  <div class="videos-container grid lg:grid-cols-2 gap-8">
                     <!-- 影片 1 -->
                     <div class="video-wrapper">
-                      <h5 class="text-lg font-medium text-energy-gold mb-3">片段一：核心原理解析 (9:54-11:53)</h5>
-                      <div class="video-container bg-black rounded-lg overflow-hidden" style="aspect-ratio: 16/9; max-width: 800px; margin: 0 auto;">
+                      <h5 class="text-xl font-medium text-energy-gold mb-4">片段一：核心原理解析 (9:54-11:53)</h5>
+                      <div class="video-container bg-black rounded-lg overflow-hidden" style="aspect-ratio: 16/9;">
                         <iframe
                           id="video-1"
                           class="w-full h-full"
@@ -471,8 +521,8 @@
                     
                     <!-- 影片 2 -->
                     <div class="video-wrapper">
-                      <h5 class="text-lg font-medium text-energy-gold mb-3">片段二：實驗驗證過程 (4:25-5:48)</h5>
-                      <div class="video-container bg-black rounded-lg overflow-hidden" style="aspect-ratio: 16/9; max-width: 800px; margin: 0 auto;">
+                      <h5 class="text-xl font-medium text-energy-gold mb-4">片段二：實驗驗證過程 (4:25-5:48)</h5>
+                      <div class="video-container bg-black rounded-lg overflow-hidden" style="aspect-ratio: 16/9;">
                         <iframe
                           id="video-2"
                           class="w-full h-full"
@@ -488,19 +538,19 @@
                   </div>
                   
                   <!-- 額外資源連結 -->
-                  <div class="mt-6 pt-4 border-t border-white/10">
-                    <p class="text-sm text-gray-300 mb-3">相關資源：</p>
-                    <div class="flex flex-wrap gap-3">
+                  <div class="mt-8 pt-6 border-t border-white/10">
+                    <p class="text-base text-gray-300 mb-4">相關資源：</p>
+                    <div class="flex flex-wrap gap-4">
                       <a
                         href="/assets/docs/2-heat-to-electricity-conversion-under-gravity-simplified.md"
-                        class="text-xs bg-white/10 hover:bg-white/20 text-gray-200 px-3 py-1 rounded-full transition-colors duration-300"
+                        class="text-sm bg-white/10 hover:bg-white/20 text-gray-200 px-4 py-2 rounded-full transition-colors duration-300"
                         target="_blank"
                       >
                         📄 技術文件
                       </a>
                       <a
                         href="https://youtu.be/NA_FsBknLV0"
-                        class="text-xs bg-red-600/80 hover:bg-red-600 text-white px-3 py-1 rounded-full transition-colors duration-300"
+                        class="text-sm bg-red-600/80 hover:bg-red-600 text-white px-4 py-2 rounded-full transition-colors duration-300"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -509,21 +559,117 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </article>
 
-            <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
-              <h3 class="text-xl font-semibold text-electric-blue mb-4">實驗數據驗證</h3>
-              <p class="text-gray-100 mb-4">
-                通過托爾曼實驗的改進版本，獲得了可重複的實驗數據， 證實了理論預測的正確性。
-              </p>
-              <a
-                href="/assets/docs/4-the-question-over-five-thousand-professors-could-not-answer.md"
-                class="text-energy-gold hover:underline"
-              >
-                實驗數據 →
-              </a>
-            </article>
+                <!-- 實驗數據內容 -->
+                <div
+                  id="experiment-data-content"
+                  class="tab-content hidden"
+                  role="tabpanel"
+                  aria-labelledby="experiment-data-tab"
+                >
+                  <h4 class="text-2xl font-semibold text-electric-blue mb-6">實驗圖表與數據</h4>
+                  <p class="text-gray-200 mb-8 text-lg">
+                    以下為托爾曼實驗改進版本的完整實驗設置、測量數據和結果分析圖表。
+                  </p>
+                  
+                  <!-- 實驗圖片容器 - 使用響應式網格佈局 -->
+                  <div class="experiment-images-container grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+                    
+                    <!-- Figure 8: 實驗用離心電池結構 -->
+                    <div class="experiment-image-item opacity-0 transform translate-y-4 transition-all duration-500">
+                      <h5 class="text-lg font-medium text-energy-gold mb-3">Figure 8: 實驗用離心電池結構</h5>
+                      <div class="image-container bg-black/20 rounded-lg overflow-hidden mb-3">
+                        <img
+                          data-src="assets/images/032-fig8-structure-of-centrifugal-battery-used-in-experiment.webp"
+                          alt="實驗用離心電池結構圖，展示電池各組件的配置和設計"
+                          class="w-full h-auto lazy"
+                          loading="lazy"
+                          style="background: linear-gradient(45deg, #1e293b, #334155);"
+                        />
+                      </div>
+                      <p class="text-gray-300 text-sm">展示實驗中使用的離心電池結構設計與組件配置</p>
+                    </div>
+
+                    <!-- Figure 9: 離心電池製造組件 -->
+                    <div class="experiment-image-item opacity-0 transform translate-y-4 transition-all duration-500">
+                      <h5 class="text-lg font-medium text-energy-gold mb-3">Figure 9: 離心電池製造組件</h5>
+                      <div class="image-container bg-black/20 rounded-lg overflow-hidden mb-3">
+                        <img
+                          data-src="assets/images/033-fig9-components-of-centrifugal-battery-manufacturing.webp"
+                          alt="離心電池製造組件圖，詳細展示各個製造組件"
+                          class="w-full h-auto lazy"
+                          loading="lazy"
+                          style="background: linear-gradient(45deg, #1e293b, #334155);"
+                        />
+                      </div>
+                      <p class="text-gray-300 text-sm">詳細說明離心電池各個製造組件的配置和組裝過程</p>
+                    </div>
+
+                    <!-- Figure 10: 電池設置與輸出連接實照 -->
+                    <div class="experiment-image-item opacity-0 transform translate-y-4 transition-all duration-500">
+                      <h5 class="text-lg font-medium text-energy-gold mb-3">Figure 10: 電池設置與輸出連接實照</h5>
+                      <div class="image-container bg-black/20 rounded-lg overflow-hidden mb-3">
+                        <img
+                          data-src="assets/images/034-fig10-photos-of-battery-setup-and-output-connections.webp"
+                          alt="電池設置與輸出連接的實際照片"
+                          class="w-full h-auto lazy"
+                          loading="lazy"
+                          style="background: linear-gradient(45deg, #1e293b, #334155);"
+                        />
+                      </div>
+                      <p class="text-gray-300 text-sm">實際電池設置的照片和輸出連接方式展示</p>
+                    </div>
+
+                    <!-- Table 2: 電池直立時輸出電壓與時間關係 -->
+                    <div class="experiment-image-item opacity-0 transform translate-y-4 transition-all duration-500">
+                      <h5 class="text-lg font-medium text-energy-gold mb-3">Table 2: 電池直立時輸出電壓與時間關係</h5>
+                      <div class="image-container bg-black/20 rounded-lg overflow-hidden mb-3">
+                        <img
+                          data-src="assets/images/036-table2-output-voltage-vs-time-of-battery-standing-upright.webp"
+                          alt="電池直立狀態下輸出電壓與時間關係數據表"
+                          class="w-full h-auto lazy"
+                          loading="lazy"
+                          style="background: linear-gradient(45deg, #1e293b, #334155);"
+                        />
+                      </div>
+                      <p class="text-gray-300 text-sm">記錄電池直立狀態下輸出電壓隨時間變化的實驗數據</p>
+                    </div>
+
+                    <!-- Table 3: 電池倒置時輸出電壓與時間關係 -->
+                    <div class="experiment-image-item opacity-0 transform translate-y-4 transition-all duration-500">
+                      <h5 class="text-lg font-medium text-energy-gold mb-3">Table 3: 電池倒置時輸出電壓與時間關係</h5>
+                      <div class="image-container bg-black/20 rounded-lg overflow-hidden mb-3">
+                        <img
+                          data-src="assets/images/037-table3-output-voltage-vs-time-of-battery-upside-down.webp"
+                          alt="電池倒置狀態下輸出電壓與時間關係數據表"
+                          class="w-full h-auto lazy"
+                          loading="lazy"
+                          style="background: linear-gradient(45deg, #1e293b, #334155);"
+                        />
+                      </div>
+                      <p class="text-gray-300 text-sm">記錄電池倒置狀態下輸出電壓隨時間變化的實驗數據</p>
+                    </div>
+
+                    <!-- Figure 11: 10G離心機下電池輸出電壓 -->
+                    <div class="experiment-image-item opacity-0 transform translate-y-4 transition-all duration-500">
+                      <h5 class="text-lg font-medium text-energy-gold mb-3">Figure 11: 10G離心機下電池輸出電壓</h5>
+                      <div class="image-container bg-black/20 rounded-lg overflow-hidden mb-3">
+                        <img
+                          data-src="assets/images/035-fig11-output-voltage-of-battery-under-10G-centrifuge.webp"
+                          alt="在10G離心機環境下電池輸出電壓的測量數據"
+                          class="w-full h-auto lazy"
+                          loading="lazy"
+                          style="background: linear-gradient(45deg, #1e293b, #334155);"
+                        />
+                      </div>
+                      <p class="text-gray-300 text-sm">在10G離心機環境下測得的電池輸出電壓表現數據</p>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
       </section>
