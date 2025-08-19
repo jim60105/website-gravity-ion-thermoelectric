@@ -186,7 +186,7 @@
     <!-- Critical JavaScript (loaded with defer) -->
     <script defer src="/assets/js/utils.js"></script>
     <script defer src="/assets/js/main.js"></script>
-    <script defer src="/assets/js/unified-accordion.js"></script>
+    <script defer src="/assets/js/research-results-tabs.js"></script>
   </head>
   <body class="font-sans antialiased bg-gradient-to-br from-deep-space via-blue-900 to-purple-900 text-white">
     <!-- Skip Navigation Link for Accessibility -->
@@ -425,16 +425,6 @@
               <p class="text-gray-100 mb-4">
                 在嚴格控制的實驗環境中，達成了連續穩定的電流輸出， 驗證了技術的可靠性。
               </p>
-              <!-- 統一手風琴觸發按鈕 -->
-              <button
-                id="unified-accordion-toggle"
-                class="text-energy-gold hover:underline focus:outline-none focus:ring-2 focus:ring-energy-gold focus:ring-opacity-50 rounded"
-                aria-expanded="false"
-                aria-controls="unified-accordion-content"
-                data-accordion-trigger
-              >
-                <span class="accordion-text">詳細資料</span>
-              </button>
             </article>
 
             <article class="bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-300">
@@ -451,15 +441,14 @@
             </article>
           </div>
 
-          <!-- 統一的手風琴內容區域 - 使用全寬度 -->
+          <!-- 研究成果詳細內容區域 - 永久展開 -->
           <div
             id="unified-accordion-content"
-            class="accordion-content overflow-hidden transition-all duration-500 ease-in-out bg-white/5 backdrop-blur-sm rounded-lg"
-            style="max-height: 0; opacity: 0;"
-            aria-hidden="true"
-            data-accordion-content
+            class="research-content-container bg-white/5 backdrop-blur-sm rounded-lg mt-8"
+            role="region"
+            aria-label="研究成果詳細內容"
           >
-            <div class="accordion-inner-content p-8">
+            <div class="research-inner-content p-8">
               
               <!-- 標籤頁導航 -->
               <div class="tab-navigation mb-8">
