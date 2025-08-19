@@ -7,7 +7,9 @@
 			"command": "./node_modules/.bin/http-server",
 			"args": [
 				"-p",
-				"3000"
+				"3000",
+				"-c",
+				"1"
 			],
 			"isBackground": true,
 			"group": "build"
