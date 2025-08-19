@@ -420,10 +420,20 @@
               <div class="tab-navigation mb-8">
                 <div class="flex flex-wrap gap-2 border-b border-white/20">
                   <button
-                    id="tech-videos-tab"
+                    id="academic-paper-tab"
                     class="tab-button active px-6 py-3 text-base font-medium rounded-t-lg border-b-2 border-energy-gold text-energy-gold bg-white/10 transition-all duration-300"
-                    data-tab="tech-videos"
+                    data-tab="academic-paper"
                     aria-selected="true"
+                    role="tab"
+                    aria-controls="academic-paper-content"
+                  >
+                    📄 學術論文全文
+                  </button>
+                  <button
+                    id="tech-videos-tab"
+                    class="tab-button px-6 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300"
+                    data-tab="tech-videos"
+                    aria-selected="false"
                     role="tab"
                   >
                     📹 深度技術解析影片
@@ -443,10 +453,88 @@
               <!-- 標籤頁內容容器 -->
               <div class="tab-content-container">
                 
+                <!-- 學術論文全文內容 -->
+                <div
+                  id="academic-paper-content"
+                  class="tab-content active"
+                  role="tabpanel"
+                  aria-labelledby="academic-paper-tab"
+                >
+                  <h4 class="text-2xl font-semibold text-electric-blue mb-6">學術論文全文</h4>
+                  <p class="text-gray-200 mb-8 text-lg">
+                    完整的學術研究論文，詳細闡述重力離子熱電轉換技術的理論基礎與實驗驗證。
+                  </p>
+                  
+                  <!-- PDF 檢視器容器 -->
+                  <div class="pdf-viewer-container bg-black/20 rounded-lg overflow-hidden mb-6" style="height: 90vh;">
+                    <iframe
+                      id="academic-paper-pdf"
+                      class="w-full h-full border-0"
+                      src="assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.pdf#view=FitV&toolbar=1&navpanes=1&scrollbar=1"
+                      title="卡諾定理例外：托爾曼實驗推斷的離子流體在加速度下驅動連續熱電轉換"
+                      allow="fullscreen"
+                      loading="lazy"
+                      aria-describedby="pdf-description"
+                    ></iframe>
+                    <div id="pdf-description" class="sr-only">
+                      學術論文 PDF 檢視器，包含完整的研究內容、數據分析和結論
+                    </div>
+                  </div>
+                  
+                  <!-- PDF 資訊和下載選項 -->
+                  <div class="mt-8 pt-6 border-t border-white/10">
+                    <div class="grid md:grid-cols-2 gap-6">
+                      <!-- 論文資訊 -->
+                      <div class="paper-info bg-white/5 rounded-lg p-6">
+                        <h5 class="text-lg font-medium text-energy-gold mb-4">論文資訊</h5>
+                        <div class="space-y-2 text-sm text-gray-200">
+                          <div class="flex justify-between">
+                            <span>作者：</span>
+                            <span>Kuo Tso Chen</span>
+                          </div>
+                          <div class="flex justify-between">
+                            <span>機構：</span>
+                            <span>OPTROMAX Co. Taiwan</span>
+                          </div>
+                          <div class="flex justify-between">
+                            <span>檔案大小：</span>
+                            <span>約 1.3 MB</span>
+                          </div>
+                          <div class="flex justify-between">
+                            <span>頁數：</span>
+                            <span>25 頁</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <!-- 下載和分享選項 -->
+                      <div class="download-options bg-white/5 rounded-lg p-6">
+                        <h5 class="text-lg font-medium text-energy-gold mb-4">下載選項</h5>
+                        <div class="space-y-3">
+                          <a
+                            href="assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.pdf"
+                            class="block text-sm bg-white/10 hover:bg-white/20 text-gray-200 px-4 py-2 rounded-lg transition-colors duration-300 text-center"
+                            target="_blank"
+                            download
+                          >
+                            📥 下載 PDF 檔案
+                          </a>
+                          <button
+                            class="block w-full text-sm bg-energy-gold/20 hover:bg-energy-gold/30 text-energy-gold px-4 py-2 rounded-lg transition-colors duration-300"
+                            onclick="window.print()"
+                          >
+                            🖨️ 列印論文
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- 技術解析影片內容 -->
                 <div
                   id="tech-videos-content"
-                  class="tab-content active"
+                  class="tab-content hidden"
                   role="tabpanel"
                   aria-labelledby="tech-videos-tab"
                 >

@@ -10,11 +10,12 @@
 class ResearchResultsTabs {
     constructor() {
         this.contentContainer = null;
-        this.activeTab = 'tech-videos';
+        this.activeTab = 'academic-paper';
         this.tabButtons = new Map();
         this.tabContents = new Map();
         this.videosLoaded = false;
         this.imagesLoaded = false;
+        this.paperLoaded = false;
 
         this.init();
     }
@@ -54,7 +55,7 @@ class ResearchResultsTabs {
         });
 
         tabContents.forEach(content => {
-            const tabId = content.id.replace('-content', '').replace('tech-videos', 'tech-videos').replace('experiment-data', 'experiment-data');
+            const tabId = content.id.replace('-content', '').replace('tech-videos', 'tech-videos').replace('experiment-data', 'experiment-data').replace('academic-paper', 'academic-paper');
             this.tabContents.set(tabId, content);
         });
 
@@ -220,12 +221,75 @@ class ResearchResultsTabs {
      */
     loadTabContent(tabId) {
         switch (tabId) {
+            case 'academic-paper':
+                this.loadAcademicPaper();
+                break;
             case 'tech-videos':
                 this.loadVideos();
                 break;
             case 'experiment-data':
                 this.loadExperimentImages();
                 break;
+        }
+    }
+
+    /**
+     * 載入學術論文 PDF
+     */
+    loadAcademicPaper() {
+        if (this.paperLoaded) {
+            return;
+        }
+
+        const pdfContainer = this.tabContents.get('academic-paper').querySelector('.pdf-viewer-container');
+        const iframe = document.getElementById('academic-paper-pdf');
+
+        if (pdfContainer && iframe) {
+            // 添加載入動畫
+            pdfContainer.style.opacity = '0';
+            pdfContainer.style.transform = 'translateY(20px)';
+            pdfContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+            // 確保 PDF 載入
+            iframe.onload = () => {
+                setTimeout(() => {
+                    pdfContainer.style.opacity = '1';
+                    pdfContainer.style.transform = 'translateY(0)';
+                }, 200);
+            };
+
+            // 錯誤處理
+            iframe.onerror = () => {
+                this.handlePdfError(pdfContainer);
+            };
+
+            this.paperLoaded = true;
+        }
+    }
+
+    /**
+     * 處理 PDF 載入錯誤
+     */
+    handlePdfError(container) {
+        console.error('PDF loading failed');
+        
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'pdf-error flex flex-col items-center justify-center h-full text-gray-400 text-center p-8';
+        errorMessage.innerHTML = `
+            <div class="mb-4 text-4xl">📄</div>
+            <div class="text-lg mb-2">PDF 載入失敗</div>
+            <div class="text-sm mb-4">請嘗試重新整理頁面或直接下載檔案</div>
+            <a href="assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.pdf" 
+               target="_blank"
+               class="text-energy-gold hover:underline">
+                直接下載 PDF
+            </a>
+        `;
+        
+        const iframe = container.querySelector('iframe');
+        if (iframe) {
+            iframe.style.display = 'none';
+            container.appendChild(errorMessage);
         }
     }
 

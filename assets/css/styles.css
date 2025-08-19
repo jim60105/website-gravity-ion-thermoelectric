@@ -2686,3 +2686,61 @@ html {
     gap: 1.5rem;
   }
 }
+
+/* PDF 檢視器樣式 */
+.pdf-viewer-container {
+    min-height: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.pdf-viewer-container iframe {
+    border: none;
+    background: #f5f5f5;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .pdf-viewer-container {
+        height: 70vh !important;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pdf-viewer-container {
+        height: 60vh !important;
+        min-height: 250px;
+    }
+}
+
+/* PDF 錯誤處理樣式 */
+.pdf-error {
+    background: linear-gradient(45deg, #1e293b, #334155);
+    border-radius: 0.5rem;
+}
+
+/* 載入動畫 */
+.pdf-viewer-container.loading {
+    background: linear-gradient(45deg, #1e293b, #334155);
+    position: relative;
+}
+
+.pdf-viewer-container.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid #D4AF37;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
