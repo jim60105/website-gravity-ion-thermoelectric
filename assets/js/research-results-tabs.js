@@ -268,19 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tabsInstance = new ResearchResultsTabs();
 });
 
-/**
- * 全域函數：開啟實驗數據標籤頁
- * 從研究成果卡片點擊時呼叫
- */
-window.openExperimentDataTab = function() {
-    if (!tabsInstance) {
-        console.error('ResearchResultsTabs instance not initialized');
-        return;
-    }
 
-    // 直接切換到實驗數據標籤頁（不需要展開手風琴，因為內容永久可見）
-    tabsInstance.switchTab('experiment-data');
-};
 
 // 導出給其他模組使用
 if (typeof module !== 'undefined' && module.exports) {
