@@ -1,16 +1,15 @@
 /**
- * 統一手風琴組件
- * 處理包含標籤頁的手風琴展開/收合功能
+ * 研究成果標籤頁組件
+ * 處理研究成果區塊的標籤頁切換功能
+ * 永久展開模式，符合 "Always Stay Expand" 設計原則
  * 結合深度技術解析影片和實驗數據兩個內容區塊
  * @author Gravity Ion Thermoelectric Research Team
- * @version 2.0.0
+ * @version 3.0.0
  */
 
-class UnifiedAccordion {
+class ResearchResultsTabs {
     constructor() {
-        this.triggerButton = null;
         this.contentContainer = null;
-        this.isExpanded = false;
         this.activeTab = 'tech-videos';
         this.tabButtons = new Map();
         this.tabContents = new Map();
@@ -31,17 +30,17 @@ class UnifiedAccordion {
         this.setupAccessibility();
         this.setupTabSystem();
         this.setupLazyLoading();
+        this.initializeTabs(); // 立即初始化標籤頁內容
     }
 
     /**
      * 找到 DOM 元素
      */
     findElements() {
-        this.triggerButton = document.getElementById('unified-accordion-toggle');
         this.contentContainer = document.getElementById('unified-accordion-content');
 
-        if (!this.triggerButton || !this.contentContainer) {
-            console.error('UnifiedAccordion: Required elements not found');
+        if (!this.contentContainer) {
+            console.error('ResearchResultsTabs: Content container not found');
             return false;
         }
 
@@ -66,19 +65,6 @@ class UnifiedAccordion {
      * 設置事件監聽器
      */
     setupEventListeners() {
-        // 手風琴主要觸發按鈕
-        this.triggerButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.toggle();
-        });
-
-        this.triggerButton.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                this.toggle();
-            }
-        });
-
         // 標籤頁按鈕
         this.tabButtons.forEach((button, tabId) => {
             button.addEventListener('click', (e) => {
@@ -94,11 +80,9 @@ class UnifiedAccordion {
             });
         });
 
-        // 視窗大小變化時重新計算高度
+        // 視窗大小變化時重新計算高度（雖然不再需要手風琴高度，但保留以防萬一）
         window.addEventListener('resize', Utils.Performance.debounce(() => {
-            if (this.isExpanded) {
-                this.updateContentHeight();
-            }
+            // 可在此處添加響應式邏輯
         }, 250));
     }
 
@@ -106,14 +90,9 @@ class UnifiedAccordion {
      * 設置無障礙功能
      */
     setupAccessibility() {
-        // 設置主觸發按鈕的 ARIA 屬性
-        this.triggerButton.setAttribute('role', 'button');
-        this.triggerButton.setAttribute('aria-expanded', 'false');
-        this.triggerButton.setAttribute('aria-controls', 'unified-accordion-content');
-
+        // 設置內容容器的基本 ARIA 屬性
         this.contentContainer.setAttribute('role', 'region');
-        this.contentContainer.setAttribute('aria-labelledby', 'unified-accordion-toggle');
-        this.contentContainer.setAttribute('aria-hidden', 'true');
+        this.contentContainer.setAttribute('aria-label', '研究成果詳細內容');
 
         // 設置標籤頁的 ARIA 屬性
         this.tabButtons.forEach((button, tabId) => {
@@ -134,6 +113,14 @@ class UnifiedAccordion {
     setupTabSystem() {
         // 確保初始狀態正確
         this.switchTab(this.activeTab, false);
+    }
+
+    /**
+     * 初始化標籤頁內容（立即載入所有內容）
+     */
+    initializeTabs() {
+        // 立即載入所有標籤頁內容，因為現在永久可見
+        this.loadTabContent(this.activeTab);
     }
 
     /**
@@ -164,71 +151,6 @@ class UnifiedAccordion {
     }
 
     /**
-     * 切換展開/收合狀態
-     */
-    toggle() {
-        if (this.isExpanded) {
-            this.collapse();
-        } else {
-            this.expand();
-        }
-    }
-
-    /**
-     * 展開手風琴
-     */
-    expand() {
-        if (this.isExpanded) {
-            return;
-        }
-
-        this.isExpanded = true;
-        
-        // 更新按鈕狀態
-        this.updateButtonState();
-        
-        // 計算內容高度並展開
-        this.updateContentHeight();
-        
-        // 更新可及性屬性
-        this.triggerButton.setAttribute('aria-expanded', 'true');
-        this.contentContainer.setAttribute('aria-hidden', 'false');
-        
-        // 平滑動畫
-        this.contentContainer.style.opacity = '1';
-        
-        // 載入對應標籤頁的內容
-        this.loadTabContent(this.activeTab);
-        
-        // 添加展開後的動畫效果
-        setTimeout(() => {
-            this.animateContentIn();
-        }, 300);
-    }
-
-    /**
-     * 收合手風琴
-     */
-    collapse() {
-        if (!this.isExpanded) {
-            return;
-        }
-
-        this.isExpanded = false;
-        
-        // 更新按鈕狀態
-        this.updateButtonState();
-        
-        // 收合動畫
-        this.contentContainer.style.maxHeight = '0';
-        this.contentContainer.style.opacity = '0';
-        
-        // 更新可及性屬性
-        this.triggerButton.setAttribute('aria-expanded', 'false');
-        this.contentContainer.setAttribute('aria-hidden', 'true');
-    }
-
-    /**
      * 切換標籤頁
      * @param {string} targetTab - 目標標籤頁 ID
      * @param {boolean} animate - 是否需要動畫效果
@@ -243,7 +165,7 @@ class UnifiedAccordion {
             const isActive = tabId === targetTab;
             button.classList.toggle('active', isActive);
             button.setAttribute('aria-selected', isActive ? 'true' : 'false');
-            
+
             if (isActive) {
                 button.classList.add('text-energy-gold', 'bg-white/10', 'border-energy-gold');
                 button.classList.remove('text-gray-300', 'border-transparent');
@@ -256,7 +178,7 @@ class UnifiedAccordion {
         // 更新標籤頁內容顯示狀態
         this.tabContents.forEach((content, tabId) => {
             const isActive = tabId === targetTab;
-            
+
             if (animate) {
                 if (isActive) {
                     content.classList.remove('hidden');
@@ -264,7 +186,7 @@ class UnifiedAccordion {
                     // 淡入動畫
                     content.style.opacity = '0';
                     content.style.transform = 'translateY(10px)';
-                    
+
                     requestAnimationFrame(() => {
                         content.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
                         content.style.opacity = '1';
@@ -274,7 +196,7 @@ class UnifiedAccordion {
                     content.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
                     content.style.opacity = '0';
                     content.style.transform = 'translateY(-10px)';
-                    
+
                     setTimeout(() => {
                         content.classList.add('hidden');
                         content.classList.remove('active');
@@ -287,14 +209,9 @@ class UnifiedAccordion {
         });
 
         this.activeTab = targetTab;
-        
-        // 載入對應內容
-        if (this.isExpanded) {
-            this.loadTabContent(targetTab);
-            setTimeout(() => {
-                this.updateContentHeight();
-            }, 300);
-        }
+
+        // 載入對應內容（立即載入，因為內容永久可見）
+        this.loadTabContent(targetTab);
     }
 
     /**
@@ -319,7 +236,7 @@ class UnifiedAccordion {
         if (this.videosLoaded) {
             return;
         }
-        
+
         // 影片已經在 HTML 中直接嵌入，這裡主要是確保載入狀態
         this.videosLoaded = true;
     }
@@ -331,91 +248,29 @@ class UnifiedAccordion {
         if (this.imagesLoaded) {
             return;
         }
-        
+
         const images = this.tabContents.get('experiment-data').querySelectorAll('.experiment-image-item');
-        
+
         images.forEach((item, index) => {
             setTimeout(() => {
                 item.style.opacity = '1';
                 item.style.transform = 'translateY(0)';
             }, index * 150);
         });
-        
+
         this.imagesLoaded = true;
-    }
-
-    /**
-     * 更新按鈕狀態
-     */
-    updateButtonState() {
-        const buttonText = this.triggerButton.querySelector('.accordion-text');
-        if (buttonText) {
-            buttonText.textContent = this.isExpanded ? '收合' : '詳細資料';
-        }
-    }
-
-    /**
-     * 更新內容高度
-     */
-    updateContentHeight() {
-        if (!this.isExpanded) {
-            return;
-        }
-        
-        const innerContent = this.contentContainer.querySelector('.accordion-inner-content');
-        if (innerContent) {
-            const height = innerContent.scrollHeight;
-            this.contentContainer.style.maxHeight = `${height + 40}px`; // 加一些餘量
-        }
-    }
-
-    /**
-     * 內容進入動畫
-     */
-    animateContentIn() {
-        const activeContent = this.tabContents.get(this.activeTab);
-        if (!activeContent) {
-            return;
-        }
-        
-        const elements = activeContent.querySelectorAll('.video-wrapper, .experiment-image-item');
-        elements.forEach((element, index) => {
-            setTimeout(() => {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
     }
 }
 
 // 當 DOM 載入完成時初始化組件
-let accordionInstance = null;
+let tabsInstance = null;
 document.addEventListener('DOMContentLoaded', () => {
-    accordionInstance = new UnifiedAccordion();
+    tabsInstance = new ResearchResultsTabs();
 });
 
-/**
- * 全域函數：開啟實驗數據標籤頁
- * 從研究成果卡片點擊時呼叫
- */
-window.openExperimentDataTab = function() {
-    if (!accordionInstance) {
-        console.error('Accordion instance not initialized');
-        return;
-    }
-    
-    // 如果手風琴未展開，先展開它
-    if (!accordionInstance.isExpanded) {
-        accordionInstance.toggle();
-    }
-    
-    // 切換到實驗數據標籤頁
-    setTimeout(() => {
-        accordionInstance.switchTab('experiment-data');
-    }, accordionInstance.isExpanded ? 0 : 300); // 如果需要展開，等待動畫完成
-};
+
 
 // 導出給其他模組使用
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = UnifiedAccordion;
+    module.exports = ResearchResultsTabs;
 }
