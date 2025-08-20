@@ -10,11 +10,12 @@
 class ResearchResultsTabs {
     constructor() {
         this.contentContainer = null;
-        this.activeTab = 'tech-videos';
+        this.activeTab = 'academic-paper';
         this.tabButtons = new Map();
         this.tabContents = new Map();
         this.videosLoaded = false;
         this.imagesLoaded = false;
+        this.paperLoaded = false;
 
         this.init();
     }
@@ -54,7 +55,7 @@ class ResearchResultsTabs {
         });
 
         tabContents.forEach(content => {
-            const tabId = content.id.replace('-content', '').replace('tech-videos', 'tech-videos').replace('experiment-data', 'experiment-data');
+            const tabId = content.id.replace('-content', '').replace('tech-videos', 'tech-videos').replace('experiment-data', 'experiment-data').replace('academic-paper', 'academic-paper');
             this.tabContents.set(tabId, content);
         });
 
@@ -220,12 +221,111 @@ class ResearchResultsTabs {
      */
     loadTabContent(tabId) {
         switch (tabId) {
+            case 'academic-paper':
+                this.loadAcademicPaper();
+                break;
             case 'tech-videos':
                 this.loadVideos();
                 break;
             case 'experiment-data':
                 this.loadExperimentImages();
                 break;
+        }
+    }
+
+    /**
+     * 載入學術論文 PDF
+     */
+    loadAcademicPaper() {
+        if (this.paperLoaded) {
+            return;
+        }
+
+        const pdfContainer = this.tabContents.get('academic-paper').querySelector('.pdf-viewer-container');
+        const iframe = document.getElementById('academic-paper-pdf');
+
+        if (pdfContainer && iframe) {
+            // 添加載入動畫
+            pdfContainer.style.opacity = '0';
+            pdfContainer.style.transform = 'translateY(20px)';
+            pdfContainer.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+            // 確保 PDF 載入
+            iframe.onload = () => {
+                setTimeout(() => {
+                    pdfContainer.style.opacity = '1';
+                    pdfContainer.style.transform = 'translateY(0)';
+                }, 200);
+            };
+
+            // 錯誤處理
+            iframe.onerror = () => {
+                this.handlePdfError(pdfContainer);
+            };
+
+            this.paperLoaded = true;
+        }
+    }
+
+    /**
+     * 處理 PDF 載入錯誤
+     */
+    handlePdfError(container) {
+        console.error('PDF loading failed');
+
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'pdf-error flex flex-col items-center justify-center h-full text-gray-400 text-center p-8';
+        errorMessage.innerHTML = `
+            <div class="mb-4 text-4xl">📄</div>
+            <div class="text-lg mb-2">PDF 載入失敗</div>
+            <div class="text-sm mb-4">請嘗試重新整理頁面或直接下載檔案</div>
+            <a href="assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.pdf" 
+               target="_blank"
+               class="text-energy-gold hover:underline">
+                直接下載 PDF
+            </a>
+        `;
+
+        const iframe = container.querySelector('iframe');
+        if (iframe) {
+            iframe.style.display = 'none';
+            container.appendChild(errorMessage);
+        }
+    }
+
+    /**
+     * 列印 PDF 文件
+     */
+    printPdf() {
+        const iframe = document.getElementById('academic-paper-pdf');
+        const pdfUrl = 'assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.pdf';
+
+        try {
+            // 嘗試使用 iframe 的 contentWindow 來列印
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+            } else {
+                // 備選方案：在新視窗開啟 PDF 並觸發列印
+                const printWindow = window.open(pdfUrl, '_blank');
+                if (printWindow) {
+                    printWindow.onload = () => {
+                        printWindow.print();
+                    };
+                } else {
+                    // 如果無法開啟新視窗，提供下載連結
+                    console.warn('無法開啟列印視窗，請使用下載功能或手動開啟 PDF 後列印。');
+                }
+            }
+        } catch (error) {
+            console.error('PDF printing failed:', error);
+            // 錯誤處理：開啟新視窗顯示 PDF
+            const printWindow = window.open(pdfUrl, '_blank');
+            if (printWindow) {
+                console.info('請在新開啟的 PDF 視窗中使用瀏覽器的列印功能。');
+            } else {
+                console.warn('無法開啟 PDF，請使用下載功能或手動開啟 PDF 後列印。');
+            }
         }
     }
 
@@ -263,9 +363,10 @@ class ResearchResultsTabs {
 }
 
 // 當 DOM 載入完成時初始化組件
-let tabsInstance = null;
+// 全域變數供 HTML 使用
+window.tabsInstance = null;
 document.addEventListener('DOMContentLoaded', () => {
-    tabsInstance = new ResearchResultsTabs();
+    window.tabsInstance = new ResearchResultsTabs();
 });
 
 
