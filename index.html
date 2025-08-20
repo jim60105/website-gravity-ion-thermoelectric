@@ -1747,58 +1747,24 @@
             <div class="text-center mb-16">
               <h3 class="text-3xl font-bold text-green-400 mb-6">預印論文影響力</h3>
               <p class="text-xl text-gray-100 max-w-4xl mx-auto">
-                論文發布後在學術界引起廣泛關注，下載量持續攀升
+                論文發布後在學術界引起廣泛關注，顯示真實下載資料
               </p>
             </div>
             
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-              <!-- Impact Statistics -->
-              <div class="impact-stats space-y-6">
-                <div class="stat-highlight bg-green-400/10 backdrop-blur-sm rounded-xl p-8 border border-green-400/20">
-                  <h4 class="text-3xl font-bold text-green-400 mb-2">100+</h4>
-                  <p class="text-xl text-gray-100 mb-2">下載次數</p>
-                  <p class="text-sm text-gray-300">50天內達成</p>
-                </div>
-                
-                <div class="discipline-distribution bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                  <h5 class="text-lg font-semibold text-gray-100 mb-4">學科分布</h5>
-                  <div class="discipline-bars space-y-3">
-                    <div class="discipline-item">
-                      <div class="flex justify-between text-sm mb-1">
-                        <span class="text-gray-100">物理學</span>
-                        <span class="text-blue-400">45%</span>
-                      </div>
-                      <div class="progress-bar bg-gray-700 rounded-full h-2">
-                        <div class="progress-fill bg-blue-400 h-2 rounded-full" style="width: 45%"></div>
-                      </div>
+            <!-- Live Download Counter -->
+            <div id="live-download-stats" class="max-w-4xl mx-auto">
+              <div class="bg-gradient-to-br from-green-400/10 via-emerald-500/5 to-teal-600/10 backdrop-blur-sm rounded-3xl p-12 border border-green-400/20 shadow-2xl">
+                <div class="download-counter text-center">
+                  <div class="counter-display mb-6">
+                    <div id="download-count" class="counter-number text-6xl md:text-8xl font-bold text-green-400 mb-4 transition-all duration-500">
+                      <span class="count-number">194</span>
                     </div>
-                    <div class="discipline-item">
-                      <div class="flex justify-between text-sm mb-1">
-                        <span class="text-gray-100">化學</span>
-                        <span class="text-green-400">30%</span>
-                      </div>
-                      <div class="progress-bar bg-gray-700 rounded-full h-2">
-                        <div class="progress-fill bg-green-400 h-2 rounded-full" style="width: 30%"></div>
-                      </div>
-                    </div>
-                    <div class="discipline-item">
-                      <div class="flex justify-between text-sm mb-1">
-                        <span class="text-gray-100">能源科學</span>
-                        <span class="text-purple-400">25%</span>
-                      </div>
-                      <div class="progress-bar bg-gray-700 rounded-full h-2">
-                        <div class="progress-fill bg-purple-400 h-2 rounded-full" style="width: 25%"></div>
-                      </div>
-                    </div>
+                    <div class="counter-label text-xl md:text-2xl text-gray-100 mb-2">下載次數</div>
+                    <div class="counter-subtitle text-sm text-gray-300">來自 viXra 資料</div>
                   </div>
-                </div>
-              </div>
-              
-              <!-- Download Trend Chart -->
-              <div class="trend-chart-container bg-black/30 backdrop-blur-sm rounded-xl p-6 border border-white/10">
-                <h4 class="text-xl font-semibold mb-4 text-energy-gold">下載趨勢分析</h4>
-                <div class="chart-wrapper">
-                  <canvas id="download-trend-chart" class="w-full h-64"></canvas>
+                  
+                  <div id="last-updated" class="last-updated text-xs text-gray-400">最後更新：2025 年 8 月</div>
+                  <div id="error-message" class="error-message hidden mt-4 p-3 bg-red-500/20 border border-red-500/30 rounded-lg text-red-300 text-sm"></div>
                 </div>
               </div>
             </div>

@@ -72,7 +72,7 @@ class AcademicCharts {
 
     // Observe chart containers
     const chartContainers = [
-      'download-trend-chart'
+      // Removed download-trend-chart as it's now handled by paper-downloads.js
     ];
 
     chartContainers.forEach(id => {
@@ -90,162 +90,18 @@ class AcademicCharts {
       return;
     }
 
-    const ctx = canvas.getContext('2d');
+    // Note: ctx variable removed as no charts are currently implemented
+    // const ctx = canvas.getContext('2d');
 
     switch (chartId) {
-      case 'download-trend-chart':
-        this.charts[chartId] = this.createDownloadTrendChart(ctx);
-        break;
+      // Removed download-trend-chart as it's now handled by paper-downloads.js
       default:
         console.warn('Unknown chart ID:', chartId);
     }
   }
 
-  createDownloadTrendChart(ctx) {
-    return new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: this.chartData.downloadTrend.labels.slice(-30), // Last 30 days
-        datasets: [
-          {
-            label: '每日下載',
-            data: this.chartData.downloadTrend.downloads.slice(-30),
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-            borderWidth: 3,
-            fill: true,
-            tension: 0.4,
-            pointBackgroundColor: '#10b981',
-            pointBorderColor: '#ffffff',
-            pointBorderWidth: 2,
-            pointRadius: 4,
-            pointHoverRadius: 6
-          },
-          {
-            label: '累積下載',
-            data: this.chartData.downloadTrend.cumulative.slice(-30),
-            borderColor: '#f59e0b',
-            backgroundColor: 'rgba(245, 158, 11, 0.1)',
-            borderWidth: 3,
-            fill: false,
-            tension: 0.4,
-            pointBackgroundColor: '#f59e0b',
-            pointBorderColor: '#ffffff',
-            pointBorderWidth: 2,
-            pointRadius: 4,
-            pointHoverRadius: 6,
-            yAxisID: 'y1'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          title: {
-            display: true,
-            text: '論文下載趨勢（最近30天）',
-            color: '#f3f4f6',
-            font: {
-              size: 16,
-              weight: 'bold'
-            }
-          },
-          legend: {
-            display: true,
-            labels: {
-              color: '#f3f4f6',
-              usePointStyle: true,
-              font: {
-                size: 12
-              }
-            }
-          },
-          tooltip: {
-            mode: 'index',
-            intersect: false,
-            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-            titleColor: '#f3f4f6',
-            bodyColor: '#f3f4f6',
-            borderColor: '#374151',
-            borderWidth: 1,
-            cornerRadius: 8,
-            displayColors: true
-          }
-        },
-        scales: {
-          x: {
-            display: true,
-            title: {
-              display: true,
-              text: '日期',
-              color: '#9ca3af',
-              font: {
-                size: 12
-              }
-            },
-            ticks: {
-              color: '#9ca3af',
-              maxTicksLimit: 8
-            },
-            grid: {
-              color: 'rgba(156, 163, 175, 0.2)'
-            }
-          },
-          y: {
-            type: 'linear',
-            display: true,
-            position: 'left',
-            title: {
-              display: true,
-              text: '每日下載數',
-              color: '#10b981',
-              font: {
-                size: 12
-              }
-            },
-            ticks: {
-              color: '#10b981',
-              beginAtZero: true
-            },
-            grid: {
-              color: 'rgba(16, 185, 129, 0.2)'
-            }
-          },
-          y1: {
-            type: 'linear',
-            display: true,
-            position: 'right',
-            title: {
-              display: true,
-              text: '累積下載數',
-              color: '#f59e0b',
-              font: {
-                size: 12
-              }
-            },
-            ticks: {
-              color: '#f59e0b',
-              beginAtZero: true
-            },
-            grid: {
-              drawOnChartArea: false,
-              color: 'rgba(245, 158, 11, 0.2)'
-            }
-          }
-        },
-        interaction: {
-          mode: 'nearest',
-          axis: 'x',
-          intersect: false
-        },
-        animation: {
-          duration: 2000,
-          easing: 'easeInOutQuart'
-        }
-      }
-    });
-  }
+  // Note: createDownloadTrendChart method removed as download tracking
+  // is now handled by the paper-downloads.js module with real viXra data
 
   // Create simple chart using canvas without Chart.js (fallback)
   createSimpleChart(canvasId, data, type = 'line') {
