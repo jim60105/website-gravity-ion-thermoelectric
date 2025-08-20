@@ -276,7 +276,8 @@ class PaperDownloads {
         if (refreshBtn) {
             refreshBtn.disabled = isLoading;
             if (isLoading) {
-                Utils.DOM.addClass(refreshBtn, 'opacity-50 cursor-not-allowed');
+                Utils.DOM.addClass(refreshBtn, 'opacity-50');
+                Utils.DOM.addClass(refreshBtn, 'cursor-not-allowed');
                 if (refreshIcon) {
                     Utils.DOM.addClass(refreshIcon, 'animate-spin');
                 }
@@ -284,7 +285,8 @@ class PaperDownloads {
                     refreshText.textContent = '載入中...';
                 }
             } else {
-                Utils.DOM.removeClass(refreshBtn, 'opacity-50 cursor-not-allowed');
+                Utils.DOM.removeClass(refreshBtn, 'opacity-50');
+                Utils.DOM.removeClass(refreshBtn, 'cursor-not-allowed');
                 if (refreshIcon) {
                     Utils.DOM.removeClass(refreshIcon, 'animate-spin');
                 }
