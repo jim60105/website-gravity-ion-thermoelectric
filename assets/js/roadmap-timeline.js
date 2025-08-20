@@ -9,7 +9,7 @@ class RoadmapTimeline {
         this.container = document.getElementById(containerId);
         this.milestones = [
             {
-                year: '2025',
+                year: '20??',
                 title: '小規模驗證',
                 description: '完成實驗室原型驗證，建立基礎生產流程',
                 achievements: ['實驗室原型完成', '效率參數確認', '專利申請完成'],
@@ -17,7 +17,7 @@ class RoadmapTimeline {
                 color: '#059669'
             },
             {
-                year: '2027',
+                year: '20??',
                 title: '商業化原型',
                 description: '開發可商業化原型，進行市場測試',
                 achievements: ['原型機量產', '市場驗證完成', '合作伙伴建立'],
@@ -25,7 +25,7 @@ class RoadmapTimeline {
                 color: '#0EA5E9'
             },
             {
-                year: '2030',
+                year: '20??',
                 title: '大規模部署',
                 description: '實現規模化生產，開始商業部署',
                 achievements: ['工廠建設完成', '產品標準化', '市場占有率5%'],
@@ -33,7 +33,7 @@ class RoadmapTimeline {
                 color: '#8B5CF6'
             },
             {
-                year: '2035',
+                year: '20??',
                 title: '全球推廣',
                 description: '全球範圍推廣應用，成為主流能源技術',
                 achievements: ['全球市場進入', '技術標準確立', '市場占有率25%'],
