@@ -16,11 +16,11 @@ class CounterAnimation {
 
     // Define counter targets
     this.counterTargets = {
-      'professor-counter': 5127,
+      'professor-counter': 5395,
       'response-count': 127,
-      'country-count': 52,
-      'university-count': 185,
-      'days-count': 156
+      'country-count': 16,
+      'university-count': 75,
+      'days-count': 134
     };
   }
 
