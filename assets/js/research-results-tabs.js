@@ -272,7 +272,7 @@ class ResearchResultsTabs {
      */
     handlePdfError(container) {
         console.error('PDF loading failed');
-        
+
         const errorMessage = document.createElement('div');
         errorMessage.className = 'pdf-error flex flex-col items-center justify-center h-full text-gray-400 text-center p-8';
         errorMessage.innerHTML = `
@@ -285,11 +285,47 @@ class ResearchResultsTabs {
                 直接下載 PDF
             </a>
         `;
-        
+
         const iframe = container.querySelector('iframe');
         if (iframe) {
             iframe.style.display = 'none';
             container.appendChild(errorMessage);
+        }
+    }
+
+    /**
+     * 列印 PDF 文件
+     */
+    printPdf() {
+        const iframe = document.getElementById('academic-paper-pdf');
+        const pdfUrl = 'assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.pdf';
+
+        try {
+            // 嘗試使用 iframe 的 contentWindow 來列印
+            if (iframe && iframe.contentWindow) {
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+            } else {
+                // 備選方案：在新視窗開啟 PDF 並觸發列印
+                const printWindow = window.open(pdfUrl, '_blank');
+                if (printWindow) {
+                    printWindow.onload = () => {
+                        printWindow.print();
+                    };
+                } else {
+                    // 如果無法開啟新視窗，提供下載連結
+                    console.warn('無法開啟列印視窗，請使用下載功能或手動開啟 PDF 後列印。');
+                }
+            }
+        } catch (error) {
+            console.error('PDF printing failed:', error);
+            // 錯誤處理：開啟新視窗顯示 PDF
+            const printWindow = window.open(pdfUrl, '_blank');
+            if (printWindow) {
+                console.info('請在新開啟的 PDF 視窗中使用瀏覽器的列印功能。');
+            } else {
+                console.warn('無法開啟 PDF，請使用下載功能或手動開啟 PDF 後列印。');
+            }
         }
     }
 
@@ -327,9 +363,10 @@ class ResearchResultsTabs {
 }
 
 // 當 DOM 載入完成時初始化組件
-let tabsInstance = null;
+// 全域變數供 HTML 使用
+window.tabsInstance = null;
 document.addEventListener('DOMContentLoaded', () => {
-    tabsInstance = new ResearchResultsTabs();
+    window.tabsInstance = new ResearchResultsTabs();
 });
 
 

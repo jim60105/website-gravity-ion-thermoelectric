@@ -498,11 +498,11 @@
                           </div>
                           <div class="flex justify-between">
                             <span>檔案大小：</span>
-                            <span>約 1.3 MB</span>
+                            <span>約 1.2 MB</span>
                           </div>
                           <div class="flex justify-between">
                             <span>頁數：</span>
-                            <span>25 頁</span>
+                            <span>43 頁</span>
                           </div>
                         </div>
                       </div>
@@ -521,7 +521,7 @@
                           </a>
                           <button
                             class="block w-full text-sm bg-energy-gold/20 hover:bg-energy-gold/30 text-energy-gold px-4 py-2 rounded-lg transition-colors duration-300"
-                            onclick="window.print()"
+                            onclick="if(window.tabsInstance) window.tabsInstance.printPdf()"
                           >
                             🖨️ 列印論文
                           </button>
