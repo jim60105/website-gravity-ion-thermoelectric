@@ -115,32 +115,11 @@ class NavigationController {
         const backToTopButton = document.getElementById('back-to-top');
         if (!backToTopButton) {return;}
 
-        // Show/hide button based on scroll position
-        const toggleBackToTopButton = () => {
-            if (window.pageYOffset > 300) {
-                backToTopButton.style.display = 'block';
-                setTimeout(() => {
-                    backToTopButton.style.opacity = '1';
-                    backToTopButton.style.transform = 'scale(1)';
-                }, 10);
-            } else {
-                backToTopButton.style.opacity = '0';
-                backToTopButton.style.transform = 'scale(0.8)';
-                setTimeout(() => {
-                    if (window.pageYOffset <= 300) {
-                        backToTopButton.style.display = 'none';
-                    }
-                }, 300);
-            }
-        };
-
-        // Add scroll listener for back to top button
-        window.addEventListener('scroll',
-            Utils.Performance.throttle(toggleBackToTopButton, 100)
-        );
-
         // Handle button click
-        backToTopButton.addEventListener('click', () => {
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -159,12 +138,19 @@ class NavigationController {
         backToTopButton.style.opacity = '0';
         backToTopButton.style.transform = 'scale(0.8)';
         backToTopButton.style.transition = 'all 0.3s ease';
+        backToTopButton.style.display = 'none';
+        
+        // Ensure the button maintains its fixed position
+        backToTopButton.style.position = 'fixed';
     }
 
     /**
      * Handle scroll events for scroll spy and header effects
      */
     handleScroll() {
+        // Always update back to top button regardless of scrolling state
+        this.updateBackToTopButton();
+        
         if (this.isScrolling) {return;}
 
         this.updateActiveSection();
@@ -373,6 +359,39 @@ class NavigationController {
         } else {
             this.header.style.backdropFilter = '';
             this.header.style.backgroundColor = '';
+        }
+    }
+
+    /**
+     * Update back to top button visibility based on scroll position
+     */
+    updateBackToTopButton() {
+        const backToTopButton = document.getElementById('back-to-top');
+        if (!backToTopButton) {return;}
+
+        backToTopButton.style.position = 'fixed';
+
+        const shouldShow = window.pageYOffset > 300;
+        
+        if (shouldShow) {
+            // Show button
+            if (backToTopButton.style.display === 'none') {
+                backToTopButton.style.display = 'block';
+                // Force reflow before starting animation
+                backToTopButton.offsetHeight;
+            }
+            backToTopButton.style.opacity = '1';
+            backToTopButton.style.transform = 'scale(1)';
+        } else {
+            // Hide button
+            backToTopButton.style.opacity = '0';
+            backToTopButton.style.transform = 'scale(0.8)';
+            // Set display to none after transition completes
+            setTimeout(() => {
+                if (window.pageYOffset <= 300) {
+                    backToTopButton.style.display = 'none';
+                }
+            }, 300);
         }
     }
 
