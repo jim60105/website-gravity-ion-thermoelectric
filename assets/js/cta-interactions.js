@@ -17,7 +17,6 @@ class CTAInteractions {
     init() {
         this.setupVideoButtons();
         this.setupPaperDownload();
-        this.setupSecondaryActions();
         this.setupAnalytics();
 
         console.info('CTA Interactions initialized');
@@ -130,130 +129,6 @@ class CTAInteractions {
             downloadCounter.offsetHeight; // Trigger reflow
             downloadCounter.style.animation = 'counterUp 0.5s ease-out';
         }
-    }
-
-    /**
-     * Setup secondary action buttons
-     */
-    setupSecondaryActions() {
-        const academicBtn = document.querySelector('.academic-cta button');
-        const businessBtn = document.querySelector('.business-cta button');
-        const mediaBtn = document.querySelector('.media-cta button');
-
-        if (academicBtn) {
-            academicBtn.addEventListener('click', () => {
-                this.handleSecondaryAction('academic', academicBtn);
-            });
-        }
-
-        if (businessBtn) {
-            businessBtn.addEventListener('click', () => {
-                this.handleSecondaryAction('business', businessBtn);
-            });
-        }
-
-        if (mediaBtn) {
-            mediaBtn.addEventListener('click', () => {
-                this.handleSecondaryAction('media', mediaBtn);
-            });
-        }
-    }
-
-    /**
-     * Handle secondary action clicks
-     */
-    handleSecondaryAction(actionType, button) {
-        // Add click animation
-        this.addClickAnimation(button);
-
-        // Track interaction
-        this.trackInteraction('secondary_action', {
-            type: actionType,
-            timestamp: Date.now()
-        });
-
-        // Show contact form or redirect
-        this.showContactForm(actionType);
-
-        console.info(`Secondary action clicked: ${actionType}`);
-    }
-
-    /**
-     * Show contact form modal
-     */
-    showContactForm(actionType) {
-        // Create modal overlay
-        const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-        modal.innerHTML = `
-            <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
-                <div class="text-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">${this.getActionTitle(actionType)}</h3>
-                    <p class="text-gray-600">請留下您的聯絡資訊，我們將盡快與您聯繫</p>
-                </div>
-                
-                <form class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">姓名</label>
-                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">電子郵件</label>
-                        <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">訊息</label>
-                        <textarea rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="請描述您的需求..."></textarea>
-                    </div>
-                    <div class="flex space-x-4">
-                        <button type="submit" class="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
-                            發送
-                        </button>
-                        <button type="button" class="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 transition-colors" onclick="this.closest('.fixed').remove()">
-                            取消
-                        </button>
-                    </div>
-                </form>
-            </div>
-        `;
-
-        document.body.appendChild(modal);
-
-        // Handle form submission
-        const form = modal.querySelector('form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.handleFormSubmission(form, actionType);
-            modal.remove();
-        });
-    }
-
-    /**
-     * Get action title for modal
-     */
-    getActionTitle(actionType) {
-        const titles = {
-            academic: '學術合作申請',
-            business: '商業合作諮詢',
-            media: '媒體採訪申請'
-        };
-        return titles[actionType] || '聯絡我們';
-    }
-
-    /**
-     * Handle form submission
-     */
-    handleFormSubmission(_form, actionType) {
-        // Track form submission
-        this.trackInteraction('form_submission', {
-            type: actionType,
-            timestamp: Date.now()
-        });
-
-        // Show success message
-        this.showGlobalSuccessMessage('您的訊息已送出，我們將盡快與您聯繫');
-
-        console.info(`Form submitted for ${actionType}`);
     }
 
     /**
@@ -399,8 +274,7 @@ class CTAInteractions {
             totalInteractions: this.interactions.size,
             videoClicks: 0,
             paperDownloads: 0,
-            socialShares: 0,
-            formSubmissions: 0
+            socialShares: 0
         };
 
         this.interactions.forEach(interaction => {
@@ -413,9 +287,6 @@ class CTAInteractions {
                     break;
                 case 'social_share':
                     stats.socialShares++;
-                    break;
-                case 'form_submission':
-                    stats.formSubmissions++;
                     break;
             }
         });
