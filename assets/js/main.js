@@ -187,9 +187,6 @@ class GravityIonApp {
 
         // Initialize image loading
         this.initLazyLoading();
-
-        // Initialize scroll to top
-        this.initScrollToTop();
     }
 
     /**
@@ -414,45 +411,6 @@ class GravityIonApp {
 
             this.components.set('lazyLoading', imageObserver);
         }
-    }
-
-    /**
-     * Initialize scroll to top functionality
-     */
-    initScrollToTop() {
-        // Create scroll to top button
-        const scrollButton = Utils.DOM.createElement('button', {
-            className:
-                'fixed bottom-8 right-8 bg-electric-blue hover:bg-electric-blue/80 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50 hidden',
-            'aria-label': '回到頂部',
-            innerHTML: `
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                </svg>
-            `
-        });
-
-        document.body.appendChild(scrollButton);
-
-        // Show/hide button based on scroll position
-        const handleScrollButton = Utils.Performance.throttle(() => {
-            const scrolled = Utils.Scroll.getPosition().y;
-
-            if (scrolled > 500) {
-                Utils.DOM.removeClass(scrollButton, 'hidden');
-            } else {
-                Utils.DOM.addClass(scrollButton, 'hidden');
-            }
-        }, 100);
-
-        window.addEventListener('scroll', handleScrollButton);
-
-        // Scroll to top on click
-        Utils.DOM.on(scrollButton, 'click', () => {
-            Utils.Scroll.to(0);
-        });
-
-        this.components.set('scrollToTop', { button: scrollButton, handler: handleScrollButton });
     }
 
     /**
