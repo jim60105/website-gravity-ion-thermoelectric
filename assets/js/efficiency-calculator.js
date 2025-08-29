@@ -292,15 +292,11 @@ class EfficiencyCalculator {
         // Calculate centrifugal acceleration
         const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
 
-        // Use effective height (inner radius for electrolyte column)
-        const height = this.structure.r1;
-
-        // Calculate power density using real physics
+        // Calculate power density using real physics from paper section 5.1
         const powerData = this.physicsEngine.calculatePowerDensity(
             ionSystem.anion,
             ionSystem.cation,
-            acceleration,
-            height,
+            this.structure,
             ionSystem.conductivity
         );
 
