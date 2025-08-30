@@ -335,6 +335,51 @@ class EfficiencyCalculator {
 
         educationalDisplay.innerHTML = content;
         educationalPanel.appendChild(educationalDisplay);
+
+        // Trigger MathJax rendering after DOM content is added
+        this.renderEducationalEquations(section);
+    }
+
+    /**
+     * Render MathJax equations for educational content after DOM is ready
+     */
+    renderEducationalEquations(section) {
+        // Small delay to ensure DOM elements are fully rendered
+        setTimeout(() => {
+            if (window.mathRenderer && window.mathRenderer.instance) {
+                const renderer = window.mathRenderer.instance;
+                
+                if (section === 'basic') {
+                    // Render basic physics equations
+                    renderer.renderEquation('educational-boltzmann', '#educational-boltzmann-container');
+                    renderer.renderEquation('educational-electric-field', '#educational-electric-field-container');
+                    renderer.renderEquation('educational-voltage-difference', '#educational-voltage-difference-container');
+                } else if (section === 'advanced') {
+                    // Render advanced calculation equations
+                    renderer.renderEquation('educational-power-density', '#educational-power-density-container');
+                    renderer.renderEquation('educational-max-speed', '#educational-max-speed-container');
+                }
+            } else {
+                console.warn('MathRenderer not available for educational content');
+                // Fallback: try again after a longer delay
+                setTimeout(() => {
+                    if (window.mathRenderer && window.mathRenderer.instance) {
+                        const renderer = window.mathRenderer.instance;
+                        
+                        if (section === 'basic') {
+                            renderer.renderEquation('educational-boltzmann', '#educational-boltzmann-container');
+                            renderer.renderEquation('educational-electric-field', '#educational-electric-field-container');
+                            renderer.renderEquation('educational-voltage-difference', '#educational-voltage-difference-container');
+                        } else if (section === 'advanced') {
+                            renderer.renderEquation('educational-power-density', '#educational-power-density-container');
+                            renderer.renderEquation('educational-max-speed', '#educational-max-speed-container');
+                        }
+                    } else {
+                        console.error('MathRenderer still not available after retry');
+                    }
+                }, 500);
+            }
+        }, 100); // 100ms delay to ensure DOM is fully rendered
     }
 
     /**
@@ -346,9 +391,7 @@ class EfficiencyCalculator {
             <div class="grid md:grid-cols-2 gap-4">
                 <div class="formula-card bg-blue-50 p-3 rounded border border-blue-200">
                     <h6 class="font-semibold text-blue-800 mb-2">波茲曼分布</h6>
-                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
-                        C(h+Δh)/C(h) = exp(-mgΔh/kT)
-                    </div>
+                    <div id="educational-boltzmann-container" data-equation="educational-boltzmann" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-2 rounded bg-white mb-2 text-gray-800"></div>
                     <div class="text-sm text-blue-700">
                         <p><strong>計算結果:</strong> ${basic.boltzmannRatio?.toExponential(3) || 'N/A'}</p>
                         <p><strong>物理意義:</strong> 描述離子在重力場中的濃度分布變化</p>
@@ -356,9 +399,7 @@ class EfficiencyCalculator {
                 </div>
                 <div class="formula-card bg-green-50 p-3 rounded border border-green-200">
                     <h6 class="font-semibold text-green-800 mb-2">電場強度</h6>
-                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
-                        E = (m₁ - m₂)g / (2q)
-                    </div>
+                    <div id="educational-electric-field-container" data-equation="educational-electric-field" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-2 rounded bg-white mb-2 text-gray-800"></div>
                     <div class="text-sm text-green-700">
                         <p><strong>計算結果:</strong> ${basic.electricField?.toExponential(3) || 'N/A'} V/m</p>
                         <p><strong>物理意義:</strong> 不同質量離子產生的電場</p>
@@ -366,9 +407,7 @@ class EfficiencyCalculator {
                 </div>
                 <div class="formula-card bg-purple-50 p-3 rounded border border-purple-200">
                     <h6 class="font-semibold text-purple-800 mb-2">電壓差</h6>
-                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
-                        ΔV = (m₁ - m₂)GH / (2q)
-                    </div>
+                    <div id="educational-voltage-difference-container" data-equation="educational-voltage-difference" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-2 rounded bg-white mb-2 text-gray-800"></div>
                     <div class="text-sm text-purple-700">
                         <p><strong>計算結果:</strong> ${basic.voltageDifference?.toExponential(3) || 'N/A'} V</p>
                         <p><strong>物理意義:</strong> 可測量的電位差</p>
@@ -396,9 +435,7 @@ class EfficiencyCalculator {
             <div class="grid md:grid-cols-2 gap-4">
                 <div class="formula-card bg-cyan-50 p-3 rounded border border-cyan-200">
                     <h6 class="font-semibold text-cyan-800 mb-2">功率密度計算</h6>
-                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
-                        P = (ΔV/2)² / R
-                    </div>
+                    <div id="educational-power-density-container" data-equation="educational-power-density" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-2 rounded bg-white mb-2"></div>
                     <div class="text-sm text-cyan-700">
                         <p><strong>計算結果:</strong> ${advanced.powerDensity?.toFixed(6) || 'N/A'} W/m³</p>
                         <p><strong>應用:</strong> 實際可獲得的功率輸出</p>
@@ -406,9 +443,7 @@ class EfficiencyCalculator {
                 </div>
                 <div class="formula-card bg-yellow-50 p-3 rounded border border-yellow-200">
                     <h6 class="font-semibold text-yellow-800 mb-2">最大轉速限制</h6>
-                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
-                        ω_max = √(σ_allow / (ρ × r²))
-                    </div>
+                    <div id="educational-max-speed-container" data-equation="educational-max-speed" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-2 rounded bg-white mb-2"></div>
                     <div class="text-sm text-yellow-700">
                         <p><strong>計算結果:</strong> ${advanced.maxRotationalSpeedRPM?.toFixed(0) || 'N/A'} RPM</p>
                         <p><strong>安全等級:</strong> ${safety.warningLevel}</p>

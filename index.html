@@ -2226,19 +2226,40 @@
                   <div class="grid md:grid-cols-2 gap-4 text-xs text-blue-700">
                     <div>
                       <h6 class="font-semibold mb-1">基礎方程式:</h6>
-                      <ul class="space-y-1">
-                        <li>• 波茲曼分布：C(h+Δh)/C(h) = exp(-mGΔh/kT)</li>
-                        <li>• 電場強度：E = (m₁ - m₂)G / (2q)</li>
-                        <li>• 電壓差：ΔV = (m₁ - m₂)GH / (2q)</li>
-                        <li>• 離心加速度：a = ω²r</li>
+                      <ul class="space-y-3">
+                        <li class="flex items-center space-x-2">
+                          <span>• 波茲曼分布：</span>
+                          <div id="boltzmann-calculator-container" data-equation="boltzmann-calculator" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-1 rounded"></div>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                          <span>• 電場強度：</span>
+                          <div id="electric-field-calculator-container" data-equation="electric-field-calculator" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-1 rounded"></div>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                          <span>• 電壓差：</span>
+                          <div id="voltage-difference-calculator-container" data-equation="voltage-difference-calculator" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-1 rounded"></div>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                          <span>• 離心加速度：</span>
+                          <div id="centrifugal-acceleration-container" data-equation="centrifugal-acceleration" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-1 rounded"></div>
+                        </li>
                       </ul>
                     </div>
                     <div>
                       <h6 class="font-semibold mb-1">進階分析:</h6>
-                      <ul class="space-y-1">
-                        <li>• 功率密度：P = (ΔV/2)² / R</li>
-                        <li>• 最大轉速：ω_max = √(σ_allow / (ρ × r²))</li>
-                        <li>• 安全係數：SF = σ_allow / σ_actual</li>
+                      <ul class="space-y-3">
+                        <li class="flex items-center space-x-2">
+                          <span>• 功率密度：</span>
+                          <div id="power-density-container" data-equation="power-density" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-1 rounded"></div>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                          <span>• 最大轉速：</span>
+                          <div id="max-rotational-speed-container" data-equation="max-rotational-speed" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-1 rounded"></div>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                          <span>• 安全係數：</span>
+                          <div id="safety-factor-container" data-equation="safety-factor" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-1 rounded"></div>
+                        </li>
                         <li>• 離子系統效能：多離子比較分析</li>
                       </ul>
                     </div>

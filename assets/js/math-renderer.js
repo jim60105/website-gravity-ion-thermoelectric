@@ -102,6 +102,162 @@ class MathRenderer {
                 'T': 'Temperature'
             }
         });
+
+        // ========== Calculator Section Equations ==========
+        
+        // Boltzmann distribution for calculator
+        this.defineEquation('boltzmann-calculator', {
+            latex: `\\frac{C(h+\\Delta h)}{C(h)} = \\exp\\left(\\frac{-mG\\Delta h}{k_B T}\\right)`,
+            description: 'Boltzmann distribution ratio in gravitational field',
+            variables: {
+                'C(h+\\Delta h)': '高度 h+Δh 處的離子濃度',
+                'C(h)': '高度 h 處的離子濃度',
+                'm': '離子質量差異',
+                'G': '重力加速度',
+                '\\Delta h': '高度差',
+                'k_B': '波茲曼常數 (1.38×10⁻²³ J/K)',
+                'T': '絕對溫度 (K)'
+            }
+        });
+
+        // Electric field strength for calculator
+        this.defineEquation('electric-field-calculator', {
+            latex: `E = \\frac{(m_1 - m_2)G}{2q}`,
+            description: 'Self-generated electric field in ion system',
+            variables: {
+                'E': '電場強度 (V/m)',
+                'm_1': '重離子質量 (kg)',
+                'm_2': '輕離子質量 (kg)',
+                'G': '重力加速度 (m/s²)',
+                'q': '基本電荷 (1.6×10⁻¹⁹ C)'
+            }
+        });
+
+        // Voltage difference for calculator
+        this.defineEquation('voltage-difference-calculator', {
+            latex: `\\Delta V = \\frac{(m_1 - m_2)GH}{2q}`,
+            description: 'Voltage difference across ion system height',
+            variables: {
+                '\\Delta V': '電壓差 (V)',
+                'm_1': '重離子質量 (kg)',
+                'm_2': '輕離子質量 (kg)',
+                'G': '重力加速度 (m/s²)',
+                'H': '系統高度 (m)',
+                'q': '基本電荷 (1.6×10⁻¹⁹ C)'
+            }
+        });
+
+        // Centrifugal acceleration
+        this.defineEquation('centrifugal-acceleration', {
+            latex: `a = \\omega^2 r`,
+            description: 'Centrifugal acceleration in rotating system',
+            variables: {
+                'a': '離心加速度 (m/s²)',
+                '\\omega': '角速度 (rad/s)',
+                'r': '旋轉半徑 (m)'
+            }
+        });
+
+        // Power density
+        this.defineEquation('power-density', {
+            latex: `P = \\frac{(\\Delta V/2)^2}{R}`,
+            description: 'Power density calculation',
+            variables: {
+                'P': '功率密度 (W/m³)',
+                '\\Delta V': '電壓差 (V)',
+                'R': '電阻 (Ω)'
+            }
+        });
+
+        // Maximum rotational speed
+        this.defineEquation('max-rotational-speed', {
+            latex: `\\omega_{\\text{max}} = \\sqrt{\\frac{\\sigma_{\\text{allow}}}{\\rho \\times r^2}}`,
+            description: 'Maximum safe rotational speed',
+            variables: {
+                '\\omega_{\\text{max}}': '最大角速度 (rad/s)',
+                '\\sigma_{\\text{allow}}': '許用應力 (Pa)',
+                '\\rho': '材料密度 (kg/m³)',
+                'r': '旋轉半徑 (m)'
+            }
+        });
+
+        // Safety factor
+        this.defineEquation('safety-factor', {
+            latex: `SF = \\frac{\\sigma_{\\text{allow}}}{\\sigma_{\\text{actual}}}`,
+            description: 'Safety factor calculation',
+            variables: {
+                'SF': '安全係數 (無因次)',
+                '\\sigma_{\\text{allow}}': '許用應力 (Pa)',
+                '\\sigma_{\\text{actual}}': '實際應力 (Pa)'
+            }
+        });
+
+        // ========== Educational Content Equations ==========
+        
+        // Basic physics - Boltzmann distribution (educational)
+        this.defineEquation('educational-boltzmann', {
+            latex: `\\frac{C(h+\\Delta h)}{C(h)} = \\exp\\left(\\frac{-mg\\Delta h}{kT}\\right)`,
+            description: '波茲曼分布描述離子在重力場中的濃度分布變化',
+            variables: {
+                'C(h+\\Delta h)': '高度 h+Δh 處的離子濃度',
+                'C(h)': '高度 h 處的離子濃度',
+                'm': '離子質量差異 (kg)',
+                'g': '重力加速度 (9.81 m/s²)',
+                '\\Delta h': '高度差 (m)',
+                'k': '波茲曼常數 (1.38×10⁻²³ J/K)',
+                'T': '絕對溫度 (K)'
+            }
+        });
+
+        // Basic physics - Electric field strength (educational)
+        this.defineEquation('educational-electric-field', {
+            latex: `E = \\frac{(m_1 - m_2)g}{2q}`,
+            description: '不同質量離子產生的電場強度',
+            variables: {
+                'E': '電場強度 (V/m)',
+                'm_1': '重離子質量 (kg)',
+                'm_2': '輕離子質量 (kg)',
+                'g': '重力加速度 (9.81 m/s²)',
+                'q': '離子電荷 (C)'
+            }
+        });
+
+        // Basic physics - Voltage difference (educational)
+        this.defineEquation('educational-voltage-difference', {
+            latex: `\\Delta V = \\frac{(m_1 - m_2)GH}{2q}`,
+            description: '可測量的電位差',
+            variables: {
+                '\\Delta V': '電壓差 (V)',
+                'm_1': '重離子質量 (kg)',
+                'm_2': '輕離子質量 (kg)',
+                'G': '重力加速度或離心加速度 (m/s²)',
+                'H': '有效高度 (m)',
+                'q': '離子電荷 (C)'
+            }
+        });
+
+        // Advanced - Power density (educational)
+        this.defineEquation('educational-power-density', {
+            latex: `P = \\frac{(\\Delta V/2)^2}{R}`,
+            description: '實際可獲得的功率輸出',
+            variables: {
+                'P': '功率密度 (W/m³)',
+                '\\Delta V': '電壓差 (V)',
+                'R': '內阻 (Ω)'
+            }
+        });
+
+        // Advanced - Maximum rotational speed (educational)
+        this.defineEquation('educational-max-speed', {
+            latex: `\\omega_{\\text{max}} = \\sqrt{\\frac{\\sigma_{\\text{allow}}}{\\rho \\times r^2}}`,
+            description: '材料結構的最大安全轉速',
+            variables: {
+                '\\omega_{\\text{max}}': '最大角速度 (rad/s)',
+                '\\sigma_{\\text{allow}}': '許用應力 (670 MPa for 7075-T6)',
+                '\\rho': '材料密度 (2810 kg/m³ for 7075-T6)',
+                'r': '旋轉半徑 (m)'
+            }
+        });
     }
 
     /**
@@ -120,7 +276,14 @@ class MathRenderer {
      */
     async renderEquation(equationId, containerId) {
         const equation = this.equations.get(equationId);
-        const container = Utils.DOM.select(containerId);
+        let container;
+        
+        // Handle both string selectors and DOM elements
+        if (typeof containerId === 'string') {
+            container = Utils.DOM.select(containerId);
+        } else {
+            container = containerId; // It's already a DOM element
+        }
 
         if (!equation || !container) {
             console.warn(`Cannot render equation: ${equationId} in ${containerId}`);
@@ -362,6 +525,41 @@ class MathRenderer {
             'Average thermal energy per particle': `
                 熱能方程式描述了粒子的平均熱運動能量。在我們的系統中，這個熱能提供了電子逆電場運動的驅動力，
                 實現了在等溫條件下的持續能量輸出。
+            `,
+            // Calculator equations explanations
+            'Boltzmann distribution ratio in gravitational field': `
+                這是波茲曼分布在重力場中的經典表達式。它描述了離子濃度隨高度的指數變化。
+                當離子質量差異 m 越大，或重力場 G 越強時，離子分離效果越明顯，
+                這是重力離子熱電技術的物理基礎。在實際應用中，我們使用離心力來增強這個效應。
+            `,
+            'Self-generated electric field in ion system': `
+                當不同質量的離子在重力場中達到平衡時，會自發產生一個電場。
+                這個電場的強度取決於離子質量差異和重力加速度。
+                HI 系統具有最大的質量差異（I⁻ 比 H⁺ 重約 18 倍），因此產生最強的電場。
+            `,
+            'Voltage difference across ion system height': `
+                電壓差是電場強度在系統高度上的積分。這個電壓差驅動電流的產生，
+                是我們系統的電能輸出源。在離心系統中，有效高度 H 由旋轉半徑決定，
+                因此可以通過增加旋轉半徑來提高電壓輸出。
+            `,
+            'Centrifugal acceleration in rotating system': `
+                離心加速度是我們技術中的關鍵參數。通過旋轉運動，我們可以產生比地球重力強數百萬倍的加速度，
+                大幅增強離子分離效應。角速度 ω 和半徑 r 的平方關係意味著即使小幅增加轉速也能顯著提升效能。
+            `,
+            'Power density calculation': `
+                功率密度公式展現了電壓差如何轉換為實際的電能輸出。
+                除以 2 是因為電場的有效值計算，電阻 R 由離子電導率和幾何結構決定。
+                這個公式直接關聯到我們系統的經濟效益和實用性。
+            `,
+            'Maximum safe rotational speed': `
+                最大轉速受到材料強度限制。這個公式基於離心應力不能超過材料許用應力的原理。
+                我們使用鋁合金 7075-T6 作為結構材料，其高強度重量比使我們能達到極高的轉速，
+                從而實現強大的離心加速度效應。
+            `,
+            'Safety factor calculation': `
+                安全係數是工程設計的關鍵參數，確保系統在各種操作條件下都能安全運行。
+                我們的設計採用適當的安全係數，平衡性能與可靠性，
+                確保長期穩定運行而不會發生結構失效。
             `
         };
 
@@ -380,7 +578,12 @@ class MathRenderer {
         equationContainers.forEach(container => {
             const equationId = container.dataset.equation;
             if (this.equations.has(equationId)) {
-                this.renderEquation(equationId, `#${container.id}`);
+                if (container.id) {
+                    this.renderEquation(equationId, `#${container.id}`);
+                } else {
+                    // If no ID, use the container directly
+                    this.renderEquation(equationId, container);
+                }
             }
         });
     }
@@ -425,6 +628,9 @@ let mathRenderer;
 
 const initMathRenderer = () => {
     mathRenderer = new MathRenderer();
+    
+    // Update global reference after initialization
+    window.mathRenderer = { instance: mathRenderer };
 
     // Auto-render equations after a delay to ensure MathJax is ready
     setTimeout(() => {
@@ -445,5 +651,5 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = { MathRenderer };
 }
 
-// Make available globally
-window.MathRenderer = { MathRenderer, instance: mathRenderer };
+// Make available globally (initial setup)
+window.mathRenderer = { instance: null };
