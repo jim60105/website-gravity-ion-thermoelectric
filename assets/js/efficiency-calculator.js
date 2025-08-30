@@ -10,7 +10,7 @@ class EfficiencyCalculator {
         this.container = document.getElementById(containerId);
         this.currentRPM = 0;
         this.currentIonSystem = 'HI'; // Default to hydrogen iodide (most efficient)
-        this.physicsEngine = new PhysicsEngine();
+        this.physicsEngine = window.PhysicsEngine ? new window.PhysicsEngine() : null;
         this.chart = null;
 
         // Current structural parameters (can be adjusted)

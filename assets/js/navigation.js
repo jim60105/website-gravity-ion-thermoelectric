@@ -119,7 +119,7 @@ class NavigationController {
         backToTopButton.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            
+
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -139,7 +139,7 @@ class NavigationController {
         backToTopButton.style.transform = 'scale(0.8)';
         backToTopButton.style.transition = 'all 0.3s ease';
         backToTopButton.style.display = 'none';
-        
+
         // Ensure the button maintains its fixed position
         backToTopButton.style.position = 'fixed';
     }
@@ -150,7 +150,7 @@ class NavigationController {
     handleScroll() {
         // Always update back to top button regardless of scrolling state
         this.updateBackToTopButton();
-        
+
         if (this.isScrolling) {return;}
 
         this.updateActiveSection();
@@ -372,7 +372,7 @@ class NavigationController {
         backToTopButton.style.position = 'fixed';
 
         const shouldShow = window.pageYOffset > 300;
-        
+
         if (shouldShow) {
             // Show button
             if (backToTopButton.style.display === 'none') {
