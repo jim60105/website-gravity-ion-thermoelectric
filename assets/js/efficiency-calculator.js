@@ -120,7 +120,7 @@ class EfficiencyCalculator {
 
             // Basic calculations using methods #1, #2, #3 - based on current RPM
             const heightDifference = this.structure.r2 - this.structure.r1;
-            
+
             if (rpm > 0) {
                 results.basic.boltzmannRatio = this.physicsEngine.calculateBoltzmannRatio(
                     heavyIonMass, acceleration, heightDifference
@@ -151,7 +151,7 @@ class EfficiencyCalculator {
                 // Calculate power density at current RPM
                 const currentOmegaSquared = Math.pow((rpm * 2 * Math.PI) / 60, 2); // Convert RPM to rad/s then square
                 const currentAcceleration = currentOmegaSquared * this.structure.r3;
-                
+
                 // Calculate current electric field and voltage
                 const currentElectricField = this.physicsEngine.calculateElectricField(
                     heavyIonMass, lightIonMass, currentAcceleration
@@ -160,12 +160,12 @@ class EfficiencyCalculator {
                 const currentVoltageAcrossElectrodes = currentElectricField * heightDifference; // display purpose
                 const unitHeight = 1.0; // m
                 const currentVoltageForDensity = currentElectricField * unitHeight; // for W/m^3 calculation
-                
+
                 // Calculate current power density
                 const outputVoltage = currentVoltageForDensity / 2; // per paper, use half of open-circuit
                 const resistance = 1 / ionSystem.conductivity;
                 const powerDensityLiquid = (outputVoltage * outputVoltage) / resistance;
-                
+
                 // Apply structural efficiency factor
                 const { r1, r2 } = this.structure;
                 const liquidArea = Math.PI * r1 * r1;
@@ -174,7 +174,7 @@ class EfficiencyCalculator {
                 const structuralEfficiency = 0.762; // From paper data
                 const volumeFraction = areaFraction * structuralEfficiency;
                 const powerDensityCombined = powerDensityLiquid * volumeFraction;
-                
+
                 results.advanced.powerDensity = {
                     powerDensity: powerDensityCombined,
                     powerDensityLiquid: powerDensityLiquid,
@@ -348,7 +348,7 @@ class EfficiencyCalculator {
         setTimeout(() => {
             if (window.mathRenderer && window.mathRenderer.instance) {
                 const renderer = window.mathRenderer.instance;
-                
+
                 if (section === 'basic') {
                     // Render basic physics equations
                     renderer.renderEquation('educational-boltzmann', '#educational-boltzmann-container');
@@ -365,7 +365,7 @@ class EfficiencyCalculator {
                 setTimeout(() => {
                     if (window.mathRenderer && window.mathRenderer.instance) {
                         const renderer = window.mathRenderer.instance;
-                        
+
                         if (section === 'basic') {
                             renderer.renderEquation('educational-boltzmann', '#educational-boltzmann-container');
                             renderer.renderEquation('educational-electric-field', '#educational-electric-field-container');
@@ -703,7 +703,7 @@ class EfficiencyCalculator {
                     // Use enhanced physics calculation for chart data
                     const enhancedResults = this.calculateEnhancedPhysics(rpm, system);
                     const power = enhancedResults.advanced.powerDensity?.powerDensity || 0;
-                    
+
                     // Include all points including zero for linear scale
                     dataPoints.push({ x: rpm, y: power });
                 } catch (error) {

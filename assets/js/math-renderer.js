@@ -104,7 +104,7 @@ class MathRenderer {
         });
 
         // ========== Calculator Section Equations ==========
-        
+
         // Boltzmann distribution for calculator
         this.defineEquation('boltzmann-calculator', {
             latex: `\\frac{C(h+\\Delta h)}{C(h)} = \\exp\\left(\\frac{-mG\\Delta h}{k_B T}\\right)`,
@@ -193,7 +193,7 @@ class MathRenderer {
         });
 
         // ========== Educational Content Equations ==========
-        
+
         // Basic physics - Boltzmann distribution (educational)
         this.defineEquation('educational-boltzmann', {
             latex: `\\frac{C(h+\\Delta h)}{C(h)} = \\exp\\left(\\frac{-mg\\Delta h}{kT}\\right)`,
@@ -277,7 +277,7 @@ class MathRenderer {
     async renderEquation(equationId, containerId) {
         const equation = this.equations.get(equationId);
         let container;
-        
+
         // Handle both string selectors and DOM elements
         if (typeof containerId === 'string') {
             container = Utils.DOM.select(containerId);
@@ -628,7 +628,7 @@ let mathRenderer;
 
 const initMathRenderer = () => {
     mathRenderer = new MathRenderer();
-    
+
     // Update global reference after initialization
     window.mathRenderer = { instance: mathRenderer };
 
