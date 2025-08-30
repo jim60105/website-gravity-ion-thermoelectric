@@ -1170,45 +1170,91 @@
             </div>
             
             <div class="simulation-container bg-black/30 backdrop-blur-sm rounded-xl p-8 border border-white/10">
-              <div class="simulation-controls mb-6 flex flex-wrap items-center justify-center gap-4">
-                <div class="control-group">
-                  <label for="gravity-slider" class="block text-sm font-medium text-gray-100 mb-2">
-                    重力強度
-                  </label>
-                  <input
-                    type="range"
-                    id="gravity-slider"
-                    min="0.1"
-                    max="2.0"
-                    step="0.1"
-                    value="1.0"
-                    class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <span id="gravity-value" class="text-energy-gold font-mono">1.0g</span>
+              <div class="simulation-controls mb-6 space-y-4">
+                <!-- Primary Controls Row -->
+                <div class="flex flex-wrap items-center justify-center gap-4">
+                  <div class="control-group">
+                    <label for="gravity-slider" class="block text-sm font-medium text-gray-100 mb-2">
+                      重力強度
+                    </label>
+                    <input
+                      type="range"
+                      id="gravity-slider"
+                      min="0.1"
+                      max="2.0"
+                      step="0.1"
+                      value="1.0"
+                      class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <span id="gravity-value" class="text-energy-gold font-mono">1.0g</span>
+                  </div>
+                  
+                  <div class="control-group">
+                    <label for="temperature-slider" class="block text-sm font-medium text-gray-100 mb-2">
+                      熱振動強度
+                    </label>
+                    <input
+                      type="range"
+                      id="temperature-slider"
+                      min="0.5"
+                      max="3.0"
+                      step="0.1"
+                      value="1.0"
+                      class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <span id="temperature-value" class="text-electric-blue font-mono">1.0</span>
+                  </div>
+                  
+                  <button
+                    id="reset-simulation"
+                    class="bg-plasma-purple hover:bg-plasma-purple/80 text-white px-6 py-2 rounded-lg transition-colors duration-300"
+                  >
+                    重置模擬
+                  </button>
                 </div>
-                
-                <div class="control-group">
-                  <label for="temperature-slider" class="block text-sm font-medium text-gray-100 mb-2">
-                    熱振動強度
-                  </label>
-                  <input
-                    type="range"
-                    id="temperature-slider"
-                    min="0.5"
-                    max="3.0"
-                    step="0.1"
-                    value="1.0"
-                    class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <span id="temperature-value" class="text-electric-blue font-mono">1.0</span>
+
+                <!-- Advanced Controls Row -->
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-white/10">
+                  <div class="control-group">
+                    <label for="ion-system-select" class="block text-sm font-medium text-gray-100 mb-2">
+                      離子系統
+                    </label>
+                    <select
+                      id="ion-system-select"
+                      class="bg-gray-700 text-white px-3 py-2 rounded-lg border border-gray-600 focus:border-electric-blue"
+                    >
+                      <option value="HI">氫碘酸 (HI) - 72.23 W/m³</option>
+                      <option value="LiCl">氯化鋰 (LiCl) - 4.514 W/m³</option>
+                      <option value="KCl">氯化鉀 (KCl) - 0.2821 W/m³</option>
+                    </select>
+                  </div>
+
+                  <div class="control-group">
+                    <label for="visualization-mode" class="block text-sm font-medium text-gray-100 mb-2">
+                      視覺化模式
+                    </label>
+                    <select
+                      id="visualization-mode"
+                      class="bg-gray-700 text-white px-3 py-2 rounded-lg border border-gray-600 focus:border-electric-blue"
+                    >
+                      <option value="particles">粒子模式</option>
+                      <option value="concentration">濃度分布</option>
+                      <option value="electric-field">電場力線</option>
+                    </select>
+                  </div>
+
+                  <div class="control-group">
+                    <label class="flex items-center space-x-2 text-sm text-gray-100">
+                      <input
+                        type="checkbox"
+                        id="show-formulas"
+                        checked
+                        class="rounded border-gray-600 bg-gray-700 text-electric-blue focus:ring-electric-blue"
+                      />
+                      <span>顯示科學公式</span>
+                    </label>
+                  </div>
                 </div>
-                
-                <button
-                  id="reset-simulation"
-                  class="bg-plasma-purple hover:bg-plasma-purple/80 text-white px-6 py-2 rounded-lg transition-colors duration-300"
-                >
-                  重置模擬
-                </button>
               </div>
               
               <div class="simulation-display relative bg-black/50 rounded-lg overflow-hidden">
