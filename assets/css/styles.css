@@ -7,34 +7,34 @@
 
 /* Navigation System Styles */
 header {
-  transition: all 0.3s ease;
   backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
   -webkit-backdrop-filter: blur(8px);
 }
 
 header.scrolled {
   backdrop-filter: blur(10px);
-  background-color: rgba(0, 0, 0, 0.8) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Navigation Link Styles */
 .nav-link {
-  position: relative;
   display: inline-block;
+  position: relative;
   text-decoration: none;
 }
 
 .nav-link::before {
-  content: '';
   position: absolute;
   bottom: -4px;
   left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+  background: linear-gradient(90deg, #3b82f6, #fbbf24);
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #fbbf24);
-  transition: all 0.3s ease;
-  transform: translateX(-50%);
+  content: '';
 }
 
 .nav-link:hover::before,
@@ -48,17 +48,17 @@ header.scrolled {
 }
 
 .nav-link.active::after {
-  content: '';
   position: absolute;
   top: 50%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse-dot 2s ease-in-out infinite;
+  box-shadow: 0 0 10px #fbbf24;
+  border-radius: 50%;
+  background: #fbbf24;
   width: 8px;
   height: 8px;
-  background: #fbbf24;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 10px #fbbf24;
-  animation: pulse-dot 2s ease-in-out infinite;
+  content: '';
 }
 
 @keyframes pulse-dot {
@@ -74,24 +74,24 @@ header.scrolled {
 
 /* Mobile Menu Styles */
 #mobile-menu {
-  transition: all 0.3s ease;
   backdrop-filter: blur(10px);
-  background: rgba(0, 0, 0, 0.9);
-  border-radius: 8px;
+  transition: all 0.3s ease;
   margin-top: 1rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.9);
   padding: 1rem;
 }
 
 #mobile-menu.hidden {
-  opacity: 0;
-  visibility: hidden;
   transform: translateY(-10px);
+  visibility: hidden;
+  opacity: 0;
 }
 
 #mobile-menu:not(.hidden) {
-  opacity: 1;
-  visibility: visible;
   transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Mobile Menu Button Animation */
@@ -100,8 +100,8 @@ header.scrolled {
 }
 
 #mobile-menu-button:hover {
-  background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 #mobile-menu-button svg {
@@ -134,8 +134,8 @@ html {
   .nav-link::before,
   .nav-link.active::after,
   #mobile-menu {
-    transition: none;
     animation: none;
+    transition: none;
   }
 }
 
@@ -170,10 +170,10 @@ html {
   position: absolute;
   top: 0;
   left: -100%;
+  transition: left 0.5s;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
   content: '';
 }
 
@@ -228,13 +228,13 @@ html {
 }
 
 @keyframes counterUp {
-  from { 
+  from {
+    transform: translateY(20px); 
     opacity: 0;
-    transform: translateY(20px);
   }
-  to { 
+  to {
+    transform: translateY(0); 
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -248,13 +248,13 @@ html {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 20px;
-  height: 20px;
+  animation: spin 1s linear infinite;
   margin: -10px 0 0 -10px;
   border: 2px solid rgba(255,255,255,0.3);
   border-top: 2px solid #fff;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  width: 20px;
+  height: 20px;
   content: '';
 }
 
@@ -265,23 +265,23 @@ html {
 
 /* Success/Error Feedback */
 .feedback-success {
-  color: #10b981;
   animation: fadeInUp 0.5s ease-out;
+  color: #10b981;
 }
 
 .feedback-error {
-  color: #ef4444;
   animation: shake 0.5s ease-out;
+  color: #ef4444;
 }
 
 @keyframes fadeInUp {
   from {
-    opacity: 0;
     transform: translateY(10px);
+    opacity: 0;
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
 }
 
@@ -344,8 +344,8 @@ html {
 
 /* Glow effect for numbers */
 .glow-effect {
-  text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
   animation: glow-pulse 3s ease-in-out infinite alternate;
+  text-shadow: 0 0 20px currentColor, 0 0 40px currentColor, 0 0 60px currentColor;
 }
 
 @keyframes glow-pulse {
@@ -365,10 +365,10 @@ html {
 
 /* World map container styling */
 #world-map {
+  border-radius: 8px;
   background: 
     radial-gradient(circle at 30% 40%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 70% 60%, rgba(34, 197, 94, 0.08) 0%, transparent 50%);
-  border-radius: 8px;
 }
 
 /* University carousel animation */
@@ -397,8 +397,8 @@ html {
 
 /* Progress bars animation */
 .progress-fill {
-  transition: width 1s ease-in-out;
   animation: progress-grow 2s ease-out;
+  transition: width 1s ease-in-out;
 }
 
 @keyframes progress-grow {
@@ -407,23 +407,23 @@ html {
 
 /* Response category cards */
 .response-category {
-  transition: all 0.3s ease;
   position: relative;
+  transition: all 0.3s ease;
   overflow: hidden;
 }
 
 .response-category::before {
-  content: '';
   position: absolute;
   top: -2px;
-  left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  z-index: -1;
-  border-radius: inherit;
+  left: -2px;
   opacity: 0;
+  z-index: -1;
   transition: opacity 0.3s ease;
+  border-radius: inherit;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  content: '';
 }
 
 .response-category:hover::before {
@@ -465,8 +465,8 @@ html {
 }
 
 .chart-wrapper canvas {
-  background: rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive adjustments */
@@ -1003,42 +1003,317 @@ html {
 
 /* Calculator Section Equation Styles */
 .equation-container {
-  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  margin: 2px 0;
   border: 1px solid rgba(255, 215, 0, 0.3);
   border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
   padding: 8px 12px;
-  margin: 2px 0;
   min-height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
   font-family: 'Times New Roman', serif;
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
 }
 
 .equation-container:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 215, 0, 0.6);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+  border-color: rgba(255, 215, 0, 0.6);
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .equation-container:before {
-  content: '';
   position: absolute;
   top: 0;
   left: -100%;
+  transition: left 0.6s ease;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-  transition: left 0.6s ease;
+  content: '';
 }
 
 .equation-container:hover:before {
   left: 100%;
+}
+
+/* Enhanced Equation Display for Complete Scientific Principles Section */
+.equation-card {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+}
+
+.equation-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.equation-card::before {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  z-index: 1;
+  transition: left 0.6s ease;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  width: 100%;
+  height: 100%;
+  content: '';
+}
+
+.equation-card:hover::before {
+  left: 100%;
+}
+
+.equation-display {
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.equation-display:hover {
+  background: rgba(255, 255, 255, 0.9) !important;
+  transform: scale(1.02);
+}
+
+/* Enhanced equation container for better formula display */
+.equation-container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  margin: 4px 0;
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 16px 20px;
+  min-height: 80px;
+  overflow: hidden;
+  font-family: 'Times New Roman', serif;
+  font-size: 18px;
+  line-height: 1.4;
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.equation-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.6);
+  background: rgba(255, 255, 255, 1);
+}
+
+.equation-container:before {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  transition: left 0.6s ease;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+  width: 100%;
+  height: 100%;
+  content: '';
+}
+
+.equation-container:hover:before {
+  left: 100%;
+}
+
+/* Complete Scientific Principles Section - Color adjustments */
+#applications-impact .equation-card,
+#applications-impact .equation-display,
+#applications-impact .equation-container {
+  color: #1f2937;
+}
+
+#applications-impact .equation-card *,
+#applications-impact .equation-display *,
+#applications-impact .equation-container * {
+  color: #1f2937;
+}
+
+#applications-impact .equation-card:hover,
+#applications-impact .equation-card:hover *,
+#applications-impact .equation-display:hover,
+#applications-impact .equation-display:hover *,
+#applications-impact .equation-container:hover,
+#applications-impact .equation-container:hover * {
+  color: #111827;
+}
+
+/* Formula Category Headers */
+.formula-category-header {
+  margin-bottom: 2rem;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 197, 253, 0.1));
+  padding: 1rem 1.5rem;
+}
+
+/* Interactive Formula Grid */
+.formula-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .formula-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .formula-grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Ion System Performance Cards */
+.ion-performance-card {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid rgba(147, 51, 234, 0.15);
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.05), rgba(196, 181, 253, 0.05));
+}
+
+.ion-performance-card:hover {
+  border-color: rgba(147, 51, 234, 0.4);
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(196, 181, 253, 0.1));
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(147, 51, 234, 0.2);
+}
+
+/* Enhanced responsive design for scientific principles */
+@media (max-width: 1024px) {
+  .formula-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .equation-card {
+    padding: 1.5rem;
+  }
+  
+  .equation-container {
+    padding: 14px 18px;
+    min-height: 70px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .equation-card {
+    padding: 1.25rem;
+  }
+  
+  .equation-container {
+    padding: 12px 16px;
+    min-height: 60px;
+    font-size: 15px;
+  }
+  
+  .formula-category-header {
+    padding: 0.75rem 1rem;
+  }
+  
+  .ion-performance-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .equation-container {
+    padding: 10px 14px;
+    min-height: 50px;
+    font-size: 14px;
+  }
+  
+  .equation-card {
+    padding: 1rem;
+  }
+  
+  .formula-category-header {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .ion-performance-card {
+    padding: 1.25rem;
+  }
+}
+
+/* MathJax styling within calculator equations - enhanced */
+.equation-container .MathJax {
+  color: inherit !important;
+  text-shadow: inherit !important;
+  font-size: inherit !important;
+}
+
+.equation-container .MathJax_Display {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.equation-container .MathJax svg {
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Enhanced hover states for equation elements */
+.equation-container:hover .MathJax {
+  text-shadow: 0 0 12px rgba(59, 130, 246, 0.4) !important;
+}
+
+/* Improved visual hierarchy */
+.equation-card h7 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.equation-card .equation-display {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.equation-card p {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+/* Color variations for different card types */
+.equation-card[class*="border-blue"] .equation-container {
+  border-color: rgba(59, 130, 246, 0.3);
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.equation-card[class*="border-green"] .equation-container {
+  border-color: rgba(34, 197, 94, 0.3);
+  text-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+}
+
+.equation-card[class*="border-purple"] .equation-container {
+  border-color: rgba(147, 51, 234, 0.3);
+  text-shadow: 0 0 8px rgba(147, 51, 234, 0.3);
+}
+
+.equation-card[class*="border-orange"] .equation-container {
+  border-color: rgba(251, 146, 60, 0.3);
+  text-shadow: 0 0 8px rgba(251, 146, 60, 0.3);
+}
+
+.equation-card[class*="border-emerald"] .equation-container {
+  border-color: rgba(16, 185, 129, 0.3);
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+.equation-card[class*="border-amber"] .equation-container {
+  border-color: rgba(245, 158, 11, 0.3);
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
+}
+
+.equation-card[class*="border-red"] .equation-container {
+  border-color: rgba(239, 68, 68, 0.3);
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
 }
 
 /* MathJax styling within calculator equations */
@@ -1887,8 +2162,8 @@ textarea:focus {
 }
 
 .battery-3d {
-  transform-style: preserve-3d;
   position: relative;
+  transform-style: preserve-3d;
   padding: 60px 20px; /* Add padding for voltage indicators */
 }
 
@@ -1897,30 +2172,30 @@ textarea:focus {
 }
 
 .battery-visual {
-  transform-style: preserve-3d;
   position: relative;
+  transform-style: preserve-3d;
   z-index: 5;
 }
 
 .voltage-indicator {
-  transition: all 0.5s ease;
-  z-index: 10;
-  pointer-events: none;
-  min-height: 40px; /* Ensure minimum height for text */
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  z-index: 10;
+  transition: all 0.5s ease;
+  min-height: 40px; /* Ensure minimum height for text */
+  pointer-events: none;
 }
 
 .battery-3d.flipped .voltage-indicator.top {
-  transform: translateX(-50%) rotateX(180deg) translateZ(10px);
   top: -50px; /* Adjusted for better spacing */
+  transform: translateX(-50%) rotateX(180deg) translateZ(10px);
 }
 
 .battery-3d.flipped .voltage-indicator.bottom {
-  transform: translateX(-50%) rotateX(180deg) translateZ(10px);
   bottom: -50px; /* Adjusted for better spacing */
+  transform: translateX(-50%) rotateX(180deg) translateZ(10px);
 }
 
 /* Ion Animation Styles */
@@ -1971,14 +2246,14 @@ textarea:focus {
 
 /* Control Button Styles */
 .control-btn {
+  position: relative;
+  z-index: 15; /* Ensure buttons are above other elements */
   transition: all 0.3s ease;
   cursor: pointer;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: none;
-  font-weight: 600;
   min-width: 80px; /* Ensure consistent button size */
-  position: relative;
-  z-index: 15; /* Ensure buttons are above other elements */
+  font-weight: 600;
 }
 
 .control-btn:hover {
@@ -1992,18 +2267,18 @@ textarea:focus {
 
 /* Simulation Controls Container */
 .simulation-controls {
+  display: flex;
   position: absolute;
   bottom: 20px; /* Adjusted to prevent overlap */
   left: 50%;
+  gap: 1rem;
   transform: translateX(-50%);
   z-index: 15;
   backdrop-filter: blur(8px);
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  padding: 8px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  gap: 1rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 8px;
 }
 
 /* Data Cards */
@@ -2151,8 +2426,8 @@ textarea:focus {
   }
   
   .voltage-indicator {
-    font-size: 14px;
     min-height: 35px;
+    font-size: 14px;
   }
   
   .voltage-value {
@@ -2169,8 +2444,8 @@ textarea:focus {
   }
   
   .control-btn {
-    min-width: 60px;
     padding: 8px 12px !important;
+    min-width: 60px;
     font-size: 14px;
   }
   
@@ -2198,8 +2473,8 @@ textarea:focus {
   }
   
   .voltage-indicator {
-    font-size: 12px;
     min-height: 30px;
+    font-size: 12px;
   }
   
   .voltage-value {
@@ -2216,8 +2491,8 @@ textarea:focus {
   }
   
   .control-btn {
-    min-width: 50px;
     padding: 6px 10px !important;
+    min-width: 50px;
     font-size: 12px;
   }
   
@@ -2261,9 +2536,9 @@ html {
 
 .accordion-content.collapsed {
   opacity: 0 !important;
-  max-height: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
+  max-height: 0 !important;
 }
 
 /* 觸發按鈕動畫 */
@@ -2277,14 +2552,14 @@ html {
 }
 
 [data-accordion-trigger]::after {
-  content: '';
   position: absolute;
   bottom: -2px;
   left: 0;
+  transition: width 0.3s ease;
+  background: linear-gradient(90deg, #f59e0b, #eab308);
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #f59e0b, #eab308);
-  transition: width 0.3s ease;
+  content: '';
 }
 
 [data-accordion-trigger]:hover::after {
@@ -2293,15 +2568,15 @@ html {
 
 /* 展開時按鈕樣式變化 */
 [data-accordion-trigger][aria-expanded="true"] .accordion-text::after {
-  content: " ↑";
-  margin-left: 0.5rem;
   transition: all 0.3s ease;
+  margin-left: 0.5rem;
+  content: " ↑";
 }
 
 [data-accordion-trigger][aria-expanded="false"] .accordion-text::after {
-  content: " →";
-  margin-left: 0.5rem;
   transition: all 0.3s ease;
+  margin-left: 0.5rem;
+  content: " →";
 }
 
 /* 影片容器樣式 */
@@ -2342,23 +2617,23 @@ html {
 /* 動畫定義 */
 @keyframes slideInUp {
   from {
-    opacity: 0;
     transform: translateY(30px);
+    opacity: 0;
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
 }
 
 @keyframes fadeInScale {
   from {
-    opacity: 0;
     transform: scale(0.9);
+    opacity: 0;
   }
   to {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -2388,8 +2663,8 @@ html {
   .accordion-content,
   .video-container,
   [data-accordion-trigger] {
-    transition: none !important;
     animation: none !important;
+    transition: none !important;
   }
 }
 
@@ -2410,31 +2685,31 @@ html {
 }
 
 .experiment-image-item {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 12px;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  padding: 1.5rem;
 }
 
 .experiment-image-item:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
 }
 
 .experiment-image-item.animate-in {
-  opacity: 1 !important;
   transform: translateY(0) !important;
+  opacity: 1 !important;
 }
 
 /* 圖片容器樣式 */
 .experiment-image-item .image-container {
   position: relative;
-  overflow: hidden;
-  border-radius: 8px;
   transition: transform 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .experiment-image-item .image-container:hover {
@@ -2463,42 +2738,42 @@ html {
 }
 
 .experiment-image-item h5::before {
-  content: '';
   position: absolute;
-  left: 0;
   top: 50%;
+  left: 0;
   transform: translateY(-50%);
+  border-radius: 2px;
+  background: linear-gradient(180deg, #f59e0b, #eab308);
   width: 4px;
   height: 20px;
-  background: linear-gradient(180deg, #f59e0b, #eab308);
-  border-radius: 2px;
+  content: '';
 }
 
 /* 圖片描述樣式 */
 .experiment-image-item p {
-  font-style: italic;
-  line-height: 1.5;
+  margin-left: 1rem;
   border-left: 2px solid rgba(245, 158, 11, 0.3);
   padding-left: 0.75rem;
-  margin-left: 1rem;
+  font-style: italic;
+  line-height: 1.5;
 }
 
 /* 響應式設計 */
 @media (max-width: 768px) {
   .experiment-image-item {
-    padding: 1rem;
     margin-bottom: 1.5rem;
+    padding: 1rem;
   }
   
   .experiment-image-item h5 {
-    font-size: 1rem;
     margin-bottom: 0.75rem;
+    font-size: 1rem;
   }
   
   .experiment-image-item p {
-    font-size: 0.875rem;
     margin-left: 0.5rem;
     padding-left: 0.5rem;
+    font-size: 0.875rem;
   }
 }
 
@@ -2508,39 +2783,39 @@ html {
 }
 
 #experiment-data-content .accordion-inner-content {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(51, 65, 85, 0.3));
   border-radius: 8px;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(51, 65, 85, 0.3));
   padding: 1.5rem;
 }
 
 /* 載入動畫 */
 @keyframes slideInUp {
   from {
-    opacity: 0;
     transform: translateY(30px);
+    opacity: 0;
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
 }
 
 @keyframes fadeInScale {
   from {
-    opacity: 0;
     transform: scale(0.95);
+    opacity: 0;
   }
   to {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
 }
 
 /* 圖片預載入效果 */
 .experiment-image-item img[data-src] {
-  background-size: 200% 200%;
-  background-position: 0% 0%;
   animation: shimmer 2s infinite;
+  background-position: 0% 0%;
+  background-size: 200% 200%;
 }
 
 @keyframes shimmer {
@@ -2559,12 +2834,12 @@ html {
 
 .tab-button {
   position: relative;
-  cursor: pointer;
-  background: transparent;
-  border: none;
   transition: all 0.3s ease;
-  font-family: inherit;
+  cursor: pointer;
   outline: none;
+  border: none;
+  background: transparent;
+  font-family: inherit;
 }
 
 .tab-button:focus {
@@ -2574,14 +2849,14 @@ html {
 }
 
 .tab-button.active {
-  color: #fbbf24;
-  background: rgba(255, 255, 255, 0.1);
   border-bottom-color: #fbbf24;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fbbf24;
 }
 
 .tab-button:not(.active):hover {
-  color: #ffffff;
   background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
 }
 
 .tab-content {
@@ -2594,8 +2869,8 @@ html {
 
 .tab-content.active {
   display: block;
-  opacity: 1;
   transform: translateY(0);
+  opacity: 1;
 }
 
 /* 響應式標籤頁 */
@@ -2606,16 +2881,16 @@ html {
   }
   
   .tab-button {
+    border-bottom: none !important;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
     width: 100%;
     text-align: left;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    border-bottom: none !important;
   }
   
   .tab-button.active {
-    background: rgba(255, 215, 0, 0.1);
     border: 1px solid rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.1);
   }
 }
 
@@ -2632,14 +2907,14 @@ html {
 
 /* 全寬度統一手風琴樣式 */
 #unified-accordion-content {
-  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 #unified-accordion-content.expanded {
-  max-height: none !important;
-  opacity: 1 !important;
   visibility: visible;
+  opacity: 1 !important;
+  max-height: none !important;
 }
 
 /* 實驗圖片網格優化 */
@@ -2648,11 +2923,11 @@ html {
 }
 
 .experiment-image-item {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 0.75rem;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1rem;
 }
 
 .experiment-image-item:hover {
@@ -2662,8 +2937,8 @@ html {
 }
 
 .experiment-image-item.visible {
-  opacity: 1 !important;
   transform: translateY(0) !important;
+  opacity: 1 !important;
 }
 
 /* 影片佈局改進 */
@@ -2672,11 +2947,11 @@ html {
 }
 
 .video-wrapper {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 0.75rem;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1rem;
 }
 
 .video-wrapper:hover {
@@ -2714,9 +2989,9 @@ html {
 
 /* PDF 檢視器樣式 */
 .pdf-viewer-container {
-    min-height: 400px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 400px;
 }
 
 .pdf-viewer-container iframe {
@@ -2741,28 +3016,28 @@ html {
 
 /* PDF 錯誤處理樣式 */
 .pdf-error {
-    background: linear-gradient(45deg, #1e293b, #334155);
     border-radius: 0.5rem;
+    background: linear-gradient(45deg, #1e293b, #334155);
 }
 
 /* 載入動畫 */
 .pdf-viewer-container.loading {
-    background: linear-gradient(45deg, #1e293b, #334155);
     position: relative;
+    background: linear-gradient(45deg, #1e293b, #334155);
 }
 
 .pdf-viewer-container.loading::after {
-    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
+    animation: spin 1s linear infinite;
     border: 3px solid rgba(255, 255, 255, 0.3);
     border-top: 3px solid #D4AF37;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    width: 40px;
+    height: 40px;
+    content: '';
 }
 
 @keyframes spin {
@@ -2780,15 +3055,15 @@ html {
 .count-number {
     background: linear-gradient(135deg, #10b981, #059669);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-weight: 900;
     text-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
 }
 
 .loading-text {
-    color: #6b7280;
     animation: pulse 2s infinite;
+    color: #6b7280;
 }
 
 @keyframes pulse {
