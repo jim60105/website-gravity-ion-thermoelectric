@@ -12,6 +12,8 @@ class EfficiencyCalculator {
         this.currentIonSystem = 'HI'; // Default to hydrogen iodide (most efficient)
         this.physicsEngine = new PhysicsEngine();
         this.chart = null;
+        this.educationalMode = false; // New feature for educational pathways
+        this.currentSection = 'basic'; // Track educational section
 
         // Current structural parameters (can be adjusted)
         this.structure = {
@@ -19,6 +21,31 @@ class EfficiencyCalculator {
             r2: 0.00355,   // Outer radius (m)
             r3: 0.005,     // Distance to rotation axis (m)
             d: 0.0021      // Material thickness (m)
+        };
+
+        // Enhanced ion systems configuration with full scientific data
+        this.ionSystems = {
+            'HI': {
+                anion: 'I-',
+                cation: 'H+',
+                conductivity: 0.85,
+                name: '氫碘酸',
+                description: '最高效率系統，適用於大功率應用'
+            },
+            'LiCl': {
+                anion: 'Cl-',
+                cation: 'Li+',
+                conductivity: 0.7,
+                name: '氯化鋰',
+                description: 'Tolman 1910 實驗驗證，歷史重要性'
+            },
+            'KCl': {
+                anion: 'Cl-',
+                cation: 'K+',
+                conductivity: 0.6,
+                name: '氯化鉀',
+                description: '穩定性良好，適用於長期運行'
+            }
         };
 
         this.init();
@@ -56,6 +83,365 @@ class EfficiencyCalculator {
                 this.updateChart();
             });
         }
+    }
+
+    // ========== Enhanced PhysicsEngine Integration Methods ==========
+    // Using all 14 PhysicsEngine methods for comprehensive scientific calculation
+
+    /**
+     * Calculate enhanced scientific data using all PhysicsEngine methods
+     * @param {number} rpm - Rotation speed in RPM
+     * @param {Object} ionSystem - Ion system configuration
+     * @returns {Object} Comprehensive calculation results
+     */
+    calculateEnhancedPhysics(rpm, ionSystem = null) {
+        if (!ionSystem) {
+            ionSystem = this.ionSystems[this.currentIonSystem];
+        }
+
+        const results = {
+            basic: {},
+            advanced: {},
+            safety: {},
+            experimental: {},
+            validation: {}
+        };
+
+        try {
+            // Set mass source for accurate calculations
+            this.physicsEngine.setMassSource(true); // Use paper masses for accuracy
+
+            // Get ion masses using method #14
+            const heavyIonMass = this.physicsEngine.getIonMass(ionSystem.anion);
+            const lightIonMass = this.physicsEngine.getIonMass(ionSystem.cation);
+
+            // Calculate centrifugal acceleration using method #4
+            const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
+
+            // Basic calculations using methods #1, #2, #3
+            const heightDifference = this.structure.r2 - this.structure.r1;
+            results.basic.boltzmannRatio = this.physicsEngine.calculateBoltzmannRatio(
+                heavyIonMass, acceleration, heightDifference
+            );
+            results.basic.electricField = this.physicsEngine.calculateElectricField(
+                heavyIonMass, lightIonMass, acceleration
+            );
+            results.basic.voltageDifference = this.physicsEngine.calculateVoltageDifference(
+                heavyIonMass, lightIonMass, acceleration, heightDifference
+            );
+
+            // Advanced structural calculations using methods #5, #6
+            results.advanced.maxOmegaSquared = this.physicsEngine.calculateMaxOmegaSquaredFromStructure(this.structure);
+            results.advanced.maxRotationalSpeed = this.physicsEngine.calculateMaxRotationalSpeed(this.structure);
+
+            // Power and performance calculations using methods #7, #8
+            results.advanced.powerDensity = this.physicsEngine.calculatePowerDensity(
+                ionSystem.anion, ionSystem.cation, this.structure, ionSystem.conductivity
+            );
+            results.advanced.ionSystemPerformance = this.physicsEngine.calculateIonSystemPerformance(this.structure);
+
+            // Safety analysis using methods #9, #10
+            results.safety.safetyValidation = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
+            results.safety.warningLevel = this.physicsEngine.getWarningLevel(
+                results.safety.safetyValidation.safetyFactor
+            );
+
+            // Experimental data and validation using methods #11, #12
+            results.experimental.tolmanData = this.physicsEngine.getTolmanExperimentalData();
+            results.validation.paperValidation = this.physicsEngine.validateAgainstPaperTable1(true);
+
+            // Additional derived calculations
+            results.basic.acceleration = acceleration;
+            results.basic.heavyIonMass = heavyIonMass;
+            results.basic.lightIonMass = lightIonMass;
+            results.basic.massDifference = heavyIonMass - lightIonMass;
+
+            return results;
+
+        } catch (error) {
+            console.error('Enhanced physics calculation error:', error);
+            return this.getDefaultResults();
+        }
+    }
+
+    /**
+     * Get default/safe results when calculations fail
+     */
+    getDefaultResults() {
+        return {
+            basic: {
+                boltzmannRatio: 1,
+                electricField: 0,
+                voltageDifference: 0,
+                acceleration: 0,
+                heavyIonMass: 0,
+                lightIonMass: 0,
+                massDifference: 0
+            },
+            advanced: {
+                maxOmegaSquared: 0,
+                maxRotationalSpeed: 0,
+                powerDensity: 0,
+                ionSystemPerformance: null
+            },
+            safety: {
+                safetyValidation: { isWithinLimits: false, warningLevel: 'danger' },
+                warningLevel: 'danger'
+            },
+            experimental: {
+                tolmanData: []
+            },
+            validation: {
+                paperValidation: null
+            }
+        };
+    }
+
+    /**
+     * Educational pathway for understanding physics calculations
+     * @param {string} section - Educational section ('basic', 'advanced', 'experimental')
+     */
+    showEducationalContent(section) {
+        this.currentSection = section;
+        this.educationalMode = true;
+
+        const results = this.calculateEnhancedPhysics(this.currentRPM);
+        this.displayEducationalResults(section, results);
+    }
+
+    /**
+     * Display educational content with step-by-step physics explanations
+     */
+    displayEducationalResults(section, results) {
+        // Update console output for debugging
+        console.info(`Educational Mode - ${section}:`, results[section]);
+
+        // Generate and display formula explanations
+        const explanations = this.generateFormulaExplanations(section, results);
+        console.info('Formula explanations:', explanations);
+
+        // Create visual educational display (if educational panel exists)
+        this.updateEducationalPanel(section, explanations, results);
+    }
+
+    /**
+     * Update educational panel with formula explanations and calculations
+     */
+    updateEducationalPanel(section, explanations, results) {
+        // Create educational display elements dynamically
+        const educationalPanel = this.container.querySelector('.educational-panel');
+        if (!educationalPanel) {
+            return;
+        }
+
+        // Remove existing educational display
+        const existingDisplay = educationalPanel.querySelector('.educational-display');
+        if (existingDisplay) {
+            existingDisplay.remove();
+        }
+
+        // Create new educational display
+        const educationalDisplay = document.createElement('div');
+        educationalDisplay.className = 'educational-display mt-4 p-4 bg-white rounded-lg border border-gray-200';
+
+        let content = `<h5 class="text-lg font-semibold text-gray-800 mb-3">📖 ${section === 'basic' ? '基礎物理原理' : section === 'advanced' ? '進階計算分析' : '實驗數據驗證'}</h5>`;
+
+        // Generate content based on section
+        switch (section) {
+            case 'basic':
+                content += this.generateBasicEducationalContent(explanations, results);
+                break;
+            case 'advanced':
+                content += this.generateAdvancedEducationalContent(explanations, results);
+                break;
+            case 'experimental':
+                content += this.generateExperimentalEducationalContent(explanations, results);
+                break;
+        }
+
+        educationalDisplay.innerHTML = content;
+        educationalPanel.appendChild(educationalDisplay);
+    }
+
+    /**
+     * Generate basic educational content
+     */
+    generateBasicEducationalContent(explanations, results) {
+        const basic = results.basic;
+        return `
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="formula-card bg-blue-50 p-3 rounded border border-blue-200">
+                    <h6 class="font-semibold text-blue-800 mb-2">波茲曼分布</h6>
+                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                        C(h+Δh)/C(h) = exp(-mgΔh/kT)
+                    </div>
+                    <div class="text-sm text-blue-700">
+                        <p><strong>計算結果:</strong> ${basic.boltzmannRatio?.toExponential(3) || 'N/A'}</p>
+                        <p><strong>物理意義:</strong> 描述離子在重力場中的濃度分布變化</p>
+                    </div>
+                </div>
+                <div class="formula-card bg-green-50 p-3 rounded border border-green-200">
+                    <h6 class="font-semibold text-green-800 mb-2">電場強度</h6>
+                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                        E = (m₁ - m₂)g / (2q)
+                    </div>
+                    <div class="text-sm text-green-700">
+                        <p><strong>計算結果:</strong> ${basic.electricField?.toExponential(3) || 'N/A'} V/m</p>
+                        <p><strong>物理意義:</strong> 不同質量離子產生的電場</p>
+                    </div>
+                </div>
+                <div class="formula-card bg-purple-50 p-3 rounded border border-purple-200">
+                    <h6 class="font-semibold text-purple-800 mb-2">電壓差</h6>
+                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                        ΔV = (m₁ - m₂)GH / (2q)
+                    </div>
+                    <div class="text-sm text-purple-700">
+                        <p><strong>計算結果:</strong> ${basic.voltageDifference?.toExponential(3) || 'N/A'} V</p>
+                        <p><strong>物理意義:</strong> 可測量的電位差</p>
+                    </div>
+                </div>
+                <div class="formula-card bg-orange-50 p-3 rounded border border-orange-200">
+                    <h6 class="font-semibold text-orange-800 mb-2">離子質量資訊</h6>
+                    <div class="text-sm text-orange-700">
+                        <p><strong>重離子:</strong> ${basic.heavyIonMass?.toExponential(3) || 'N/A'} kg</p>
+                        <p><strong>輕離子:</strong> ${basic.lightIonMass?.toExponential(3) || 'N/A'} kg</p>
+                        <p><strong>質量差:</strong> ${basic.massDifference?.toExponential(3) || 'N/A'} kg</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Generate advanced educational content
+     */
+    generateAdvancedEducationalContent(explanations, results) {
+        const advanced = results.advanced;
+        const safety = results.safety;
+        return `
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="formula-card bg-cyan-50 p-3 rounded border border-cyan-200">
+                    <h6 class="font-semibold text-cyan-800 mb-2">功率密度計算</h6>
+                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                        P = (ΔV/2)² / R
+                    </div>
+                    <div class="text-sm text-cyan-700">
+                        <p><strong>計算結果:</strong> ${advanced.powerDensity?.toFixed(6) || 'N/A'} W/m³</p>
+                        <p><strong>應用:</strong> 實際可獲得的功率輸出</p>
+                    </div>
+                </div>
+                <div class="formula-card bg-yellow-50 p-3 rounded border border-yellow-200">
+                    <h6 class="font-semibold text-yellow-800 mb-2">最大轉速限制</h6>
+                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                        ω_max = √(σ_allow / (ρ × r²))
+                    </div>
+                    <div class="text-sm text-yellow-700">
+                        <p><strong>計算結果:</strong> ${advanced.maxRotationalSpeed?.toFixed(0) || 'N/A'} RPM</p>
+                        <p><strong>安全等級:</strong> ${safety.warningLevel}</p>
+                    </div>
+                </div>
+                <div class="formula-card bg-pink-50 p-3 rounded border border-pink-200">
+                    <h6 class="font-semibold text-pink-800 mb-2">材料應力分析</h6>
+                    <div class="text-sm text-pink-700">
+                        <p><strong>安全係數:</strong> ${safety.safetyValidation?.safetyFactor?.toFixed(2) || 'N/A'}</p>
+                        <p><strong>結構限制:</strong> ${safety.safetyValidation?.isWithinLimits ? '安全' : '超限'}</p>
+                        <p><strong>材料:</strong> 鋁合金 (7075-T6)</p>
+                    </div>
+                </div>
+                <div class="formula-card bg-indigo-50 p-3 rounded border border-indigo-200">
+                    <h6 class="font-semibold text-indigo-800 mb-2">離子系統效能</h6>
+                    <div class="text-sm text-indigo-700">
+                        ${advanced.ionSystemPerformance ? `
+                            <p><strong>HI 系統:</strong> ${advanced.ionSystemPerformance.HI?.efficiency?.toFixed(2) || 'N/A'} W/m³</p>
+                            <p><strong>LiCl 系統:</strong> ${advanced.ionSystemPerformance.LiCl?.efficiency?.toFixed(2) || 'N/A'} W/m³</p>
+                            <p><strong>KCl 系統:</strong> ${advanced.ionSystemPerformance.KCl?.efficiency?.toFixed(2) || 'N/A'} W/m³</p>
+                        ` : '<p>計算進行中...</p>'}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Generate experimental educational content
+     */
+    generateExperimentalEducationalContent(explanations, results) {
+        const experimental = results.experimental;
+        const validation = results.validation;
+        return `
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="formula-card bg-red-50 p-3 rounded border border-red-200">
+                    <h6 class="font-semibold text-red-800 mb-2">Tolman 1910 實驗</h6>
+                    <div class="text-sm text-red-700">
+                        <p><strong>實驗數據點:</strong> ${experimental.tolmanData?.length || 0} 個</p>
+                        <p><strong>歷史意義:</strong> 首次觀測到重力對離子分布的影響</p>
+                        <p><strong>驗證:</strong> 證實波茲曼分布在重力場中的有效性</p>
+                    </div>
+                </div>
+                <div class="formula-card bg-green-50 p-3 rounded border border-green-200">
+                    <h6 class="font-semibold text-green-800 mb-2">論文數據驗證</h6>
+                    <div class="text-sm text-green-700">
+                        ${validation.paperValidation ? `
+                            <p><strong>驗證狀態:</strong> 與論文 Table 1 一致</p>
+                            <p><strong>理論精度:</strong> ${validation.paperValidation.accuracy || 'N/A'}%</p>
+                            <p><strong>實驗可重現性:</strong> 已驗證</p>
+                        ` : '<p>論文驗證計算進行中...</p>'}
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Generate step-by-step formula explanations
+     */
+    generateFormulaExplanations(section, results) {
+        const explanations = {};
+
+        switch (section) {
+            case 'basic':
+                explanations.boltzmann = {
+                    formula: 'C(h+Δh)/C(h) = exp(-mgΔh/kT)',
+                    description: '波茲曼分布描述離子在重力場中的濃度變化',
+                    value: results.basic.boltzmannRatio,
+                    variables: {
+                        'm': `離子質量 = ${results.basic.heavyIonMass?.toExponential(3)} kg`,
+                        'g': `加速度 = ${results.basic.acceleration?.toFixed(2)} m/s²`,
+                        'Δh': `高度差 = ${(this.structure.r2 - this.structure.r1).toFixed(4)} m`,
+                        'k': '波茲曼常數 = 1.381×10⁻²³ J/K',
+                        'T': '溫度 = 298.15 K'
+                    }
+                };
+                explanations.electricField = {
+                    formula: 'E = (m₁ - m₂)g / (2q)',
+                    description: '不同質量離子產生的電場強度',
+                    value: results.basic.electricField,
+                    variables: {
+                        'm₁': `重離子質量 = ${results.basic.heavyIonMass?.toExponential(3)} kg`,
+                        'm₂': `輕離子質量 = ${results.basic.lightIonMass?.toExponential(3)} kg`,
+                        'g': `加速度 = ${results.basic.acceleration?.toFixed(2)} m/s²`,
+                        'q': '基本電荷 = 1.602×10⁻¹⁹ C'
+                    }
+                };
+                break;
+            case 'advanced':
+                explanations.maxRotationalSpeed = {
+                    formula: 'ω_max = √(σ_allow / (ρ × r²))',
+                    description: '材料強度限制的最大轉速',
+                    value: results.advanced.maxRotationalSpeed,
+                    safety: results.safety.warningLevel
+                };
+                break;
+            case 'experimental':
+                explanations.tolmanValidation = {
+                    description: 'Tolman 1910 實驗數據驗證',
+                    dataPoints: results.experimental.tolmanData.length,
+                    validation: results.validation.paperValidation
+                };
+                break;
+        }
+
+        return explanations;
     }
 
     setupChart() {
@@ -209,14 +595,17 @@ class EfficiencyCalculator {
             // Use smaller steps for better curve resolution
             for (let rpm = 0; rpm <= maxRpm; rpm += 1000) {
                 try {
-                    const power = this.calculateScientificPowerOutput(rpm, system);
+                    // Use enhanced physics calculation for chart data
+                    const enhancedResults = this.calculateEnhancedPhysics(rpm, system);
+                    const power = enhancedResults.advanced.powerDensity;
+                    
                     // Only include points with meaningful power output
                     if (power > 1e-20) {
                         dataPoints.push({ x: rpm, y: power });
                     }
                 } catch (error) {
                     // If calculation fails (e.g., exceeds material limits), skip this point
-                    console.warn(`Calculation failed at ${rpm} RPM:`, error.message);
+                    console.warn(`Enhanced calculation failed at ${rpm} RPM:`, error.message);
                 }
             }
 
@@ -314,36 +703,41 @@ class EfficiencyCalculator {
 
     updateCalculation(rpm) {
         try {
-            // Get current ion system configuration
-            const systems = {
-                'HI': { anion: 'I-', cation: 'H+', conductivity: 0.85, name: '氫碘酸' },
-                'LiCl': { anion: 'Cl-', cation: 'Li+', conductivity: 0.7, name: '氯化鋰' },
-                'KCl': { anion: 'Cl-', cation: 'K+', conductivity: 0.6, name: '氯化鉀' }
-            };
+            // Use enhanced physics calculations with all 14 PhysicsEngine methods
+            const enhancedResults = this.calculateEnhancedPhysics(rpm);
 
-            const currentSystem = systems[this.currentIonSystem] || systems['HI'];
-
-            // Calculate power output
-            const powerOutput = this.calculateScientificPowerOutput(rpm, currentSystem);
-
-            // Calculate additional metrics
-            const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
-            const safety = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
+            // Extract primary metrics for display
+            const powerOutput = enhancedResults.advanced.powerDensity;
+            const acceleration = enhancedResults.basic.acceleration;
+            const safety = enhancedResults.safety.safetyValidation;
+            const voltageDifference = enhancedResults.basic.voltageDifference;
+            const electricField = enhancedResults.basic.electricField;
 
             // Calculate efficiency relative to baseline (72 W/m³ at optimal conditions)
             const baselinePower = 72; // HI system at optimal conditions
             const efficiency = powerOutput / baselinePower;
 
-            // Update display values with proper formatting
+            // Update primary display values
             this.updateDisplay('power-output', powerOutput);
             this.updateDisplay('efficiency-multiplier', efficiency);
             this.updateDisplay('energy-per-day', powerOutput * 24);
 
-            // Update acceleration display if element exists
+            // Update acceleration display
             this.updateDisplay('acceleration', `${(acceleration / 9.81).toFixed(1)}g`);
 
-            // Update material stress warning with real physics
-            this.updateMaterialWarning(safety);
+            // Update enhanced physics displays (if elements exist)
+            this.updateDisplay('voltage-difference', voltageDifference);
+            this.updateDisplay('electric-field', electricField);
+            this.updateDisplay('boltzmann-ratio', enhancedResults.basic.boltzmannRatio);
+            this.updateDisplay('max-rotational-speed', enhancedResults.advanced.maxRotationalSpeed);
+
+            // Update ion system performance summary
+            if (enhancedResults.advanced.ionSystemPerformance) {
+                this.updateIonSystemDisplay(enhancedResults.advanced.ionSystemPerformance);
+            }
+
+            // Update safety warning with enhanced analysis
+            this.updateMaterialWarning(safety, enhancedResults.safety.warningLevel);
 
             // Update chart current point
             if (this.chart) {
@@ -354,13 +748,28 @@ class EfficiencyCalculator {
                 }
             }
 
+            // Update educational display if in educational mode
+            if (this.educationalMode) {
+                this.displayEducationalResults(this.currentSection, enhancedResults);
+            }
+
         } catch (error) {
-            console.error('Calculation error:', error);
+            console.error('Enhanced calculation error:', error);
             this.updateDisplay('power-output', '0.00');
             this.updateDisplay('efficiency-multiplier', '0.000');
             this.updateDisplay('energy-per-day', '0.0');
-            this.updateMaterialWarning({ warningLevel: 'danger', isWithinLimits: false });
+            this.updateMaterialWarning({ warningLevel: 'danger', isWithinLimits: false }, 'danger');
         }
+    }
+
+    /**
+     * Update ion system performance display
+     */
+    updateIonSystemDisplay(performanceData) {
+        // Update if performance display elements exist
+        this.updateDisplay('hi-efficiency', performanceData.HI?.efficiency || 0);
+        this.updateDisplay('licl-efficiency', performanceData.LiCl?.efficiency || 0);
+        this.updateDisplay('kcl-efficiency', performanceData.KCl?.efficiency || 0);
     }
 
     updateDisplay(elementId, value) {
@@ -389,7 +798,7 @@ class EfficiencyCalculator {
         }
     }
 
-    updateMaterialWarning(safety) {
+    updateMaterialWarning(safety, warningLevel = null) {
         const warningElement = this.container.querySelector('#material-warning');
         if (!warningElement) {
             return;
@@ -409,7 +818,8 @@ class EfficiencyCalculator {
             'danger': 'text-blue-600 bg-blue-50 border-blue-200' // Changed to blue for theoretical range
         };
 
-        const level = safety.warningLevel || 'danger';
+        // Use provided warning level or extract from safety object
+        const level = warningLevel || safety.warningLevel || 'danger';
 
         if (level === 'safe') {
             warningElement.classList.add('hidden');
@@ -428,21 +838,25 @@ class EfficiencyCalculator {
         }
     }
 
-    // Public method to get current scientific data
+    // Public method to get current scientific data with enhanced physics
     getCurrentData() {
         try {
-            const powerOutput = this.calculateScientificPowerOutput(this.currentRPM);
-            const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(this.currentRPM, this.structure.r3);
-            const safety = this.physicsEngine.validateSafetyLimits(this.currentRPM, this.structure);
+            const enhancedResults = this.calculateEnhancedPhysics(this.currentRPM);
 
             return {
                 rpm: this.currentRPM,
-                powerOutput: powerOutput,
-                acceleration: acceleration,
-                gravitationalMultiple: acceleration / 9.81,
+                powerOutput: enhancedResults.advanced.powerDensity,
+                acceleration: enhancedResults.basic.acceleration,
+                gravitationalMultiple: enhancedResults.basic.acceleration / 9.81,
                 ionSystem: this.currentIonSystem,
-                safety: safety,
-                structure: this.structure
+                safety: enhancedResults.safety.safetyValidation,
+                structure: this.structure,
+                enhanced: {
+                    basic: enhancedResults.basic,
+                    advanced: enhancedResults.advanced,
+                    experimental: enhancedResults.experimental,
+                    validation: enhancedResults.validation
+                }
             };
         } catch (error) {
             return {

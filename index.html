@@ -2106,18 +2106,106 @@
                   </div>
                 </div>
                 
+                <!-- Enhanced Physics Metrics -->
+                <div class="enhanced-physics-panel mb-6">
+                  <h4 class="text-lg font-semibold text-gray-700 mb-4">🔬 進階物理參數</h4>
+                  <div class="grid grid-cols-3 gap-3">
+                    <div class="metric-card bg-cyan-50 rounded-lg p-3 border border-cyan-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">電場強度</h5>
+                      <div class="text-lg font-bold text-cyan-600">
+                        <span id="electric-field">0.00</span>
+                      </div>
+                      <p class="text-xs text-gray-500">V/m</p>
+                    </div>
+                    <div class="metric-card bg-indigo-50 rounded-lg p-3 border border-indigo-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">電壓差</h5>
+                      <div class="text-lg font-bold text-indigo-600">
+                        <span id="voltage-difference">0.00</span>
+                      </div>
+                      <p class="text-xs text-gray-500">V</p>
+                    </div>
+                    <div class="metric-card bg-pink-50 rounded-lg p-3 border border-pink-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">波茲曼比</h5>
+                      <div class="text-lg font-bold text-pink-600">
+                        <span id="boltzmann-ratio">1.00</span>
+                      </div>
+                      <p class="text-xs text-gray-500">無量綱</p>
+                    </div>
+                    <div class="metric-card bg-yellow-50 rounded-lg p-3 border border-yellow-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">最大轉速</h5>
+                      <div class="text-lg font-bold text-yellow-600">
+                        <span id="max-rotational-speed">0</span>
+                      </div>
+                      <p class="text-xs text-gray-500">RPM</p>
+                    </div>
+                    <div class="metric-card bg-teal-50 rounded-lg p-3 border border-teal-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">HI 效率</h5>
+                      <div class="text-lg font-bold text-teal-600">
+                        <span id="hi-efficiency">0.0</span>
+                      </div>
+                      <p class="text-xs text-gray-500">W/m³</p>
+                    </div>
+                    <div class="metric-card bg-rose-50 rounded-lg p-3 border border-rose-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">LiCl 效率</h5>
+                      <div class="text-lg font-bold text-rose-600">
+                        <span id="licl-efficiency">0.0</span>
+                      </div>
+                      <p class="text-xs text-gray-500">W/m³</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Educational Learning Pathway -->
+                <div class="educational-panel mb-6">
+                  <h4 class="text-lg font-semibold text-gray-700 mb-4">📖 互動式學習路徑</h4>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button 
+                      onclick="window.efficiencyCalculator?.showEducationalContent('basic')"
+                      class="educational-btn bg-blue-100 hover:bg-blue-200 text-blue-800 font-medium py-2 px-3 rounded text-sm transition-colors"
+                    >
+                      基礎物理
+                    </button>
+                    <button 
+                      onclick="window.efficiencyCalculator?.showEducationalContent('advanced')"
+                      class="educational-btn bg-purple-100 hover:bg-purple-200 text-purple-800 font-medium py-2 px-3 rounded text-sm transition-colors"
+                    >
+                      進階計算
+                    </button>
+                    <button 
+                      onclick="window.efficiencyCalculator?.showEducationalContent('experimental')"
+                      class="educational-btn bg-green-100 hover:bg-green-200 text-green-800 font-medium py-2 px-3 rounded text-sm transition-colors"
+                    >
+                      實驗驗證
+                    </button>
+                  </div>
+                </div>
+                
                 <!-- Material Warning -->
                 <div id="material-warning" class="hidden"></div>
                 
-                <!-- Scientific Information -->
+                <!-- Enhanced Scientific Information -->
                 <div class="bg-blue-50 rounded-lg p-4 mt-6 border border-blue-200">
-                  <h5 class="text-sm font-semibold text-blue-800 mb-2">📚 科學原理</h5>
-                  <ul class="text-xs text-blue-700 space-y-1">
-                    <li>• 波茲曼分布：C(h+Δh)/C(h) = exp(-mGΔh/kT)</li>
-                    <li>• 電場強度：E = (m₁ - m₂)G / (2q)</li>
-                    <li>• 電壓差：ΔV = (m₁ - m₂)GH / (2q)</li>
-                    <li>• 功率密度：P = (ΔV/2)² / R</li>
-                  </ul>
+                  <h5 class="text-sm font-semibold text-blue-800 mb-2">📚 完整科學原理 (所有 14 個 PhysicsEngine 方法)</h5>
+                  <div class="grid md:grid-cols-2 gap-4 text-xs text-blue-700">
+                    <div>
+                      <h6 class="font-semibold mb-1">基礎方程式:</h6>
+                      <ul class="space-y-1">
+                        <li>• 波茲曼分布：C(h+Δh)/C(h) = exp(-mGΔh/kT)</li>
+                        <li>• 電場強度：E = (m₁ - m₂)G / (2q)</li>
+                        <li>• 電壓差：ΔV = (m₁ - m₂)GH / (2q)</li>
+                        <li>• 離心加速度：a = ω²r</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h6 class="font-semibold mb-1">進階分析:</h6>
+                      <ul class="space-y-1">
+                        <li>• 功率密度：P = (ΔV/2)² / R</li>
+                        <li>• 最大轉速：ω_max = √(σ_allow / (ρ × r²))</li>
+                        <li>• 安全係數：SF = σ_allow / σ_actual</li>
+                        <li>• 離子系統效能：多離子比較分析</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
               
