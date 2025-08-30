@@ -206,22 +206,6 @@ html {
   to { width: var(--target-width, 100%); }
 }
 
-/* Countdown Timer Effects */
-.countdown-item {
-  animation: countdownPulse 1s ease-in-out infinite alternate;
-}
-
-@keyframes countdownPulse {
-  from { 
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.4);
-  }
-  to { 
-    transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(245, 158, 11, 0);
-  }
-}
-
 /* Counter Animation */
 .counter-item .text-lg {
   animation: counterUp 2s ease-out;
@@ -303,15 +287,6 @@ html {
   
   #call-to-action .urgency-elements {
     grid-template-columns: 1fr;
-  }
-  
-  .countdown-display {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  
-  .countdown-item {
-    min-width: 50px;
   }
 }
 
