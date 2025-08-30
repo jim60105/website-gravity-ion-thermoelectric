@@ -118,26 +118,79 @@ class EfficiencyCalculator {
             // Calculate centrifugal acceleration using method #4
             const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
 
-            // Basic calculations using methods #1, #2, #3
+            // Basic calculations using methods #1, #2, #3 - based on current RPM
             const heightDifference = this.structure.r2 - this.structure.r1;
-            results.basic.boltzmannRatio = this.physicsEngine.calculateBoltzmannRatio(
-                heavyIonMass, acceleration, heightDifference
-            );
-            results.basic.electricField = this.physicsEngine.calculateElectricField(
-                heavyIonMass, lightIonMass, acceleration
-            );
-            results.basic.voltageDifference = this.physicsEngine.calculateVoltageDifference(
-                heavyIonMass, lightIonMass, acceleration, heightDifference
-            );
+            
+            if (rpm > 0) {
+                results.basic.boltzmannRatio = this.physicsEngine.calculateBoltzmannRatio(
+                    heavyIonMass, acceleration, heightDifference
+                );
+                results.basic.electricField = this.physicsEngine.calculateElectricField(
+                    heavyIonMass, lightIonMass, acceleration
+                );
+                results.basic.voltageDifference = this.physicsEngine.calculateVoltageDifference(
+                    heavyIonMass, lightIonMass, acceleration, heightDifference
+                );
+            } else {
+                // When RPM is 0, basic physics values are minimal
+                results.basic.boltzmannRatio = 1.0; // No acceleration means no concentration change
+                results.basic.electricField = 0;
+                results.basic.voltageDifference = 0;
+            }
 
             // Advanced structural calculations using methods #5, #6
             results.advanced.maxOmegaSquared = this.physicsEngine.calculateMaxOmegaSquaredFromStructure(this.structure);
             results.advanced.maxRotationalSpeed = this.physicsEngine.calculateMaxRotationalSpeed(this.structure);
 
             // Power and performance calculations using methods #7, #8
-            results.advanced.powerDensity = this.physicsEngine.calculatePowerDensity(
-                ionSystem.anion, ionSystem.cation, this.structure, ionSystem.conductivity
-            );
+            // For power density, we need to calculate based on actual RPM, not max structure RPM
+            if (rpm > 0) {
+                // Calculate power density at current RPM
+                const currentOmegaSquared = Math.pow((rpm * 2 * Math.PI) / 60, 2); // Convert RPM to rad/s then square
+                const currentAcceleration = currentOmegaSquared * this.structure.r3;
+                
+                // Calculate current electric field and voltage
+                const currentElectricField = this.physicsEngine.calculateElectricField(
+                    heavyIonMass, lightIonMass, currentAcceleration
+                );
+                const heightDifference = this.structure.r2 - this.structure.r1;
+                const currentVoltageDifference = currentElectricField * heightDifference;
+                
+                // Calculate current power density
+                const outputVoltage = currentVoltageDifference / 2;
+                const resistance = 1 / ionSystem.conductivity;
+                const powerDensityLiquid = (outputVoltage * outputVoltage) / resistance;
+                
+                // Apply structural efficiency factor
+                const { r1, r2 } = this.structure;
+                const liquidArea = Math.PI * r1 * r1;
+                const totalArea = Math.PI * r2 * r2;
+                const areaFraction = liquidArea / totalArea;
+                const structuralEfficiency = 0.762; // From paper data
+                const volumeFraction = areaFraction * structuralEfficiency;
+                const powerDensityCombined = powerDensityLiquid * volumeFraction;
+                
+                results.advanced.powerDensity = {
+                    powerDensity: powerDensityCombined,
+                    powerDensityLiquid: powerDensityLiquid,
+                    voltageDifference: currentVoltageDifference,
+                    outputVoltage: outputVoltage,
+                    electricField: currentElectricField,
+                    resistance: resistance,
+                    conductivity: ionSystem.conductivity
+                };
+            } else {
+                // When RPM is 0, all values should be 0
+                results.advanced.powerDensity = {
+                    powerDensity: 0,
+                    powerDensityLiquid: 0,
+                    voltageDifference: 0,
+                    outputVoltage: 0,
+                    electricField: 0,
+                    resistance: 1 / ionSystem.conductivity,
+                    conductivity: ionSystem.conductivity
+                };
+            }
             results.advanced.ionSystemPerformance = this.physicsEngine.calculateIonSystemPerformance(this.structure);
 
             // Safety analysis using methods #9, #10
@@ -597,7 +650,7 @@ class EfficiencyCalculator {
                 try {
                     // Use enhanced physics calculation for chart data
                     const enhancedResults = this.calculateEnhancedPhysics(rpm, system);
-                    const power = enhancedResults.advanced.powerDensity;
+                    const power = enhancedResults.advanced.powerDensity?.powerDensity || 0;
                     
                     // Only include points with meaningful power output
                     if (power > 1e-20) {
@@ -706,16 +759,16 @@ class EfficiencyCalculator {
             // Use enhanced physics calculations with all 14 PhysicsEngine methods
             const enhancedResults = this.calculateEnhancedPhysics(rpm);
 
-            // Extract primary metrics for display
-            const powerOutput = enhancedResults.advanced.powerDensity;
-            const acceleration = enhancedResults.basic.acceleration;
-            const safety = enhancedResults.safety.safetyValidation;
-            const voltageDifference = enhancedResults.basic.voltageDifference;
-            const electricField = enhancedResults.basic.electricField;
+            // Extract primary metrics for display - handle object returns properly
+            const powerOutput = enhancedResults.advanced.powerDensity?.powerDensity || 0;
+            const acceleration = enhancedResults.basic.acceleration || 0;
+            const safety = enhancedResults.safety.safetyValidation || { isWithinLimits: false, warningLevel: 'danger' };
+            const voltageDifference = enhancedResults.basic.voltageDifference || 0;
+            const electricField = enhancedResults.basic.electricField || 0;
 
             // Calculate efficiency relative to baseline (72 W/m³ at optimal conditions)
             const baselinePower = 72; // HI system at optimal conditions
-            const efficiency = powerOutput / baselinePower;
+            const efficiency = (powerOutput && baselinePower) ? powerOutput / baselinePower : 0;
 
             // Update primary display values
             this.updateDisplay('power-output', powerOutput);
@@ -845,11 +898,11 @@ class EfficiencyCalculator {
 
             return {
                 rpm: this.currentRPM,
-                powerOutput: enhancedResults.advanced.powerDensity,
-                acceleration: enhancedResults.basic.acceleration,
-                gravitationalMultiple: enhancedResults.basic.acceleration / 9.81,
+                powerOutput: enhancedResults.advanced.powerDensity?.powerDensity || 0,
+                acceleration: enhancedResults.basic.acceleration || 0,
+                gravitationalMultiple: (enhancedResults.basic.acceleration || 0) / 9.81,
                 ionSystem: this.currentIonSystem,
-                safety: enhancedResults.safety.safetyValidation,
+                safety: enhancedResults.safety.safetyValidation || { isWithinLimits: false, warningLevel: 'danger' },
                 structure: this.structure,
                 enhanced: {
                     basic: enhancedResults.basic,
