@@ -140,10 +140,13 @@ class EfficiencyCalculator {
 
             // Advanced structural calculations using methods #5, #6
             results.advanced.maxOmegaSquared = this.physicsEngine.calculateMaxOmegaSquaredFromStructure(this.structure);
-            results.advanced.maxRotationalSpeed = this.physicsEngine.calculateMaxRotationalSpeed(this.structure);
+            // Physics engine returns ω_max in rad/s; convert to RPM for UI
+            const maxOmegaRadPerSec = this.physicsEngine.calculateMaxRotationalSpeed(this.structure);
+            results.advanced.maxRotationalSpeed = maxOmegaRadPerSec; // keep rad/s for any advanced usage
+            results.advanced.maxRotationalSpeedRPM = (maxOmegaRadPerSec * 60) / (2 * Math.PI);
 
             // Power and performance calculations using methods #7, #8
-            // For power density, we need to calculate based on actual RPM, not max structure RPM
+            // For power density (W/m^3), use the paper's convention: height = 1 m for unit-cube analysis
             if (rpm > 0) {
                 // Calculate power density at current RPM
                 const currentOmegaSquared = Math.pow((rpm * 2 * Math.PI) / 60, 2); // Convert RPM to rad/s then square
@@ -153,11 +156,13 @@ class EfficiencyCalculator {
                 const currentElectricField = this.physicsEngine.calculateElectricField(
                     heavyIonMass, lightIonMass, currentAcceleration
                 );
-                const heightDifference = this.structure.r2 - this.structure.r1;
-                const currentVoltageDifference = currentElectricField * heightDifference;
+                const heightDifference = this.structure.r2 - this.structure.r1; // electrode spacing (for UI only)
+                const currentVoltageAcrossElectrodes = currentElectricField * heightDifference; // display purpose
+                const unitHeight = 1.0; // m
+                const currentVoltageForDensity = currentElectricField * unitHeight; // for W/m^3 calculation
                 
                 // Calculate current power density
-                const outputVoltage = currentVoltageDifference / 2;
+                const outputVoltage = currentVoltageForDensity / 2; // per paper, use half of open-circuit
                 const resistance = 1 / ionSystem.conductivity;
                 const powerDensityLiquid = (outputVoltage * outputVoltage) / resistance;
                 
@@ -173,7 +178,7 @@ class EfficiencyCalculator {
                 results.advanced.powerDensity = {
                     powerDensity: powerDensityCombined,
                     powerDensityLiquid: powerDensityLiquid,
-                    voltageDifference: currentVoltageDifference,
+                    voltageDifference: currentVoltageAcrossElectrodes, // UI-scale voltage across actual electrode spacing
                     outputVoltage: outputVoltage,
                     electricField: currentElectricField,
                     resistance: resistance,
@@ -191,7 +196,23 @@ class EfficiencyCalculator {
                     conductivity: ionSystem.conductivity
                 };
             }
-            results.advanced.ionSystemPerformance = this.physicsEngine.calculateIonSystemPerformance(this.structure);
+            // Get ion system performance (array) and map to keyed object for UI convenience
+            const perfArray = this.physicsEngine.calculateIonSystemPerformance(this.structure);
+            const perfMap = {};
+            perfArray.forEach(p => {
+                // Normalize naming to match UI keys
+                // p.name expected: 'HI' | 'LiCl' | 'KCl'
+                perfMap[p.name] = {
+                    // Expose a friendly 'efficiency' alias (W/m^3 combined)
+                    efficiency: p.powerDensity ?? p.powerDensityCombined ?? p.powerDensityLiquid ?? 0,
+                    // Preserve additional raw fields for potential UI/debug use
+                    powerDensity: p.powerDensity ?? 0,
+                    electricField: p.electricField,
+                    voltageDifference: p.voltageDifference,
+                    conductivity: p.conductivity
+                };
+            });
+            results.advanced.ionSystemPerformance = perfMap;
 
             // Safety analysis using methods #9, #10
             results.safety.safetyValidation = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
@@ -389,7 +410,7 @@ class EfficiencyCalculator {
                         ω_max = √(σ_allow / (ρ × r²))
                     </div>
                     <div class="text-sm text-yellow-700">
-                        <p><strong>計算結果:</strong> ${advanced.maxRotationalSpeed?.toFixed(0) || 'N/A'} RPM</p>
+                        <p><strong>計算結果:</strong> ${advanced.maxRotationalSpeedRPM?.toFixed(0) || 'N/A'} RPM</p>
                         <p><strong>安全等級:</strong> ${safety.warningLevel}</p>
                     </div>
                 </div>
@@ -528,7 +549,7 @@ class EfficiencyCalculator {
                         type: 'linear',
                         position: 'bottom',
                         min: 0,
-                        max: 50000,
+                        max: 916000, // Match slider range
                         title: {
                             display: true,
                             text: '轉速 (RPM)',
@@ -542,8 +563,8 @@ class EfficiencyCalculator {
                             color: 'rgba(156, 163, 175, 0.3)'
                         },
                         ticks: {
-                            stepSize: 5000, // Smaller step size for better granularity
-                            maxTicksLimit: 12, // Limit number of ticks to avoid crowding
+                            stepSize: 10000, // 10K intervals for cleaner display
+                            maxTicksLimit: 8, // Limit number of ticks to avoid crowding
                             callback: function(value, _index, _values) {
                                 if (value === 0) {return '0';}
                                 if (value >= 1000) {
@@ -559,7 +580,7 @@ class EfficiencyCalculator {
                     },
                     y: {
                         display: true,
-                        type: 'logarithmic', // Use logarithmic scale for wide range of values
+                        type: 'linear', // Use linear scale for better visualization
                         title: {
                             display: true,
                             text: '功率密度 (W/m³)',
@@ -572,21 +593,17 @@ class EfficiencyCalculator {
                         grid: {
                             color: 'rgba(156, 163, 175, 0.3)'
                         },
-                        min: 1e-20, // Set minimum to handle very small values
-                        max: 100, // Set reasonable maximum
+                        min: 0, // Start from zero for linear scale
+                        max: 80, // Set reasonable maximum to accommodate HI system peak
                         ticks: {
-                            maxTicksLimit: 8, // Limit ticks for better readability
+                            maxTicksLimit: 10, // Limit ticks for better readability
                             callback: function(value, _index, _values) {
-                                // Format y-axis labels with scientific notation when needed
+                                // Format y-axis labels for linear scale
                                 if (value === 0) {return '0';}
-                                if (value < 1e-15) {
-                                    return value.toExponential(0);
-                                } else if (value < 0.001) {
+                                if (value < 0.01) {
                                     return value.toExponential(1);
                                 } else if (value < 1) {
-                                    return value.toFixed(3);
-                                } else if (value >= 1000) {
-                                    return value.toLocaleString('en-US');
+                                    return value.toFixed(2);
                                 } else {
                                     return value.toFixed(1);
                                 }
@@ -632,7 +649,7 @@ class EfficiencyCalculator {
     }
 
     generateDatasets() {
-        const maxRpm = 50000; // Maximum RPM for calculation
+        const maxRpm = 916000; // Maximum RPM for calculation (match slider range)
 
         // Generate data for different ion systems
         const ionSystems = [
@@ -644,18 +661,16 @@ class EfficiencyCalculator {
         const datasets = ionSystems.map(system => {
             const dataPoints = [];
 
-            // Generate more data points across the entire range for better visualization
-            // Use smaller steps for better curve resolution
-            for (let rpm = 0; rpm <= maxRpm; rpm += 1000) {
+            // Generate more data points with smaller steps for better curve resolution
+            // Use 500 RPM steps to match slider step size
+            for (let rpm = 0; rpm <= maxRpm; rpm += 500) {
                 try {
                     // Use enhanced physics calculation for chart data
                     const enhancedResults = this.calculateEnhancedPhysics(rpm, system);
                     const power = enhancedResults.advanced.powerDensity?.powerDensity || 0;
                     
-                    // Only include points with meaningful power output
-                    if (power > 1e-20) {
-                        dataPoints.push({ x: rpm, y: power });
-                    }
+                    // Include all points including zero for linear scale
+                    dataPoints.push({ x: rpm, y: power });
                 } catch (error) {
                     // If calculation fails (e.g., exceeds material limits), skip this point
                     console.warn(`Enhanced calculation failed at ${rpm} RPM:`, error.message);
@@ -664,8 +679,8 @@ class EfficiencyCalculator {
 
             // Ensure we have at least some data points
             if (dataPoints.length === 0) {
-                // Add a single point at 0 to prevent empty dataset
-                dataPoints.push({ x: 0, y: 1e-20 });
+                // Add a single point at 0 for empty dataset
+                dataPoints.push({ x: 0, y: 0 });
             }
 
             return {
@@ -782,7 +797,7 @@ class EfficiencyCalculator {
             this.updateDisplay('voltage-difference', voltageDifference);
             this.updateDisplay('electric-field', electricField);
             this.updateDisplay('boltzmann-ratio', enhancedResults.basic.boltzmannRatio);
-            this.updateDisplay('max-rotational-speed', enhancedResults.advanced.maxRotationalSpeed);
+            this.updateDisplay('max-rotational-speed', enhancedResults.advanced.maxRotationalSpeedRPM);
 
             // Update ion system performance summary
             if (enhancedResults.advanced.ionSystemPerformance) {
@@ -796,6 +811,7 @@ class EfficiencyCalculator {
             if (this.chart) {
                 const currentPointDataset = this.chart.data.datasets.find(ds => ds.label === '當前設定');
                 if (currentPointDataset) {
+                    // For linear scale, we can use actual power output (including zero)
                     currentPointDataset.data = [{ x: rpm, y: powerOutput }];
                     this.chart.update('none');
                 }
