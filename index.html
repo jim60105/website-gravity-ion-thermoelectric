@@ -1170,45 +1170,141 @@
             </div>
             
             <div class="simulation-container bg-black/30 backdrop-blur-sm rounded-xl p-8 border border-white/10">
-              <div class="simulation-controls mb-6 flex flex-wrap items-center justify-center gap-4">
-                <div class="control-group">
-                  <label for="gravity-slider" class="block text-sm font-medium text-gray-100 mb-2">
-                    重力強度
-                  </label>
-                  <input
-                    type="range"
-                    id="gravity-slider"
-                    min="0.1"
-                    max="2.0"
-                    step="0.1"
-                    value="1.0"
-                    class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <span id="gravity-value" class="text-energy-gold font-mono">1.0g</span>
+              <!-- Education Module (Inline Block) -->
+              <div class="education-module bg-white/5 rounded-lg p-6 mb-8">
+                <h3 class="text-2xl font-bold text-white mb-4">🎓 互動式學習模組</h3>
+                
+                <!-- Learning Path Selection -->
+                <div class="learning-paths grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div class="path-card bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-4 rounded-lg border border-white/10 cursor-pointer hover:bg-white/10 transition-all" data-path="basics">
+                    <h4 class="text-lg font-semibold text-white mb-2">🔬 基礎理論</h4>
+                    <p class="text-gray-300 text-sm">波茲曼分布與離子分離原理</p>
+                  </div>
+                  <div class="path-card bg-gradient-to-br from-green-500/20 to-blue-500/20 p-4 rounded-lg border border-white/10 cursor-pointer hover:bg-white/10 transition-all" data-path="experiments">
+                    <h4 class="text-lg font-semibold text-white mb-2">⚗️ 實驗重現</h4>
+                    <p class="text-gray-300 text-sm">Tolman 1910 & Chen 2024</p>
+                  </div>
+                  <div class="path-card bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-4 rounded-lg border border-white/10 cursor-pointer hover:bg-white/10 transition-all" data-path="applications">
+                    <h4 class="text-lg font-semibold text-white mb-2">⚙️ 工程應用</h4>
+                    <p class="text-gray-300 text-sm">功率計算與系統設計</p>
+                  </div>
                 </div>
                 
-                <div class="control-group">
-                  <label for="temperature-slider" class="block text-sm font-medium text-gray-100 mb-2">
-                    熱振動強度
-                  </label>
-                  <input
-                    type="range"
-                    id="temperature-slider"
-                    min="0.5"
-                    max="3.0"
-                    step="0.1"
-                    value="1.0"
-                    class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <span id="temperature-value" class="text-electric-blue font-mono">1.0</span>
+                <!-- Theory Content Area -->
+                <div class="theory-content bg-black/30 rounded-lg p-4 mb-4" id="theory-content">
+                  <div class="default-content">
+                    <h4 class="text-lg font-semibold text-electric-blue mb-3">歡迎使用科學教育模組</h4>
+                    <p class="text-gray-300 mb-3">選擇上方的學習路徑來開始探索重力離子熱電技術的科學原理。</p>
+                    <div class="key-concepts grid grid-cols-2 gap-4">
+                      <div class="concept">
+                        <h5 class="text-sm font-semibold text-energy-gold">波茲曼分布</h5>
+                        <p class="text-xs text-gray-400">C(h+Δh)/C(h) = exp(-mGΔh/kT)</p>
+                      </div>
+                      <div class="concept">
+                        <h5 class="text-sm font-semibold text-energy-gold">電場強度</h5>
+                        <p class="text-xs text-gray-400">E = (m重 - m輕)G / (2q)</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Enhanced Controls with New Parameter System -->
+              <div class="simulation-controls mb-6 space-y-4">
+                <div class="physics-parameters bg-white/5 rounded-lg p-4">
+                  <h4 class="text-lg font-semibold text-white mb-4">🔧 物理參數控制</h4>
+                  
+                  <div class="control-grid grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Acceleration Control -->
+                    <div class="control-group">
+                      <label for="acceleration-slider" class="block text-sm font-medium text-gray-100 mb-2">
+                        加速度倍數 (g)
+                      </label>
+                      <input
+                        type="range"
+                        id="acceleration-slider"
+                        min="1"
+                        max="100"
+                        step="1"
+                        value="1"
+                        class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer w-full"
+                      />
+                      <div class="flex justify-between items-center mt-2">
+                        <span id="acceleration-value" class="text-energy-gold font-mono">1g (9.81 m/s²)</span>
+                        <span class="text-xs text-gray-400">1-100g</span>
+                      </div>
+                    </div>
+                    
+                    <!-- Temperature Control -->
+                    <div class="control-group">
+                      <label for="temperature-slider" class="block text-sm font-medium text-gray-100 mb-2">
+                        溫度 (K)
+                      </label>
+                      <input
+                        type="range"
+                        id="temperature-slider"
+                        min="200"
+                        max="400"
+                        step="5"
+                        value="298"
+                        class="slider bg-gray-700 rounded-lg appearance-none cursor-pointer w-full"
+                      />
+                      <div class="flex justify-between items-center mt-2">
+                        <span id="temperature-value" class="text-electric-blue font-mono">298K (25°C)</span>
+                        <span class="text-xs text-gray-400">200-400K</span>
+                      </div>
+                    </div>
+                    
+                    <!-- Ion System Selection -->
+                    <div class="control-group">
+                      <label for="ion-system-select" class="block text-sm font-medium text-gray-100 mb-2">
+                        離子系統
+                      </label>
+                      <select
+                        id="ion-system-select"
+                        class="w-full bg-gray-700 text-white rounded-lg p-2 border border-gray-600 focus:border-electric-blue focus:outline-none"
+                      >
+                        <option value="HI">氫碘酸 (HI) - 最佳效能</option>
+                        <option value="LiCl">氯化鋰 (LiCl) - 經典系統</option>
+                        <option value="KCl">氯化鉀 (KCl) - 穩定性佳</option>
+                      </select>
+                      <div class="mt-2">
+                        <span class="text-xs text-gray-400" id="ion-system-description">最佳效能系統</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Safety Status and Measurements -->
+                  <div class="measurements-display bg-black/30 rounded-lg p-4 mt-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                      <div class="measurement">
+                        <div class="text-xs text-gray-400">電場強度</div>
+                        <div class="text-lg font-mono text-energy-gold" id="electric-field-display">0 V/m</div>
+                      </div>
+                      <div class="measurement">
+                        <div class="text-xs text-gray-400">安全狀態</div>
+                        <div class="text-lg font-mono text-green-400" id="safety-status-display">安全</div>
+                      </div>
+                      <div class="measurement">
+                        <div class="text-xs text-gray-400">波茲曼比</div>
+                        <div class="text-lg font-mono text-electric-blue" id="boltzmann-ratio-display">1.00</div>
+                      </div>
+                      <div class="measurement">
+                        <div class="text-xs text-gray-400">功率密度</div>
+                        <div class="text-lg font-mono text-plasma-purple" id="power-density-display">0 W/m³</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 
-                <button
-                  id="reset-simulation"
-                  class="bg-plasma-purple hover:bg-plasma-purple/80 text-white px-6 py-2 rounded-lg transition-colors duration-300"
-                >
-                  重置模擬
-                </button>
+                <div class="action-controls flex justify-center">
+                  <button
+                    id="reset-simulation"
+                    class="bg-plasma-purple hover:bg-plasma-purple/80 text-white px-6 py-2 rounded-lg transition-colors duration-300"
+                  >
+                    重置模擬
+                  </button>
+                </div>
               </div>
               
               <div class="simulation-display relative bg-black/50 rounded-lg overflow-hidden">
