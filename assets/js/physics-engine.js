@@ -170,7 +170,7 @@ class PhysicsEngine {
 
         // Equation (11): omega3^2 = omega1^2 + omega2^2
         const omega3_squared = omega1_squared + omega2_squared;
-        
+
         return Math.max(0, omega3_squared); // Ensure non-negative
     }
 
@@ -204,7 +204,7 @@ class PhysicsEngine {
 
         // Calculate maximum rotational speed using equation (11)
         const maxOmegaSquared = this.calculateMaxOmegaSquaredFromStructure(structure);
-        
+
         // Calculate maximum acceleration at r3
         const maxAcceleration = maxOmegaSquared * structure.r3;
 
@@ -229,7 +229,7 @@ class PhysicsEngine {
         const liquidArea = Math.PI * r1 * r1; // Cross-sectional area of liquid
         const totalArea = Math.PI * r2 * r2;  // Total cross-sectional area
         const areaFraction = liquidArea / totalArea;
-        
+
         // Based on paper's Table 1, the effective volume fraction includes structural effects
         // For SMALL structure: 72.23/190.92 = 0.378
         // For MEDIUM structure: 4.514/11.933 = 0.378
@@ -345,13 +345,13 @@ class PhysicsEngine {
         // Temporarily switch to the requested mass source
         const originalSetting = this.usePaperMasses;
         this.setMassSource(usePaperMasses);
-        
+
         const results = {};
-        
+
         // Test all three structure variants from Table 1
         Object.entries(this.CONSTANTS.STRUCTURE_VARIANTS).forEach(([size, structure]) => {
             const performance = this.calculatePowerDensity('I-', 'H+', structure, 0.85);
-            
+
             results[size] = {
                 structure,
                 massSource: usePaperMasses ? 'paper' : 'NIST',
@@ -392,7 +392,7 @@ class PhysicsEngine {
 
         // Restore original setting
         this.setMassSource(originalSetting);
-        
+
         return results;
     }
 }

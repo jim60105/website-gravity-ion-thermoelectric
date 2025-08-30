@@ -2783,12 +2783,46 @@
       </div>
     </footer>
 
+    <!-- Educational Tools Floating Actions -->
+    <div class="educational-tools-fab" style="position: fixed; bottom: 120px; right: 20px; z-index: 9999;">
+      <button id="show-educational-modules" 
+              style="background: linear-gradient(135deg, #3b82f6, #6366f1); 
+                     color: white; border: none; width: 60px; height: 60px; 
+                     border-radius: 50%; box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4); 
+                     cursor: pointer; margin-bottom: 12px; display: flex; 
+                     align-items: center; justify-content: center; font-size: 24px;
+                     transition: all 0.3s ease; backdrop-filter: blur(10px);"
+              title="開啟教育模組"
+              onmouseover="this.style.transform='scale(1.1)'"
+              onmouseout="this.style.transform='scale(1)'"
+              onclick="window.educationalModules?.showModuleSelector()">
+        🎓
+      </button>
+      
+      <button id="show-virtual-lab" 
+              style="background: linear-gradient(135deg, #10b981, #34d399); 
+                     color: white; border: none; width: 60px; height: 60px; 
+                     border-radius: 50%; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4); 
+                     cursor: pointer; margin-bottom: 12px; display: flex; 
+                     align-items: center; justify-content: center; font-size: 24px;
+                     transition: all 0.3s ease; backdrop-filter: blur(10px);"
+              title="開啟虛擬實驗室"
+              onmouseover="this.style.transform='scale(1.1)'"
+              onmouseout="this.style.transform='scale(1)'"
+              onclick="window.experimentRecreator?.showLaboratory()">
+        🧪
+      </button>
+    </div>
+
     <!-- Scripts -->
     <script src="/assets/js/accessibility.js"></script>
     <script src="/assets/js/navigation.js"></script>
     <script src="/assets/js/animations.js"></script>
     <script src="/assets/js/scientific-animations.js"></script>
     <script src="/assets/js/particle-simulator.js"></script>
+    <script src="/assets/js/physics-visualizer.js"></script>
+    <script src="/assets/js/educational-modules.js"></script>
+    <script src="/assets/js/experiment-recreator.js"></script>
     <script src="/assets/js/math-renderer.js"></script>
     <script src="/assets/js/data-visualization.js"></script>
     <script src="/assets/js/experiment-simulation.js"></script>
