@@ -437,7 +437,7 @@ class EfficiencyCalculator {
                     <h6 class="font-semibold text-cyan-800 mb-2">功率密度計算</h6>
                     <div id="educational-power-density-container" data-equation="educational-power-density" class="equation-container cursor-pointer hover:shadow-md transition-shadow p-2 rounded bg-white mb-2"></div>
                     <div class="text-sm text-cyan-700">
-                        <p><strong>計算結果:</strong> ${advanced.powerDensity?.toFixed(6) || 'N/A'} W/m³</p>
+                        <p><strong>計算結果:</strong> ${advanced.powerDensity?.powerDensity?.toFixed(6) || 'N/A'} W/m³</p>
                         <p><strong>應用:</strong> 實際可獲得的功率輸出</p>
                     </div>
                 </div>
