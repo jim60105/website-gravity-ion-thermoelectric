@@ -16,6 +16,15 @@
     </image:image>
   </url>
 
+  <!-- Physics Engine Validation Page -->
+  <url>
+    <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/physics-engine-validation.html</loc>
+    <lastmod>2025-08-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/physics-engine-validation.html" />
+  </url>
+
   <!-- Research documents -->
   <url>
     <loc>https://website-gravity-ion-thermoelectric.jim60105.workers.dev/assets/docs/5-an-exception-to-carnots-theorem-inferred-from-tolmans-experiment-ion-containing-fluids-driving-continuous-heat-to-electricity-conversion-under-acceleration-jci-web-c.pdf</loc>

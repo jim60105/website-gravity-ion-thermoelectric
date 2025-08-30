@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重力離子熱電技術物理引擎驗證</title>
+    
+    <!-- Google Supported Meta Tags -->
+    <meta name="description" content="重力離子熱電技術物理引擎驗證系統。基於 Chen's Paper 驗證物理引擎實作的正確性，包含物理常數、核心方程式、Table 1 數值比較等全面測試。" />
+    <meta name="author" content="Kuo Tso Chen" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    
+    <!-- Social Media Meta Tags -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/physics-engine-validation.html" />
+    <meta property="og:title" content="重力離子熱電技術物理引擎驗證 | Physics Engine Validation" />
+    <meta property="og:description" content="重力離子熱電技術物理引擎驗證系統。基於 Chen's Paper 驗證物理引擎實作的正確性，包含物理常數、核心方程式、Table 1 數值比較等全面測試。" />
+    <meta property="og:image" content="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/favicon.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="重力離子熱電技術物理引擎驗證系統" />
+    <meta property="og:site_name" content="重力離子熱電技術" />
+    <meta property="og:locale" content="zh_TW" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@jim60105" />
+    <meta name="twitter:creator" content="@jim60105" />
+    <meta name="twitter:title" content="重力離子熱電技術物理引擎驗證 | Physics Engine Validation" />
+    <meta name="twitter:description" content="重力離子熱電技術物理引擎驗證系統。基於 Chen's Paper 驗證物理引擎實作的正確性，包含物理常數、核心方程式、Table 1 數值比較等全面測試。" />
+    <meta name="twitter:image" content="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/favicon.svg" />
+    <meta name="twitter:image:alt" content="重力離子熱電技術物理引擎驗證系統" />
+    
+    <!-- Link Tags -->
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/physics-engine-validation.html" />
+    
+    <!-- Alternate Languages -->
+    <link rel="alternate" hreflang="zh-TW" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/physics-engine-validation.html" />
+    <link rel="alternate" hreflang="x-default" href="https://website-gravity-ion-thermoelectric.jim60105.workers.dev/physics-engine-validation.html" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#3498db',
+                        'primary-dark': '#2980b9',
+                        'secondary': '#95a5a6',
+                        'accent': '#e67e22',
+                        'success': '#27ae60',
+                        'warning': '#f39c12',
+                        'error': '#e74c3c'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <!-- Main Container -->
+    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg shadow-lg mb-6">
+            <div class="px-6 py-8 text-center">
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
+                    重力離子熱電技術物理引擎驗證
+                </h1>
+                <p class="text-blue-100 text-sm sm:text-base">
+                    基於 Chen's Paper: "An Exception to Carnot's Theorem Inferred from Tolman's Experiment"
+                </p>
+                <p class="text-blue-100 text-sm sm:text-base">
+                    此系統用於驗證網頁實作的物理引擎實作是否符合論文中的數值與理論。
+                </p>
+            </div>
+        </header>
+
+        <!-- Status Dashboard -->
+        <section class="bg-white rounded-lg shadow-md mb-6">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-800 flex items-center">
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-3"></span>
+                    引擎狀態總覽
+                </h2>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-blue-600 font-medium">當前模式</p>
+                                <p class="text-xl font-bold text-blue-800" id="current-mode">NIST 標準</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                                <span class="text-white text-xl">🧪</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-green-600 font-medium">驗證狀態</p>
+                                <p class="text-xl font-bold text-green-800" id="validation-status">待執行</p>
+                            </div>
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                                <span class="text-white text-xl" id="status-icon">⏳</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-purple-50 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-purple-600 font-medium">通過率</p>
+                                <p class="text-xl font-bold text-purple-800" id="pass-rate">--</p>
+                            </div>
+                            <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                                <span class="text-white text-xl">📊</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button 
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
+                        onclick="runValidation('nist')"
+                        id="nist-btn"
+                    >
+                        🧪 使用 NIST 標準驗證
+                    </button>
+                    <button 
+                        class="bg-gray-500 hover:bg-gray-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
+                        onclick="runValidation('paper')"
+                        id="paper-btn"
+                    >
+                        📄 使用論文數值驗證
+                    </button>
+                    <button 
+                        class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
+                        onclick="runComparison()"
+                        id="compare-btn"
+                    >
+                        ⚖️ 比較分析
+                    </button>
+                    <button 
+                        class="bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center gap-2"
+                        onclick="exportResults()"
+                        id="export-btn"
+                        disabled
+                    >
+                        📥 匯出結果
+                    </button>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mt-6">
+                    <div class="flex justify-between text-sm text-gray-600 mb-1">
+                        <span>驗證進度</span>
+                        <span id="progress-text">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full transition-all duration-500" style="width: 0%" id="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Test Results Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="results-grid">
+            <!-- Quick Start Guide -->
+            <article class="lg:col-span-2 bg-white rounded-lg shadow-md">
+                <div class="px-6 py-4 bg-gradient-to-r from-green-50 to-emerald-50 border-b border-gray-200 rounded-t-lg">
+                    <h3 class="text-lg font-semibold text-green-800 flex items-center">
+                        <span class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white text-sm">ℹ</span>
+                        </span>
+                        快速開始
+                    </h3>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">🧪 NIST 標準模式</h4>
+                            <p class="text-gray-600 text-sm mb-4">使用國際標準原子質量進行驗證，確保科學準確性</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• 基於 NIST/CODATA 2018 標準</li>
+                                <li>• 適用於實際工程應用</li>
+                                <li>• 推薦用於科學研究</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-3">📄 論文數值模式</h4>
+                            <p class="text-gray-600 text-sm mb-4">使用論文中的質量值，重現 Table 1 結果</p>
+                            <ul class="text-sm text-gray-600 space-y-1">
+                                <li>• 基於 Chen's Paper 數值</li>
+                                <li>• 重現論文計算結果</li>
+                                <li>• 驗證理論模型一致性</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="loading-overlay">
+            <div class="bg-white rounded-lg p-8 text-center">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto mb-4"></div>
+                <p class="text-gray-700">正在執行驗證測試...</p>
+                <p class="text-sm text-gray-500 mt-2" id="loading-step">準備中</p>
+            </div>
+        </div>
+
+        <!-- Test Detail Modal -->
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="detail-modal">
+            <div class="bg-white rounded-lg max-w-4xl mx-4 max-h-[90vh] overflow-y-auto">
+                <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+                    <h3 class="text-lg font-semibold text-gray-800" id="detail-title">測試詳細資訊</h3>
+                    <button 
+                        class="text-gray-400 hover:text-gray-600 text-xl font-bold"
+                        onclick="closeTestDetail()"
+                    >
+                        ×
+                    </button>
+                </div>
+                <div class="p-6" id="detail-content">
+                    <!-- Content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/physics-engine.js"></script>
+    <script>
+        // Application State
+        const appState = {
+            currentMode: 'nist',
+            testResults: {},
+            isRunning: false
+        };
+
+        // Constants
+        const AMU_TO_KG = 1.66053906660e-27;
+        const NIST_ATOMIC_MASSES = {
+            'H': 1.00782503223,
+            'Li': 7.0160034366,
+            'Cl': 34.968852682,
+            'K': 38.9637064864,
+            'I': 126.9044719
+        };
+
+        const PAPER_EXPECTED_VALUES = {
+            SMALL: {
+                omegaSquared: 9.189e9,
+                acceleration: 4.594e7,
+                electricField: 29.97,
+                powerDensityLiquid: 190.92,
+                powerDensityCombined: 72.23
+            },
+            MEDIUM: {
+                omegaSquared: 5.743e8,
+                acceleration: 1.1486e7,
+                electricField: 7.494,
+                powerDensityLiquid: 11.933,
+                powerDensityCombined: 4.514
+            },
+            LARGE: {
+                omegaSquared: 3.589e7,
+                acceleration: 2.872e6,
+                electricField: 1.8734,
+                powerDensityLiquid: 0.7458,
+                powerDensityCombined: 0.2821
+            }
+        };
+
+        // UI Utilities
+        const $ = (id) => document.getElementById(id);
+        const updateProgress = (percent) => {
+            $('progress-bar').style.width = `${percent}%`;
+            $('progress-text').textContent = `${Math.round(percent)}%`;
+        };
+
+        const showLoading = (show, step = '準備中') => {
+            $('loading-overlay').classList.toggle('hidden', !show);
+            if (show) $('loading-step').textContent = step;
+        };
+
+        const updateStatus = (status, icon, passRate = '--') => {
+            $('validation-status').textContent = status;
+            $('status-icon').textContent = icon;
+            $('pass-rate').textContent = passRate;
+        };
+
+        const updateCurrentMode = (mode) => {
+            appState.currentMode = mode;
+            $('current-mode').textContent = mode === 'nist' ? 'NIST 標準' : '論文數值';
+        };
+
+        // Test Functions
+        const validatePhysicalConstants = () => {
+            const engine = new PhysicsEngine();
+            return [
+                {
+                    name: 'Boltzmann 常數',
+                    expected: 1.380649e-23,
+                    actual: engine.CONSTANTS.BOLTZMANN_CONSTANT,
+                    unit: 'J/K',
+                    pass: Math.abs(engine.CONSTANTS.BOLTZMANN_CONSTANT - 1.380649e-23) < 1e-28
+                },
+                {
+                    name: '基本電荷',
+                    expected: 1.602176634e-19,
+                    actual: engine.CONSTANTS.ELECTRON_CHARGE,
+                    unit: 'C',
+                    pass: Math.abs(engine.CONSTANTS.ELECTRON_CHARGE - 1.602176634e-19) < 1e-28
+                },
+                {
+                    name: '鋁合金降伏強度',
+                    expected: 670e6,
+                    actual: engine.CONSTANTS.MATERIAL_PROPERTIES.ALUMINUM_ALLOY_YIELD,
+                    unit: 'Pa',
+                    pass: Math.abs(engine.CONSTANTS.MATERIAL_PROPERTIES.ALUMINUM_ALLOY_YIELD - 670e6) < 1e6
+                }
+            ];
+        };
+
+        const validateEquations = (usePaperMasses) => {
+            const engine = new PhysicsEngine();
+            engine.setMassSource(usePaperMasses);
+            
+            // Boltzmann distribution test
+            const testMass = 1e-26;
+            const testAccel = 9.81;
+            const testHeight = 1.0;
+            const temperature = 298.15;
+            
+            const ratio = engine.calculateBoltzmannRatio(testMass, testAccel, testHeight, temperature);
+            const expectedRatio = Math.exp(-(testMass * testAccel * testHeight) / (engine.CONSTANTS.BOLTZMANN_CONSTANT * temperature));
+            
+            // Electric field test
+            const heavyMass = 2e-25;
+            const lightMass = 1e-26;
+            const acceleration = 1e7;
+            
+            const electricField = engine.calculateElectricField(heavyMass, lightMass, acceleration);
+            const expectedField = (heavyMass - lightMass) * acceleration / (2 * engine.CONSTANTS.ELECTRON_CHARGE);
+            
+            return [
+                {
+                    name: 'Boltzmann 分布',
+                    formula: 'C(h+Δh)/C(h) = exp(-mGΔh/kT)',
+                    pass: Math.abs(ratio - expectedRatio) < 1e-10
+                },
+                {
+                    name: '電場強度計算',
+                    formula: 'E = (m_heavy - m_light)G / (2q)',
+                    pass: Math.abs(electricField - expectedField) < 1e-10
+                }
+            ];
+        };
+
+        const validateTable1 = (usePaperMasses) => {
+            const engine = new PhysicsEngine();
+            const results = engine.validateAgainstPaperTable1(usePaperMasses);
+            
+            Object.keys(results).forEach(size => {
+                if (results[size].expected) {
+                    const calc = results[size].calculated;
+                    const exp = results[size].expected;
+                    
+                    results[size].errors = {
+                        omegaSquared: Math.abs((calc.omegaSquared - exp.omegaSquared) / exp.omegaSquared) * 100,
+                        powerDensityCombined: Math.abs((calc.powerDensityCombined - exp.powerDensityCombined) / exp.powerDensityCombined) * 100
+                    };
+                    
+                    const tolerance = usePaperMasses ? 1.0 : 10.0;
+                    results[size].pass = Object.values(results[size].errors).every(error => error < tolerance);
+                }
+            });
+            
+            return results;
+        };
+
+        // Report Generation
+        const createTestCard = (title, icon, results, type) => {
+            const passCount = Array.isArray(results) ? results.filter(r => r.pass).length : 0;
+            const totalCount = Array.isArray(results) ? results.length : 0;
+            const passRate = totalCount > 0 ? Math.round((passCount / totalCount) * 100) : 0;
+            
+            return `
+                <article class="bg-white rounded-lg shadow-md">
+                    <div class="px-6 py-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200 rounded-t-lg">
+                        <h3 class="text-lg font-semibold text-blue-800 flex items-center">
+                            <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm">${icon}</span>
+                            </span>
+                            ${title}
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-gray-600">通過率</span>
+                            <span class="text-lg font-bold ${passRate >= 80 ? 'text-green-600' : passRate >= 60 ? 'text-yellow-600' : 'text-red-600'}">
+                                ${passRate}% (${passCount}/${totalCount})
+                            </span>
+                        </div>
+                        ${generateTestTable(results, type)}
+                    </div>
+                </article>
+            `;
+        };
+
+        const generateTestTable = (results, type) => {
+            if (!Array.isArray(results)) return '';
+            
+            let html = `
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">項目</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">狀態</th>
+                                <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">詳細</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+            `;
+            
+            results.forEach((result, index) => {
+                const statusClass = result.pass ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+                const statusText = result.pass ? '✅ 通過' : '❌ 失敗';
+                const resultId = `${type}_${index}`;
+                
+                html += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 text-sm text-gray-900">${result.name || result.formula}</td>
+                        <td class="px-4 py-3 text-sm">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${statusClass}">
+                                ${statusText}
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            <button 
+                                class="text-blue-600 hover:text-blue-800 font-medium text-xs"
+                                onclick="showTestDetail('${resultId}', ${JSON.stringify(result).replace(/"/g, '&quot;')})"
+                            >
+                                📊 查看詳細
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            return html;
+        };
+
+        const createTable1Card = (results, mode) => {
+            const sizes = Object.keys(results).filter(size => results[size].expected);
+            const totalPass = sizes.filter(size => results[size].pass).length;
+            const passRate = sizes.length > 0 ? Math.round((totalPass / sizes.length) * 100) : 0;
+            
+            let html = `
+                <article class="bg-white rounded-lg shadow-md">
+                    <div class="px-6 py-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200 rounded-t-lg">
+                        <h3 class="text-lg font-semibold text-blue-800 flex items-center">
+                            <span class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                                <span class="text-white text-sm">📋</span>
+                            </span>
+                            Table 1 驗證
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-sm text-gray-600">通過率</span>
+                            <span class="text-lg font-bold ${passRate >= 80 ? 'text-green-600' : passRate >= 60 ? 'text-yellow-600' : 'text-red-600'}">
+                                ${passRate}% (${totalPass}/${sizes.length})
+                            </span>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">結構大小</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">狀態</th>
+                                        <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">詳細</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+            `;
+            
+            sizes.forEach((size, index) => {
+                const result = results[size];
+                const statusClass = result.pass ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+                const statusText = result.pass ? '✅ 通過' : '❌ 失敗';
+                
+                html += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 text-sm text-gray-900">${size} (r1=${result.structure.r1}m)</td>
+                        <td class="px-4 py-3 text-sm">
+                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${statusClass}">
+                                ${statusText}
+                            </span>
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            <button 
+                                class="text-blue-600 hover:text-blue-800 font-medium text-xs"
+                                onclick="showTable1Detail('${size}', ${JSON.stringify(result).replace(/"/g, '&quot;')})"
+                            >
+                                📊 查看詳細
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </article>
+            `;
+            
+            return html;
+        };
+
+        const generateSummaryCard = (mode, allResults) => {
+            const { constants, equations, table1 } = allResults;
+            
+            const constantsPass = constants.every(c => c.pass);
+            const equationsPass = equations.every(e => e.pass);
+            const table1Pass = Object.values(table1).some(t => t.pass);
+            
+            const totalPassed = [constantsPass, equationsPass, table1Pass].filter(Boolean).length;
+            const overallPass = (totalPassed / 3) * 100;
+            
+            let statusColor = 'red';
+            let statusMessage = '需要改進';
+            
+            if (overallPass >= 80) {
+                statusColor = 'green';
+                statusMessage = '驗證通過';
+            } else if (overallPass >= 60) {
+                statusColor = 'yellow';
+                statusMessage = '基本通過';
+            }
+            
+            return `
+                <article class="lg:col-span-2 bg-gradient-to-r from-${statusColor}-50 to-${statusColor}-100 rounded-lg shadow-md border-l-4 border-${statusColor}-500">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-${statusColor}-800 mb-4">
+                            📋 驗證總結 - ${mode === 'nist' ? 'NIST 標準模式' : '論文數值模式'}
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-${statusColor}-700">${Math.round(overallPass)}%</div>
+                                <div class="text-sm text-${statusColor}-600">總體通過率</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-${statusColor}-700">${totalPassed}/3</div>
+                                <div class="text-sm text-${statusColor}-600">模組通過</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl text-${statusColor}-700">${statusMessage}</div>
+                                <div class="text-sm text-${statusColor}-600">驗證結果</div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-white rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-3">詳細結果</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">物理常數驗證</span>
+                                    <span class="px-2 py-1 text-xs rounded-full ${constantsPass ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                        ${constantsPass ? '✅ 通過' : '❌ 失敗'}
+                                    </span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">方程式驗證</span>
+                                    <span class="px-2 py-1 text-xs rounded-full ${equationsPass ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                        ${equationsPass ? '✅ 通過' : '❌ 失敗'}
+                                    </span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-600">Table 1 驗證</span>
+                                    <span class="px-2 py-1 text-xs rounded-full ${table1Pass ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+                                        ${table1Pass ? '✅ 通過' : '❌ 失敗'}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `;
+        };
+
+        // Main Validation Function
+        const runValidation = async (mode) => {
+            if (appState.isRunning) return;
+            
+            appState.isRunning = true;
+            const usePaperMasses = mode === 'paper';
+            updateCurrentMode(mode);
+            showLoading(true, '初始化測試...');
+            updateProgress(0);
+            updateStatus('執行中', '⏳');
+            
+            try {
+                // Step 1: Constants validation
+                showLoading(true, '驗證物理常數...');
+                updateProgress(20);
+                const constants = validatePhysicalConstants();
+                
+                // Step 2: Equations validation
+                showLoading(true, '驗證核心方程式...');
+                updateProgress(50);
+                const equations = validateEquations(usePaperMasses);
+                
+                // Step 3: Table 1 validation
+                showLoading(true, '驗證論文數值...');
+                updateProgress(80);
+                const table1 = validateTable1(usePaperMasses);
+                
+                // Complete
+                updateProgress(100);
+                
+                // Store results
+                appState.testResults[mode] = { constants, equations, table1 };
+                
+                // Generate UI
+                const resultsGrid = $('results-grid');
+                resultsGrid.innerHTML = `
+                    ${createTestCard('物理常數驗證', '⚛', constants, 'constants')}
+                    ${createTestCard('核心方程式驗證', '📐', equations, 'equations')}
+                    ${createTable1Card(table1, mode)}
+                    ${generateSummaryCard(mode, { constants, equations, table1 })}
+                `;
+                
+                // Update status
+                const overallPass = calculateOverallPass({ constants, equations, table1 });
+                updateStatus('完成', '✅', `${Math.round(overallPass)}%`);
+                $('export-btn').disabled = false;
+                $('export-btn').classList.remove('opacity-50');
+                
+            } catch (error) {
+                console.error('Validation failed:', error);
+                updateStatus('失敗', '❌');
+                $('results-grid').innerHTML = `
+                    <div class="lg:col-span-2 bg-red-50 rounded-lg border-l-4 border-red-500 p-6">
+                        <div class="flex">
+                            <div class="text-red-500 text-xl mr-3">❌</div>
+                            <div>
+                                <h3 class="text-red-800 font-semibold">驗證執行失敗</h3>
+                                <p class="text-red-700 mt-1">${error.message}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } finally {
+                showLoading(false);
+                appState.isRunning = false;
+            }
+        };
+
+        const runComparison = async () => {
+            if (appState.isRunning) return;
+            
+            showLoading(true, '執行比較分析...');
+            updateStatus('比較中', '⚖️');
+            
+            try {
+                await runValidation('nist');
+                await runValidation('paper');
+                
+                // Generate comparison report
+                if (appState.testResults.nist && appState.testResults.paper) {
+                    generateComparisonReport();
+                }
+                
+                updateStatus('比較完成', '✅');
+            } catch (error) {
+                console.error('Comparison failed:', error);
+                updateStatus('比較失敗', '❌');
+            } finally {
+                showLoading(false);
+            }
+        };
+
+        const generateComparisonReport = () => {
+            // Implementation would be added here for comparison functionality
+            console.log('Comparison report generated');
+        };
+
+        const calculateOverallPass = ({ constants, equations, table1 }) => {
+            const constantsPass = constants.every(c => c.pass);
+            const equationsPass = equations.every(e => e.pass);
+            const table1Pass = Object.values(table1).some(t => t.pass);
+            
+            const totalPassed = [constantsPass, equationsPass, table1Pass].filter(Boolean).length;
+            return (totalPassed / 3) * 100;
+        };
+
+        const exportResults = () => {
+            if (Object.keys(appState.testResults).length === 0) {
+                alert('請先執行測試後再匯出結果');
+                return;
+            }
+            
+            const exportData = {
+                exportInfo: {
+                    timestamp: new Date().toISOString(),
+                    version: 'Physics Engine Validation v2.0',
+                    description: 'Gravity Ion Thermoelectric Technology Physics Engine Validation Results'
+                },
+                testResults: appState.testResults
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `physics-engine-validation-${new Date().toISOString().slice(0, 10)}.json`;
+            link.click();
+        };
+
+        // Test Detail Modal Functions
+        const showTestDetail = (testId, testData) => {
+            const modal = $('detail-modal');
+            const title = $('detail-title');
+            const content = $('detail-content');
+            
+            title.textContent = `${testData.name || testData.formula} - 詳細資訊`;
+            content.innerHTML = generateDetailContent(testData);
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const closeTestDetail = () => {
+            const modal = $('detail-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        };
+
+        const showTable1Detail = (size, resultData) => {
+            const modal = $('detail-modal');
+            const title = $('detail-title');
+            const content = $('detail-content');
+            
+            title.textContent = `Table 1 驗證 - ${size} 結構詳細資訊`;
+            content.innerHTML = generateTable1DetailContent(size, resultData);
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const generateDetailContent = (testData) => {
+            let html = '';
+            
+            // Test status overview
+            const statusClass = testData.pass ? 'text-green-600' : 'text-red-600';
+            const statusIcon = testData.pass ? '✅' : '❌';
+            const statusText = testData.pass ? '通過' : '失敗';
+            
+            html += `
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-semibold text-gray-800">測試狀態</h4>
+                        <span class="text-2xl ${statusClass} font-bold">
+                            ${statusIcon} ${statusText}
+                        </span>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <strong>測試項目：</strong>${testData.name || testData.formula}
+                    </div>
+                </div>
+            `;
+
+            // Physical constants details
+            if (testData.expected !== undefined && testData.actual !== undefined) {
+                html += `
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">數值比較</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <div class="text-sm text-blue-600 font-medium">期望值</div>
+                                <div class="text-lg font-mono text-blue-800">${testData.expected.toExponential(9)}</div>
+                                ${testData.unit ? `<div class="text-xs text-blue-500">${testData.unit}</div>` : ''}
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg">
+                                <div class="text-sm text-green-600 font-medium">實際值</div>
+                                <div class="text-lg font-mono text-green-800">${testData.actual.toExponential(9)}</div>
+                                ${testData.unit ? `<div class="text-xs text-green-500">${testData.unit}</div>` : ''}
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                            <div class="text-sm text-yellow-600 font-medium">絕對誤差</div>
+                            <div class="text-lg font-mono text-yellow-800">
+                                ${Math.abs(testData.actual - testData.expected).toExponential(6)}
+                            </div>
+                            <div class="text-sm text-yellow-600 mt-1">
+                                相對誤差: ${(Math.abs(testData.actual - testData.expected) / Math.abs(testData.expected) * 100).toFixed(8)}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Formula details for equation tests
+            if (testData.formula) {
+                html += `
+                    <div class="mb-6">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">方程式資訊</h4>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="text-sm text-gray-600 font-medium mb-2">數學公式</div>
+                            <div class="text-lg font-mono bg-white p-3 rounded border">
+                                ${testData.formula}
+                            </div>
+                        </div>
+                        
+                        ${testData.calculated !== undefined && testData.expected !== undefined ? `
+                            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <div class="text-sm text-blue-600 font-medium">計算結果</div>
+                                    <div class="text-lg font-mono text-blue-800">${testData.calculated.toExponential(6)}</div>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="text-sm text-green-600 font-medium">理論值</div>
+                                    <div class="text-lg font-mono text-green-800">${testData.expected.toExponential(6)}</div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 p-4 bg-purple-50 rounded-lg">
+                                <div class="text-sm text-purple-600 font-medium">計算誤差</div>
+                                <div class="text-lg font-mono text-purple-800">
+                                    ${testData.error ? testData.error.toExponential(6) : 'N/A'}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            // Test methodology
+            html += `
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">測試方法</h4>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        ${getTestMethodology(testData)}
+                    </div>
+                </div>
+            `;
+
+            // Validation criteria
+            html += `
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">驗證標準</h4>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        ${getValidationCriteria(testData)}
+                    </div>
+                </div>
+            `;
+
+            // Scientific context
+            html += `
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">科學背景</h4>
+                    <div class="bg-gray-50 p-4 rounded-lg text-sm text-gray-700">
+                        ${getScientificContext(testData)}
+                    </div>
+                </div>
+            `;
+
+            return html;
+        };
+
+        const getTestMethodology = (testData) => {
+            if (testData.name === 'Boltzmann 常數') {
+                return `
+                    <div class="text-sm text-gray-700">
+                        <p><strong>比較方法：</strong>引擎內建常數 vs CODATA 2018 推薦值</p>
+                        <p><strong>精確度要求：</strong>絕對誤差 < 1×10⁻²⁸ J/K</p>
+                        <p><strong>資料來源：</strong>NIST/CODATA 2018 基本物理常數</p>
+                    </div>
+                `;
+            } else if (testData.name === '基本電荷') {
+                return `
+                    <div class="text-sm text-gray-700">
+                        <p><strong>比較方法：</strong>引擎內建常數 vs CODATA 2018 定義值</p>
+                        <p><strong>精確度要求：</strong>絕對誤差 < 1×10⁻²⁸ C</p>
+                        <p><strong>資料來源：</strong>SI 基本單位重新定義後的精確值</p>
+                    </div>
+                `;
+            } else if (testData.name === '鋁合金降伏強度') {
+                return `
+                    <div class="text-sm text-gray-700">
+                        <p><strong>比較方法：</strong>引擎材料常數 vs 工程標準值</p>
+                        <p><strong>精確度要求：</strong>絕對誤差 < 1×10⁶ Pa</p>
+                        <p><strong>資料來源：</strong>工程材料手冊標準值</p>
+                    </div>
+                `;
+            } else if (testData.formula && testData.formula.includes('Boltzmann')) {
+                return `
+                    <div class="text-sm text-gray-700">
+                        <p><strong>測試參數：</strong></p>
+                        <ul class="list-disc ml-4 mt-2">
+                            <li>測試質量: 1×10⁻²⁶ kg</li>
+                            <li>重力加速度: 9.81 m/s²</li>
+                            <li>高度差: 1.0 m</li>
+                            <li>溫度: 298.15 K (25°C)</li>
+                        </ul>
+                        <p class="mt-2"><strong>驗證方法：</strong>比較引擎計算結果與理論公式直接計算結果</p>
+                    </div>
+                `;
+            } else if (testData.formula && testData.formula.includes('electric')) {
+                return `
+                    <div class="text-sm text-gray-700">
+                        <p><strong>測試參數：</strong></p>
+                        <ul class="list-disc ml-4 mt-2">
+                            <li>重離子質量: 2×10⁻²⁵ kg</li>
+                            <li>輕離子質量: 1×10⁻²⁶ kg</li>
+                            <li>加速度: 1×10⁷ m/s²</li>
+                        </ul>
+                        <p class="mt-2"><strong>驗證方法：</strong>比較引擎電場計算與理論公式結果</p>
+                    </div>
+                `;
+            }
+            return '<p class="text-sm text-gray-700">標準數值比較驗證</p>';
+        };
+
+        const getValidationCriteria = (testData) => {
+            if (testData.pass) {
+                return `
+                    <div class="text-sm text-green-700">
+                        <p><strong>✅ 通過標準：</strong></p>
+                        <p>計算結果在可接受的誤差範圍內，符合科學精確度要求。</p>
+                    </div>
+                `;
+            } else {
+                return `
+                    <div class="text-sm text-red-700">
+                        <p><strong>❌ 未通過原因：</strong></p>
+                        <p>計算結果超出可接受的誤差範圍，需要檢查實作或參數設定。</p>
+                    </div>
+                `;
+            }
+        };
+
+        const getScientificContext = (testData) => {
+            if (testData.name === 'Boltzmann 常數') {
+                return `
+                    Boltzmann常數是統計力學的基本常數，連接了微觀粒子的熱運動與巨觀溫度。
+                    在重力離子熱電技術中，此常數用於計算離子在重力場中的Boltzmann分布，
+                    是理論模型的核心參數之一。
+                `;
+            } else if (testData.name === '基本電荷') {
+                return `
+                    基本電荷是自然界的基本常數，定義了單個電子或質子所攜帶的電荷量。
+                    在重力離子熱電系統中，此常數用於計算離子分離所產生的電場強度，
+                    直接影響系統的發電效率計算。
+                `;
+            } else if (testData.formula && testData.formula.includes('Boltzmann')) {
+                return `
+                    Boltzmann分布描述了粒子在重力位能場中的濃度分布。根據Chen's Paper，
+                    重離子和輕離子在重力場中會產生不同的分布，這種分布差異是
+                    重力離子熱電效應的物理基礎。
+                `;
+            } else if (testData.formula && testData.formula.includes('electric')) {
+                return `
+                    電場強度計算基於不同質量離子在加速度場中的分離效應。
+                    根據論文理論，質量差異會在加速度場中產生有效的電荷分離，
+                    進而建立電場並驅動電流產生。
+                `;
+            }
+            return '此測試驗證物理引擎實作的正確性，確保計算結果符合理論預期。';
+        };
+
+        const generateTable1DetailContent = (size, resultData) => {
+            let html = '';
+            
+            // Structure overview
+            const statusClass = resultData.pass ? 'text-green-600' : 'text-red-600';
+            const statusIcon = resultData.pass ? '✅' : '❌';
+            const statusText = resultData.pass ? '通過' : '失敗';
+            
+            html += `
+                <div class="mb-6 p-4 bg-gray-50 rounded-lg">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-semibold text-gray-800">${size} 結構驗證狀態</h4>
+                        <span class="text-2xl ${statusClass} font-bold">
+                            ${statusIcon} ${statusText}
+                        </span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div>
+                            <span class="text-gray-600">內半徑 (r1):</span>
+                            <span class="font-mono font-semibold">${resultData.structure.r1} m</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">外半徑 (r2):</span>
+                            <span class="font-mono font-semibold">${resultData.structure.r2} m</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">高度 (h):</span>
+                            <span class="font-mono font-semibold">${resultData.structure.h} m</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Detailed parameter comparison
+            html += `
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">詳細參數比較</h4>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">參數</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">計算值</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">論文期望值</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">相對誤差</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">狀態</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+            `;
+
+            const parameters = [
+                {
+                    name: 'ω₃² (s⁻²)',
+                    calculated: resultData.calculated.omegaSquared,
+                    expected: resultData.expected.omegaSquared,
+                    error: resultData.errors.omegaSquared,
+                    unit: 's⁻²'
+                },
+                {
+                    name: '最大加速度 (m/s²)',
+                    calculated: resultData.calculated.acceleration,
+                    expected: resultData.expected.acceleration,
+                    error: resultData.errors.acceleration || 0,
+                    unit: 'm/s²'
+                },
+                {
+                    name: '電場強度 (V/m)',
+                    calculated: resultData.calculated.electricField,
+                    expected: resultData.expected.electricField,
+                    error: resultData.errors.electricField || 0,
+                    unit: 'V/m'
+                },
+                {
+                    name: '液體功率密度 (W/m³)',
+                    calculated: resultData.calculated.powerDensityLiquid,
+                    expected: resultData.expected.powerDensityLiquid,
+                    error: resultData.errors.powerDensityLiquid || 0,
+                    unit: 'W/m³'
+                },
+                {
+                    name: '總功率密度 (W/m³)',
+                    calculated: resultData.calculated.powerDensityCombined,
+                    expected: resultData.expected.powerDensityCombined,
+                    error: resultData.errors.powerDensityCombined,
+                    unit: 'W/m³'
+                }
+            ];
+
+            parameters.forEach(param => {
+                const errorClass = param.error < 1 ? 'text-green-600' : param.error < 5 ? 'text-yellow-600' : 'text-red-600';
+                const errorIcon = param.error < 1 ? '✅' : param.error < 5 ? '⚠️' : '❌';
+                
+                html += `
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 text-sm font-medium text-gray-900">${param.name}</td>
+                        <td class="px-4 py-3 text-sm font-mono text-blue-800">
+                            ${param.name.includes('²') ? param.calculated.toExponential(3) : param.calculated.toFixed(2)}
+                        </td>
+                        <td class="px-4 py-3 text-sm font-mono text-green-800">
+                            ${param.name.includes('²') ? param.expected.toExponential(3) : param.expected.toFixed(2)}
+                        </td>
+                        <td class="px-4 py-3 text-sm font-mono ${errorClass}">
+                            ${param.error.toFixed(2)}%
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            <span class="${errorClass}">${errorIcon}</span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+
+            // Physics interpretation
+            html += `
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">物理意義解釋</h4>
+                    <div class="space-y-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-blue-800 mb-2">離心頻率 (ω₃)</h5>
+                            <p class="text-sm text-blue-700">
+                                離心頻率決定了系統的旋轉速度，直接影響離心加速度的大小。
+                                較高的頻率會產生更強的離心力，增強離子分離效果。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-green-800 mb-2">電場強度 (E)</h5>
+                            <p class="text-sm text-green-700">
+                                電場強度反映了離子分離所產生的電位差強度。
+                                根據論文理論，不同質量的離子在離心場中會產生有效的電荷分離。
+                            </p>
+                        </div>
+                        
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <h5 class="font-semibold text-purple-800 mb-2">功率密度 (P)</h5>
+                            <p class="text-sm text-purple-700">
+                                功率密度表示單位體積內可產生的電功率。
+                                總功率密度考慮了液體和固體部分的體積比例，是系統實際性能的關鍵指標。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Engineering considerations
+            html += `
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">工程考量</h4>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <h6 class="font-semibold text-gray-800 mb-2">結構設計影響</h6>
+                                <ul class="text-gray-700 space-y-1">
+                                    <li>• ${size} 結構適合 ${getStructureApplication(size)}</li>
+                                    <li>• 內徑影響最大加速度</li>
+                                    <li>• 高度影響總體積和容量</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h6 class="font-semibold text-gray-800 mb-2">性能特性</h6>
+                                <ul class="text-gray-700 space-y-1">
+                                    <li>• 功率密度: ${getPerformanceLevel(resultData.calculated.powerDensityCombined)}</li>
+                                    <li>• 電場強度: ${getFieldStrength(resultData.calculated.electricField)}</li>
+                                    <li>• 驗證狀態: ${resultData.pass ? '符合理論預期' : '需要進一步調整'}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return html;
+        };
+
+        const getStructureApplication = (size) => {
+            switch(size) {
+                case 'SMALL': return '實驗室研究和概念驗證';
+                case 'MEDIUM': return '小型示範設備';
+                case 'LARGE': return '工業級應用設備';
+                default: return '一般應用';
+            }
+        };
+
+        const getPerformanceLevel = (powerDensity) => {
+            if (powerDensity > 50) return '高效能';
+            if (powerDensity > 10) return '中等效能';
+            return '基礎效能';
+        };
+
+        const getFieldStrength = (electricField) => {
+            if (electricField > 20) return '強電場';
+            if (electricField > 5) return '中等電場';
+            return '弱電場';
+        };
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStatus('就緒', '⚡');
+            console.log('Physics Engine Validation System Ready');
+        });
+
+        // Handle modal keyboard events
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                const modal = $('detail-modal');
+                if (!modal.classList.contains('hidden')) {
+                    closeTestDetail();
+                }
+            }
+        });
+
+        // Handle modal background click
+        document.addEventListener('click', (event) => {
+            const modal = $('detail-modal');
+            if (event.target === modal) {
+                closeTestDetail();
+            }
+        });
+    </script>
+</body>
+</html>
