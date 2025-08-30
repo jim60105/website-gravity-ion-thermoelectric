@@ -2038,8 +2038,53 @@
           <div class="efficiency-calculator bg-white rounded-xl p-8 mb-16 shadow-lg" id="efficiency-calculator">
             <div class="text-center mb-8">
               <h3 class="text-3xl font-bold text-gray-800 mb-4">重力離子熱電轉換計算器</h3>
-              <p class="text-xl text-gray-600">基於 Chen 博士論文的真實物理模型，計算不同離子系統的功率輸出</p>
-              <p class="text-sm text-gray-500 mt-2">使用波茲曼分布和電場強度計算 (公式 1-4)</p>
+              <p class="text-xl text-gray-600">基於 PhysicsEngine 完整整合的科學計算平台</p>
+              <p class="text-sm text-gray-500 mt-2">使用全部 14 個物理方法進行精確計算與教育展示</p>
+            </div>
+            
+            <!-- Educational Module Section -->
+            <div class="education-module bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 mb-8 border border-blue-200">
+              <h4 class="text-2xl font-bold text-gray-800 mb-4">📚 互動式學習模組</h4>
+              
+              <!-- Learning Path Selection -->
+              <div class="learning-paths grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <div class="path-card bg-white p-4 rounded-lg border-2 border-blue-300 cursor-pointer hover:border-blue-500 transition-colors" data-path="basics">
+                  <h5 class="font-bold text-blue-700 mb-2">🔬 基礎理論</h5>
+                  <p class="text-sm text-gray-600 mb-2">波茲曼分布與離子分離</p>
+                  <div class="text-xs text-blue-500">使用方法 1, 13, 14</div>
+                </div>
+                <div class="path-card bg-white p-4 rounded-lg border border-gray-300 cursor-pointer hover:border-blue-500 transition-colors" data-path="electric">
+                  <h5 class="font-bold text-green-700 mb-2">⚡ 電場計算</h5>
+                  <p class="text-sm text-gray-600 mb-2">電場強度與電壓差</p>
+                  <div class="text-xs text-green-500">使用方法 2, 3</div>
+                </div>
+                <div class="path-card bg-white p-4 rounded-lg border border-gray-300 cursor-pointer hover:border-blue-500 transition-colors" data-path="engineering">
+                  <h5 class="font-bold text-orange-700 mb-2">⚙️ 工程設計</h5>
+                  <p class="text-sm text-gray-600 mb-2">結構安全與功率計算</p>
+                  <div class="text-xs text-orange-500">使用方法 5-10</div>
+                </div>
+                <div class="path-card bg-white p-4 rounded-lg border border-gray-300 cursor-pointer hover:border-blue-500 transition-colors" data-path="validation">
+                  <h5 class="font-bold text-purple-700 mb-2">🧪 實驗驗證</h5>
+                  <p class="text-sm text-gray-600 mb-2">歷史數據與論文對比</p>
+                  <div class="text-xs text-purple-500">使用方法 11, 12</div>
+                </div>
+              </div>
+              
+              <!-- Dynamic Educational Content -->
+              <div class="education-content bg-white rounded-lg p-4 border border-gray-200" id="education-display">
+                <h5 class="text-lg font-bold text-gray-800 mb-3">歡迎使用科學教育模組</h5>
+                <p class="text-gray-600 mb-4">選擇上方的學習路徑來開始探索重力離子熱電技術的科學原理。</p>
+                <div class="formula-examples grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="formula-card bg-gray-50 p-3 rounded">
+                    <h6 class="font-semibold text-gray-700 mb-1">波茲曼分布</h6>
+                    <code class="text-sm text-blue-600">C(h+Δh)/C(h) = exp(-mGΔh/kT)</code>
+                  </div>
+                  <div class="formula-card bg-gray-50 p-3 rounded">
+                    <h6 class="font-semibold text-gray-700 mb-1">電場強度</h6>
+                    <code class="text-sm text-green-600">E = (m重 - m輕)G / (2q)</code>
+                  </div>
+                </div>
+              </div>
             </div>
             
             <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -2048,20 +2093,20 @@
                 <!-- Ion System Selection -->
                 <div class="mb-6">
                   <label for="ion-system-select" class="block text-lg font-semibold text-gray-700 mb-3">
-                    離子系統選擇
+                    離子系統選擇 (PhysicsEngine 方法 9-10, 13-14)
                   </label>
                   <select id="ion-system-select" class="w-full p-3 border-2 border-gray-400 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-600 bg-white text-gray-900 font-semibold shadow-sm">
-                    <option value="HI" class="text-gray-900 bg-white font-semibold">HI (氫碘酸) - 最高效率 72 W/m³</option>
-                    <option value="LiCl" class="text-gray-900 bg-white font-semibold">LiCl (氯化鋰) - Tolman 實驗驗證</option>
-                    <option value="KCl" class="text-gray-900 bg-white font-semibold">KCl (氯化鉀) - 穩定性良好</option>
+                    <option value="HI" class="text-gray-900 bg-white font-semibold">HI (氫碘酸) - 最高效率 72.23 W/m³</option>
+                    <option value="LiCl" class="text-gray-900 bg-white font-semibold">LiCl (氯化鋰) - Tolman 實驗驗證 4.514 W/m³</option>
+                    <option value="KCl" class="text-gray-900 bg-white font-semibold">KCl (氯化鉀) - 穩定性良好 0.2821 W/m³</option>
                   </select>
-                  <p class="text-xs text-gray-500 mt-1">不同離子質量差異產生不同的電場強度</p>
+                  <p class="text-xs text-gray-500 mt-1">使用 calculateIonSystemPerformance(), calculatePowerDensity(), getIonMass() 方法</p>
                 </div>
                 
                 <!-- RPM Control -->
                 <div class="mb-8">
                   <label for="rpm-slider" class="block text-lg font-semibold text-gray-700 mb-4">
-                    離心機轉速：<span id="rpm-display" class="text-electric-blue">0</span> RPM
+                    離心機轉速 (PhysicsEngine 方法 4, 5-8)：<span id="rpm-display" class="text-electric-blue">0</span> RPM
                     <span id="acceleration" class="text-sm text-gray-500 ml-2">(0.0g)</span>
                   </label>
                   <input 
@@ -2073,7 +2118,12 @@
                     step="1000"
                     class="calculator-slider"
                   />
-                  <p class="text-xs text-gray-500 mt-1">範圍包含實驗室條件到理論最佳化參數 (根據論文 Table 1)</p>
+                  <div class="flex justify-between text-xs text-gray-500 mt-1">
+                    <span>地球重力</span>
+                    <span>實驗室條件</span>
+                    <span>理論最大值</span>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-1">使用 calculateCentrifugalAcceleration(), validateSafetyLimits(), getWarningLevel() 方法</p>
                 </div>
                 
                 <!-- Metrics Display -->
@@ -2083,14 +2133,14 @@
                     <div class="text-xl font-bold text-green-600">
                       <span id="power-output">0.00</span> <span class="text-sm">W/m³</span>
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">P = (ΔV/2)² / R</p>
+                    <p class="text-xs text-gray-500 mt-1">方法 9: calculatePowerDensity</p>
                   </div>
                   <div class="metric-card bg-blue-50 rounded-lg p-4 border border-blue-200">
                     <h4 class="text-sm font-semibold text-gray-600 mb-1">效率倍數</h4>
                     <div class="text-xl font-bold text-blue-600">
                       <span id="efficiency-multiplier">0.000</span> <span class="text-sm">倍</span>
                     </div>
-                    <p class="text-xs text-gray-500 mt-1">相對於基準值</p>
+                    <p class="text-xs text-gray-500 mt-1">相對於 HI 基準值</p>
                   </div>
                   <div class="metric-card bg-purple-50 rounded-lg p-4 border border-purple-200">
                     <h4 class="text-sm font-semibold text-gray-600 mb-1">日產電量</h4>
@@ -2100,24 +2150,54 @@
                     <p class="text-xs text-gray-500 mt-1">24 小時連續運行</p>
                   </div>
                   <div class="metric-card bg-orange-50 rounded-lg p-4 border border-orange-200">
-                    <h4 class="text-sm font-semibold text-gray-600 mb-1">材料應力</h4>
+                    <h4 class="text-sm font-semibold text-gray-600 mb-1">安全狀態</h4>
                     <div class="text-lg font-bold text-orange-600">安全</div>
-                    <p class="text-xs text-gray-500 mt-1">鋁合金結構限制</p>
+                    <p class="text-xs text-gray-500 mt-1">方法 6-8: 結構安全分析</p>
                   </div>
                 </div>
                 
                 <!-- Material Warning -->
                 <div id="material-warning" class="hidden"></div>
                 
-                <!-- Scientific Information -->
-                <div class="bg-blue-50 rounded-lg p-4 mt-6 border border-blue-200">
-                  <h5 class="text-sm font-semibold text-blue-800 mb-2">📚 科學原理</h5>
-                  <ul class="text-xs text-blue-700 space-y-1">
-                    <li>• 波茲曼分布：C(h+Δh)/C(h) = exp(-mGΔh/kT)</li>
-                    <li>• 電場強度：E = (m₁ - m₂)G / (2q)</li>
-                    <li>• 電壓差：ΔV = (m₁ - m₂)GH / (2q)</li>
-                    <li>• 功率密度：P = (ΔV/2)² / R</li>
-                  </ul>
+                <!-- PhysicsEngine Methods Information -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 mt-6 border border-blue-200">
+                  <h5 class="text-sm font-semibold text-blue-800 mb-2">🔬 PhysicsEngine 方法使用 (14/14)</h5>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-blue-700">
+                    <div>
+                      <strong>核心物理 (1-4):</strong>
+                      <ul class="ml-2 mt-1">
+                        <li>• 波茲曼分布：C(h+Δh)/C(h) = exp(-mGΔh/kT)</li>
+                        <li>• 電場強度：E = (m₁ - m₂)G / (2q)</li>
+                        <li>• 電壓差：ΔV = (m₁ - m₂)GH / (2q)</li>
+                        <li>• 離心加速度：a = ω²r</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong>結構工程 (5-8):</strong>
+                      <ul class="ml-2 mt-1">
+                        <li>• 最大角速度平方計算</li>
+                        <li>• 最大轉速限制</li>
+                        <li>• 安全極限驗證</li>
+                        <li>• 警告等級評估</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong>功率計算 (9-10):</strong>
+                      <ul class="ml-2 mt-1">
+                        <li>• 功率密度：P = (ΔV/2)² / R</li>
+                        <li>• 離子系統效能比較</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <strong>驗證與配置 (11-14):</strong>
+                      <ul class="ml-2 mt-1">
+                        <li>• Tolman 1910 實驗數據對比</li>
+                        <li>• Chen 2024 論文表格驗證</li>
+                        <li>• 質量數據源設定 (NIST/論文)</li>
+                        <li>• 離子質量精確獲取</li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
               
@@ -2132,18 +2212,55 @@
                     <div class="bg-white rounded p-3 border">
                       <h6 class="font-semibold text-gray-700 mb-2">🧪 實驗數據來源</h6>
                       <ul class="text-gray-600 space-y-1">
-                        <li>• Tolman 1910: LiI, KI 溶液測試</li>
-                        <li>• Chen 2024: HI 理論計算</li>
+                        <li>• Tolman 1910: LiI, KI 溶液測試 (方法 11)</li>
+                        <li>• Chen 2024: HI 理論計算 (方法 12)</li>
                         <li>• 論文 Table 1: 結構參數優化</li>
+                        <li>• PhysicsEngine: 14 個方法完整整合</li>
                       </ul>
                     </div>
                     <div class="bg-white rounded p-3 border">
-                      <h6 class="font-semibold text-gray-700 mb-2">⚡ 離子質量差異</h6>
+                      <h6 class="font-semibold text-gray-700 mb-2">⚡ 離子質量差異 (方法 13-14)</h6>
                       <ul class="text-gray-600 space-y-1">
-                        <li>• H⁺: 1.15×10⁻²⁶ kg, I⁻: 2.11×10⁻²⁵ kg</li>
-                        <li>• Li⁺: 1.15×10⁻²⁶ kg, Cl⁻: 5.89×10⁻²⁶ kg</li>
-                        <li>• K⁺: 6.49×10⁻²⁶ kg, Cl⁻: 5.89×10⁻²⁶ kg</li>
+                        <li>• H⁺: 1.67×10⁻²⁷ kg, I⁻: 2.11×10⁻²⁵ kg</li>
+                        <li>• Li⁺: 1.17×10⁻²⁶ kg, Cl⁻: 5.81×10⁻²⁶ kg</li>
+                        <li>• K⁺: 6.47×10⁻²⁶ kg, Cl⁻: 5.81×10⁻²⁶ kg</li>
+                        <li>• 使用 getIonMass() 精確獲取</li>
                       </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Experimental Validation Section -->
+            <div class="experimental-validation mt-8 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 border border-purple-200">
+              <h4 class="text-xl font-bold text-gray-800 mb-4">🔬 實驗驗證與數據對比 (PhysicsEngine 方法 11-12)</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="tolman-validation bg-white rounded-lg p-4 border">
+                  <h5 class="font-semibold text-purple-700 mb-2">Tolman 1910 實驗對比</h5>
+                  <p class="text-sm text-gray-600 mb-3">使用 getTolmanExperimentalData() 方法</p>
+                  <div class="validation-metrics space-y-2">
+                    <div class="metric flex justify-between">
+                      <span class="text-gray-600">準確度:</span>
+                      <span class="font-semibold text-purple-600" id="tolman-accuracy">計算中...</span>
+                    </div>
+                    <div class="metric flex justify-between">
+                      <span class="text-gray-600">數據點:</span>
+                      <span class="font-semibold">歷史實驗數據</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="paper-validation bg-white rounded-lg p-4 border">
+                  <h5 class="font-semibold text-blue-700 mb-2">Chen 2024 論文驗證</h5>
+                  <p class="text-sm text-gray-600 mb-3">使用 validateAgainstPaperTable1() 方法</p>
+                  <div class="validation-metrics space-y-2">
+                    <div class="metric flex justify-between">
+                      <span class="text-gray-600">Table 1 符合度:</span>
+                      <span class="font-semibold text-blue-600" id="paper-accuracy">計算中...</span>
+                    </div>
+                    <div class="metric flex justify-between">
+                      <span class="text-gray-600">數據來源:</span>
+                      <span class="font-semibold">NIST + 論文數據</span>
                     </div>
                   </div>
                 </div>
@@ -2843,7 +2960,7 @@
     <script src="/assets/js/data-visualization.js"></script>
     <script src="/assets/js/experiment-simulation.js"></script>
     <script src="/assets/js/physics-engine.js"></script>
-    <script src="/assets/js/efficiency-calculator.js"></script>
+    <script src="/assets/js/calculator.js"></script>
     <script src="/assets/js/impact-charts.js"></script>
     <script src="/assets/js/roadmap-timeline.js"></script>
     <script src="/assets/js/counter-animation.js"></script>

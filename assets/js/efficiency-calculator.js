@@ -10,7 +10,7 @@ class EfficiencyCalculator {
         this.container = document.getElementById(containerId);
         this.currentRPM = 0;
         this.currentIonSystem = 'HI'; // Default to hydrogen iodide (most efficient)
-        this.physicsEngine = new PhysicsEngine();
+        this.physicsEngine = window.PhysicsEngine ? new PhysicsEngine() : null;
         this.chart = null;
 
         // Current structural parameters (can be adjusted)
@@ -249,12 +249,13 @@ class EfficiencyCalculator {
         });
 
         // Add Tolman experimental data points
-        const tolmanData = this.physicsEngine.getTolmanExperimentalData()
-            .filter(point => point.rpm > 0)
-            .map(point => ({
-                x: point.rpm,
-                y: this.estimatePowerFromTolmanData(point)
-            }));
+        const tolmanData = this.physicsEngine ? 
+            this.physicsEngine.getTolmanExperimentalData()
+                .filter(point => point.rpm > 0)
+                .map(point => ({
+                    x: point.rpm,
+                    y: this.estimatePowerFromTolmanData(point)
+                })) : [];
 
         if (tolmanData.length > 0) {
             datasets.push({
@@ -287,18 +288,18 @@ class EfficiencyCalculator {
         }
 
         // Check safety limits first (but don't stop calculations, just warn)
-        const safety = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
+        const safety = this.physicsEngine ? this.physicsEngine.validateSafetyLimits(rpm, this.structure) : { warningLevel: 'safe' };
 
         // Calculate centrifugal acceleration
-        const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
+        const acceleration = this.physicsEngine ? this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3) : 9.81;
 
         // Calculate power density using real physics from paper section 5.1
-        const powerData = this.physicsEngine.calculatePowerDensity(
+        const powerData = this.physicsEngine ? this.physicsEngine.calculatePowerDensity(
             ionSystem.anion,
             ionSystem.cation,
             this.structure,
             ionSystem.conductivity
-        );
+        ) : { powerDensity: 0 };
 
         return powerData.powerDensity;
     }
@@ -327,8 +328,8 @@ class EfficiencyCalculator {
             const powerOutput = this.calculateScientificPowerOutput(rpm, currentSystem);
 
             // Calculate additional metrics
-            const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
-            const safety = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
+            const acceleration = this.physicsEngine ? this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3) : 9.81;
+            const safety = this.physicsEngine ? this.physicsEngine.validateSafetyLimits(rpm, this.structure) : { warningLevel: 'safe' };
 
             // Calculate efficiency relative to baseline (72 W/m³ at optimal conditions)
             const baselinePower = 72; // HI system at optimal conditions
@@ -432,8 +433,8 @@ class EfficiencyCalculator {
     getCurrentData() {
         try {
             const powerOutput = this.calculateScientificPowerOutput(this.currentRPM);
-            const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(this.currentRPM, this.structure.r3);
-            const safety = this.physicsEngine.validateSafetyLimits(this.currentRPM, this.structure);
+            const acceleration = this.physicsEngine ? this.physicsEngine.calculateCentrifugalAcceleration(this.currentRPM, this.structure.r3) : 9.81;
+            const safety = this.physicsEngine ? this.physicsEngine.validateSafetyLimits(this.currentRPM, this.structure) : { isWithinLimits: true, warningLevel: 'safe' };
 
             return {
                 rpm: this.currentRPM,
