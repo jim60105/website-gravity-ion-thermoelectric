@@ -31,7 +31,8 @@ export default [
                 Chart: 'readonly',
                 FormData: 'readonly',
                 Blob: 'readonly',
-                sessionStorage: 'readonly'
+                sessionStorage: 'readonly',
+                PhysicsEngine: 'readonly'
             }
         },
         rules: {

@@ -1,6 +1,7 @@
 {
   "name": "gravity-ion-thermoelectric-website",
   "version": "0.0.1",
+  "type": "module",
   "description": "Gravity Ion Thermoelectric promotional website showcasing revolutionary heat-to-electricity conversion technology",
   "main": "index.html",
   "scripts": {

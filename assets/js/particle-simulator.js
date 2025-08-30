@@ -545,7 +545,7 @@ class InteractiveParticleSimulator {
         if (!this.isRunning) {return;}
 
         this.updatePhysics();
-        this.updateMeasurements();
+        this.updateMeasurementDisplays();
         this.render();
 
         this.animationId = requestAnimationFrame(() => this.animate());
@@ -656,7 +656,7 @@ class InteractiveParticleSimulator {
                 0.85
             );
             this.measurements.powerDensity = powerData.powerDensityCombined;
-        } catch (e) {
+        } catch {
             this.measurements.powerDensity = 0;
         }
     }
@@ -750,7 +750,7 @@ class InteractiveParticleSimulator {
     /**
      * Update measurement displays
      */
-    updateMeasurements() {
+    updateMeasurementDisplays() {
         // Update particle distribution measurements
         this.measurements.separationDegree = this.calculateChargeSeparation();
 

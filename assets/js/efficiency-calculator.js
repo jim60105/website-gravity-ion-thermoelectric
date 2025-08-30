@@ -105,7 +105,7 @@ class EfficiencyCalculator {
                         ticks: {
                             stepSize: 5000, // Smaller step size for better granularity
                             maxTicksLimit: 12, // Limit number of ticks to avoid crowding
-                            callback: function(value, index, values) {
+                            callback: function(value, _index, _values) {
                                 if (value === 0) {return '0';}
                                 if (value >= 1000) {
                                     return (value / 1000) + 'K';
@@ -137,7 +137,7 @@ class EfficiencyCalculator {
                         max: 100, // Set reasonable maximum
                         ticks: {
                             maxTicksLimit: 8, // Limit ticks for better readability
-                            callback: function(value, index, values) {
+                            callback: function(value, _index, _values) {
                                 // Format y-axis labels with scientific notation when needed
                                 if (value === 0) {return '0';}
                                 if (value < 1e-15) {
@@ -287,10 +287,10 @@ class EfficiencyCalculator {
         }
 
         // Check safety limits first (but don't stop calculations, just warn)
-        const safety = this.physicsEngine.validateSafetyLimits(rpm, this.structure);
+        void this.physicsEngine.validateSafetyLimits(rpm, this.structure);
 
-        // Calculate centrifugal acceleration
-        const acceleration = this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
+        // Calculate centrifugal acceleration (for future use)
+        void this.physicsEngine.calculateCentrifugalAcceleration(rpm, this.structure.r3);
 
         // Calculate power density using real physics from paper section 5.1
         const powerData = this.physicsEngine.calculatePowerDensity(

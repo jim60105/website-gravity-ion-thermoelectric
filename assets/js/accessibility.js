@@ -362,7 +362,7 @@ class AccessibilityEnhancer {
 
             // Enhance header associations
             const headers = table.querySelectorAll('th');
-            headers.forEach((header, index) => {
+            headers.forEach((header, _index) => {
                 if (!header.id) {
                     header.id = `header-${Math.random().toString(36).substr(2, 9)}`;
                 }
@@ -583,7 +583,7 @@ class AccessibilityEnhancer {
     calculateContrast(color1, color2) {
         // This is a very simplified version
         // For production, use a proper color contrast calculation
-        const getLuminance = (color) => {
+        const getLuminance = (_color) => {
             // Extract RGB values and calculate relative luminance
             // This is a placeholder implementation
             return 0.5; // Placeholder
@@ -623,7 +623,7 @@ class AccessibilityEnhancer {
         const forms = document.querySelectorAll('form');
         forms.forEach(form => {
             // Add form submission feedback
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', (_e) => {
                 this.announceToScreenReader('表單已提交，正在處理中...', 'assertive');
             });
 
@@ -638,7 +638,7 @@ class AccessibilityEnhancer {
     setupFormErrorHandling(form) {
         const inputs = form.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
-            input.addEventListener('invalid', (e) => {
+            input.addEventListener('invalid', (_e) => {
                 const label = this.getInputLabel(input);
                 this.announceToScreenReader(`${label} 輸入有誤，請檢查`, 'assertive');
             });

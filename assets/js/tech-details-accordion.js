@@ -106,7 +106,7 @@ class TechDetailsAccordion {
             return;
         }
 
-        console.log('Expanding tech details accordion');
+        console.info('Expanding tech details accordion');
 
         // 更新狀態
         this.isExpanded = true;
@@ -146,7 +146,7 @@ class TechDetailsAccordion {
             return;
         }
 
-        console.log('Collapsing tech details accordion');
+        console.info('Collapsing tech details accordion');
 
         // 更新狀態
         this.isExpanded = false;
@@ -186,7 +186,7 @@ class TechDetailsAccordion {
             return;
         }
 
-        console.log('Initializing YouTube videos');
+        console.info('Initializing YouTube videos');
 
         const videoContainers = this.contentContainer.querySelectorAll('.video-container');
 
@@ -285,7 +285,7 @@ class TechDetailsAccordion {
 
         this.videosLoaded = false;
 
-        console.log('TechDetailsAccordion destroyed');
+        console.info('TechDetailsAccordion destroyed');
     }
 }
 
