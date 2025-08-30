@@ -976,8 +976,8 @@ html {
   text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
 }
 
-/* Calculator Section Equation Styles */
-.equation-container {
+/* Calculator Section Equation Styles - Apply only to calculator section */
+#efficiency-calculator .equation-container {
   display: flex;
   position: relative;
   justify-content: center;
@@ -994,14 +994,14 @@ html {
   text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
 }
 
-.equation-container:hover {
+#efficiency-calculator .equation-container:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
   border-color: rgba(255, 215, 0, 0.6);
   background: rgba(255, 255, 255, 0.15);
 }
 
-.equation-container:before {
+#efficiency-calculator .equation-container:before {
   position: absolute;
   top: 0;
   left: -100%;
@@ -1012,23 +1012,23 @@ html {
   content: '';
 }
 
-.equation-container:hover:before {
+#efficiency-calculator .equation-container:hover:before {
   left: 100%;
 }
 
-/* Enhanced Equation Display for Complete Scientific Principles Section */
-.equation-card {
+/* Enhanced Equation Display for Complete Scientific Principles Section - Apply only to applications section */
+#applications-impact .equation-card {
   position: relative;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   overflow: hidden;
 }
 
-.equation-card:hover {
+#applications-impact .equation-card:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-.equation-card::before {
+#applications-impact .equation-card::before {
   position: absolute;
   top: 0;
   left: -100%;
@@ -1040,23 +1040,23 @@ html {
   content: '';
 }
 
-.equation-card:hover::before {
+#applications-impact .equation-card:hover::before {
   left: 100%;
 }
 
-.equation-display {
+#applications-impact .equation-display {
   position: relative;
   z-index: 2;
   transition: all 0.3s ease;
 }
 
-.equation-display:hover {
+#applications-impact .equation-display:hover {
   background: rgba(255, 255, 255, 0.9) !important;
   transform: scale(1.02);
 }
 
-/* Enhanced equation container for better formula display */
-.equation-container {
+/* Enhanced equation container for better formula display - Apply only to applications section */
+#applications-impact .equation-container {
   display: flex;
   position: relative;
   justify-content: center;
@@ -1075,14 +1075,14 @@ html {
   text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
 }
 
-.equation-container:hover {
+#applications-impact .equation-container:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
   border-color: rgba(59, 130, 246, 0.6);
   background: rgba(255, 255, 255, 1);
 }
 
-.equation-container:before {
+#applications-impact .equation-container:before {
   position: absolute;
   top: 0;
   left: -100%;
@@ -1093,7 +1093,7 @@ html {
   content: '';
 }
 
-.equation-container:hover:before {
+#applications-impact .equation-container:hover:before {
   left: 100%;
 }
 
@@ -1164,11 +1164,11 @@ html {
     grid-template-columns: 1fr;
   }
   
-  .equation-card {
+  #efficiency-calculator .equation-card {
     padding: 1.5rem;
   }
   
-  .equation-container {
+  #efficiency-calculator .equation-container {
     padding: 14px 18px;
     min-height: 70px;
     font-size: 16px;
@@ -1176,11 +1176,11 @@ html {
 }
 
 @media (max-width: 768px) {
-  .equation-card {
+  #efficiency-calculator .equation-card {
     padding: 1.25rem;
   }
   
-  .equation-container {
+  #efficiency-calculator .equation-container {
     padding: 12px 16px;
     min-height: 60px;
     font-size: 15px;
@@ -1196,13 +1196,13 @@ html {
 }
 
 @media (max-width: 640px) {
-  .equation-container {
+  #efficiency-calculator .equation-container {
     padding: 10px 14px;
     min-height: 50px;
     font-size: 14px;
   }
   
-  .equation-card {
+  #efficiency-calculator .equation-card {
     padding: 1rem;
   }
   
@@ -1215,89 +1215,89 @@ html {
   }
 }
 
-/* MathJax styling within calculator equations - enhanced */
-.equation-container .MathJax {
+/* MathJax styling within calculator equations - enhanced - Apply only to calculator section */
+#efficiency-calculator .equation-container .MathJax {
   color: inherit !important;
   text-shadow: inherit !important;
   font-size: inherit !important;
 }
 
-.equation-container .MathJax_Display {
+#efficiency-calculator .equation-container .MathJax_Display {
   margin: 0 !important;
   padding: 0 !important;
 }
 
-.equation-container .MathJax svg {
+#efficiency-calculator .equation-container .MathJax svg {
   max-width: 100% !important;
   height: auto !important;
 }
 
-/* Enhanced hover states for equation elements */
-.equation-container:hover .MathJax {
+/* Enhanced hover states for equation elements in calculator */
+#efficiency-calculator .equation-container:hover .MathJax {
   text-shadow: 0 0 12px rgba(59, 130, 246, 0.4) !important;
 }
 
-/* Improved visual hierarchy */
-.equation-card h7 {
+/* Improved visual hierarchy for calculator equations */
+#efficiency-calculator .equation-card h7 {
   font-size: 1.125rem;
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
-.equation-card .equation-display {
+#efficiency-calculator .equation-card .equation-display {
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
   margin-bottom: 1rem;
 }
 
-.equation-card p {
+#efficiency-calculator .equation-card p {
   font-size: 0.875rem;
   line-height: 1.5;
 }
 
-/* Color variations for different card types */
-.equation-card[class*="border-blue"] .equation-container {
+/* Color variations for different card types in calculator section */
+#efficiency-calculator .equation-card[class*="border-blue"] .equation-container {
   border-color: rgba(59, 130, 246, 0.3);
   text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
 }
 
-.equation-card[class*="border-green"] .equation-container {
+#efficiency-calculator .equation-card[class*="border-green"] .equation-container {
   border-color: rgba(34, 197, 94, 0.3);
   text-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
 }
 
-.equation-card[class*="border-purple"] .equation-container {
+#efficiency-calculator .equation-card[class*="border-purple"] .equation-container {
   border-color: rgba(147, 51, 234, 0.3);
   text-shadow: 0 0 8px rgba(147, 51, 234, 0.3);
 }
 
-.equation-card[class*="border-orange"] .equation-container {
+#efficiency-calculator .equation-card[class*="border-orange"] .equation-container {
   border-color: rgba(251, 146, 60, 0.3);
   text-shadow: 0 0 8px rgba(251, 146, 60, 0.3);
 }
 
-.equation-card[class*="border-emerald"] .equation-container {
+#efficiency-calculator .equation-card[class*="border-emerald"] .equation-container {
   border-color: rgba(16, 185, 129, 0.3);
   text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
 }
 
-.equation-card[class*="border-amber"] .equation-container {
+#efficiency-calculator .equation-card[class*="border-amber"] .equation-container {
   border-color: rgba(245, 158, 11, 0.3);
   text-shadow: 0 0 8px rgba(245, 158, 11, 0.3);
 }
 
-.equation-card[class*="border-red"] .equation-container {
+#efficiency-calculator .equation-card[class*="border-red"] .equation-container {
   border-color: rgba(239, 68, 68, 0.3);
   text-shadow: 0 0 8px rgba(239, 68, 68, 0.3);
 }
 
-/* MathJax styling within calculator equations */
-.equation-container .MathJax {
+/* MathJax styling within calculator equations - specific to calculator section */
+#efficiency-calculator .equation-container .MathJax {
   color: inherit !important;
   text-shadow: inherit !important;
 }
 
-.equation-container .MathJax_Display {
+#efficiency-calculator .equation-container .MathJax_Display {
   margin: 0 !important;
 }
 
