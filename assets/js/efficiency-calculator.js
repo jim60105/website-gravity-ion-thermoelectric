@@ -346,7 +346,7 @@ class EfficiencyCalculator {
             <div class="grid md:grid-cols-2 gap-4">
                 <div class="formula-card bg-blue-50 p-3 rounded border border-blue-200">
                     <h6 class="font-semibold text-blue-800 mb-2">波茲曼分布</h6>
-                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
                         C(h+Δh)/C(h) = exp(-mgΔh/kT)
                     </div>
                     <div class="text-sm text-blue-700">
@@ -356,7 +356,7 @@ class EfficiencyCalculator {
                 </div>
                 <div class="formula-card bg-green-50 p-3 rounded border border-green-200">
                     <h6 class="font-semibold text-green-800 mb-2">電場強度</h6>
-                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
                         E = (m₁ - m₂)g / (2q)
                     </div>
                     <div class="text-sm text-green-700">
@@ -366,7 +366,7 @@ class EfficiencyCalculator {
                 </div>
                 <div class="formula-card bg-purple-50 p-3 rounded border border-purple-200">
                     <h6 class="font-semibold text-purple-800 mb-2">電壓差</h6>
-                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
                         ΔV = (m₁ - m₂)GH / (2q)
                     </div>
                     <div class="text-sm text-purple-700">
@@ -396,7 +396,7 @@ class EfficiencyCalculator {
             <div class="grid md:grid-cols-2 gap-4">
                 <div class="formula-card bg-cyan-50 p-3 rounded border border-cyan-200">
                     <h6 class="font-semibold text-cyan-800 mb-2">功率密度計算</h6>
-                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
                         P = (ΔV/2)² / R
                     </div>
                     <div class="text-sm text-cyan-700">
@@ -406,7 +406,7 @@ class EfficiencyCalculator {
                 </div>
                 <div class="formula-card bg-yellow-50 p-3 rounded border border-yellow-200">
                     <h6 class="font-semibold text-yellow-800 mb-2">最大轉速限制</h6>
-                    <div class="formula text-sm font-mono bg-white p-2 rounded mb-2">
+                    <div class="formula text-sm font-mono bg-white text-gray-800 p-2 rounded mb-2">
                         ω_max = √(σ_allow / (ρ × r²))
                     </div>
                     <div class="text-sm text-yellow-700">
