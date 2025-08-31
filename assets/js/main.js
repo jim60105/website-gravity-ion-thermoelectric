@@ -184,9 +184,6 @@ class GravityIonApp {
 
         // Initialize contact forms (if any)
         this.initContactForms();
-
-        // Initialize image loading
-        this.initLazyLoading();
     }
 
     /**
@@ -385,31 +382,6 @@ class GravityIonApp {
             if (loadingAnimations) {
                 loadingAnimations.hide(form);
             }
-        }
-    }
-
-    /**
-     * Initialize lazy loading for images
-     */
-    initLazyLoading() {
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            imageObserver.unobserve(img);
-                        }
-                    }
-                });
-            });
-
-            const lazyImages = Utils.DOM.selectAll('img[data-src]');
-            lazyImages.forEach(img => imageObserver.observe(img));
-
-            this.components.set('lazyLoading', imageObserver);
         }
     }
 

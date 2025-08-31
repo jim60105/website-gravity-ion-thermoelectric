@@ -30,7 +30,6 @@ class ResearchResultsTabs {
         this.setupEventListeners();
         this.setupAccessibility();
         this.setupTabSystem();
-        this.setupLazyLoading();
         this.initializeTabs(); // 立即初始化標籤頁內容
     }
 
@@ -122,33 +121,6 @@ class ResearchResultsTabs {
     initializeTabs() {
         // 立即載入所有標籤頁內容，因為現在永久可見
         this.loadTabContent(this.activeTab);
-    }
-
-    /**
-     * 設置圖片延遲載入
-     */
-    setupLazyLoading() {
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.classList.remove('lazy');
-                            img.classList.add('loaded');
-                            observer.unobserve(img);
-                        }
-                    }
-                });
-            });
-
-            // 觀察所有延遲載入的圖片
-            const lazyImages = this.contentContainer.querySelectorAll('img[data-src]');
-            lazyImages.forEach(img => {
-                imageObserver.observe(img);
-            });
-        }
     }
 
     /**
@@ -351,11 +323,9 @@ class ResearchResultsTabs {
 
         const images = this.tabContents.get('experiment-data').querySelectorAll('.experiment-image-item');
 
-        images.forEach((item, index) => {
-            setTimeout(() => {
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, index * 150);
+        images.forEach((item) => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
         });
 
         this.imagesLoaded = true;
