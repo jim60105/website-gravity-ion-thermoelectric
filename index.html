@@ -2035,14 +2035,41 @@
           </h2>
 
           <!-- Scientific Physics Calculator -->
-          <div class="efficiency-calculator bg-white rounded-xl p-8 mb-16 shadow-lg" id="efficiency-calculator">
+          <div class="efficiency-calculator bg-white rounded-xl p-8 mb-16 shadow-lg max-w-4xl mx-auto" id="efficiency-calculator">
             <div class="text-center mb-8">
               <h3 class="text-3xl font-bold text-gray-800 mb-4">重力離子熱電轉換計算器</h3>
               <p class="text-xl text-gray-600">基於 Chen 博士論文的真實物理模型，計算不同離子系統的功率輸出</p>
               <p class="text-sm text-gray-500 mt-2">使用波茲曼分布和電場強度計算 (公式 1-4)</p>
             </div>
-            
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                          
+            <div class="items-center">
+              <!-- Scientific Performance Chart -->
+              <div class="chart-panel">
+                <div class="chart-container bg-gray-50 rounded-lg p-6">
+                  <h4 class="text-lg font-semibold text-gray-800 mb-4">多離子系統功率輸出比較</h4>
+                  <canvas id="efficiency-chart"></canvas>
+                  
+                </div>
+                  <!-- Chart Legend and Information -->
+                  <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="bg-white rounded p-3 border">
+                      <h6 class="font-semibold text-gray-700 mb-2">🧪 實驗數據來源</h6>
+                      <ul class="text-gray-600 space-y-1">
+                        <li>• Tolman 1910: LiI, KI 溶液測試</li>
+                        <li>• Chen 2024: HI 理論計算</li>
+                        <li>• 論文 Table 1: 結構參數優化</li>
+                      </ul>
+                    </div>
+                    <div class="bg-white rounded p-3 border">
+                      <h6 class="font-semibold text-gray-700 mb-2">⚡ 離子質量差異</h6>
+                      <ul class="text-gray-600 space-y-1">
+                        <li>• H⁺: 1.15×10⁻²⁶ kg, I⁻: 2.11×10⁻²⁵ kg</li>
+                        <li>• Li⁺: 1.15×10⁻²⁶ kg, Cl⁻: 5.89×10⁻²⁶ kg</li>
+                        <li>• K⁺: 6.49×10⁻²⁶ kg, Cl⁻: 5.89×10⁻²⁶ kg</li>
+                      </ul>
+                    </div>
+                  </div>
+              </div>
               <!-- Interactive Calculator -->
               <div class="calculator-panel">
                 <!-- Ion System Selection -->
@@ -2068,12 +2095,12 @@
                     type="range" 
                     id="rpm-slider" 
                     min="0" 
-                    max="100000" 
+                    max="916000" 
                     value="0" 
-                    step="1000"
+                    step="500"
                     class="calculator-slider"
                   />
-                  <p class="text-xs text-gray-500 mt-1">範圍包含實驗室條件到理論最佳化參數 (根據論文 Table 1)</p>
+                  <p class="text-xs text-gray-500 mt-1">以 SMALL 結構進行計算</p>
                 </div>
                 
                 <!-- Metrics Display -->
@@ -2106,79 +2133,324 @@
                   </div>
                 </div>
                 
+                <!-- Enhanced Physics Metrics -->
+                <div class="enhanced-physics-panel mb-6">
+                  <h4 class="text-lg font-semibold text-gray-700 mb-4">🔬 進階物理參數</h4>
+                  <div class="grid grid-cols-3 gap-3">
+                    <div class="metric-card bg-cyan-50 rounded-lg p-3 border border-cyan-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">電場強度</h5>
+                      <div class="text-lg font-bold text-cyan-600">
+                        <span id="electric-field">0.00</span>
+                      </div>
+                      <p class="text-xs text-gray-500">V/m</p>
+                    </div>
+                    <div class="metric-card bg-indigo-50 rounded-lg p-3 border border-indigo-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">電壓差</h5>
+                      <div class="text-lg font-bold text-indigo-600">
+                        <span id="voltage-difference">0.00</span>
+                      </div>
+                      <p class="text-xs text-gray-500">V</p>
+                    </div>
+                    <div class="metric-card bg-pink-50 rounded-lg p-3 border border-pink-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">波茲曼比</h5>
+                      <div class="text-lg font-bold text-pink-600">
+                        <span id="boltzmann-ratio">1.00</span>
+                      </div>
+                      <p class="text-xs text-gray-500">無因次</p>
+                    </div>
+                    <div class="metric-card bg-yellow-50 rounded-lg p-3 border border-yellow-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">最大轉速</h5>
+                      <div class="text-lg font-bold text-yellow-600">
+                        <span id="max-rotational-speed">0</span>
+                      </div>
+                      <p class="text-xs text-gray-500">RPM</p>
+                    </div>
+                    <div class="metric-card bg-teal-50 rounded-lg p-3 border border-teal-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">HI 效率</h5>
+                      <div class="text-lg font-bold text-teal-600">
+                        <span id="hi-efficiency">0.0</span>
+                      </div>
+                      <p class="text-xs text-gray-500">W/m³</p>
+                    </div>
+                    <div class="metric-card bg-rose-50 rounded-lg p-3 border border-rose-200">
+                      <h5 class="text-xs font-semibold text-gray-600 mb-1">LiCl 效率</h5>
+                      <div class="text-lg font-bold text-rose-600">
+                        <span id="licl-efficiency">0.0</span>
+                      </div>
+                      <p class="text-xs text-gray-500">W/m³</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Structural Limits Display -->
+                <div class="structural-limits-panel mb-6">
+                  <h4 class="text-lg font-semibold text-gray-700 mb-4">⚙️ 結構極限參數 (論文 Table 1)</h4>
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="limit-card bg-emerald-50 rounded-lg p-4 border border-emerald-200">
+                      <h5 class="text-sm font-semibold text-emerald-800 mb-2">SMALL 結構</h5>
+                      <div class="space-y-1 text-xs text-emerald-700">
+                        <p><strong>r₃:</strong> 0.005 m</p>
+                        <p><strong>最大轉速:</strong> ~916,000 RPM</p>
+                        <p><strong>最大加速度:</strong> ~4.7×10⁶ g</p>
+                        <p><strong>功率密度:</strong> 72.23 W/m³</p>
+                      </div>
+                    </div>
+                    <div class="limit-card bg-amber-50 rounded-lg p-4 border border-amber-200">
+                      <h5 class="text-sm font-semibold text-amber-800 mb-2">MEDIUM 結構</h5>
+                      <div class="space-y-1 text-xs text-amber-700">
+                        <p><strong>r₃:</strong> 0.02 m</p>
+                        <p><strong>最大轉速:</strong> ~229,000 RPM</p>
+                        <p><strong>最大加速度:</strong> ~1.17×10⁶ g</p>
+                        <p><strong>功率密度:</strong> 4.514 W/m³</p>
+                      </div>
+                    </div>
+                    <div class="limit-card bg-violet-50 rounded-lg p-4 border border-violet-200">
+                      <h5 class="text-sm font-semibold text-violet-800 mb-2">LARGE 結構</h5>
+                      <div class="space-y-1 text-xs text-violet-700">
+                        <p><strong>r₃:</strong> 0.08 m</p>
+                        <p><strong>最大轉速:</strong> ~57,200 RPM</p>
+                        <p><strong>最大加速度:</strong> ~2.93×10⁵ g</p>
+                        <p><strong>功率密度:</strong> 0.2821 W/m³</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="text-xs text-gray-500 mt-3">
+                    理論極限基於鋁合金 7075-T6 屈服強度 (670 MPa) 與密度計算，實際應用需考慮安全係數與動平衡限制
+                  </p>
+                </div>
+
+                <!-- Educational Learning Pathway -->
+                <div class="educational-panel mb-6">
+                  <h4 class="text-lg font-semibold text-gray-700 mb-4">📖 互動式學習路徑</h4>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button 
+                      onclick="window.efficiencyCalculator?.showEducationalContent('basic')"
+                      class="educational-btn bg-blue-100 hover:bg-blue-200 text-blue-800 font-medium py-2 px-3 rounded text-sm transition-colors"
+                    >
+                      基礎物理
+                    </button>
+                    <button 
+                      onclick="window.efficiencyCalculator?.showEducationalContent('advanced')"
+                      class="educational-btn bg-purple-100 hover:bg-purple-200 text-purple-800 font-medium py-2 px-3 rounded text-sm transition-colors"
+                    >
+                      進階計算
+                    </button>
+                    <button 
+                      onclick="window.efficiencyCalculator?.showEducationalContent('experimental')"
+                      class="educational-btn bg-green-100 hover:bg-green-200 text-green-800 font-medium py-2 px-3 rounded text-sm transition-colors"
+                    >
+                      實驗驗證
+                    </button>
+                  </div>
+                </div>
+                
                 <!-- Material Warning -->
                 <div id="material-warning" class="hidden"></div>
                 
-                <!-- Scientific Information -->
-                <div class="bg-blue-50 rounded-lg p-4 mt-6 border border-blue-200">
-                  <h5 class="text-sm font-semibold text-blue-800 mb-2">📚 科學原理</h5>
-                  <ul class="text-xs text-blue-700 space-y-1">
-                    <li>• 波茲曼分布：C(h+Δh)/C(h) = exp(-mGΔh/kT)</li>
-                    <li>• 電場強度：E = (m₁ - m₂)G / (2q)</li>
-                    <li>• 電壓差：ΔV = (m₁ - m₂)GH / (2q)</li>
-                    <li>• 功率密度：P = (ΔV/2)² / R</li>
-                  </ul>
-                </div>
-              </div>
-              
-              <!-- Scientific Performance Chart -->
-              <div class="chart-panel">
-                <div class="chart-container bg-gray-50 rounded-lg p-6">
-                  <h4 class="text-lg font-semibold text-gray-800 mb-4">多離子系統功率輸出比較</h4>
-                  <canvas id="efficiency-chart"></canvas>
+                <!-- Enhanced Scientific Information -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 mt-8 border border-blue-200 shadow-lg">
+                  <div class="text-center mb-10">
+                    <h5 class="text-2xl font-bold text-blue-800 mb-4">📚 完整科學原理</h5>
+                    <p class="text-lg text-blue-700">所有核心公式與計算原理</p>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mt-4 rounded-full"></div>
+                  </div>
                   
-                  <!-- Chart Legend and Information -->
-                  <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                    <div class="bg-white rounded p-3 border">
-                      <h6 class="font-semibold text-gray-700 mb-2">🧪 實驗數據來源</h6>
-                      <ul class="text-gray-600 space-y-1">
-                        <li>• Tolman 1910: LiI, KI 溶液測試</li>
-                        <li>• Chen 2024: HI 理論計算</li>
-                        <li>• 論文 Table 1: 結構參數優化</li>
-                      </ul>
+                  <!-- Core Physics Equations Section -->
+                  <div class="mb-12">
+                    <div class="text-center mb-8">
+                      <h6 class="text-xl font-semibold text-blue-800 mb-2">🧮 核心物理方程式</h6>
+                      <p class="text-sm text-blue-600">重力離子熱電轉換的基礎物理定律</p>
                     </div>
-                    <div class="bg-white rounded p-3 border">
-                      <h6 class="font-semibold text-gray-700 mb-2">⚡ 離子質量差異</h6>
-                      <ul class="text-gray-600 space-y-1">
-                        <li>• H⁺: 1.15×10⁻²⁶ kg, I⁻: 2.11×10⁻²⁵ kg</li>
-                        <li>• Li⁺: 1.15×10⁻²⁶ kg, Cl⁻: 5.89×10⁻²⁶ kg</li>
-                        <li>• K⁺: 6.49×10⁻²⁶ kg, Cl⁻: 5.89×10⁻²⁶ kg</li>
-                      </ul>
+                    
+                    <div class="grid gap-8">
+                      <!-- Row 1: Boltzmann Distribution and Electric Field -->
+                      <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- Boltzmann Distribution -->
+                        <div class="equation-card bg-white rounded-xl p-8 border border-blue-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                          <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <span class="text-white text-2xl">⚛️</span>
+                            </div>
+                            <h7 class="text-lg font-bold text-gray-800 block">波茲曼分布</h7>
+                            <p class="text-sm text-blue-600 mt-1">Boltzmann Distribution</p>
+                          </div>
+                          <div class="equation-display bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl p-6 mb-4 border border-gray-200">
+                            <div id="boltzmann-calculator-container" data-equation="boltzmann-calculator" class="equation-container cursor-pointer hover:bg-white/50 transition-all duration-300 p-4 rounded-lg min-h-[80px] flex items-center justify-center text-center"></div>
+                          </div>
+                          <p class="text-sm text-gray-700 text-center leading-relaxed">描述離子在重力場中的濃度分布差異，是重力離子分離效應的理論基礎</p>
+                        </div>
+                        
+                        <!-- Electric Field -->
+                        <div class="equation-card bg-white rounded-xl p-8 border border-green-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                          <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <span class="text-white text-2xl">⚡</span>
+                            </div>
+                            <h7 class="text-lg font-bold text-gray-800 block">電場強度</h7>
+                            <p class="text-sm text-green-600 mt-1">Electric Field</p>
+                          </div>
+                          <div class="equation-display bg-gradient-to-r from-gray-50 to-green-50 rounded-xl p-6 mb-4 border border-gray-200">
+                            <div id="electric-field-calculator-container" data-equation="electric-field-calculator" class="equation-container cursor-pointer hover:bg-white/50 transition-all duration-300 p-4 rounded-lg min-h-[80px] flex items-center justify-center text-center"></div>
+                          </div>
+                          <p class="text-sm text-gray-700 text-center leading-relaxed">質量差異在加速度場中產生的自發電場，驅動電流生成</p>
+                        </div>
+                      </div>
+                      
+                      <!-- Row 2: Voltage and Acceleration -->
+                      <div class="grid lg:grid-cols-2 gap-8">
+                        <!-- Voltage Difference -->
+                        <div class="equation-card bg-white rounded-xl p-8 border border-purple-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                          <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <span class="text-white text-2xl">🔋</span>
+                            </div>
+                            <h7 class="text-lg font-bold text-gray-800 block">電壓差</h7>
+                            <p class="text-sm text-purple-600 mt-1">Voltage Difference</p>
+                          </div>
+                          <div class="equation-display bg-gradient-to-r from-gray-50 to-purple-50 rounded-xl p-6 mb-4 border border-gray-200">
+                            <div id="voltage-difference-calculator-container" data-equation="voltage-difference-calculator" class="equation-container cursor-pointer hover:bg-white/50 transition-all duration-300 p-4 rounded-lg min-h-[80px] flex items-center justify-center text-center"></div>
+                          </div>
+                          <p class="text-sm text-gray-700 text-center leading-relaxed">不同質量離子分離產生的可測量電位差，實現電能輸出</p>
+                        </div>
+                        
+                        <!-- Centrifugal Acceleration -->
+                        <div class="equation-card bg-white rounded-xl p-8 border border-orange-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                          <div class="text-center mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <span class="text-white text-2xl">🌀</span>
+                            </div>
+                            <h7 class="text-lg font-bold text-gray-800 block">離心加速度</h7>
+                            <p class="text-sm text-orange-600 mt-1">Centrifugal Acceleration</p>
+                          </div>
+                          <div class="equation-display bg-gradient-to-r from-gray-50 to-orange-50 rounded-xl p-6 mb-4 border border-gray-200">
+                            <div id="centrifugal-acceleration-container" data-equation="centrifugal-acceleration" class="equation-container cursor-pointer hover:bg-white/50 transition-all duration-300 p-4 rounded-lg min-h-[80px] flex items-center justify-center text-center"></div>
+                          </div>
+                          <p class="text-sm text-gray-700 text-center leading-relaxed">旋轉系統產生的離心加速度，可達地球重力的數百萬倍</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Advanced Performance Analysis Section -->
+                  <div class="mb-12">
+                    <div class="text-center mb-8">
+                      <h6 class="text-xl font-semibold text-blue-800 mb-2">⚡ 進階效能分析</h6>
+                      <p class="text-sm text-blue-600">工程實現與安全評估的關鍵參數</p>
+                    </div>
+                    
+                    <div class="grid lg:grid-cols-3 gap-8">
+                      <!-- Power Density -->
+                      <div class="equation-card bg-white rounded-xl p-8 border border-emerald-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center mb-6">
+                          <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-xl">⚡</span>
+                          </div>
+                          <h7 class="text-lg font-bold text-gray-800 block">功率密度</h7>
+                          <p class="text-sm text-emerald-600 mt-1">Power Density</p>
+                        </div>
+                        <div class="equation-display bg-gradient-to-r from-gray-50 to-emerald-50 rounded-xl p-6 mb-4 border border-gray-200">
+                          <div id="power-density-container" data-equation="power-density" class="equation-container cursor-pointer hover:bg-white/50 transition-all duration-300 p-4 rounded-lg min-h-[80px] flex items-center justify-center text-center"></div>
+                        </div>
+                        <p class="text-sm text-gray-700 text-center leading-relaxed">單位體積的功率輸出計算，評估系統效能</p>
+                      </div>
+                      
+                      <!-- Max Rotational Speed -->
+                      <div class="equation-card bg-white rounded-xl p-8 border border-amber-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center mb-6">
+                          <div class="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-xl">🚀</span>
+                          </div>
+                          <h7 class="text-lg font-bold text-gray-800 block">最大轉速</h7>
+                          <p class="text-sm text-amber-600 mt-1">Max Speed</p>
+                        </div>
+                        <div class="equation-display bg-gradient-to-r from-gray-50 to-amber-50 rounded-xl p-6 mb-4 border border-gray-200">
+                          <div id="max-rotational-speed-container" data-equation="max-rotational-speed" class="equation-container cursor-pointer hover:bg-white/50 transition-all duration-300 p-4 rounded-lg min-h-[80px] flex items-center justify-center text-center"></div>
+                        </div>
+                        <p class="text-sm text-gray-700 text-center leading-relaxed">材料強度限制下的最大安全轉速</p>
+                      </div>
+                      
+                      <!-- Safety Factor -->
+                      <div class="equation-card bg-white rounded-xl p-8 border border-red-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center mb-6">
+                          <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-xl">🛡️</span>
+                          </div>
+                          <h7 class="text-lg font-bold text-gray-800 block">安全係數</h7>
+                          <p class="text-sm text-red-600 mt-1">Safety Factor</p>
+                        </div>
+                        <div class="equation-display bg-gradient-to-r from-gray-50 to-red-50 rounded-xl p-6 mb-4 border border-gray-200">
+                          <div id="safety-factor-container" data-equation="safety-factor" class="equation-container cursor-pointer hover:bg-white/50 transition-all duration-300 p-4 rounded-lg min-h-[80px] flex items-center justify-center text-center"></div>
+                        </div>
+                        <p class="text-sm text-gray-700 text-center leading-relaxed">確保結構安全的工程設計係數</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Ion System Performance Analysis -->
+                  <div class="mb-10">
+                    <div class="text-center mb-8">
+                      <h6 class="text-xl font-semibold text-purple-800 mb-2">🔬 離子系統效能分析</h6>
+                      <p class="text-sm text-purple-600">多離子系統的比較研究與效能優化</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                      <div class="ion-performance-card bg-white rounded-xl p-8 border border-purple-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                          <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🔬</span>
+                          </div>
+                          <h7 class="text-lg font-bold text-purple-800 mb-3 block">多離子比較</h7>
+                          <p class="text-sm text-purple-700 leading-relaxed">H⁺/I⁻, Li⁺/Cl⁻, K⁺/Cl⁻ 系統效能對比分析，發現 HI 系統具有最佳質量差異比</p>
+                          <div class="mt-4 p-4 bg-purple-50 rounded-lg">
+                            <div class="text-xs text-purple-600 font-semibold">質量比較</div>
+                            <div class="text-xs text-purple-700 mt-1">I⁻/H⁺: 18.4 倍<br>Cl⁻/Li⁺: 5.1 倍<br>K⁺/Cl⁻: 1.1 倍</div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="ion-performance-card bg-white rounded-xl p-8 border border-purple-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                          <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">📊</span>
+                          </div>
+                          <h7 class="text-lg font-bold text-purple-800 mb-3 block">質量差異效應</h7>
+                          <p class="text-sm text-purple-700 leading-relaxed">不同離子質量差對發電效率的影響，質量差越大，電場強度越強</p>
+                          <div class="mt-4 p-4 bg-indigo-50 rounded-lg">
+                            <div class="text-xs text-indigo-600 font-semibold">效能排序</div>
+                            <div class="text-xs text-indigo-700 mt-1">HI > LiCl > KCl<br>按電場強度排序</div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="ion-performance-card bg-white rounded-xl p-8 border border-purple-100 shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                        <div class="text-center">
+                          <div class="w-16 h-16 bg-gradient-to-br from-violet-500 to-violet-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">⚖️</span>
+                          </div>
+                          <h7 class="text-lg font-bold text-purple-800 mb-3 block">最佳化參數</h7>
+                          <p class="text-sm text-purple-700 leading-relaxed">結構尺寸與轉速的最佳化配置，平衡功率輸出與安全性考量</p>
+                          <div class="mt-4 p-4 bg-violet-50 rounded-lg">
+                            <div class="text-xs text-violet-600 font-semibold">設計準則</div>
+                            <div class="text-xs text-violet-700 mt-1">轉速 ∝ √(強度/密度)<br>功率 ∝ 質量差²</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Interactive Note -->
+                  <div class="text-center">
+                    <div class="inline-flex items-center px-6 py-4 bg-gradient-to-r from-blue-100 to-indigo-100 border border-blue-200 rounded-xl shadow-md">
+                      <span class="text-2xl mr-3">💡</span>
+                      <div class="text-left">
+                        <p class="text-sm font-semibold text-blue-800 mb-1">互動式公式查看</p>
+                        <p class="text-xs text-blue-700">點擊任意公式可查看詳細計算過程、變數說明和物理意義</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <!-- Technical Structure Images -->
-            <div class="technical-images grid md:grid-cols-3 gap-6 mt-12">
-              <div class="image-card">
-                <img
-                  src="/assets/images/014-centrifugal-structure-for-efficiency-enhancement.webp"
-                  alt="離心結構效率增強示意圖"
-                  class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                  
-                />
-                <p class="text-sm text-gray-300 mt-2 text-center">離心結構設計原理</p>
-              </div>
-              <div class="image-card">
-                <img
-                  src="/assets/images/026-fig3-centrifugal-structure-for-efficiency-enhancement.webp"
-                  alt="離心結構效率增強技術圖解"
-                  class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                  
-                />
-                <p class="text-sm text-gray-300 mt-2 text-center">技術實現方案</p>
-              </div>
-              <div class="image-card">
-                <img
-                  src="/assets/images/027-table1-efficiency-parameters-of-centrifugal-structure.webp"
-                  alt="離心結構效率參數表"
-                  class="w-full rounded-lg shadow-md hover:shadow-lg transition-shadow"
-                  
-                />
-                <p class="text-sm text-gray-300 mt-2 text-center">效率參數數據</p>
-              </div>
+
             </div>
           </div>
 
@@ -2849,7 +3121,6 @@
     <script src="/assets/js/counter-animation.js"></script>
     <script src="/assets/js/academic-charts.js"></script>
     <script src="/assets/js/cta-interactions.js"></script>
-    <script src="/assets/js/countdown-timer.js"></script>
     <script src="/assets/js/social-sharing.js"></script>
   </body>
 </html>

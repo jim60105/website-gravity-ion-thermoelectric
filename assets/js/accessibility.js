@@ -490,6 +490,97 @@ class AccessibilityEnhancer {
     }
 
     /**
+     * Enhance form labels and accessibility
+     */
+    enhanceFormLabels() {
+        // Find all form inputs without proper labels
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            // Skip if already has proper labeling
+            if (input.hasAttribute('aria-label') ||
+                input.hasAttribute('aria-labelledby') ||
+                document.querySelector(`label[for="${input.id}"]`)) {
+                return;
+            }
+
+            // Generate appropriate label based on input type and context
+            const label = this.generateInputLabel(input);
+            if (label) {
+                input.setAttribute('aria-label', label);
+            }
+
+            // Add required field indicators
+            if (input.hasAttribute('required')) {
+                const currentLabel = input.getAttribute('aria-label') || '';
+                input.setAttribute('aria-label', `${currentLabel} (必填)`);
+                input.setAttribute('aria-required', 'true');
+            }
+
+            // Enhance placeholder text accessibility
+            if (input.placeholder && !input.hasAttribute('aria-describedby')) {
+                const descId = `desc-${Math.random().toString(36).substr(2, 9)}`;
+                const descElement = document.createElement('div');
+                descElement.id = descId;
+                descElement.className = 'sr-only';
+                descElement.textContent = `輸入提示：${input.placeholder}`;
+                input.parentNode.insertBefore(descElement, input.nextSibling);
+                input.setAttribute('aria-describedby', descId);
+            }
+        });
+
+        console.info('[Accessibility] Form labels enhanced');
+    }
+
+    /**
+     * Generate appropriate label for form inputs
+     */
+    generateInputLabel(input) {
+        const type = input.type || input.tagName.toLowerCase();
+        const name = input.name || input.id || '';
+        const placeholder = input.placeholder || '';
+
+        // Check context from surrounding elements
+        const formGroup = input.closest('.form-group, .field, .input-group');
+        const contextLabel = formGroup?.querySelector('label, .label');
+        if (contextLabel) {
+            return contextLabel.textContent.trim();
+        }
+
+        // Generate based on input type
+        switch (type) {
+            case 'email':
+                return '電子郵件地址';
+            case 'password':
+                return '密碼';
+            case 'tel':
+                return '電話號碼';
+            case 'url':
+                return '網址';
+            case 'search':
+                return '搜尋';
+            case 'number':
+                return placeholder || '數值輸入';
+            case 'range':
+                return placeholder || '範圍調整';
+            case 'date':
+                return '日期';
+            case 'time':
+                return '時間';
+            case 'checkbox':
+                return '核取方塊';
+            case 'radio':
+                return '選項';
+            case 'select':
+                return '選擇選項';
+            case 'textarea':
+                return placeholder || '文字輸入區域';
+            case 'text':
+            default:
+                return placeholder || name || '文字輸入';
+        }
+    }
+
+    /**
      * Generate button label based on context
      */
     generateButtonLabel(button) {
