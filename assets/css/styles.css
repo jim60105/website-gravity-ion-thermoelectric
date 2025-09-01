@@ -2001,10 +2001,6 @@ img {
   height: auto;
 }
 
-img[loading='lazy'] {
-  transition: opacity 0.3s;
-}
-
 /* Focus indicators for better accessibility */
 button:focus,
 a:focus,
@@ -2696,16 +2692,6 @@ html {
   border-radius: 8px;
 }
 
-.experiment-image-item img.lazy {
-  opacity: 0.3;
-  filter: blur(2px);
-}
-
-.experiment-image-item img.loaded {
-  opacity: 1;
-  filter: none;
-}
-
 /* 圖片標題樣式 */
 .experiment-image-item h5 {
   position: relative;
@@ -2783,22 +2769,6 @@ html {
   to {
     transform: scale(1);
     opacity: 1;
-  }
-}
-
-/* 圖片預載入效果 */
-.experiment-image-item img[data-src] {
-  animation: shimmer 2s infinite;
-  background-position: 0% 0%;
-  background-size: 200% 200%;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: 200% 200%;
-  }
-  100% {
-    background-position: -200% -200%;
   }
 }
 
